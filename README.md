@@ -1,3 +1,3 @@
-# Zelfzorg aan zee
+# Herstelkompas
 
-[Design Challenge](https://github.com/fdnd-agency/zelfzorgaanzee/wiki/Design-Challenge)
+[Design Challenge](https://github.com/fdnd-agency/herstelkompas/wiki/Design-Challenge)
