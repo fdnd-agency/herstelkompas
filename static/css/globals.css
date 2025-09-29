@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Stupid Flanders */
+    font-family: "Inter", sans-serif;
+}
+#container{
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1rem;
+}
