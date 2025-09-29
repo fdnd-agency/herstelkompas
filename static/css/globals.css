@@ -4,8 +4,10 @@
     box-sizing: border-box; /* Stupid Flanders */
     font-family: "Inter", sans-serif;
 }
-#container{
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 1rem;
+@media (min-width: 750px){
+    #container{
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 1rem;
+    }
 }

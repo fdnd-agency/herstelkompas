@@ -68,17 +68,18 @@
 <style>
     aside{
         width: 100%;
+        max-width: 400px;
         background-color: lightgray;
         background-color: #137BC0;
         height: 100vh;
         display: grid;
+        translate: -100% 0;
+        transition: 0.5s ease;
+        position: fixed;
+        top: 0;
+        left: 0;
     }
-    @media (min-width: 335px){
-        aside{
-            width: 18.75vw;
-            min-width: 320px;
-        }
-    }
+
     aside nav{
         padding: 40px 0 0 20px;
     }
@@ -215,6 +216,13 @@
     aside .information-auth *{
         color: #fff;
         fill: #fff;
+    }
+    @media (min-width: 750px){
+        aside{
+            translate: 0 0;
+            position: relative;
+        }
+
     }
 
     
