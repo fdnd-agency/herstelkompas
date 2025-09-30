@@ -33,3 +33,10 @@
 ## 📌 Team Canvas
 
 <img width="1765" height="1232" alt="Screenshot (568)" src="https://github.com/user-attachments/assets/e0053788-acee-462e-8010-f8413cce288a" />
+
+
+## Gitflow
+We werken deze sprints volgens de Git Flow workflow strategie:
+
+
+<img width="559" height="648" alt="492315217-0568b305-f1d8-4c78-962b-0f9d34342331" src="https://github.com/user-attachments/assets/ed577032-d00c-4be2-ac94-d2a7072f1a09" />
