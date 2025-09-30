@@ -31,4 +31,5 @@
 
 
 ## 📌 Team Canvas
-<img width="710" height="504" alt="image" src="https://github.com/user-attachments/assets/b01f5153-b95d-4c29-951f-99c5a833ce46" />
+
+<img width="1765" height="1232" alt="Screenshot (568)" src="https://github.com/user-attachments/assets/e0053788-acee-462e-8010-f8413cce288a" />
