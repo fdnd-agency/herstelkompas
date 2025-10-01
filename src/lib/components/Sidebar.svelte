@@ -102,27 +102,10 @@
         position: relative;
         .corners{
             position: absolute;
-            right: 0;
+            right: -0.5px;
             top: 0;
             height: 100%;
-            &:before{
-                background-color: #fff;
-                position: absolute;
-                content: '';
-                width: 15px;
-                height: 15px;
-                right: 0;
-                bottom: 100%;
-            }
-            &:after{
-                background-color: #fff;
-                position: absolute;
-                content: '';
-                width: 15px;
-                height: 15px;
-                right: 0;
-                top: 100%;
-            }
+            width: 100%;
             svg{
                 transition: 0.3s ease;
                 > *{
@@ -131,25 +114,25 @@
             }
         }
         &:before{
-            background-color: #137BC0;
+            /* background-color: #137BC0; */
             position: absolute;
             content: '';
             width: 15px;
             height: 15px;
-            right: 0;
-            bottom: 100%;
+            right: -.5px;
+            bottom: calc(100% - .5px);
             border-bottom-right-radius: 0%;
             transition: 0.3s ease;
             z-index: 9;
         }
         &:after{
-            background-color: #137BC0;
+            /* background-color: #137BC0; */
             position: absolute;
             content: '';
             width: 15px;
             height: 15px;
-            right: 0;
-            top: 100%;
+            right: -.5px;
+            top: calc(100% - .5px);
             border-top-right-radius: 0%;
             transition: 0.3s ease;
             z-index: 9;
@@ -160,11 +143,17 @@
         background-color: #fff;
         border-top-left-radius: 9px;
         border-bottom-left-radius: 9px;
+        
+        .corners{
+            background: white;
+        }
         &:before{
-            border-bottom-right-radius: 100%;
+            /* border-bottom-right-radius: 100%; */
+            background-image: radial-gradient(farthest-side circle at 0% 0%, #0000 calc(100% - .5px), white 100%);
         }
         &:after{
-            border-top-right-radius: 100%;
+            /* border-top-right-radius: 100%; */
+            background-image: radial-gradient(farthest-side circle at 0% 100%, #0000 calc(100% - .5px), white 100%);
         }
         
     }
