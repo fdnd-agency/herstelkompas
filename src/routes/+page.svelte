@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+    let { data } = $props();
+	import { page } from '$app/state';
+    import { Sidebar } from '$lib'
+</script>
+<div id="container">
+    <Sidebar/>
+    <main>
+    <h1>Home</h1>
+    </main>
+</div>
