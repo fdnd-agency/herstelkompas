@@ -105,7 +105,9 @@
             right: -0.5px;
             top: 0;
             height: 100%;
-            width: 100%;
+            width: 1px;
+            transition: 0.3s ease;
+            background: #137BC000;
             svg{
                 transition: 0.3s ease;
                 > *{
