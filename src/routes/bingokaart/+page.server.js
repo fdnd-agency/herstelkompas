@@ -14,7 +14,7 @@ export async function load({}){
 }
 export const actions = {
     default: async ({ request }) => {
-        console.log("poep")
+        console.log("test1")
         let newCardState = [];
         const data = await request.formData();
         let checkedFields = data.getAll('bingocard-field');
