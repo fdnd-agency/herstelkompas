@@ -1,46 +1,51 @@
 <script>
-    const { member } =  $props()
+    const { member, form } =  $props()
+    import { enhance } from "$app/forms";
+    import { page } from "$app/stores";
+
+    let loading = false;
 </script>
 
 <h2>Ik ben een bingokaart</h2>
 
-<form class="bingocard">
+<form class="bingocard" method="POST" action="/bingokaart">
     <label class="bingo-square">
-        <input type="checkbox" name="square-1">
+        <input type="checkbox" name="bingocard-field" value="Gym">
         <span>1</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-2">
+        <input type="checkbox" name="bingocard-field" value="Drankje doen met vriendinnen">
         <span>2</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-3">
+        <input type="checkbox" name="bingocard-field" value="square-3">
         <span>3</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-4">
+        <input type="checkbox" name="bingocard-field" value="square-4">
         <span>4</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-5">
+        <input type="checkbox" name="bingocard-field" value="square-5">
         <span>5</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-6">
+        <input type="checkbox" name="bingocard-field" value="square-6">
         <span>6</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-7">
+        <input type="checkbox" name="bingocard-field" value="square-7">
         <span>7</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-8">
+        <input type="checkbox" name="bingocard-field" value="square-8">
         <span>8</span>
     </label>
     <label class="bingo-square">
-        <input type="checkbox" name="square-9">
+        <input type="checkbox" name="bingocard-field" value="square-9">
         <span>9</span>
     </label>
+    <input type="submit" value="test">
 </form>
 
 <style>
