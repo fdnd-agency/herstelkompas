@@ -1,19 +1,20 @@
 <script>
     const { member, form, behandelingen, currentCard, bingokaart } =  $props()
-    import { enhance } from "$app/forms";
-    console.log(currentCard)
-    console.log(bingokaart)
-    let enhancedForm = form;
+    // import { enhance } from "$app/forms";
 
-    function handleFormSubmit({ result, update }) {
-        if (result?.newCardState) { // if result and result.newCardstate https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-            enhancedForm = result;
-        }
-    }
+    // let enhancedForm = form;
+
+    // function handleFormSubmit({ result, update }) {
+    //     if (result?.newCardState) { // if result and result.newCardstate https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+    //         enhancedForm = result;
+    //     }
+    // }
 </script>
 
 <h2>Ik ben een bingokaart</h2>
-<form class="bingocard" method="POST" use:enhance={{ onSubmit: handleFormSubmit }}>
+<form class="bingocard" method="POST">
+<!-- use:enhance={{ onSubmit: handleFormSubmit }} -->
+
   {#if form && form.newCardState}
     <!-- use the current card from the form -->
     {#each form.newCardState as square}

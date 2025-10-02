@@ -2,7 +2,6 @@
     let { data, form } = $props();
     let behandelingen = data.behandelingen
     let bingokaart = data.bingokaart
-    console.log(bingokaart)
     import { Bingocard } from '$lib';
     import { Sidebar } from '$lib';
     import { page } from '$app/state';

@@ -1,11 +1,20 @@
+import { createDirectus, authentication } from '@directus/sdk';
+import { DIRECTUS_EMAIL, DIRECTUS_PASSWORD, DIRECTUS_URL } from '$env/static/private';
+const client = createDirectus(DIRECTUS_URL).with(authentication());
+const token = await client.login({
+    email: DIRECTUS_EMAIL,
+    password: DIRECTUS_PASSWORD
+});
 export async function load({}){
     const behandelingenReponse = await fetch('https://fdnd-agency.directus.app/items/behandeling?limit=1&sort=-datum') // meest recent
     const behandelingenReponseData = await behandelingenReponse.json()
     let behandelingen = behandelingenReponseData.data[0]
+
     return { behandelingen: behandelingenReponseData.data, bingokaart: behandelingen.bingokaart};
 }
 export const actions = {
     default: async ({ request }) => {
+        console.log("poep")
         let newCardState = [];
         const data = await request.formData();
         let checkedFields = data.getAll('bingocard-field');
@@ -24,7 +33,9 @@ export const actions = {
         console.log(newCardState)
         const todayBehandeling =  await fetch('https://fdnd-agency.directus.app/items/behandeling?filter={"datum":%20"2025-10-01T12:00:00"}') // Hier moet huidige datum in
         const todayBehandelingReponseData = await todayBehandeling.json()
-        let todayBehandelingData = todayBehandelingReponseData.data
+        let todayBehandelingData = todayBehandelingReponseData.data;
+        const recordId = todayBehandelingData[0].id;
+
         const now = new Date();
         const todaydatetime = now.toISOString().slice(0, 19);
         console.log(todaydatetime); 
@@ -35,7 +46,7 @@ export const actions = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer YOUR_TOKEN_HERE',
+                    'Authorization': token.access_token
                 },
                 body: JSON.stringify({
                     beschrijving: "Leeg",
@@ -45,13 +56,13 @@ export const actions = {
             });
         }
         else{
-            const recordId = todayBehandelingData[0].id;
             // PATCH the bingokaart
+            console.log(recordId)
             const patchRes = await fetch(`https://fdnd-agency.directus.app/items/behandeling/${recordId}`, {
                 method: 'PATCH',
                 headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer YOUR_TOKEN_HERE'
+                'Authorization': token.access_token
                 },
                 body: JSON.stringify({
                     bingokaart: newCardState 
@@ -59,6 +70,7 @@ export const actions = {
             });
 
             const patchResult = await patchRes.json();
+            console.log(patchResult);
         }
         return {
             success: true,
