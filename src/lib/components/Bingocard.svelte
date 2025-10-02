@@ -1,51 +1,48 @@
 <script>
-    const { member, form } =  $props()
+    const { member, form, behandelingen, currentCard, bingokaart } =  $props()
     import { enhance } from "$app/forms";
-    import { page } from "$app/stores";
+    console.log(currentCard)
+    console.log(bingokaart)
+    let enhancedForm = form;
 
-    let loading = false;
+    function handleFormSubmit({ result, update }) {
+        if (result?.newCardState) { // if result and result.newCardstate https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+            enhancedForm = result;
+        }
+    }
 </script>
 
 <h2>Ik ben een bingokaart</h2>
+<form class="bingocard" method="POST" use:enhance={{ onSubmit: handleFormSubmit }}>
+  {#if form && form.newCardState}
+    <!-- use the current card from the form -->
+    {#each form.newCardState as square}
+      <label class="bingo-square">
+        <input 
+          type="checkbox" 
+          name="bingocard-field" 
+          value={square.activiteit}
+          checked={square.checked}
+        >
+        <span>{square.activiteit}</span>
+      </label>
+    {/each}
+  {:else}
+    <!-- fallback: use the card from Directus -->
+    {#each bingokaart as square}
+      <label class="bingo-square">
+        <input 
+          type="checkbox" 
+          name="bingocard-field" 
+          value={square.activiteit}
+          checked={square.checked}
+        >
+        <span>{square.activiteit}</span>
+      </label>
+    {/each}
+  {/if}
 
-<form class="bingocard" method="POST" action="/bingokaart">
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="Gym">
-        <span>1</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="Drankje doen met vriendinnen">
-        <span>2</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-3">
-        <span>3</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-4">
-        <span>4</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-5">
-        <span>5</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-6">
-        <span>6</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-7">
-        <span>7</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-8">
-        <span>8</span>
-    </label>
-    <label class="bingo-square">
-        <input type="checkbox" name="bingocard-field" value="square-9">
-        <span>9</span>
-    </label>
-    <input type="submit" value="test">
+  <input type="submit" value="test">
 </form>
 
 <style>
