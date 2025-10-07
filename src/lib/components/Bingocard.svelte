@@ -1,49 +1,17 @@
 <script>
-    const { member, form, behandelingen, currentCard, bingokaart } =  $props()
-    // import { enhance } from "$app/forms";
-
-    // let enhancedForm = form;
-
-    // function handleFormSubmit({ result, update }) {
-    //     if (result?.newCardState) { // if result and result.newCardstate https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-    //         enhancedForm = result;
-    //     }
-    // }
+  const { bingokaart } = $props()
 </script>
 
 <h2>Ik ben een bingokaart</h2>
 <form class="bingocard" method="POST">
-<!-- use:enhance={{ onSubmit: handleFormSubmit }} -->
 
-  {#if form && form.newCardState}
-    <!-- use the current card from the form -->
-    {#each form.newCardState as square}
-      <label class="bingo-square">
-        <input 
-          type="checkbox" 
-          name="bingocard-field" 
-          value={square.activiteit}
-          checked={square.checked}
-        >
-        <span>{square.activiteit}</span>
-      </label>
-    {/each}
-  {:else}
-    <!-- fallback: use the card from Directus -->
     {#each bingokaart as square}
       <label class="bingo-square">
-        <input 
-          type="checkbox" 
-          name="bingocard-field" 
-          value={square.activiteit}
-          checked={square.checked}
-        >
+        <input type="checkbox" name="bingocard-field" value={square.activiteit} checked={square.checked}>
         <span>{square.activiteit}</span>
       </label>
     {/each}
-  {/if}
-
-  <input type="submit" value="test">
+  <input type="submit" value="Bevestig afgekruisde vakjes">
 </form>
 
 <style>
