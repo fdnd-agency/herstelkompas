@@ -13,9 +13,9 @@ const token = await client.login({
 export async function load({}){
     const behandelingenReponse = await fetch('https://fdnd-agency.directus.app/items/behandeling?limit=1&sort=-datum') // meest recent
     const behandelingenReponseData = await behandelingenReponse.json()
-    let behandeling = behandelingenReponseData.data[0]
-    // geef bingokaart door aan de view
-    return { bingokaart: behandeling.bingokaart};
+    let behandeling = behandelingenReponseData.data[0] 
+    let bingokaart = behandeling.bingokaart ? behandeling.bingokaart : [];
+    return { bingokaart };
 }
 export const actions = {
     default: async ({ request }) => {
