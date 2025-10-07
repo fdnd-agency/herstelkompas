@@ -83,7 +83,7 @@
         transition: 0.5s ease;
         position: fixed;
         top: 0;
-        left: -1px; /* dunno why this is needed xP */
+        left: -1px; /* subpixel bug */
         grid-row: 1 / -1;
     }
     aside .hamburger-open{
