@@ -81,7 +81,7 @@ export const actions = {
                     'Authorization': token.access_token
                 },
                 body: JSON.stringify({
-                    beschrijving: "Leeg",
+                    beschrijving: "Geen beschrijving",
                     datum: todaydatetime,
                     bingokaart: newCardState
                 }),
