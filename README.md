@@ -1,5 +1,51 @@
 # Herstelkompas
 
+## About this project
+
+**Herstelkompas** is a digital web tool developed using the **Svelte** framework.  
+The tool supports Long COVID patients and their healthcare providers in monitoring recovery in a visual, accessible, and personalized way. The project combines design, data, and usability to make recovery insights clear and to encourage progress.
+
+---
+
+## Client
+
+**Zelfzorg aan Zee**
+
+Zelfzorg aan Zee combines physical therapy, insightful exercises, and the power of water (Blue Mind Theory) to promote recovery. The program targets people with brain injuries, Long COVID, and burnout, helping them improve both cognitive and physical functions.  
+A medically specialized rehabilitation team collaborates with experienced patient advisors to guide participants until they can meaningfully contribute to society through work, volunteering, or achieving personal goals.  
+The treatment program is only considered complete when the participant is satisfied with the outcome.
+
+---
+
+## Design Challenge
+
+Design an **intuitive and user-friendly web tool** that supports Long COVID patients and their healthcare providers in tracking the recovery process.  
+The tool should:
+
+* Be visually appealing and easy to navigate
+* Show reliable and insightful data about recovery progress
+* Provide personalized recommendations and insights based on individual recovery trajectories
+
+---
+
+## Team & Roles
+
+The project team consists of **Ties**, **Kerem**, and **Dylan**.  
+Each team member developed their own **design concept**. After a joint discussion, it was decided to proceed with **Ties' design**, as it best aligned with the project goals and target audience.  
+
+All three team members collaborate on the **technical implementation** of the web tool. Tasks are divided and executed together, ensuring everyone contributes to both front-end development and optimizing the user experience.
+
+---
+
+## Technical Stack
+
+* **Framework:** Svelte
+* **Styling:** CSS (mobile-first, responsive design)
+* **Tools:** GitHub, Figma, VS Code
+* **Goal:** Accessible and scalable web tool for recovery monitoring
+
+---
+
 ## Design Choices
 We tried to match the colors from the “Zelfzorg aan Zee” website as closely as possible. However, we noticed that the “yellow” color you use doesn’t provide enough contrast when white text is placed on top of it. Therefore, we changed that yellow color to “green” in our design. Of course, this can easily be adjusted according to your preferences.
 
