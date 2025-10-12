@@ -6,6 +6,6 @@
 <div id="container">
     <Sidebar/>
     <main>
-        <h1>Behandelingen detail pagina</h1>
+        <h1>Behandelingen pagina</h1>
     </main>
 </div>
