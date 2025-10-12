@@ -13,10 +13,10 @@ Altijd positief en reageert snel op berichten. Hij is sterk in klantcontact en k
 Geeft altijd een eerlijke mening en houdt graag het overzicht.
 
 **Ties over Dylan:**
-*(Nog in te vullen)*
+Werkt heel goed en communiceerd ook heel goed. Zorgt voor goed overzicht en neemt veel initiatieven.
 
 **Ties over Kerem:**
-*(Nog in te vullen)*
+Goed oog voor design en stelt veel goede vragen.
 
 ---
 
@@ -66,6 +66,6 @@ Uit de pitch zijn twee belangrijke verbeterpunten naar voren gekomen:
 
 * **Dylan:** Meer verantwoordelijkheid nemen en mezelf vaker aanbieden om taken op te pakken.
 * **Kerem:** Sneller aangeven als ik iets lastig vind of niet haal.
-* **Ties:** *(Nog in te vullen)*
+* **Ties:** Iets sneller werken en meer overzicht houden.
 
 ---
