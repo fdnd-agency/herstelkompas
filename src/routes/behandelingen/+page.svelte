@@ -7,15 +7,6 @@
   import { Sidebar, Treatment } from '$lib';
 </script>
 
-<!-- Layout wrapper voor sidebar + content -->
-<div class="layout-container">
-  <!-- Sidebar als aside: semantisch correct voor navigatie of aanvullende info -->
-  <aside class="sidebar">
-    <Sidebar />
-  </aside>
-
-  <!-- Hoofdcontent van de pagina -->
-  <main>
     <!-- Pagina header: titel en subtitel -->
     <header class="page-header">
       <h1>Behandelingen</h1> 
@@ -42,8 +33,6 @@
         {/each}
       </ul>
     </section>
-  </main>
-</div>
 
 <style>
   /* ===========================
