@@ -7,57 +7,84 @@
   import { Sidebar, Treatment } from '$lib';
 </script>
 
-<div id="container">
-  <!-- Sidebar navigatie -->
-  <Sidebar />
+<!-- Layout wrapper voor sidebar + content -->
+<div class="layout-container">
+  <!-- Sidebar als aside: semantisch correct voor navigatie of aanvullende info -->
+  <aside class="sidebar">
+    <Sidebar />
+  </aside>
 
+  <!-- Hoofdcontent van de pagina -->
   <main>
-    <!-- Pagina titel en subtitel -->
-    <h1>Behandelingen</h1>
-    <p class="subtitle">Jouw overzicht</p>
+    <!-- Pagina header: titel en subtitel -->
+    <header class="page-header">
+      <h1>Behandelingen</h1> 
+      <p class="subtitle">Jouw overzicht</p> 
+    </header>
 
-    <!-- Tabelkop -->
-    <div class="treatment-header">
-      <span>Beschrijving</span>
-      <span>Datum</span>
-    </div>
+    <!-- Sectie met behandelingen -->
+    <section class="treatment-section">
+      <!-- Header van de behandelingslijst: kolomlabels -->
+      <header class="treatment-header">
+        <span>Beschrijving</span>
+        <span>Datum</span>
+      </header>
 
-    <!-- Dynamische behandelingslijst -->
-    <div class="treatment-list">
-      {#each behandelingen as behandeling}
-        <Treatment behandeling={behandeling} />
-      {/each}
-    </div>
+      <!-- Semantische lijst van behandelingen -->
+      <ul class="treatment-list">
+        {#each behandelingen as behandeling}
+          <li>
+            <!-- Article voor individuele behandeling -->
+            <article class="treatment-item-wrapper">
+              <Treatment behandeling={behandeling} />
+            </article>
+          </li>
+        {/each}
+      </ul>
+    </section>
   </main>
 </div>
 
 <style>
-  /* ===================================
-     BASISSTIJLEN (Mobile First)
-     =================================== */
+  /* ===========================
+     Layout container: 
+     =========================== */
+  .layout-container {
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* Sidebar styling */
+  .sidebar {
+    flex: 0 0 250px; 
+  }
+
+  /* Hoofdcontent */
   main {
+    flex: 1;
     padding: 1.5rem;
     font-family: var(--font-regular);
     background-color: var(--color-white);
   }
 
-  h1 {
+  /* Pagina header */
+  .page-header h1 {
     color: var(--primary-color-dark);
     font-family: var(--font-semibold);
     font-size: var(--text-size-xl);
     margin-bottom: 0.25rem;
   }
 
-  .subtitle {
+  .page-header .subtitle {
     color: var(--primary-color-dark);
     font-size: var(--text-size-sm);
-    margin-bottom: 1rem; /* kleine spacing onder subtitel */
+    margin-bottom: 1rem;
   }
 
-  /* Kopje boven behandelingslijst */
+  /* Behandelingslijst header: kolomnamen */
   .treatment-header {
     display: flex;
-    justify-content: space-between; /* Beschrijving links, datum rechts */
+    justify-content: space-between; 
     color: color-mix(in srgb, var(--primary-color-dark) 70%, var(--color-white) 30%);
     font-size: var(--text-size-xs);
     font-family: var(--font-medium);
@@ -68,21 +95,28 @@
 
   /* Lijst van behandelingen */
   .treatment-list {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem; /* ruimte tussen items */
+    gap: 0.75rem; 
   }
 
-  /* ===================================
+  .treatment-list li {
+    margin: 0; 
+  }
+
+  /* ===========================
      MEDIA QUERIES (Tablet & Desktop)
-     =================================== */
+     =========================== */
   @media (min-width: 768px) {
     .treatment-header {
       font-size: var(--text-size-sm);
       margin-bottom: 0.75rem;
     }
 
-    .subtitle {
+    .page-header .subtitle {
       margin-bottom: 2rem;
     }
   }

@@ -3,21 +3,22 @@
   export let behandeling;
 </script>
 
-<!-- behandeling-item met beschrijving, datum en pijl -->
-<div class="treatment-item">
-  <div class="beschrijving">
+<article class="treatment-item">
+  <!-- Beschrijvingstekst -->
+  <p class="beschrijving">
     {behandeling.beschrijving || 'Geen beschrijving beschikbaar'}
-  </div>
+  </p>
 
+  <!-- Datum en pijl -->
   <div class="date-and-arrow">
-    <span class="datum">
+    <time class="datum" datetime={behandeling.datum}>
       {behandeling.datum
         ? new Date(behandeling.datum).toLocaleDateString('nl-NL')
         : '-'}
-    </span>
+    </time>
     <span class="arrow">→</span>
   </div>
-</div>
+</article>
 
 <style>
   /* ===================================
@@ -46,6 +47,7 @@
     font-size: var(--text-size-sm);
     color: var(--primary-color-dark);
     line-height: 1.4;
+    margin: 0; /* p standaard margin reset */
   }
 
   /* Container voor datum + pijl rechts */
@@ -53,7 +55,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    flex-shrink: 0; /* Voorkomt dat de inhoud wordt samengedrukt */
+    flex-shrink: 0; 
   }
 
   /* Datumstijl */
@@ -61,7 +63,7 @@
     font-family: var(--font-semibold);
     font-size: var(--text-size-sm);
     color: var(--primary-color-dark);
-    white-space: nowrap; /* Voorkomt afbreken van datum */
+    white-space: nowrap; 
   }
 
   /* Pijlstijl */
