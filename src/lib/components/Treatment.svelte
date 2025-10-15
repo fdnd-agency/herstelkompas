@@ -24,6 +24,8 @@
   /* ===================================
      BASISSTIJLEN 
      =================================== */
+
+ 
   .treatment-item {
     display: flex;
     justify-content: space-between; 
@@ -78,6 +80,8 @@
   .treatment-item:hover .arrow {
     transform: translateX(4px);
   }
+
+  
 
   /* ===================================
      MEDIA QUERIES (Tablet & Desktop)
