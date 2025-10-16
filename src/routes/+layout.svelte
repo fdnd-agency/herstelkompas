@@ -19,6 +19,10 @@
 			vertical-align: top;
 		}
 	}
+	:global(#container){
+		max-height: 100vh;
+		overflow: hidden;
+	}
 	@supports (display: grid){
 		@media (min-width: 750px){
 			:global(main){

@@ -1,6 +1,6 @@
 :root {
   /* Kleuren met fallback */
-  --primary-color-light: rgb(41, 158, 222); /* fallback */
+  --primary-color-light: rgb(41, 158, 222); /* fa llback */
   --primary-color-light: hsl(204, 82%, 41%);
 
   --primary-color-dark: rgb(8, 63, 119); /* fallback */
@@ -12,6 +12,23 @@
   --color-white: rgb(255, 255, 255); /* fallback */
   --color-white: hsl(0, 0%, 100%);
 
+  /* Neutral colors */
+
+  /* RGB fallbacks first */
+  --color-neutral-darker: rgb(0, 0, 0);
+  --color-neutral-dark: rgb(31, 36, 50);
+  --color-neutral: rgb(84, 104, 156);
+  --color-neutral-light: rgb(170, 176, 194);
+  --color-neutral-lighter: rgb(229, 232, 242);
+
+  /* Overwrite with HSL if supported */
+  --color-neutral-darker: hsl(0, 0%, 0%);
+  --color-neutral-dark: hsl(230, 21%, 14%);
+  --color-neutral: hsl(223, 30%, 47%);
+  --color-neutral-light: hsl(224, 14%, 72%);
+  --color-neutral-lighter: hsl(223, 40%, 91%);
+
+
   /* Fonts */
   --font-regular: "Inter", sans-serif;
   --font-medium: "Inter Medium", "Inter", sans-serif;
@@ -22,6 +39,6 @@
   --text-size-sm: clamp(0.875rem, 1.75vw, 14px);
   --text-size-md: clamp(1rem, 2vw, 16px);
   --text-size-lg: clamp(1.125rem, 2.25vw, 18px);
-  --text-size-xl: clamp(1.4rem, 2.5vw, 20px);
+  --text-size-xl: clamp(1.4rem, 2.5vw, 30px);
 }
 
