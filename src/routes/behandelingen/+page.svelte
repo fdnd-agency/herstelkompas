@@ -6,7 +6,6 @@
   // Importeer Sidebar en individuele Treatment component
   import { Sidebar, Treatment } from '$lib';
 </script>
-
 <header class="page-header">
   <h1>Behandelingen</h1>
   <p class="subtitle">Jouw overzicht</p>
@@ -98,3 +97,4 @@ main {
   }
 }
 </style>
+
