@@ -7,4 +7,3 @@
 
         <h1>Bingokaart pagina</h1>
         <Bingocard/>
-
