@@ -14,7 +14,14 @@ export async function load({}){
     const vragenReponse = await fetch('https://fdnd-agency.directus.app/items/vraag') // meest recent
     const vragenReponseData = await vragenReponse.json()
     let vragen = vragenReponseData.data
-    return { vragen };
+    let agreementsScales = [
+        { text: "Zeer mee oneens" },
+        { text: "Oneens" },
+        { text: "Neutraal" },
+        { text: "Eens" },
+        { text: "Zeer mee eens" },
+    ];
+    return { vragen, agreementsScales };
 }
 
 
