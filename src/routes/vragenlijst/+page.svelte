@@ -256,8 +256,8 @@
         opacity: 0;
         transform: translateY(5px);
         transition:
-            opacity 1s,
-            transform 1s;
+            opacity .5s,
+            transform .5s;
     }
     section {
         display: flex;
@@ -297,11 +297,14 @@
         transition: 1.25s ease;
         
     }
-    :global(.animation--slide-in){
+    @media (prefers-reduced-motion: no-preference) {
+
+        :global(.animation--slide-in){
             legend{
                 animation: .5s slide-in ease-in;
             }
         }
+    }
 
     legend {
         font-weight: 600;
@@ -483,16 +486,18 @@
             position: absolute;
             translate: -50% -50%;
             opacity: 1;
-            transition: 2s ease;
+            transition: .5s ease;
             justify-content: center;
             display: flex;
             width: 100%;
             max-width: 310px;
             flex-wrap: wrap;
             row-gap: 10px;
-            @starting-style {
-                opacity: 0;
-                top: 550px;
+            @media (prefers-reduced-motion: no-preference) {
+                @starting-style {
+                    opacity: 0;
+                    top: 550px;
+                }
             }
         }
         :global(button.btn-nav) {
