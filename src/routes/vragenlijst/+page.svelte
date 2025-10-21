@@ -120,6 +120,7 @@
                 }
             });
         });
+
     });
     //prev question button click
     function prevQuestion(e) {
@@ -205,6 +206,7 @@
                                     id="q-{i + 1}-a-{j + 1}"
                                     name="q-{i + 1}"
                                     value={agreementsScale.text}
+                                    checked={j === 2}
                                     required={j === 0}
                                     oninvalid={j === 0
                                         ? (e) => {
@@ -299,7 +301,7 @@
     }
     @media (prefers-reduced-motion: no-preference) {
 
-        :global(.animation--slide-in){
+        :global(.js-enabled .animation--slide-in){
             legend{
                 animation: .5s slide-in ease-in;
             }
