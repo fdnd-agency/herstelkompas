@@ -23,6 +23,7 @@
             // add left
             const prevBtn = document.createElement("button");
             prevBtn.textContent = "Vorige";
+            prevBtn.setAttribute("aria-hidden", "true");
             prevBtn.tabIndex = -1;
             prevBtn.classList.add("btn-prev");
             prevBtn.classList.add("btn-nav");
@@ -34,6 +35,7 @@
             //right
             const nextBtn = document.createElement("button");
             nextBtn.textContent = "Volgende";
+            nextBtn.setAttribute("aria-hidden", "true");
             nextBtn.tabIndex = -1;
             nextBtn.classList.add("btn-next");
             nextBtn.classList.add("btn-nav");
