@@ -25,10 +25,14 @@ header .hamburger-close{
     line-height: 1rem;
     gap: .35rem;
     transition: 0.3s ease;
-    @media (min-width: 750px){
-        display: none !important;
-    }
+
 }
+    @media (min-width: 750px){
+        header .hamburger-close{
+            display: none !important;
+        }
+    }
+
 header .hamburger-close svg > *{
     fill: #0B4989;
     transition: 0.3s ease;
