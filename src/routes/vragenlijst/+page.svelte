@@ -303,10 +303,8 @@
     }
     @media (prefers-reduced-motion: no-preference) {
 
-        :global(.js-enabled .animation--slide-in){
-            legend{
-                animation: .5s slide-in ease-in;
-            }
+        :global(.js-enabled .animation--slide-in) legend{
+            animation: .5s slide-in ease-in;
         }
     }
 
@@ -315,6 +313,7 @@
         font-size: var(--text-size-xl);
         color: var(--color-neutral);
         max-width: 48rem;
+        margin: 0 auto;
     }
     main {
         font-family: var(--font-regular);
@@ -347,31 +346,32 @@
         position: relative;
         transition: 0.3s ease-in;
         cursor: pointer;
-        &:before {
-            content: attr(data-num);
-            font-size: var(--text-size-lg);
-            font-weight: 800;
-            color: var(--color-neutral);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            translate: -50% -50%;
-            transition: 0.3s ease-in;
-        }
+    }
+    input[type="radio"]:before {
+        content: attr(data-num);
+        font-size: var(--text-size-lg);
+        font-weight: 800;
+        color: var(--color-neutral);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        transition: 0.3s ease-in;
     }
     input[type="radio"]:checked,
     .input-wrapper:hover input[type="radio"] {
         background-color: var(--color-neutral);
-        &:before {
-            color: #e8ebf2;
-        }
+        
+    }
+    input[type="radio"]:checked:before, .input-wrapper:hover input[type="radio"]:before {
+        color: #e8ebf2;
     }
     input[type="radio"]:focus-visible {
         outline: 2px dashed var(--color-neutral);
-        &:before {
-            color: var(--color-neutral);
-        }
     }
+    input[type="radio"]:focus-visible:before{
+        color: var(--color-neutral);
+    } 
     input[type="radio"] + label {
         cursor: pointer;
         font-weight: 600;
@@ -412,124 +412,146 @@
 
     /* Has JS */
 
-    :global(html.js-enabled) section {
-        form {
-            position: absolute;
-            left: 50%;
-            translate: -50% -50%;
-            top: 300px;
-            width: 80%;
-            overflow: hidden;
-            height: 225px;
-            gap: 0;
-            min-width: 320px;
-        }
-        fieldset {
-            flex: 1;
-            opacity: 0;
-            text-align: center;
-        }
-        fieldset:first-child {
-            opacity: 1;
-        }
-        #formControl {
-            text-align: center;
-        }
-        .answers-wrapper {
-            justify-content: center;
-            gap: 0.5rem;
-            flex-direction: row;
-            .input-wrapper {
-                flex-direction: column;
-                text-align: center;
-                flex: 1;
-                input[type="radio"] {
-                    width: 44px;
-                    height: 44px;
-                }
-                input[type="radio"] + label {
-                    font-size: 13px;
-                }
-            }
-        }
-        @media (min-width: 500px) {
-            .answers-wrapper {
-                gap: 1rem;
-                flex-direction: row;
-                .input-wrapper {
-                    flex-direction: column;
-                    input[type="radio"] {
-                        width: 55px;
-                        height: 55px;
-                    }
-                    input[type="radio"] + label {
-                        font-size: 15px;
-                    }
-                }
-            }
-        }
-        @media (min-width: 850px) {
-            .answers-wrapper {
-                gap: 1rem;
-                flex-direction: row;
-                .input-wrapper {
-                    flex-direction: column;
-                    max-width: 140px;
-                    input[type="radio"] {
-                        width: 64px;
-                        height: 64px;
-                    }
-                    input[type="radio"] + label {
-                        font-size: 1rem;
-                    }
-                }
-            }
-        }
+    :global(html.js-enabled) section form {
+    position: absolute;
+    left: 50%;
+    translate: -50% -50%;
+    top: 300px;
+    width: 80%;
+    overflow: hidden;
+    height: 225px;
+    gap: 0;
+    min-width: 320px;
+}
+
+:global(html.js-enabled) section fieldset {
+    flex: 1;
+    opacity: 0;
+    text-align: center;
+}
+
+:global(html.js-enabled) section fieldset:first-child {
+    opacity: 1;
+}
+
+:global(html.js-enabled) section #formControl {
+    text-align: center;
+}
+
+:global(html.js-enabled) section .answers-wrapper {
+    justify-content: center;
+    gap: 0.5rem;
+    flex-direction: row;
+}
+
+:global(html.js-enabled) section .answers-wrapper .input-wrapper {
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+}
+
+:global(html.js-enabled) section .answers-wrapper .input-wrapper input[type="radio"] {
+    width: 44px;
+    height: 44px;
+}
+
+:global(html.js-enabled) section .answers-wrapper .input-wrapper input[type="radio"] + label {
+    font-size: 13px;
+}
+
+@media (min-width: 500px) {
+    :global(html.js-enabled) section .answers-wrapper {
+        gap: 1rem;
+        flex-direction: row;
+    }
+
+    :global(html.js-enabled) section .answers-wrapper .input-wrapper {
+        flex-direction: column;
+    }
+
+    :global(html.js-enabled) section .answers-wrapper .input-wrapper input[type="radio"] {
+        width: 55px;
+        height: 55px;
+    }
+
+    :global(html.js-enabled) section .answers-wrapper .input-wrapper input[type="radio"] + label {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 850px) {
+    :global(html.js-enabled) section .answers-wrapper {
+        gap: 1rem;
+        flex-direction: row;
+    }
+
+    :global(html.js-enabled) section .answers-wrapper .input-wrapper {
+        flex-direction: column;
+        max-width: 140px;
+    }
+
+    :global(html.js-enabled) section .answers-wrapper .input-wrapper input[type="radio"] {
+        width: 64px;
+        height: 64px;
+    }
+
+    :global(html.js-enabled) section .answers-wrapper .input-wrapper input[type="radio"] + label {
+        font-size: 1rem;
+    }
+}
+
+:global(.controls-container) {
+    top: 450px;
+    position: absolute;
+    translate: -50% -50%;
+    opacity: 1;
+    transition: .5s ease;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    max-width: 310px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    @starting-style {
         :global(.controls-container) {
-            top: 450px;
-            position: absolute;
-            translate: -50% -50%;
-            opacity: 1;
-            transition: .5s ease;
-            justify-content: center;
-            display: flex;
-            width: 100%;
-            max-width: 310px;
-            flex-wrap: wrap;
-            row-gap: 10px;
-            @media (prefers-reduced-motion: no-preference) {
-                @starting-style {
-                    opacity: 0;
-                    top: 550px;
-                }
-            }
-        }
-        :global(button.btn-nav) {
-            transition: 0.3s ease;
-            cursor: pointer;
-            padding: 8px 30px;
-            border-radius: 10px;
-            margin-left: 1rem;
-            font-size: 18px;
-            font-weight: bold;
-            border: 2px solid #54689c;
-        }
-        :global(button.btn-prev) {
-            background-color: #e8ebf2;
-            color: #54689c;
-            display: none;
-            &:hover{
-                background-color: #54689c;
-                color: #def0fc;
-            }
-        }
-        :global(button.btn-next) {
-            background-color: #54689c;
-            color: #def0fc;
-            &:hover{
-                background-color: #e8ebf2;
-                color: #54689c;
-            }
+            opacity: 0;
+            top: 550px;
         }
     }
+}
+
+:global(button.btn-nav) {
+    transition: 0.3s ease;
+    cursor: pointer;
+    padding: 8px 30px;
+    border-radius: 10px;
+    margin-left: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #54689c;
+}
+
+:global(button.btn-prev) {
+    background-color: #e8ebf2;
+    color: #54689c;
+    display: none;
+}
+
+:global(button.btn-prev):hover {
+    background-color: #54689c;
+    color: #def0fc;
+}
+
+:global(button.btn-next) {
+    background-color: #54689c;
+    color: #def0fc;
+}
+
+:global(button.btn-next):hover {
+    background-color: #e8ebf2;
+    color: #54689c;
+}
 </style>
