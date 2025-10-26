@@ -106,7 +106,7 @@
         padding: 10px;
 
 	}
-    @media (min-width: 750px){
+    @media (min-width: 850px){
         aside .hamburger-open{
 			display: none !important;
 		}
@@ -266,14 +266,14 @@
         color: #fff;
         fill: #fff;
     }
-    @media (min-width: 750px){
+    @media (min-width: 850px){
         aside{
             translate: 0 0;
             position: relative;
         }
 
     }
-    @media (max-width: 750px){
+    @media (max-width: 850px){
         aside:target{
             translate: 0 0;
             position: absolute;

@@ -281,7 +281,7 @@
         overflow-y: auto;
         padding-bottom: 3rem;
     }
-    @media (min-width: 750px) {
+    @media (min-width: 850px) {
         form {
             max-height: calc(100vh - 90px);
         }
@@ -364,7 +364,7 @@
         
     }
     input[type="radio"]:checked:before, .input-wrapper:hover input[type="radio"]:before {
-        color: #e8ebf2;
+        color: #e8ebf2 !important
     }
     input[type="radio"]:focus-visible {
         outline: 2px dashed var(--color-neutral);
@@ -417,7 +417,7 @@
     left: 50%;
     translate: -50% -50%;
     top: 300px;
-    width: 80%;
+    width: 85%;
     overflow: hidden;
     height: 225px;
     gap: 0;

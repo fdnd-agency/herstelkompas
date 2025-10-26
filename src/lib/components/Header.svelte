@@ -27,7 +27,7 @@ header .hamburger-close{
     transition: 0.3s ease;
 
 }
-    @media (min-width: 750px){
+    @media (min-width: 850px){
         header .hamburger-close{
             display: none !important;
         }
