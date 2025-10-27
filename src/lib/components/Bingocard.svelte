@@ -33,6 +33,11 @@
         max-width: 650px;
 
         gap: 1rem;
+
+        @media (max-width: 600px) {
+            gap: 0.5rem;
+            font-size: clamp(12px, 4vw, 16px);
+        }
     }
 
     .bingo-square {
@@ -50,10 +55,16 @@
         user-select: none;
         cursor: pointer;
 
+        transition: transform .2s cubic-bezier(.2,.9,.2,1);
+
         &:has(:checked) {
-            transition: background .3s;
             background-color: #0C8825;
         }
+    }
+
+    .bingo-square:hover,
+    .bingo-square:has(input:focus-visible) {
+        transform: scale(1.03);
     }
 
     .bingo-square input {
@@ -66,6 +77,10 @@
         top: 0;
         left: 0;
         margin: .5rem;
+
+        @media (max-width: 600px) {
+            margin: 0.3rem;
+        }
     }
 
     .bingo-square span {
@@ -75,6 +90,10 @@
             
         padding: 0.5rem;
         overflow: hidden;
+
+        @media (max-width: 600px) {
+            padding: 0.3rem;
+        }
     }
 
     .bingo-square input:checked {
@@ -85,26 +104,17 @@
         outline: 3px solid #000000;
         outline-offset: 2px;
     }
-
-
-
-    @media (max-width: 600px) {
-        .bingocard {
-            gap: 0.5rem;
-            font-size: clamp(12px, 4vw, 16px);
-        }
-        .bingo-square span {
-            padding: 0.3rem;
-        }
-        .bingo-square input {
-            margin: 0.3rem;
-        }
-    }
     
     input[type="submit"]{
         position: absolute;
         top: calc(100% + 1rem);
         left: 50%;
         translate: -50% 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .bingo-square:hover {
+            transform: none;
+        }
     }
 </style>
