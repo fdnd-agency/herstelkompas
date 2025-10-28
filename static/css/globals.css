@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box; /* Stupid Flanders */
     font-family: "Inter", sans-serif;
+
+    /* padding-right: 1px; */
 }
 @media (min-width: 750px){
     #container{
@@ -10,4 +12,5 @@
         grid-template-columns: 320px 1fr;
         gap: 1rem;
     }
+
 }
