@@ -2,6 +2,7 @@
   /* Kleuren met fallback */
   --primary-color-light: rgb(41, 158, 222); /* fallback */
   --primary-color-light: hsl(204, 82%, 41%);
+  --color-blue-tint: rgb(236, 245, 255); /* zacht lichtblauw */
 
   --primary-color-dark: rgb(8, 63, 119); /* fallback */
   --primary-color-dark: hsl(210, 85%, 29%);
