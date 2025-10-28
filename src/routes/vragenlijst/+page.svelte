@@ -268,9 +268,7 @@
         flex-direction: column;
         align-items: center;
     }
-    legend {
-        height: 72px;
-    }
+
     form {
         width: 100%;
         display: flex;
@@ -299,7 +297,8 @@
         border: none;
         margin: 0;
         transition: 1.25s ease;
-        
+        display: flex;
+        justify-content: start;
     }
     @media (prefers-reduced-motion: no-preference) {
 
@@ -428,7 +427,13 @@
     flex: 1;
     opacity: 0;
     text-align: center;
+            justify-content: center;
 }
+:global(html.js-enabled)  legend {
+        height: 125px;
+        display: flex;
+        align-items: end;
+    }
 
 :global(html.js-enabled) section fieldset:first-child {
     opacity: 1;

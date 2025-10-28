@@ -1,6 +1,7 @@
 /// AUTHENTICATIE
 
 import { createDirectus, authentication } from '@directus/sdk';
+import { serialize } from 'cookie';
 import { DIRECTUS_EMAIL, DIRECTUS_PASSWORD, DIRECTUS_URL } from '$env/static/private';
 const client = createDirectus(DIRECTUS_URL).with(authentication());
 const token = await client.login({
@@ -10,7 +11,7 @@ const token = await client.login({
 
 ////
 
-export async function load({}){
+export async function load({ cookies }){
     const vragenReponse = await fetch('https://fdnd-agency.directus.app/items/vraag') // meest recent
     const vragenReponseData = await vragenReponse.json()
     let vragen = vragenReponseData.data
@@ -21,24 +22,71 @@ export async function load({}){
         { text: "Eens" },
         { text: "Zeer mee eens" },
     ];
-    return { vragen, agreementsScales };
+    var s = vragen.sort(func);  
+    function func(a, b) {  
+        return 0.5 - Math.random();
+    }  
+    console.log(vragen)
+    const sortedQuestions = [];
+    const added = {};
+    for (const vraag of vragen) {
+    switch (vraag.stofje) {
+        case '1':
+        if (!added['1']) {
+            sortedQuestions.push(vraag);
+            added['1'] = true;
+        }
+        break;
+        case '2':
+        if (!added['2']) {
+            sortedQuestions.push(vraag);
+            added['2'] = true;
+        }
+        break;
+        case '3':
+        if (!added['3']) {
+            sortedQuestions.push(vraag);
+            added['3'] = true;
+        }
+        break;
+        case '4':
+        if (!added['4']) {
+            sortedQuestions.push(vraag);
+            added['4'] = true;
+        }
+        break;
+        default:
+        break;
+    }
+
+    // stop early if you already have one per stofje
+    if (sortedQuestions.length === 4) break;
+
+    }
+    
+    sortedQuestions.sort((q1, q2) => {
+    return q1.stofje - q2.stofje;
+    });
+    console.log(sortedQuestions)
+    cookies.set('sortedQuestions', JSON.stringify(sortedQuestions), {
+        path: '/',
+        httpOnly: true
+    });
+    return { vragen: sortedQuestions, agreementsScales };
 }
 
 
 export const actions = {
-    default: async ({ request }) => {
+    default: async ({ request, cookies  }) => {
         // Maak een nieuw array aan voor een nieuwe antwoorden op de vragenlijst.
         let newQuestionsarray = [];
-
+        const vragen = JSON.parse(cookies.get('sortedQuestions') || '[]');
         // haal alle gecheckte veldfen op van het formulier
         const data = await request.formData();
-        const vragenReponse = await fetch('https://fdnd-agency.directus.app/items/vraag')
-        const vragenReponseData = await vragenReponse.json()
-        let vragen = vragenReponseData.data
         let vragenAmount = vragen.length;
         vragen.forEach( (vraag, i) =>{
             let curQuestionValue = data.getAll('q-'+ (i + 1));
-            newQuestionsarray.push({vraag: vraag.vraag, answer: curQuestionValue})
+            newQuestionsarray.push({vraag: vraag.vraag, antwoord: curQuestionValue})
         })
             const today = new Date();
 
