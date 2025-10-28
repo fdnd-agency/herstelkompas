@@ -85,6 +85,7 @@
         top: 0;
         left: -1px; /* subpixel bug */
         grid-row: 1 / -1;
+        z-index: 1;
     }
     aside .hamburger-open{
         transition: 0.3s ease;
@@ -103,10 +104,13 @@
         top: 20px;
         left: 20px;
         padding: 10px;
-		@media (min-width: 750px){
+
+	}
+    @media (min-width: 850px){
+        aside .hamburger-open{
 			display: none !important;
 		}
-	}
+    }
     aside .hamburger-open svg > *{
         fill: white;
         transition: 0.3s ease;
@@ -127,7 +131,7 @@
         gap: 25px;
         padding: 0;
     }
-    aside nav ul li a{
+    aside nav ul li a {
         color: #fff;
         text-decoration: none;
         font-size: 20px;
@@ -138,65 +142,81 @@
         padding: 10px 0 10px 7px;
         transition: 0.3s ease;
         position: relative;
-        .corners{
-            position: absolute;
-            right: -0.5px;
-            top: 0;
-            height: 100%;
-            width: 1px;
-            transition: 0.3s ease;
-            background: #137BC000;
-            svg{
-                transition: 0.3s ease;
-                > *{
-                    transition: 0.3s ease;
-                }
-            }
-        }
-        &:before{
-            /* background-color: #137BC0; */
-            position: absolute;
-            content: '';
-            width: 15px;
-            height: 15px;
-            right: -.5px;
-            bottom: calc(100% - .5px);
-            border-bottom-right-radius: 0%;
-            transition: 0.3s ease;
-            z-index: 9;
-        }
-        &:after{
-            /* background-color: #137BC0; */
-            position: absolute;
-            content: '';
-            width: 15px;
-            height: 15px;
-            right: -.5px;
-            top: calc(100% - .5px);
-            border-top-right-radius: 0%;
-            transition: 0.3s ease;
-            z-index: 9;
-        }
     }
-    aside nav ul li.active a, aside nav ul li a:hover, aside nav ul li a:focus{
+
+    aside nav ul li a .corners {
+        position: absolute;
+        right: -0.5px;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        transition: 0.3s ease;
+        background: #137BC000;
+    }
+
+    aside nav ul li a .corners svg {
+        transition: 0.3s ease;
+    }
+
+    aside nav ul li a .corners svg > * {
+        transition: 0.3s ease;
+    }
+
+    aside nav ul li a:before {
+        /* background-color: #137BC0; */
+        position: absolute;
+        content: '';
+        width: 15px;
+        height: 15px;
+        right: -.5px;
+        bottom: calc(100% - .5px);
+        border-bottom-right-radius: 0%;
+        transition: 0.3s ease;
+        z-index: 9;
+    }
+
+    aside nav ul li a:after {
+        /* background-color: #137BC0; */
+        position: absolute;
+        content: '';
+        width: 15px;
+        height: 15px;
+        right: -.5px;
+        top: calc(100% - .5px);
+        border-top-right-radius: 0%;
+        transition: 0.3s ease;
+        z-index: 9;
+    }
+
+    aside nav ul li.active a,
+    aside nav ul li a:hover,
+    aside nav ul li a:focus {
         color: #137BC0;
         background-color: #fff;
         border-top-left-radius: 9px;
         border-bottom-left-radius: 9px;
-        
-        .corners{
-            background: white;
-        }
-        &:before{
-            /* border-bottom-right-radius: 100%; */
-            background-image: radial-gradient(farthest-side circle at 0% 0%, #0000 calc(100% - .5px), white 100%);
-        }
-        &:after{
-            /* border-top-right-radius: 100%; */
-            background-image: radial-gradient(farthest-side circle at 0% 100%, #0000 calc(100% - .5px), white 100%);
-        }
-        
     }
+
+    aside nav ul li.active a .corners,
+    aside nav ul li a:hover .corners,
+    aside nav ul li a:focus .corners {
+        background: white;
+    }
+
+    aside nav ul li.active a:before,
+    aside nav ul li a:hover:before,
+    aside nav ul li a:focus:before {
+        /* border-bottom-right-radius: 100%; */
+        background-image: radial-gradient(farthest-side circle at 0% 0%, #0000 calc(100% - .5px), white 100%);
+    }
+
+    aside nav ul li.active a:after,
+    aside nav ul li a:hover:after,
+    aside nav ul li a:focus:after {
+        /* border-top-right-radius: 100%; */
+        background-image: radial-gradient(farthest-side circle at 0% 100%, #0000 calc(100% - .5px), white 100%);
+    }
+
     aside nav ul li a svg.fill-fix, aside nav ul li a svg.fill-fix > *, aside nav ul li a svg.fill-fix, aside nav ul li a svg.fill-fix, aside nav ul li a svg.fill-fix > *, aside nav ul li a svg.fill-fix > *{
         fill: #fff;
     }
@@ -246,14 +266,14 @@
         color: #fff;
         fill: #fff;
     }
-    @media (min-width: 750px){
+    @media (min-width: 850px){
         aside{
             translate: 0 0;
             position: relative;
         }
 
     }
-    @media (max-width: 750px){
+    @media (max-width: 850px){
         aside:target{
             translate: 0 0;
             position: absolute;

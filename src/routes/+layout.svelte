@@ -13,16 +13,21 @@
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <style>
-	@media (min-width: 750px){
+	@media (min-width: 850px){
 		:global(main){
 			display: inline-block;
 			vertical-align: top;
 		}
 	}
+	:global(#container){
+		max-height: 100vh;
+		overflow: hidden;
+	}
 	@supports (display: grid){
-		@media (min-width: 750px){
+		@media (min-width: 850px){
 			:global(main){
 				grid-row: 2;
+				position: relative;
 			}
 			:global(#container){
 				display: grid;

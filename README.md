@@ -90,7 +90,7 @@ SvelteKit is a modern framework built on Svelte that simplifies web development.
 
 #### Sidebar
 
-Contains links to all pages with simple icons and doubles as a mobile menu. On screens ≤750px, it can be toggled open and closed.
+Contains links to all pages with simple icons and doubles as a mobile menu. On screens ≤850px, it can be toggled open and closed.
 
 #### Bingo Card
 
