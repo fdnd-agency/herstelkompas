@@ -31,10 +31,6 @@
 </section>
 
 <style>
-/* =========================== Layout container =========================== */
-.treatment-section {
-  padding: 20px; /* 👈 extra ruimte specifiek rond de lijst */
-}
 
 /* Hoofdcontent */
 main {

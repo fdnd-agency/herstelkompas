@@ -26,7 +26,6 @@ export async function load({ cookies }){
     function func(a, b) {  
         return 0.5 - Math.random();
     }  
-    console.log(vragen)
     const sortedQuestions = [];
     const added = {};
     for (const vraag of vragen) {
@@ -67,7 +66,6 @@ export async function load({ cookies }){
     sortedQuestions.sort((q1, q2) => {
     return q1.stofje - q2.stofje;
     });
-    console.log(sortedQuestions)
     cookies.set('sortedQuestions', JSON.stringify(sortedQuestions), {
         path: '/',
         httpOnly: true
@@ -118,7 +116,6 @@ export const actions = {
         const todayBehandelingReponseData = await todayBehandeling.json()
         let todayBehandelingData = todayBehandelingReponseData.data;
         let lastbingokaart;
-        console.log(todayBehandelingReponseData.data);
         // if(!todayBehandelingData.bingokaart){
         //     const lastBingoCardurl = `https://fdnd-agency.directus.app/items/behandeling?filter[bingokaart][_nnull]=true&limit=1&sort=-datum`;
         //     const lastBingoCardFetch =  await fetch(lastBingoCardurl)
@@ -137,7 +134,6 @@ export const actions = {
             const lastBingoCardFetchJson = await lastBingoCardFetch.json()
             const lastBingoCardFetchData = lastBingoCardFetchJson.data;
             lastbingokaart = lastBingoCardFetchData[0].bingokaart;
-            console.log(lastbingokaart)
             const todaydatetime = today.toISOString().slice(0, 19);
             /// POSTEN
             const recordResponse = await fetch('https://fdnd-agency.directus.app/items/behandeling', {

@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <style>
+	:global(main){
+		padding: 20px;
+	}
 	@media (min-width: 850px){
 		:global(main){
 			display: inline-block;
@@ -34,6 +37,7 @@
 				grid-template-columns: 350px 1fr;
 				grid-template-rows: max-content 1fr;
 				gap: 1rem;
+				column-gap: 0;
 			}
 		}
 	}

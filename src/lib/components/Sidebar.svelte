@@ -1,6 +1,7 @@
 <script>
     let { data } = $props();
 	import { page } from '$app/state';
+
 </script>
 <aside id="nav-sidebar">
     <a href="#" class="hamburger-open">

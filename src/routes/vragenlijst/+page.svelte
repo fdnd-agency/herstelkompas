@@ -54,9 +54,6 @@
                     // questions.forEach((fieldset) => {
                     //     fieldset.style.opacity = "1";
                     // });
-                    console.log(formEl.offsetHeight * ( count - 1))
-                    console.log('----')
-                    console.log(formEl.scrollTop)
                     formEl.scrollTop = 0 + (formEl.offsetHeight * ( count - 1));
                     document.querySelector('#formControl').style.paddingTop = (formEl.offsetHeight / 2 ) + "px";
                     document.querySelector('#formControl').style.paddingBottom = (formEl.offsetHeight / 2 ) + "px";
@@ -91,7 +88,6 @@
                             }
                             newFocus.focus();
                         }
-                        console.log(count)
                     }
                 });
             });
@@ -105,7 +101,6 @@
                 const form = document.querySelector('form');
                 form.scrollTop = 0;
                 document.querySelector('.controls-container .btn-prev').style.display = "none"
-                console.log(e.target);
 
                 const fieldset = e.target.closest('fieldset');
                 if (fieldset) {
@@ -126,8 +121,6 @@
     });
     //prev question button click
     function prevQuestion(e) {
-        console.log(count);
-        console.log(e.type);
         const questions = formEl.querySelectorAll("fieldset");
         if(count == questions.length +1){
             e.preventDefault();
@@ -184,7 +177,6 @@
             }
             
         }
-        console.log(formEl.scrollTop);
     }
     
 </script>
