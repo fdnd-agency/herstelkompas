@@ -1,8 +1,9 @@
 <script>
+  // Ontvang data via props (Directus)
   export let data;
   const activiteit = data.activiteit;
 
-  // Datum formatteren vanuit Directus
+  // Datum formatteren vanuit Directus 
   const datum = new Date(activiteit.datum);
   const formattedDate = datum.toLocaleDateString('nl-NL', {
     day: 'numeric',
@@ -11,19 +12,21 @@
   });
 </script>
 
+<!-- ===== Pagina container ===== -->
 <section class="behandeling">
+  <!-- ===== Pagina header ===== -->
   <header class="page-header">
     <h1>{formattedDate}</h1>
     <p>Hieronder vind je informatie over deze behandeling.</p>
   </header>
 
-  <!-- Hoofdnavigatie -->
+  <!-- ===== Hoofdnavigatie ===== -->
   <nav aria-label="Hoofd navigatie" class="page-nav">
-    <ul>
+    <ul role="list">
       <li>
         <a href="#" class="active" aria-current="page">
           <img src="/icons/brain.svg" alt="" aria-hidden="true" />
-          <span>Bingokaart</span>
+          <span>Bingo kaart</span>
         </a>
       </li>
       <li>
@@ -41,7 +44,7 @@
     </ul>
   </nav>
 
-  <!-- Bingokaart sectie -->
+  <!-- ===== Bingokaart sectie ===== -->
   <section
     class="bingokaart"
     aria-labelledby="bingokaart-titel"
@@ -51,6 +54,7 @@
       De status van jouw bingokaart op {formattedDate}
     </h2>
 
+    <!-- Lijst van activiteiten -->
     <ul class="kaart-grid" role="list">
       {#each activiteit.bingokaart as item, index}
         <li
@@ -75,29 +79,31 @@
 </section>
 
 <style>
+/* ==============================
+   BASICS — MOBILE FIRST
+   ============================== */
 .behandeling {
   padding: 1.25rem 0.75rem;
-  text-align: center;
   font-family: var(--font-regular);
+  text-align: center;
 
+  /* ===== Page Header ===== */
   .page-header {
     text-align: left;
-    align-items: flex-start;
-    justify-items: start;
     padding-inline: 1.5rem;
     margin-top: 1.5rem;
 
     h1 {
       color: var(--primary-color-dark);
-      font-size: clamp(1.25rem, 4vw, var(--text-size-xl));
       font-family: var(--font-semibold);
+      font-size: clamp(1.25rem, 4vw, var(--text-size-xl));
       margin: 0;
     }
 
     p {
       color: var(--primary-color-dark);
-      font-size: clamp(0.9rem, 3vw, var(--text-size-md));
       font-family: var(--font-medium);
+      font-size: clamp(0.9rem, 3vw, var(--text-size-md));
       margin-top: 0.25rem;
       margin-bottom: 0;
     }
@@ -150,6 +156,7 @@
       color: var(--primary-color-dark);
       font-family: var(--font-medium);
       margin-bottom: 1rem;
+      text-align: center; 
     }
 
     .kaart-grid {
@@ -170,9 +177,9 @@
         place-items: center;
         width: 100%;
         height: 89px;
-        transition: background 0.3s, box-shadow 0.3s;
         position: relative;
         cursor: pointer;
+        transition: background 0.3s, box-shadow 0.3s;
 
         &:focus {
           outline: 3px solid var(--primary-color-dark);
@@ -181,13 +188,14 @@
 
         &.checked {
           background-color: var(--color-green-accent);
+          box-shadow: 0 0 20px rgba(19, 124, 38, 0.4);
         }
 
         p {
           font-weight: 500;
+          font-family: var(--font-medium);
           font-size: clamp(0.75rem, 2.5vw, var(--text-size-sm));
           padding: 0 0.25rem;
-          font-family: var(--font-medium);
         }
 
         .dot {
@@ -198,6 +206,70 @@
           height: 8px;
           background-color: var(--color-white);
           border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+/* ==============================
+   TABLET — ≥640px
+   ============================== */
+@media (min-width: 640px) {
+  .behandeling {
+    .page-nav ul {
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .bingokaart {
+      h2 {
+        text-align: left;
+        padding-inline: 2rem;
+      }
+
+      .kaart-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        max-width: 500px;
+
+        li {
+          height: 100px;
+        }
+      }
+    }
+  }
+}
+
+/* ==============================
+   DESKTOP — ≥1024px
+   ============================== */
+@media (min-width: 1024px) {
+  .behandeling {
+    .page-header {
+      text-align: left;
+      padding-inline: 4rem;
+    }
+
+    .page-nav ul {
+      justify-content: flex-start;
+      padding-left: 4rem;
+      gap: 2rem;
+    }
+
+    .bingokaart {
+      h2 {
+        text-align: left;
+        padding-inline: 4rem;
+      }
+
+      .kaart-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        max-width: 600px;
+
+        li {
+          height: 120px;
         }
       }
     }
