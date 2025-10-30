@@ -4,7 +4,7 @@
 </script>
 
 <section class="welcome">
-	<h1>Welkom Bij jouw omgeving!</h1>
+	<h1>Welkom bij jouw omgeving!</h1>
 </section>
 
 <style>
