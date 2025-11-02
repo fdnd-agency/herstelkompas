@@ -1,5 +1,9 @@
 # Herstelkompas
 
+## Dev link
+
+https://herstelkompas.netlify.app/
+
 ## About this project
 
 **Herstelkompas** is a digital web tool developed using the **Svelte** framework.  
