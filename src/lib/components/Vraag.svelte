@@ -41,7 +41,7 @@
 
     legend {
         font-weight: 700;
-        font-size: var(--text-size-lg);
+        font-size: var(--text-size-xl);
         color: var(--color-neutral);
         max-width: 48rem;
         display: flex;
@@ -84,4 +84,24 @@
         outline-offset: 2px;
         outline-width: medium;
     }
+    
+:global(html.js-enabled) fieldset {
+    flex: 1;
+    opacity: 0;
+    text-align: center;
+    justify-content: center;
+    padding: 0;
+}
+:global(html.js-enabled) fieldset:first-child {
+    opacity: 1;
+}
+:global(html.js-enabled) legend {
+    height: 110px;
+    text-align: left;
+}
+:global(html.js-enabled) .input-wrapper {
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+}
 </style>

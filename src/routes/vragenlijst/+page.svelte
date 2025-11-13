@@ -37,4 +37,8 @@
         margin-bottom: 1rem;
         margin-left: 1rem;
     }
+    section{
+        container-name: question;
+        container-type: inline-size;
+    }
 </style>
