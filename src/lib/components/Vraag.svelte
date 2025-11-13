@@ -41,7 +41,7 @@
 
     legend {
         font-weight: 700;
-        font-size: var(--text-size-xl);
+        font-size: var(--text-size-lg);
         color: var(--color-neutral);
         max-width: 48rem;
         display: flex;
@@ -75,5 +75,13 @@
         grid-row: 1;
         grid-column: 1 / -1;
         accent-color: var(--color-neutral);
+    }
+    input[type="range"]:focus{
+        accent-color: var(--color-green-accent);
+    }
+    input[type="range"]:focus-visible{
+        outline: 3px dashed var(--color-neutral);
+        outline-offset: 2px;
+        outline-width: medium;
     }
 </style>
