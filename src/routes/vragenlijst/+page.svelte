@@ -20,7 +20,7 @@
 </section>
 
 <style>
-        header {
+    header {
         align-self: start;
     }
     header h1 {

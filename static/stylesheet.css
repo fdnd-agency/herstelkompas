@@ -26,7 +26,12 @@
   --color-neutral-dark: hsl(230, 21%, 14%);
   --color-neutral: hsl(223, 30%, 47%);
   --color-neutral-light: hsl(224, 14%, 72%);
-  --color-neutral-lighter: hsl(223, 40%, 91%);
+  --color-neutral-lighter: hsl(226, 33%, 92%);
+
+  @media (prefers-contrast: more){
+    --color-neutral: rgb(66,82,123);
+    --color-neutral: hsl(223, 30%, 37%);
+  }
 
 
   /* Fonts */

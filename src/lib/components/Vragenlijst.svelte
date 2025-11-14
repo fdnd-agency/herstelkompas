@@ -310,36 +310,36 @@
 }
 
 :global(button.btn-prev):hover {
-    background-color: #54689c;
-    color: #def0fc;
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-lighter);
 }
 
 :global(button.btn-next) {
-    background-color: #54689c;
-    color: #def0fc;
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-lighter);
 }
 
 :global(button.btn-next):hover {
-    background-color: #e8ebf2;
-    color: #54689c;
+    background-color: var(--color-neutral-lighter);
+    color: var(--color-neutral);
 }
 :global(h1), :global(.subtitle){
     margin-left: 0 !important
 }
 :global(button.btn-next) :global(svg) > :global(path){
-    stroke: #e8ebf2;
-    fill: #e8ebf2;
+    stroke: var(--color-neutral-lighter);
+    fill: var(--color-neutral-lighter);
 }
 :global(button.btn-next):hover :global(svg) > :global(path){
-    stroke: #54689c;
-    fill: #54689c;
+    stroke: var(--color-neutral);
+    fill: var(--color-neutral);
 }
 :global(button.btn-prev) :global(svg) > :global(path){
-    stroke: #54689c;
-    fill: #54689c;
+    stroke: var(--color-neutral);
+    fill: var(--color-neutral);
 }
 :global(button.btn-prev):hover :global(svg) > :global(path){
-    stroke: #e8ebf2;
-    fill: #e8ebf2;
+    stroke: var(--color-neutral-lighter);
+    fill: var(--color-neutral-lighter);
 }
 </style>
