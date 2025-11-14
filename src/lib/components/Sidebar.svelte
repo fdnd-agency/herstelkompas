@@ -76,7 +76,8 @@
         max-width: 400px;
         background-color: lightgray;
         background-color: #137BC0;
-        height: 100vh;
+        /* height: 100vh; */
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         translate: -100% 0;
