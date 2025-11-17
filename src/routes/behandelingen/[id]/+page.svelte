@@ -4,61 +4,92 @@
 
   // Datum formatteren vanuit Directus
   const datum = new Date(activiteit.datum);
+
   const formattedDate = datum.toLocaleDateString('nl-NL', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
   });
+
+  const shortDate = datum.toLocaleDateString('nl-NL', {
+    day: 'numeric',
+    month: 'long'
+  });
+
+  // Actieve tab
+  let activeTab = 'bingokaart';
+
+  const tabs = [
+    { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/brain.svg' },
+    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/frame-2.svg' }
+  ];
+
+  // Helper om antwoord altijd als string te krijgen
+  const toAnswerString = (answer) => {
+    if (Array.isArray(answer)) {
+      return answer.join(', ');
+    }
+    return answer ?? 'Geen antwoord ingevuld';
+  };
+
+  // Titel = alleen datum
+  $: pageTitle = formattedDate;
+
+  // Subtitel verandert per tab
+  $: pageSubtitle =
+    activeTab === 'bingokaart'
+      ? 'Hieronder vind je informatie over deze behandeling.'
+      : 'Hieronder vind je jouw antwoorden op de vragenlijst.';
 </script>
 
 <section class="behandeling">
+  <!-- Dynamische header -->
   <header class="page-header">
-    <h1>{formattedDate}</h1>
-    <p>Hieronder vind je informatie over deze behandeling.</p>
+    <h1>{pageTitle}</h1>
+    <p>{pageSubtitle}</p>
   </header>
 
-  <!-- Hoofdnavigatie -->
-  <nav aria-label="Hoofd navigatie" class="page-nav">
-    <ul>
-      <li>
-        <a href="#" class="active" aria-current="page">
-          <img src="/icons/brain.svg" alt="" aria-hidden="true" />
-          <span>Bingo kaart</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="/icons/frame-1.svg" alt="" aria-hidden="true" />
-          <span>Scans</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="/icons/frame-2.svg" alt="" aria-hidden="true" />
-          <span>Vragenlijst</span>
-        </a>
-      </li>
+  <!-- Toegankelijke tab-navigatie -->
+  <nav aria-label="Behandelingsnavigatie" class="page-nav">
+    <ul role="tablist">
+      {#each tabs as tab}
+        <li>
+          <button
+            type="button"
+            role="tab"
+            id={`${tab.id}-tab`}
+            aria-selected={activeTab === tab.id}
+            aria-controls={`${tab.id}-panel`}
+            on:click={() => (activeTab = tab.id)}
+            class:active={activeTab === tab.id}
+          >
+            <img src={tab.icon} alt="" aria-hidden="true" />
+            <span>{tab.label}</span>
+          </button>
+        </li>
+      {/each}
     </ul>
   </nav>
 
-  <!-- Bingokaart sectie -->
+  <!-- Bingo kaart TAB -->
   <section
+    id="bingokaart-panel"
+    role="tabpanel"
+    aria-labelledby="bingokaart-tab"
+    hidden={activeTab !== 'bingokaart'}
     class="bingokaart"
-    aria-labelledby="bingokaart-titel"
     aria-live="polite"
   >
     <h2 id="bingokaart-titel">
       De status van jouw bingokaart op {formattedDate}
     </h2>
 
-    <ul class="kaart-grid" role="list">
+    <ul class="kaart-grid">
       {#each activiteit.bingokaart as item, index}
         <li
           class:checked={item.checked}
-          role="listitem"
           tabindex="0"
-          aria-checked={item.checked}
-          aria-label={`Vakje ${index + 1}: ${item.activiteit} ${
+          aria-label={`Vakje ${index + 1}: ${item.activiteit} — ${
             item.checked ? 'is voltooid' : 'nog niet voltooid'
           }`}
         >
@@ -72,6 +103,38 @@
       {/each}
     </ul>
   </section>
+
+  <!-- Vragenlijst TAB -->
+  <section
+    id="vragenlijst-panel"
+    role="tabpanel"
+    aria-labelledby="vragenlijst-tab"
+    hidden={activeTab !== 'vragenlijst'}
+    class="vragenlijst"
+    aria-live="polite"
+  >
+    <h2 id="vragenlijst-titel">
+      Jouw antwoorden op de vragenlijst op {shortDate}
+    </h2>
+
+    {#if activiteit.vragenlijst && activiteit.vragenlijst.length > 0}
+      <ul class="vragenlijst-lijst">
+        {#each activiteit.vragenlijst as item}
+          <li>
+            <article>
+              <h3>{item.vraag}</h3>
+              <p>
+                <strong>Antwoord:</strong>
+                {' '}{toAnswerString(item.antwoord)}
+              </p>
+            </article>
+          </li>
+        {/each}
+      </ul>
+    {:else}
+      <p>Er zijn nog geen vragenlijstresultaten gekoppeld aan deze behandeling.</p>
+    {/if}
+  </section>
 </section>
 
 <style>
@@ -82,6 +145,13 @@
   font-family: var(--font-regular);
 }
 
+/* Globale focus zichtbaar maken */
+:focus-visible {
+  outline: 3px solid var(--primary-color-dark);
+  outline-offset: 3px;
+}
+
+/* ===== Header ===== */
 .page-header {
   text-align: left;
   align-items: flex-start;
@@ -105,7 +175,7 @@
   margin-bottom: 0;
 }
 
-/* ===== Navigatie ===== */
+/* ===== Navigatie / Tabs ===== */
 .page-nav ul {
   display: flex;
   justify-content: space-around;
@@ -117,7 +187,9 @@
   border-bottom: 1px solid hsl(204, 33%, 85%);
 }
 
-.page-nav a {
+.page-nav button {
+  border: none;
+  background: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -127,23 +199,26 @@
   font-size: clamp(0.7rem, 2.5vw, var(--text-size-sm));
   padding-block: 2rem 0.25rem;
   border-bottom: 2px solid transparent;
-  transition: color 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.page-nav a:hover,
-.page-nav a:focus {
+.page-nav button:hover,
+.page-nav button:focus-visible {
   color: var(--primary-color-light);
-  outline: none;
 }
 
-.page-nav a img {
+.page-nav button.active,
+.page-nav button[aria-selected='true'] {
+  border-bottom-color: var(--primary-color-light);
+}
+
+.page-nav img {
   width: 18px;
   height: 18px;
-  display: block;
-  transition: filter 0.3s ease;
 }
 
-/* ===== Bingokaart ===== */
+/* ===== Bingo kaart ===== */
 .bingokaart h2 {
   font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
   color: var(--primary-color-dark);
@@ -174,13 +249,8 @@
   place-items: center;
   transition: background 0.3s, box-shadow 0.3s;
   position: relative;
-  cursor: pointer;
-  aspect-ratio: 1.15 / 1; 
-}
-
-.kaart-grid li:focus {
-  outline: 3px solid var(--primary-color-dark);
-  outline-offset: 2px;
+  cursor: default;
+  aspect-ratio: 1.15 / 1;
 }
 
 .kaart-grid li.checked {
