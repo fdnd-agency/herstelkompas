@@ -73,7 +73,7 @@
     }
     input[type="range"]{
         grid-row: 1;
-        grid-column: 1 / -1;
+        grid-column: 1 / 6;
         accent-color: var(--color-neutral);
     }
     input[type="range"]:focus{

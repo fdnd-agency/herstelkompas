@@ -198,7 +198,6 @@
         flex-direction: column;
         gap: 2rem;
         max-height: calc(100vh - 150px);
-
         overflow-y: auto;
         padding-bottom: 3rem;
     }
@@ -269,6 +268,8 @@
     flex-wrap: wrap;
     row-gap: 10px;
     left: 50%;
+            /* container-name: question;
+        container-type: inline-size;  */
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -37,7 +37,7 @@
         margin-bottom: 1rem;
         margin-left: 1rem;
     }
-    section{
+    #form-container{
         container-name: question;
         container-type: inline-size;
     }
