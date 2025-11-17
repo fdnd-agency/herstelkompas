@@ -268,8 +268,6 @@
     flex-wrap: wrap;
     row-gap: 10px;
     left: 50%;
-            /* container-name: question;
-        container-type: inline-size;  */
 }
 
 @media (prefers-reduced-motion: no-preference) {

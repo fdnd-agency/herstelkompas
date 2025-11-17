@@ -38,7 +38,8 @@
         margin-left: 1rem;
     }
     #form-container{
+        width: 100%;
         container-name: question;
-        container-type: inline-size;
+        container-type: inline-size; 
     }
 </style>
