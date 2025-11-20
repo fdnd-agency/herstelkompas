@@ -49,7 +49,7 @@
 
             if (formEl) {
                 document.querySelectorAll('legend').forEach((legend) => {
-                    legend.style.height = "125px";
+                    legend.style.height = "135px";
                 });
                 const firstChild = formEl.firstElementChild;
                 if (!firstChild) return;
