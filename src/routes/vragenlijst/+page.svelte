@@ -184,7 +184,7 @@
     
 </script>
 
-<section class:js-enabled={jsEnabled}>
+<section>
     <header class="page-header">
         <h1>Vragenlijst</h1>
         <p class="subtitle">Hoe heb je vandaag ervaren?</p>
