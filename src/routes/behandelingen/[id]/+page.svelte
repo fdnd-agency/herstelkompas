@@ -53,7 +53,7 @@
   <nav aria-label="Behandelingsnavigatie" class="page-nav">
     <ul role="tablist">
       {#each tabs as tab}
-        <li>
+        <li role="presentation">
           <button
             type="button"
             role="tab"
@@ -61,6 +61,7 @@
             aria-selected={activeTab === tab.id}
             aria-controls={`${tab.id}-panel`}
             on:click={() => (activeTab = tab.id)}
+            aria-label={tab.label}
             class:active={activeTab === tab.id}
           >
             <img src={tab.icon} alt="" aria-hidden="true" />
@@ -88,7 +89,6 @@
       {#each activiteit.bingokaart as item, index}
         <li
           class:checked={item.checked}
-          tabindex="0"
           aria-label={`Vakje ${index + 1}: ${item.activiteit} — ${
             item.checked ? 'is voltooid' : 'nog niet voltooid'
           }`}
@@ -136,6 +136,7 @@
     {/if}
   </section>
 </section>
+
 
 <style>
 /* ===== Baseline (Mobile first) ===== */
