@@ -1,3 +1,6 @@
+<svelte:head>
+    <link rel="stylesheet" href="/css/form-enhance.css">
+</svelte:head>
 <script>
     let { data } = $props();
     import { onMount } from "svelte";
@@ -41,5 +44,6 @@
         width: 100%;
         container-name: question;
         container-type: inline-size; 
+        position: relative;
     }
 </style>

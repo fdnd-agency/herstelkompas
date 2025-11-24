@@ -24,7 +24,7 @@
 <style>
 
      fieldset {
-        padding: 0.5rem 1rem 0.5rem;
+        padding: 0;
         border: none;
         margin: 0;
         transition: 1.25s ease;
@@ -32,12 +32,7 @@
         justify-content: start;
         max-width: 48rem;
     }
-    @media (prefers-reduced-motion: no-preference) {
 
-        :global(.js-enabled .animation--slide-in) legend{
-            animation: .5s slide-in ease-in;
-        }
-    }
 
     legend {
         font-weight: 700;
@@ -84,24 +79,5 @@
         outline-offset: 2px;
         outline-width: medium;
     }
-    
-:global(html.js-enabled) fieldset {
-    flex: 1;
-    opacity: 0;
-    text-align: center;
-    justify-content: center;
-    padding: 0;
-}
-:global(html.js-enabled) fieldset:first-child {
-    opacity: 1;
-}
-:global(html.js-enabled) legend {
-    height: 110px;
-    text-align: left;
-}
-:global(html.js-enabled) .input-wrapper {
-    flex-direction: column;
-    text-align: center;
-    flex: 1;
-}
+
 </style>

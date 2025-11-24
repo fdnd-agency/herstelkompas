@@ -49,6 +49,9 @@
             }
 
             if (formEl) {
+                document.querySelectorAll('legend').forEach((legend) => {
+                    legend.style.height = "135px";
+                });
                 const firstChild = formEl.firstElementChild;
                 if (!firstChild) return;
                 function updateHeight() {
@@ -56,9 +59,6 @@
                     const childHeight = firstChild.getBoundingClientRect().height;
                     formEl.style.height = childHeight + "px";
                     const questions = formEl.querySelectorAll("fieldset");
-                    // questions.forEach((fieldset) => {
-                    //     fieldset.style.opacity = "1";
-                    // });
                     formEl.scrollTop = 0 + (formEl.offsetHeight * ( count - 1));
                     document.querySelector('#formControl').style.paddingTop = (formEl.offsetHeight / 2 ) + "px";
                     document.querySelector('#formControl').style.paddingBottom = (formEl.offsetHeight / 2 ) + "px";
@@ -193,13 +193,13 @@
 </form>
 <style>
     form {
-        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 2rem;
         max-height: calc(100vh - 150px);
         overflow-y: auto;
         padding-bottom: 3rem;
+
     }
     @media (min-width: 850px) {
         form {
@@ -215,10 +215,6 @@
         }
     }
    
-    :global(main) {
-        font-family: var(--font-regular);
-        background-color: var(--color-white);
-    }
 
     input[type="submit"] {
         cursor: pointer;
@@ -236,109 +232,5 @@
         background-color: #e8ebf2;
         color: var(--color-neutral);
     }
-    
-:global(html.js-enabled) form {
-    width: 100%;
-    overflow: hidden;
-    height: 225px;
-    gap: 0;
-}
-
-:global(html.js-enabled) #formControl {
-    text-align: center;
-}
-
-
-:global(#form-container) {
-    position: relative;
-    width: fit-content;
-
-}
-
-:global(.controls-container) {
-    top: calc(100% + 30px);
-    position: absolute;
-    translate: -50% -50%;
-    opacity: 1;
-    transition: .5s ease;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    max-width: 350px;
-    flex-wrap: wrap;
-    row-gap: 10px;
-    left: 50%;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    @starting-style {
-        :global(.controls-container) {
-            opacity: 0;
-            top: 550px;
-        }
-    }
-}
-
-:global(button.btn-nav) {
-    transition: 0.3s ease;
-    cursor: pointer;
-    padding: 8px 15px;
-    border-radius: 10px;
-    margin-left: 1rem;
-    font-size: 18px;
-    font-weight: bold;
-    border: 2px solid #54689c;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-
-:global(button.btn-prev) {
-    background-color: #e8ebf2;
-    color: #54689c;
-    display: none;
-}
-:global(button.btn-prev) :global(span) {
-    font-size: 0;
-}
-@container question (width > 500px) {
-
-    :global(button.btn-prev) :global(span){
-        font-size: inherit
-    }
-}
-
-:global(button.btn-prev):hover {
-    background-color: var(--color-neutral);
-    color: var(--color-neutral-lighter);
-}
-
-:global(button.btn-next) {
-    background-color: var(--color-neutral);
-    color: var(--color-neutral-lighter);
-}
-
-:global(button.btn-next):hover {
-    background-color: var(--color-neutral-lighter);
-    color: var(--color-neutral);
-}
-:global(h1), :global(.subtitle){
-    margin-left: 0 !important
-}
-:global(button.btn-next) :global(svg) > :global(path){
-    stroke: var(--color-neutral-lighter);
-    fill: var(--color-neutral-lighter);
-}
-:global(button.btn-next):hover :global(svg) > :global(path){
-    stroke: var(--color-neutral);
-    fill: var(--color-neutral);
-}
-:global(button.btn-prev) :global(svg) > :global(path){
-    stroke: var(--color-neutral);
-    fill: var(--color-neutral);
-}
-:global(button.btn-prev):hover :global(svg) > :global(path){
-    stroke: var(--color-neutral-lighter);
-    fill: var(--color-neutral-lighter);
-}
+ 
 </style>
