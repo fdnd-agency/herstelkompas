@@ -5,3 +5,4 @@ export { default as Bingocard } from './components/Bingocard.svelte'
 export { default as Sidebar } from './components/Sidebar.svelte'
 export { default as Logo } from './components/Logo.svelte'
 export { default as Header } from './components/Header.svelte'
+export { default as Questionlist } from './components/Questionlist.svelte';

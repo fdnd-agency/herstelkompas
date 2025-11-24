@@ -1,8 +1,9 @@
 <script>
+  import { Questionlist } from '$lib';
   export let data;
+
   const activiteit = data.activiteit;
 
-  // Datum formatteren vanuit Directus
   const datum = new Date(activiteit.datum);
 
   const formattedDate = datum.toLocaleDateString('nl-NL', {
@@ -16,7 +17,6 @@
     month: 'long'
   });
 
-  // Actieve tab
   let activeTab = 'bingokaart';
 
   const tabs = [
@@ -24,18 +24,13 @@
     { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/frame-2.svg' }
   ];
 
-  // Helper om antwoord altijd als string te krijgen
   const toAnswerString = (answer) => {
-    if (Array.isArray(answer)) {
-      return answer.join(', ');
-    }
+    if (Array.isArray(answer)) return answer.join(', ');
     return answer ?? 'Geen antwoord ingevuld';
   };
 
-  // Titel = alleen datum
   $: pageTitle = formattedDate;
 
-  // Subtitel verandert per tab
   $: pageSubtitle =
     activeTab === 'bingokaart'
       ? 'Hieronder vind je informatie over deze behandeling.'
@@ -43,28 +38,22 @@
 </script>
 
 <section class="behandeling">
-  <!-- Dynamische header -->
   <header class="page-header">
     <h1>{pageTitle}</h1>
     <p>{pageSubtitle}</p>
   </header>
 
-  <!-- Toegankelijke tab-navigatie -->
-  <nav aria-label="Behandelingsnavigatie" class="page-nav">
+  <nav aria-label="Navigatie" class="page-nav">
     <ul role="tablist">
       {#each tabs as tab}
-        <li role="presentation">
+        <li>
           <button
             type="button"
             role="tab"
-            id={`${tab.id}-tab`}
-            aria-selected={activeTab === tab.id}
-            aria-controls={`${tab.id}-panel`}
-            on:click={() => (activeTab = tab.id)}
-            aria-label={tab.label}
+            on:click={() => activeTab = tab.id}
             class:active={activeTab === tab.id}
           >
-            <img src={tab.icon} alt="" aria-hidden="true" />
+            <img src={tab.icon} alt="" />
             <span>{tab.label}</span>
           </button>
         </li>
@@ -72,30 +61,21 @@
     </ul>
   </nav>
 
-  <!-- Bingo kaart TAB -->
+  <!--  BINGOKAART TAB (onveranderd) -->
   <section
     id="bingokaart-panel"
     role="tabpanel"
-    aria-labelledby="bingokaart-tab"
     hidden={activeTab !== 'bingokaart'}
     class="bingokaart"
-    aria-live="polite"
   >
-    <h2 id="bingokaart-titel">
-      De status van jouw bingokaart op {formattedDate}
-    </h2>
+    <h2>De status van jouw bingokaart op {formattedDate}</h2>
 
     <ul class="kaart-grid">
       {#each activiteit.bingokaart as item, index}
-        <li
-          class:checked={item.checked}
-          aria-label={`Vakje ${index + 1}: ${item.activiteit} — ${
-            item.checked ? 'is voltooid' : 'nog niet voltooid'
-          }`}
-        >
+        <li class:checked={item.checked}>
           <article>
             <header>
-              <span class="dot" aria-hidden="true"></span>
+              <span class="dot"></span>
             </header>
             <p>{item.activiteit}</p>
           </article>
@@ -104,38 +84,23 @@
     </ul>
   </section>
 
-  <!-- Vragenlijst TAB -->
+  
+
+  <!-- VRAGENLIJST TAB MET COMPONENT -->
   <section
     id="vragenlijst-panel"
     role="tabpanel"
-    aria-labelledby="vragenlijst-tab"
     hidden={activeTab !== 'vragenlijst'}
     class="vragenlijst"
-    aria-live="polite"
   >
-    <h2 id="vragenlijst-titel">
-      Jouw antwoorden op de vragenlijst op {shortDate}
-    </h2>
+    <Questionlist
+  vragenlijst={activiteit.vragenlijst}
+  shortDate={shortDate}
+/>
 
-    {#if activiteit.vragenlijst && activiteit.vragenlijst.length > 0}
-      <ul class="vragenlijst-lijst">
-        {#each activiteit.vragenlijst as item}
-          <li>
-            <article>
-              <h3>{item.vraag}</h3>
-              <p>
-                <strong>Antwoord:</strong>
-                {' '}{toAnswerString(item.antwoord)}
-              </p>
-            </article>
-          </li>
-        {/each}
-      </ul>
-    {:else}
-      <p>Er zijn nog geen vragenlijstresultaten gekoppeld aan deze behandeling.</p>
-    {/if}
   </section>
 </section>
+
 
 
 <style>
