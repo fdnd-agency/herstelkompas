@@ -1,5 +1,5 @@
 <script>
-  import TreatmentBingo from '$lib/components/TreatmentBingo.svelte';
+  import TreatmentBingo from '$lib/components/Treatmentbingo.svelte';
   import Questionlist from '$lib/components/Questionlist.svelte';
 
   export let data;
