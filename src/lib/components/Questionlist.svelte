@@ -10,7 +10,6 @@
 <section 
   class="survey"
   aria-labelledby="survey-title"
-  role="region"
 >
   <h2 id="survey-title" class="survey-title">
     Jouw antwoorden op de vragenlijst op {shortDate}
@@ -26,9 +25,9 @@
     <ul class="survey-list">
       {#each vragenlijst as item}
         <li>
-          <article class="survey-item" aria-label="Vragenlijst item">
-            <h3 class="question-column" aria-label="Vraag">{item.vraag}</h3>
-            <p class="answer-column" aria-label="Antwoord">{format(item.antwoord)}</p>
+          <article class="survey-item">
+            <h3 class="question-column">{item.vraag}</h3>
+            <p class="answer-column">{format(item.antwoord)}</p>
           </article>
         </li>
       {/each}
@@ -41,7 +40,7 @@
 <style>
 
 /* =========================================================== */
-/* Mobile – default                                         */
+/* Mobile – default                                             */
 /* =========================================================== */
 
 .survey {
@@ -127,7 +126,7 @@
   }
 
   /* =========================================================== */
-  /* Reduced Motion                                             */
+  /* Reduced Motion                                               */
   /* =========================================================== */
 
   @media (prefers-reduced-motion: reduce) {
@@ -140,7 +139,7 @@
 }
 
 /* =========================================================== */
-/* Animatie                                                  */
+/* Animatie                                                     */
 /* =========================================================== */
 
 @keyframes slideIn {
@@ -155,7 +154,7 @@
 }
 
 /* =========================================================== */
-/* Tablet (768–1023px)                                      */
+/* Tablet (768–1023px)                                          */
 /* =========================================================== */
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -211,7 +210,7 @@
 }
 
 /* =========================================================== */
-/* Desktop                           */
+/* Desktop                                                      */
 /* =========================================================== */
 
 @media (min-width: 1024px) {
