@@ -1,6 +1,6 @@
 <script>
   export let activiteit;
-  export let Questionlist; // komt vanuit page.svelte
+  export let Questionlist;
 
   const datum = new Date(activiteit.datum);
 
@@ -30,35 +30,37 @@
       : 'Hieronder vind je jouw antwoorden op de vragenlijst.';
 </script>
 
-
 <section class="behandeling">
   <header class="page-header">
     <h1>{pageTitle}</h1>
     <p>{pageSubtitle}</p>
   </header>
 
+  <!-- NAVIGATIE TABS -->
   <nav aria-label="Navigatie" class="page-nav">
-    <ul role="tablist">
+    <div role="tablist">
       {#each tabs as tab}
-        <li>
-          <button
-            type="button"
-            role="tab"
-            on:click={() => activeTab = tab.id}
-            class:active={activeTab === tab.id}
-          >
-            <img src={tab.icon} alt="" />
-            <span>{tab.label}</span>
-          </button>
-        </li>
+        <button
+          type="button"
+          id={`${tab.id}-tab`}
+          role="tab"
+          aria-selected={activeTab === tab.id}
+          aria-controls={`${tab.id}-panel`}
+          on:click={() => activeTab = tab.id}
+          class:active={activeTab === tab.id}
+        >
+          <img src={tab.icon} alt="" />
+          <span>{tab.label}</span>
+        </button>
       {/each}
-    </ul>
+    </div>
   </nav>
 
-  <!-- Bingo -->
+  <!-- BINGOKAART PANEL -->
   <section
     id="bingokaart-panel"
     role="tabpanel"
+    aria-labelledby="bingokaart-tab"
     hidden={activeTab !== 'bingokaart'}
     class="bingokaart"
   >
@@ -78,10 +80,11 @@
     </ul>
   </section>
 
-  <!-- Vragenlijst -->
+  <!-- VRAGENLIJST PANEL -->
   <section
     id="vragenlijst-panel"
     role="tabpanel"
+    aria-labelledby="vragenlijst-tab"
     hidden={activeTab !== 'vragenlijst'}
     class="vragenlijst"
   >
@@ -128,11 +131,10 @@
 }
 
 /* Tabs */
-.page-nav ul {
+.page-nav div[role="tablist"] {
   display: flex;
   justify-content: space-around;
   gap: 0.5rem;
-  list-style: none;
   padding: 0.5rem 0;
   margin: 1rem 0 1.25rem;
   border-bottom: 1px solid hsl(204, 33%, 85%);
@@ -238,7 +240,7 @@
     padding-inline: 4rem;
   }
 
-  .page-nav ul {
+  .page-nav div[role="tablist"] {
     justify-content: flex-start;
     padding-left: 4rem;
     gap: 2rem;
