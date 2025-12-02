@@ -14,3 +14,24 @@
     }
 
 }
+main{
+	padding: 20px;
+    container-name: main-container;
+    container-type: inline-size; 
+}
+input[type="submit"] {
+        cursor: pointer;
+        padding: 8px 30px;
+        background-color: #54689c;
+        color: #def0fc;
+        border: 2px solid #54689c;
+        border-radius: 10px;
+        margin-left: 1rem;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    input[type="submit"]:hover,
+    input[type="submit"]:focus-visible {
+        background-color: #e8ebf2;
+        color: var(--color-neutral);
+    }
