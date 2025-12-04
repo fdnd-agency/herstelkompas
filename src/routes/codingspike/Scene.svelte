@@ -60,7 +60,7 @@
     }
 
     // camera inzoomen naar gewenste zoom
-    zoomPosition += (zoomTarget - zoomPosition) * 0.003
+    zoomPosition += (zoomTarget - zoomPosition) * 0.01
   })
 </script>
 
