@@ -15,4 +15,9 @@
     section{
         width: 100vw;
     }
+    :global(body){
+      background: url("/img/hqdefault.jpg");
+      background-size: cover;
+      background-position: center center;
+    }
 </style>
