@@ -74,7 +74,7 @@
 <!-- Muur met gat -->
 <T.Mesh>
   <T.ShapeGeometry args={[wallShape]} />
-  <T.MeshBasicMaterial color="beige" side={2} />
+  <T.MeshBasicMaterial color="gray" side={2} />
 </T.Mesh>
 
 <!-- Linkerdeur -->
