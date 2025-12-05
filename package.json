@@ -17,6 +17,8 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
-		"@directus/sdk": "^20.1.0"
+		"@directus/sdk": "^20.1.0",
+		"gsap": "^3.13.0",
+		"three": "^0.181.2"
 	}
 }
