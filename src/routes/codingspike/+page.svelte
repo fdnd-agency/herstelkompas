@@ -36,7 +36,7 @@
   {#if !fadeFinished}
     <div style="position:absolute; inset:0; background:gray;"></div>
   {/if}
-
+  <a data-sveltekit-reload class="reloadBtn" href="/codingspike">Herlaad Animatie</a>
   <div
     class="canvas-wrapper {canvasReady ? 'visible' : ''}"
     on:transitionend={handleTransitionEnd}
@@ -89,5 +89,23 @@
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border: 0;
+  }
+  .reloadBtn{
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 24px;
+    background-color: white;
+    border: 3px solid black;
+    padding: 1rem;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s ease;
+    &:hover, &:focus{
+      background-color: black;
+      border: 3px solid white;
+      color: white;
+    }
   }
 </style>
