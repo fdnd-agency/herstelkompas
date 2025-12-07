@@ -1,47 +1,58 @@
 <script>
+  // De vragen die binnenkomen uit de parent-component (array van objecten)
   export let vragenlijst = [];
+
+  // De datum waarop de vragenlijst is ingevuld
   export let shortDate = "";
+
+  // Functie die een antwoord netjes formatteert:
+  // - Arrays worden omgezet naar een string met komma's (bijv. meerdere keuzes)
+  // - Null/undefined antwoorden worden vervangen door "Geen antwoord ingevuld"
   export let format = (a) => {
     if (Array.isArray(a)) return a.join(", ");
     return a ?? "Geen antwoord ingevuld";
   };
 </script>
 
-<section 
-  class="survey"
-  aria-labelledby="survey-title"
->
+<!-- Hoofdcontainer van deze pagina-sectie -->
+<section class="survey">
+  
+  <!-- Titel van de tabel, koppeling met screenreaders via id -->
   <h2 id="survey-title" class="survey-title">
     Jouw antwoorden op de vragenlijst op {shortDate}
   </h2>
 
-  <!-- Desktop/tablet header -->
-  <div class="survey-header" aria-hidden="true">
-    <span class="question-column">Vraag</span>
-    <span class="answer-column">Antwoord</span>
-  </div>
+  <!-- Toegankelijke tabel voor vraag/antwoord-overzicht -->
+  <table class="survey-table">
 
-  {#if vragenlijst && vragenlijst.length > 0}
-    <ul class="survey-list">
+    <!-- Tabelkop: definieert kolomnamen -->
+    <thead class="survey-header">
+      <tr>
+        <th class="question-column">Vraag</th>
+        <th class="answer-column">Antwoord</th>
+      </tr>
+    </thead>
+
+    <!-- Tabelbody waar de dynamische data wordt ingevuld -->
+    <tbody class="survey-list">
       {#each vragenlijst as item}
-        <li>
-          <article class="survey-item">
-            <h3 class="question-column">{item.vraag}</h3>
-            <p class="answer-column">{format(item.antwoord)}</p>
-          </article>
-        </li>
+        <tr class="survey-item">
+          
+          <!-- Cel voor de vraag -->
+          <td class="question-column">{item.vraag}</td>
+
+          <!-- Cel voor het antwoord, geformatteerd door de format() functie -->
+          <td class="answer-column">{format(item.antwoord)}</td>
+
+        </tr>
       {/each}
-    </ul>
-  {:else}
-    <p>Er zijn nog geen vragenlijstresultaten gekoppeld aan deze behandeling.</p>
-  {/if}
+    </tbody>
+
+  </table>
 </section>
 
-<style>
 
-/* =========================================================== */
-/* Mobile – default                                             */
-/* =========================================================== */
+<style>
 
 .survey {
 
@@ -54,75 +65,70 @@
     text-align: left;
   }
 
+  /* TABLE RESET */
+  .survey-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* Verberg header op mobiel */
   .survey-header {
     display: none;
   }
 
+  /* Gebruik tbody zoals je eerst ul gebruikte */
   .survey-list {
-    list-style: none;
-    padding: 0 1.20rem;
-    margin-top: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-bottom: 2rem;
-
-    li {
-      background: #eef6ff;
-      width: 100%;
-      padding: 1.25rem 1rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-
-      /* Animatie */
-      --delay: 0s;
-      @supports (animation-delay: calc(sibling-index() * 0.1s)) {
-        --delay: calc(sibling-index() * 0.1s);
-      }
-      animation: slideIn 0.4s var(--delay) ease-out both;
-
-      h3 {
-        margin: 0;
-        font-family: var(--font-semibold);
-        font-size: 1rem;
-        color: var(--primary-color-dark);
-
-        &::before {
-          content: "Vraag";
-          display: block;
-          font-size: 0.75rem;
-          color: #7aa6d9;
-          font-weight: 600;
-          margin-bottom: 0.25rem;
-        }
-      }
-
-      p {
-        margin: 0;
-        font-size: 1rem;
-        font-family: var(--font-medium);
-        color: var(--primary-color-dark);
-
-        strong {
-          display: block;
-          font-size: 0.75rem;
-          color: #7aa6d9;
-          font-weight: 600;
-          margin-bottom: 0.1rem;
-        }
-      }
-    }
+    padding: 0 1.25rem 2rem 1.25rem;
   }
 
-  .survey-item {
+  /* === Mobiele kaart styling (vervangt je eerdere <li>) === */
+  .survey-list tr {
+    background: #eef6ff;
+    width: 100%;
+    padding: 1.25rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+
+    /* Animatie */
+    --delay: 0s;
+    @supports (animation-delay: calc(sibling-index() * 0.1s)) {
+      --delay: calc(sibling-index() * 0.1s);
+    }
+    animation: slideIn 0.4s var(--delay) ease-out both;
   }
 
-  .question-column,
-  .answer-column {
+  .survey-list td {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-family: var(--font-medium);
+    color: var(--primary-color-dark);
     text-align: left;
+  }
+
+  /* Labels zoals eerst je ::before op h3 en <strong> */
+  .survey-list td.question-column::before {
+    content: "Vraag";
+    display: block;
+    font-size: 0.75rem;
+    color: #7aa6d9;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .survey-list td.answer-column::before {
+    content: "Antwoord";
+    display: block;
+    font-size: 0.75rem;
+    color: #7aa6d9;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
   }
 
   /* =========================================================== */
@@ -130,7 +136,7 @@
   /* =========================================================== */
 
   @media (prefers-reduced-motion: reduce) {
-    .survey-list li {
+    .survey-list tr {
       animation: none;
       transform: none;
       opacity: 1;
@@ -164,6 +170,7 @@
       padding-inline: 2rem;
     }
 
+    /* TABELHEADER ZICHTBAAR */
     .survey-header {
       display: grid;
       grid-template-columns: 1fr 150px;
@@ -176,41 +183,30 @@
     }
 
     .survey-list {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding: 0 1.5rem;
       gap: 0.75rem;
-
-      li {
-        display: grid;
-        grid-template-columns: 1fr 150px;
-        align-items: center;
-        padding: 0.9rem 1.1rem;
-
-        h3::before,
-        p strong {
-          display: none;
-        }
-      }
+      padding-top: 3rem;
     }
 
-    .survey-item {
-      display: contents;
-    }
+    /* TR wordt 2-koloms layout zoals jouw oude li-grid */
+    .survey-list tr {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  align-items: center;
+  padding: 1rem 1.25rem;
+ background-color: #eef6ff; 
+  border-radius: 12px;
 
-    .question-column {
-      grid-column: 1;
-      text-align: left;
-    }
+}
 
-    .answer-column {
-      grid-column: 2;
-      text-align: right;
-    }
   }
 }
 
+
+
+
 /* =========================================================== */
-/* Desktop                                                      */
+/* Desktop (1024px+)                                            */
 /* =========================================================== */
 
 @media (min-width: 1024px) {
@@ -232,37 +228,21 @@
     }
 
     .survey-list {
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding: 0 2rem;
       gap: 0.75rem;
-
-      li {
-        display: grid;
-        grid-template-columns: 1fr 200px;
-        align-items: center;
-        padding: 1rem 1.25rem;
-
-        h3::before,
-        p strong {
-          display: none;
-        }
-      }
+      padding-top: 3rem;
     }
 
-    .survey-item {
-      display: contents;
-    }
-
-    .question-column {
-      grid-column: 1;
-      text-align: left;
-    }
-
-    .answer-column {
-      grid-column: 2;
-      text-align: right;
-    }
-  }
+   .survey-list tr {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background-color: #eef6ff; /* ← DIT TOEVOEGEN */
+  border-radius: 12px;
+  
 }
 
+  }
+}
 </style>
