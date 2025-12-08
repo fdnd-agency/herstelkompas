@@ -34,7 +34,7 @@
                 file_title="Scan voor de surfsessie"
                 file_name="scan-before"
                 file_id="input-file-before"
-                desc_title="Beschrijving"
+                desc_title="Beschrijving Scan 1"
                 desc_name="scan-before-desc"
                 desc_id="input-desc-before"
             />
@@ -42,7 +42,7 @@
                 file_title="Scan na de surfsessie"
                 file_name="scan-after"
                 file_id="input-file-after"
-                desc_title="Beschrijving"
+                desc_title="Beschrijving Scan 2"
                 desc_name="scan-after-desc"
                 desc_id="input-desc-after"
             />

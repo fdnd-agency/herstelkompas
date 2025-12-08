@@ -18,8 +18,18 @@ export const actions = {
         const scanAfter      = data.get('scan-after');
         const scanAfterDesc  = data.get('scan-after-desc');
         console.log(scanBeforeDesc)
-        if (!scanBefore || !scanAfter || typeof scanBefore === 'string' || typeof scanAfter === 'string') {
-        return { error: 'Bestanden ontbreken' };
+        if (scanBefore.size > 8_000_000 || scanAfter.size > 8_000_000) {
+            alert("Image too large. Max 8MB.");
+            return;
+        }
+        if (
+        !scanBefore || typeof scanBefore === 'string' ||
+        !scanAfter  || typeof scanAfter === 'string'
+        ) {
+            return new Response(
+                JSON.stringify({ error: 'Een of beide scans ontbreken' }),
+                { status: 400 }
+            );
         }
 
         const folderID = 'f30ac045-e1a4-4e94-a286-dd9b34879fe3';
@@ -56,7 +66,6 @@ export const actions = {
         ]);
 
         scansJSON.push({scanBefore: beforeId, scanBeforeDesc: scanBeforeDesc, scanAfter: afterId, scanAfterDesc: scanAfterDesc})
-        const prettyScansJSON = JSON.stringify(scansJSON, null, 2);
         const today = new Date();
 
             const start = new Date(
@@ -106,7 +115,7 @@ export const actions = {
                     beschrijving: "Geen beschrijving",
                     datum: todaydatetime,
                     bingokaart: lastbingokaart,
-                    scans: prettyScansJSON
+                    scans: scansJSON
                 }),
             });
         }
@@ -133,7 +142,7 @@ export const actions = {
                 },
                 body: JSON.stringify({
                     bingokaart: lastbingokaart,
-                    scans: prettyScansJSON 
+                    scans: scansJSON 
                 })
             });
             const patchResult = await patchRes.json();
