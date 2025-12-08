@@ -75,6 +75,7 @@ export const actions = {
         ]);
 
         scansJSON.push({scanBefore: beforeId, scanBeforeDesc: scanBeforeDesc, scanAfter: afterId, scanAfterDesc: scanAfterDesc})
+        const prettyScansJSON = JSON.stringify(scansJSON, null, 2);
         const today = new Date();
 
             const start = new Date(
@@ -124,7 +125,7 @@ export const actions = {
                     beschrijving: "Geen beschrijving",
                     datum: todaydatetime,
                     bingokaart: lastbingokaart,
-                    scans: scansJSON
+                    scans: prettyScansJSON
                 }),
             });
         }
@@ -151,7 +152,7 @@ export const actions = {
                 },
                 body: JSON.stringify({
                     bingokaart: lastbingokaart,
-                    scans: scansJSON 
+                    scans: prettyScansJSON 
                 })
             });
             const patchResult = await patchRes.json();
