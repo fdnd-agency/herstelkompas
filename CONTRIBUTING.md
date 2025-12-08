@@ -50,3 +50,21 @@ op basis van de retrospect van sprint 14: https://github.com/fdnd-agency/herstel
 - Elke schooldag een standup aan het begin of einde van de lesdag (maandag, woensdag,vrijdag)
 - Actief communiceren waar nodig.
 - Bij afwezigheid elkaar de volgende schooldag op de hoogte brengen van de gemaakte afspraken/werl. Dit zo nodig met elkaar bespreken
+
+## DoD en DoR
+
+
+### DoR (Definition of Ready)
+	•	Poker Done
+	•	Assigned aan de juiste persoon
+	•	Duidelijke Beschrijving
+	•	Capaciteit Beschikbaar
+	•	Deadline
+
+
+### DoD (Definition of Done)
+	•	Alles Getest
+	•	PR Aangemaakt
+	•	Sub-tickets AF
+	•	Documentatie Compleet
+	•	Review Kolom in Backlog
