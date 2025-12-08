@@ -21,7 +21,7 @@
     color: var(--primary-color-dark);
     width: fit-content;
     text-align: center;
-    margin-top: 2rems;
+    margin-top: 2rem;
   }
   legend{
     font-weight: bold;
