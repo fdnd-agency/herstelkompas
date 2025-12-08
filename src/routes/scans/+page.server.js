@@ -9,6 +9,12 @@ const token = await client.login({
 });
 export const actions = {
     default: async ({ request }) => {
+        if (!token?.access_token) {
+            return {
+                success: false,
+                error: "No Directus token available"
+            };
+        }
         let scansJSON        = [];
         /// Thanks, chad!
         const data           = await request.formData();
@@ -18,18 +24,21 @@ export const actions = {
         const scanAfter      = data.get('scan-after');
         const scanAfterDesc  = data.get('scan-after-desc');
         console.log(scanBeforeDesc)
-        if (scanBefore.size > 8_000_000 || scanAfter.size > 8_000_000) {
-            alert("Image too large. Max 8MB.");
-            return;
-        }
-        if (
-        !scanBefore || typeof scanBefore === 'string' ||
-        !scanAfter  || typeof scanAfter === 'string'
+       if (
+            !scanBefore || typeof scanBefore === 'string' ||
+            !scanAfter  || typeof scanAfter  === 'string'
         ) {
-            return new Response(
-                JSON.stringify({ error: 'Een of beide scans ontbreken' }),
-                { status: 400 }
-            );
+            return {
+                success: false,
+                error: "Een of beide scans ontbreken"
+            };
+        }
+
+        if (scanBefore.size > 8_000_000 || scanAfter.size > 8_000_000) {
+            return {
+                success: false,
+                error: "Image too large. Max 8MB."
+            };
         }
 
         const folderID = 'f30ac045-e1a4-4e94-a286-dd9b34879fe3';
