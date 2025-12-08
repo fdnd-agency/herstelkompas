@@ -14,8 +14,20 @@
     }
 
 }
+.visually-hidden{
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
 main{
 	padding: 20px;
+        container-name: main-container;
+        container-type: inline-size; 
 }
 @media (min-width: 850px){
 	main{
@@ -24,7 +36,7 @@ main{
 	}
 }
 #container{
-	max-height: 100vh;
+	height: 100vh;
 	overflow: hidden;
 }
 @supports (display: grid){
@@ -45,35 +57,65 @@ main{
 /* Control buttons */
 
 button.btn-nav {
-    transition: 0.3s ease;
+    transition: .3s ease;
     cursor: pointer;
-    padding: 8px 30px;
+    padding: 8px 15px;
     border-radius: 10px;
     margin-left: 1rem;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 700;
     border: 2px solid #54689c;
+    display: flex;
+    gap: 5px;
+    align-items: center
 }
 
 button.btn-prev {
     background-color: #e8ebf2;
     color: #54689c;
-    display: none;
+    display: none
 }
 
-button.btn-prev:hover {
-    background-color: #54689c;
-    color: #def0fc;
+button.btn-prev span {
+    font-size: 0
 }
 
-button.btn-next {
-    background-color: #54689c;
-    color: #def0fc;
+@container question (width > 500px) {
+    button.btn-prev span {
+        font-size: inherit
+    }
+}
+
+button.btn-prev:hover,button.btn-next {
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-lighter)
 }
 
 button.btn-next:hover {
-    background-color: #e8ebf2;
-    color: #54689c;
+    background-color: var(--color-neutral-lighter);
+    color: var(--color-neutral)
 }
 
+h1,.subtitle {
+    margin-left: 0!important
+}
 
+button.btn-next svg>path {
+    stroke: var(--color-neutral-lighter);
+    fill: var(--color-neutral-lighter)
+}
+
+button.btn-next:hover svg>path {
+    stroke: var(--color-neutral);
+    fill: var(--color-neutral)
+}
+
+button.btn-prev svg>path {
+    stroke: var(--color-neutral);
+    fill: var(--color-neutral)
+}
+
+button.btn-prev:hover svg>path {
+    stroke: var(--color-neutral-lighter);
+    fill: var(--color-neutral-lighter)
+}
