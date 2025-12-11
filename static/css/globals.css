@@ -127,8 +127,6 @@ input:checked+.slider:before {
 
 .illuminati {
   position: absolute;
-  --test: if(style(--mode: normal): red style(--mode: hysterical):green;
-      else: red);
   left: 50%;
   translate: if(style(--mode: normal): -50% 0;
       style(--mode: hysterical): -50% -50%;
