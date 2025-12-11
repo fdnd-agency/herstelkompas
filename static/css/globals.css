@@ -1,121 +1,141 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Stupid Flanders */
-    font-family: "Inter", sans-serif;
+body {
+  overflow: hidden;
+  --mode: normal;
+  background-size: cover;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.2s ease-in-out;
 
-    /* padding-right: 1px; */
-}
-@media (min-width: 850px){
-    #container{
-        display: grid;
-        grid-template-columns: 320px 1fr;
-        gap: 1rem;
-    }
+  &:has(#toggle:checked) {
+    --mode: hysterical;
+  }
 
-}
-.visually-hidden{
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
+  background-image: if(style(--mode: normal): url("/img/mystic.jpg");
+    style(--mode: hysterical): url("/img/clouds.webp");
+    else: none);
 }
 
-main{
-	padding: 20px;
-        container-name: main-container;
-        container-type: inline-size; 
-}
-@media (min-width: 850px){
-	main{
-		display: inline-block;
-		vertical-align: top;
-	}
-}
-#container{
-	height: 100vh;
-	overflow: hidden;
-}
-@supports (display: grid){
-	@media (min-width: 850px){
-		main{
-			grid-row: 2;
-			position: relative;
-		}
-		#container{
-			display: grid;
-			grid-template-columns: 350px 1fr;
-			grid-template-rows: max-content 1fr;
-			gap: 1rem;
-			column-gap: 0;
-		}
-	}
-}
-/* Control buttons */
+.switch {
+  display: inline-block;
+  height: 60px;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  width: 150px;
+  translate: -50% 0;
+  animation: if(style(--mode: normal): shadows 1.5s infinite;
+      style(--mode: hysterical): .5s animation 5;
+      else:shadows 1.5s infinite);
 
-button.btn-nav {
-    transition: .3s ease;
-    cursor: pointer;
-    padding: 8px 15px;
-    border-radius: 10px;
-    margin-left: 1rem;
-    font-size: 18px;
-    font-weight: 700;
-    border: 2px solid #54689c;
-    display: flex;
-    gap: 5px;
-    align-items: center
+  box-shadow: if(style(--mode: normal): 0px 0px 20px 10px #48abe0;
+      style(--mode: hysterical): 0px;
+      else: 0px 0px 20px 10px #48abe0);
+  border-radius: 60px;
 }
 
-button.btn-prev {
-    background-color: #e8ebf2;
-    color: #54689c;
-    display: none
+@keyframes shadows {
+  0% {
+    box-shadow: 0px 0px 100px 10px #a6e048;
+  }
+
+  50% {
+    box-shadow: 0px 0px 20px 10px rgb(226, 43, 43);
+  }
+
+  75% {
+    box-shadow: 0px 0px 20px 10px rgb(226, 43, 43);
+  }
+
+  100% {
+    box-shadow: 0px 0px 100px 10px #a6e048;
+  }
 }
 
-button.btn-prev span {
-    font-size: 0
+@keyframes animation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    top: 10%;
+    left: 10%;
+  }
+
+  25% {
+    transform: translate(-50%, -50%) rotate(5deg);
+    top: 20%;
+    left: 80%;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    top: 70%;
+    left: 20%;
+  }
+
+  75% {
+    transform: translate(-50%, -50%) rotate(-5deg);
+    top: 60%;
+    left: 70%;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    top: 10%;
+    left: 10%;
+  }
 }
 
-@container question (width > 500px) {
-    button.btn-prev span {
-        font-size: inherit
-    }
+.switch input {
+  display: none;
 }
 
-button.btn-prev:hover,button.btn-next {
-    background-color: var(--color-neutral);
-    color: var(--color-neutral-lighter)
+.slider {
+  background-color: #9c46ff;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
 }
 
-button.btn-next:hover {
-    background-color: var(--color-neutral-lighter);
-    color: var(--color-neutral)
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 52px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 52px;
 }
 
-h1,.subtitle {
-    margin-left: 0!important
+input:checked+.slider {
+  background-color: #435D44;
 }
 
-button.btn-next svg>path {
-    stroke: var(--color-neutral-lighter);
-    fill: var(--color-neutral-lighter)
+input:checked+.slider:before {
+  transform: translateX(90px);
+  /* 150 - 52 - 8 = 90 */
 }
 
-button.btn-next:hover svg>path {
-    stroke: var(--color-neutral);
-    fill: var(--color-neutral)
+.slider.round {
+  border-radius: 60px;
 }
 
-button.btn-prev svg>path {
-    stroke: var(--color-neutral);
-    fill: var(--color-neutral)
+.slider.round:before {
+  border-radius: 50%;
 }
 
-button.btn-prev:hover svg>path {
-    stroke: var(--color-neutral-lighter);
-    fill: var(--color-neutral-lighter)
+.illuminati {
+  position: absolute;
+  --test: if(style(--mode: normal): red style(--mode: hysterical):green;
+      else: red);
+  left: 50%;
+  translate: if(style(--mode: normal): -50% 0;
+      style(--mode: hysterical): -50% -50%;
+      else: -50% 0);
+  transition: .5s ease-in;
+  top: if(style(--mode: normal): 100%;
+      style(--mode: hysterical): 50%;
+      else: 100%);
+  width: 550px;
 }

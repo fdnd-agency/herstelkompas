@@ -13,8 +13,6 @@
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <div id="container">
-    <Sidebar/>
-    <Header/>
     <main>
 		{@render children?.()}
     </main>
