@@ -50,6 +50,9 @@
     left: 0;
     transform: translateY(-50%);
     cursor: pointer;
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center;
 
     offset-path: path("M0 0 C5 -30 75 30 100 0");
     offset-rotate: auto;
@@ -61,7 +64,6 @@
     bottom: 70%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0,0,0,0.7);
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -90,7 +92,7 @@
 
   <div class="container">
     <a href="#top" class="backtotop">
-      <div class="ufo" style="background-image: url({ufoImage}); background-size: contain; background-repeat: no-repeat; background-position: center;">
+      <div class="ufo" style="background-image: url({ufoImage});">
         <span class="text">Scroll naar boven</span>
       </div>
     </a>
