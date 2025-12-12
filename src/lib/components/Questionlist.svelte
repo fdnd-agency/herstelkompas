@@ -17,21 +17,10 @@
 <!-- Hoofdcontainer van deze pagina-sectie -->
 <section class="survey">
   
-  <!-- Titel van de tabel, koppeling met screenreaders via id -->
-  <h2 id="survey-title" class="survey-title">
-    Jouw antwoorden op de vragenlijst op {shortDate}
-  </h2>
 
   <!-- Toegankelijke tabel voor vraag/antwoord-overzicht -->
   <table class="survey-table">
 
-    <!-- Tabelkop: definieert kolomnamen -->
-    <thead class="survey-header">
-      <tr>
-        <th class="question-column">Vraag</th>
-        <th class="answer-column">Antwoord</th>
-      </tr>
-    </thead>
 
     <!-- Tabelbody waar de dynamische data wordt ingevuld -->
     <tbody class="survey-list">
@@ -53,7 +42,6 @@
 
 
 <style>
-
 .survey {
 
   .survey-title {
@@ -71,12 +59,11 @@
     border-collapse: collapse;
   }
 
-  /* Verberg header op mobiel */
   .survey-header {
     display: none;
   }
 
-  /* Gebruik tbody zoals je eerst ul gebruikte */
+
   .survey-list {
     display: flex;
     flex-direction: column;
@@ -84,9 +71,8 @@
     padding: 0 1.25rem 2rem 1.25rem;
   }
 
-  /* === Mobiele kaart styling (vervangt je eerdere <li>) === */
+  /* === MOBIEL CARD  === */
   .survey-list tr {
-    background: #eef6ff;
     width: 100%;
     padding: 1.25rem 1rem;
     border-radius: 12px;
@@ -94,13 +80,18 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    border: 3px solid rgba(255, 255, 255, 0.35);
 
-    /* Animatie */
+    /* Gradient background */
+    background: linear-gradient(-45deg, #ff3c00, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientMove 1s ease infinite, slideIn 0.1s var(--delay) ease-out both;
+
+    /* Sibling-index delay */
     --delay: 0s;
     @supports (animation-delay: calc(sibling-index() * 0.1s)) {
       --delay: calc(sibling-index() * 0.1s);
     }
-    animation: slideIn 0.4s var(--delay) ease-out both;
   }
 
   .survey-list td {
@@ -112,7 +103,6 @@
     text-align: left;
   }
 
-  /* Labels zoals eerst je ::before op h3 en <strong> */
   .survey-list td.question-column::before {
     content: "Vraag";
     display: block;
@@ -134,7 +124,6 @@
   /* =========================================================== */
   /* Reduced Motion                                               */
   /* =========================================================== */
-
   @media (prefers-reduced-motion: reduce) {
     .survey-list tr {
       animation: none;
@@ -145,7 +134,7 @@
 }
 
 /* =========================================================== */
-/* Animatie                                                     */
+/* Animatie Keyframes                                           */
 /* =========================================================== */
 
 @keyframes slideIn {
@@ -159,10 +148,15 @@
   }
 }
 
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* =========================================================== */
 /* Tablet (768–1023px)                                          */
 /* =========================================================== */
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .survey {
 
@@ -170,7 +164,7 @@
       padding-inline: 2rem;
     }
 
-    /* TABELHEADER ZICHTBAAR */
+    /* Header zichtbaar */
     .survey-header {
       display: grid;
       grid-template-columns: 1fr 150px;
@@ -188,27 +182,25 @@
       padding-top: 3rem;
     }
 
-    /* TR wordt 2-koloms layout zoals jouw oude li-grid */
+    /* Kaarten worden tabel-achtige rijen */
     .survey-list tr {
-  display: grid;
-  grid-template-columns: 1fr 150px;
-  align-items: center;
-  padding: 1rem 1.25rem;
- background-color: #eef6ff; 
-  border-radius: 12px;
+      display: grid;
+      grid-template-columns: 1fr 150px;
+      align-items: center;
+      padding: 1rem 1.25rem;
 
-}
-
+      /* Gradient blijft gelden */
+      background: linear-gradient(-45deg, #ff3c00, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientMove 2s ease infinite;
+      border-radius: 12px;
+    }
   }
 }
-
-
-
 
 /* =========================================================== */
 /* Desktop (1024px+)                                            */
 /* =========================================================== */
-
 @media (min-width: 1024px) {
   .survey {
 
@@ -233,16 +225,20 @@
       padding-top: 3rem;
     }
 
-   .survey-list tr {
-  display: grid;
-  grid-template-columns: 1fr 200px;
-  align-items: center;
-  padding: 1.2rem 1.5rem;
-  background-color: #eef6ff; /* ← DIT TOEVOEGEN */
-  border-radius: 12px;
-  
-}
+    /* Desktop layout */
+    .survey-list tr {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
 
+      /* Gradient blijft bestaan */
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientMove 2s ease infinite;
+
+      border-radius: 12px;
+    }
   }
 }
 </style>

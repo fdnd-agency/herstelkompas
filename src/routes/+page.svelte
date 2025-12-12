@@ -14,7 +14,7 @@
 		align-items: flex-start;        
 		text-align: center;
 		min-height: 100vh;                      
-		background-color: var(--color-white);
+		background-color: transparent;
 		font-family: var(--font-regular);
 	}
 
