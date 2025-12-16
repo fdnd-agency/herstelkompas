@@ -19,10 +19,13 @@
 		width: 100vw;
 		height: 100%;
 		overflow: hidden;
+		animation: zindexchange 3.5s linear;
+		z-index: -1;
 	}
+
 	.waves{
 		position: absolute;
-		translate: 0 100vw;
+		translate: 0 110vh;
 		width: 100%;
 		z-index: 9;
 		animation: waterUp 3.5s linear;
@@ -59,6 +62,14 @@
 		width: 100%;
 		z-index: -1;
 	}
+	.wave{
+		background-size: cover;
+	}
+	@media (min-width: 500px){
+		.wave{
+			background-size: initial;
+		}
+	}
 	.wave1{
 		animation: waving1 1s infinite linear;
 	}
@@ -90,7 +101,7 @@
 			translate: 0 0px;
 		}
 		100% {
-			translate: 0 100vw
+			translate: 0 110vh;
 		}
 	}
 	@keyframes pumpImg {
@@ -110,5 +121,12 @@
 			transform: scale(1);
 		}
 	}
-
+	@keyframes zindexchange {
+		0% { 
+			z-index: 99;
+		}
+		100% {
+			z-index: -1; 
+		}
+	}
 </style>
