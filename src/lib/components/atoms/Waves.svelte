@@ -22,10 +22,10 @@
 	}
 	.waves{
 		position: absolute;
-		bottom: -110px;
+		translate: 0 100vw;
 		width: 100%;
 		z-index: 9;
-		animation: waterUp 2.5s linear;
+		animation: waterUp 3.5s linear;
 	}
 	.waves::after{
 		height: 100vh;
@@ -84,13 +84,13 @@
 
 	@keyframes waterUp {
 		0% {
-			bottom: 100%;
+			translate: 0 -100px;
 		}
-		40%{
-			bottom: 88%;
+		30%{
+			translate: 0 0px;
 		}
 		100% {
-			bottom: -110px;
+			translate: 0 100vw
 		}
 	}
 	@keyframes pumpImg {
