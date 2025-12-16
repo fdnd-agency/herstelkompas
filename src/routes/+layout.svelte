@@ -1,6 +1,8 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
 	import { Bingocard, Sidebar, Header } from '$lib'
+	import { page } from '$app/stores';
+	import { Waves } from '$lib';
 	let { children } = $props();
 </script>
 
@@ -13,6 +15,9 @@
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <div id="container">
+	{#key $page.url.pathname}
+		<Waves color1="#137BC0" color2="#DCEBF5" />
+	{/key}
     <Sidebar/>
     <Header/>
     <main>
