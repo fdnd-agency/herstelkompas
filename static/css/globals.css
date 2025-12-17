@@ -25,15 +25,16 @@
 }
 
 main{
-	padding: 20px;
-        container-name: main-container;
-        container-type: inline-size; 
+  padding: 0;               
+  container-name: main-container;
+  container-type: inline-size; 
 }
+
 @media (min-width: 850px){
-	main{
-		display: inline-block;
-		vertical-align: top;
-	}
+  main{
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 #container{
 	height: 100vh;
