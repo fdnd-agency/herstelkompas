@@ -4,246 +4,368 @@
 
   const datum = new Date(activiteit.datum);
 
-  const formattedDate = datum.toLocaleDateString('nl-NL', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
+  const formattedDate = datum.toLocaleDateString("nl-NL", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
   });
-
-  const shortDate = datum.toLocaleDateString('nl-NL', {
-    day: 'numeric',
-    month: 'long'
-  });
-
-  let activeTab = 'bingokaart';
 
   const tabs = [
-    { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/brain.svg' },
-    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/frame-2.svg' }
+    { id: "bingokaart", label: "Bingo kaart", icon: "/icons/brain.svg" },
+    { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/frame-2.svg" }
   ];
 
-  $: pageTitle = formattedDate;
+  let activeTab = "bingokaart";
+  let tabButtons = [];
 
-  $: pageSubtitle =
-    activeTab === 'bingokaart'
-      ? 'Hieronder vind je informatie over deze behandeling.'
-      : 'Hieronder vind je jouw antwoorden op de vragenlijst.';
+  function selectTab(index) {
+    activeTab = tabs[index].id;
+    tabButtons[index]?.focus();
+  }
+
+  function onTabKeydown(e, index) {
+    const last = tabs.length - 1;
+
+    switch (e.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        e.preventDefault();
+        selectTab(index === last ? 0 : index + 1);
+        break;
+
+      case "ArrowLeft":
+      case "ArrowUp":
+        e.preventDefault();
+        selectTab(index === 0 ? last : index - 1);
+        break;
+
+      case "Home":
+        e.preventDefault();
+        selectTab(0);
+        break;
+
+      case "End":
+        e.preventDefault();
+        selectTab(last);
+        break;
+    }
+  }
 </script>
 
 <section class="behandeling">
-  <header class="page-header">
-    <h1>{pageTitle}</h1>
-    <p>{pageSubtitle}</p>
-  </header>
-
-  <!-- NAVIGATIE TABS -->
-  <nav aria-label="Navigatie" class="page-nav">
-    <div role="tablist">
-      {#each tabs as tab}
-        <button
-          type="button"
-          id={`${tab.id}-tab`}
-          role="tab"
-          aria-selected={activeTab === tab.id}
-          aria-controls={`${tab.id}-panel`}
-          on:click={() => activeTab = tab.id}
-          class:active={activeTab === tab.id}
-        >
-          <img src={tab.icon} alt="" />
-          <span>{tab.label}</span>
-        </button>
+  <!-- NAVIGATIE (TABS) -->
+  <nav class="page-nav" aria-label="Behandeling tabs">
+    <ul class="tablist" role="tablist" aria-orientation="horizontal">
+      {#each tabs as tab, i (tab.id)}
+        <li class="tabitem" role="presentation">
+          <button
+            bind:this={tabButtons[i]}
+            type="button"
+            class="tabbutton"
+            class:active={activeTab === tab.id}
+            role="tab"
+            id={`${tab.id}-tab`}
+            aria-selected={activeTab === tab.id}
+            aria-controls={`${tab.id}-panel`}
+            tabindex={activeTab === tab.id ? 0 : -1}
+            on:click={() => selectTab(i)}
+            on:keydown={(e) => onTabKeydown(e, i)}
+          >
+            <img src={tab.icon} alt="" aria-hidden="true" />
+            <span>{tab.label}</span>
+          </button>
+        </li>
       {/each}
-    </div>
+    </ul>
   </nav>
 
-  <!-- BINGOKAART PANEL -->
+  <!-- BINGOKAART -->
   <section
     id="bingokaart-panel"
+    class="bingokaart"
     role="tabpanel"
     aria-labelledby="bingokaart-tab"
-    hidden={activeTab !== 'bingokaart'}
-    class="bingokaart"
+    hidden={activeTab !== "bingokaart"}
+    tabindex="0"
   >
-    <h2>De status van jouw bingokaart op {formattedDate}</h2>
+    <header class="bingokaart-header">
+      <h2 class="bingokaart-title">{formattedDate}</h2>
+      <p class="bingokaart-subtitle">
+        Hieronder info over de bingokaart van {formattedDate}.
+      </p>
+    </header>
 
     <ul class="kaart-grid">
-      {#each activiteit.bingokaart as item}
+      {#each activiteit.bingokaart as item (item.activiteit)}
         <li class:checked={item.checked}>
-          <article>
-            <header>
-              <span class="dot"></span>
-            </header>
-            <p>{item.activiteit}</p>
-          </article>
+          <span class="dot" aria-hidden="true"></span>
+          <p>{item.activiteit}</p>
         </li>
       {/each}
     </ul>
   </section>
 
-  <!-- VRAGENLIJST PANEL -->
+  <!-- VRAGENLIJST -->
   <section
     id="vragenlijst-panel"
     role="tabpanel"
     aria-labelledby="vragenlijst-tab"
-    hidden={activeTab !== 'vragenlijst'}
-    class="vragenlijst"
+    hidden={activeTab !== "vragenlijst"}
+    tabindex="0"
   >
-    <Questionlist
-      vragenlijst={activiteit.vragenlijst}
-      shortDate={shortDate}
-    />
+    <Questionlist vragenlijst={activiteit.vragenlijst} />
   </section>
 </section>
 
 <style>
-/* ===== Baseline (Mobile first) ===== */
-.behandeling {
-  padding: 1.25rem 0.75rem;
-  text-align: center;
-  font-family: var(--font-regular);
-}
+  /* =========================
+     BASE
+  ========================= */
+  .behandeling {
+    width: 100%;
+    min-width: 0;
+  }
 
-/* Focus */
-:focus-visible {
-  outline: 3px solid var(--primary-color-dark);
-  outline-offset: 3px;
-}
+  /* =========================
+     NAVIGATIE (TABS)
+  ========================= */
+  .page-nav {
+    position: relative;
+    padding-bottom: 1.25rem;
+  }
 
-/* Header */
-.page-header {
-  text-align: left;
-  padding-inline: 1.5rem;
-  margin-top: 1.5rem;
-}
+  .tablist {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
-.page-header h1 {
-  color: var(--primary-color-dark);
-  font-size: clamp(1.25rem, 4vw, var(--text-size-xl));
-  font-family: var(--font-semibold);
-  margin: 0;
-}
+  /* Basislijn */
+  .tablist::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(220px, 60%, 520px);
+    height: 5px;
+    background-color: var(--color-neutral-lighter);
+    border-radius: 3px;
+  }
 
-.page-header p {
-  color: var(--primary-color-dark);
-  font-size: clamp(0.9rem, 3vw, var(--text-size-md));
-  font-family: var(--font-medium);
-  margin-top: 0.25rem;
-}
+  .tabbutton {
+    background: none;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    font-size: var(--text-size-xs);
+    color: var(--color-neutral);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    position: relative;
+    cursor: pointer;
+  }
 
-/* Tabs */
-.page-nav div[role="tablist"] {
-  display: flex;
-  justify-content: space-around;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-  margin: 1rem 0 1.25rem;
-  border-bottom: 1px solid hsl(204, 33%, 85%);
-}
+  .tabbutton.active {
+    color: var(--primary-color-dark);
+    font-family: var(--font-semibold);
+  }
 
-.page-nav button {
-  border: none;
-  background: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--primary-color-dark);
-  font-family: var(--font-semibold);
-  font-size: clamp(0.7rem, 2.5vw, var(--text-size-sm));
-  padding-block: 2rem 0.25rem;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
+  /* Blauwe indicator */
+  .tabbutton.active::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 5px;
+    background-color: var(--primary-color-dark);
+    border-radius: 3px;
+    z-index: 1;
+  }
 
-.page-nav button.active {
-  border-bottom-color: var(--primary-color-light);
-}
+  .tabbutton:focus-visible {
+    outline: 3px solid var(--primary-color-light);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
 
-.page-nav img {
-  width: 18px;
-  height: 18px;
-}
+  /* =========================
+     BINGOKAART CONTENT
+  ========================= */
+  .bingokaart {
+    max-width: clamp(320px, 85vw, 720px);
+    padding: clamp(1rem, 3vw, 2rem);
+    margin: 0 auto;
+    padding-top: clamp(2rem, 5vw, 3rem);
+  }
 
-/* Bingo */
-.bingokaart h2 {
-  font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
-  color: var(--primary-color-dark);
-  font-family: var(--font-medium);
-  margin-bottom: 1rem;
-}
+  .bingokaart-title {
+    font-size: var(--text-size-md);
+    margin: 0.75rem 0 0.25rem;
+    color: var(--primary-color-dark);
+  }
 
-/* Grid */
-.kaart-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  list-style: none;
-  padding: 2.5rem 0.5rem 0;
-  margin: 0 auto;
-  width: 300px;
-  height: 300px;
-}
+  .bingokaart-subtitle {
+    font-size: var(--text-size-sm);
+    margin: 0 0 1rem;
+    color: var(--color-neutral);
+  }
 
-.kaart-grid li {
-  border-radius: 0.5rem;
-  background-color: var(--primary-color-light);
-  color: var(--color-white);
-  display: grid;
-  place-items: center;
-  position: relative;
-  transition: 0.3s;
-}
-
-.kaart-grid li.checked {
-  background-color: var(--color-green-accent);
-  box-shadow: 0 0 20px rgba(19, 124, 38, 0.4);
-}
-
-.dot {
-  position: absolute;
-  top: 0.4rem;
-  left: 0.4rem;
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-white);
-  border-radius: 50%;
-}
-
-/* Tablet */
-@media (min-width: 640px) {
+  /* =========================
+     GRID (3×3)
+  ========================= */
   .kaart-grid {
-    gap: 0.75rem;
-    width: 360px;
-    height: 360px;
+    --cell: clamp(93px, 16vmin, 150px);
+    --gap: clamp(0.25rem, 1vmin, 0.75rem);
+
+    display: grid;
+    grid-template-columns: repeat(3, var(--cell));
+    gap: var(--gap);
+
+    width: fit-content;
+    margin-inline: auto;
+    padding: 0;
+    list-style: none;
   }
 
-  .bingokaart h2 {
-    text-align: left;
-    padding-inline: 2rem;
-  }
-}
+  .kaart-grid li {
+    position: relative;
+    width: var(--cell);
+    height: calc(var(--cell) * 0.84);
 
-/* Desktop */
-@media (min-width: 1024px) {
-  .kaart-grid {
-    gap: 1rem;
-    width: 420px;
-    height: 420px;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .bingokaart h2 {
-    text-align: left;
-    padding-inline: 4rem;
+    padding: clamp(0.5rem, 1.2vmin, 0.9rem);
+    text-align: center;
+
+    background-color: var(--primary-color-light);
   }
 
-  .page-header {
-    padding-inline: 4rem;
+  .kaart-grid li p {
+    margin: 0;
+    font-size: clamp(0.6rem, 1.8vmin, 1rem);
+    line-height: 1.25;
+    font-family: var(--font-medium);
+    color: var(--color-white);
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
-  .page-nav div[role="tablist"] {
-    justify-content: flex-start;
-    padding-left: 4rem;
-    gap: 2rem;
+  .dot {
+    position: absolute;
+    top: clamp(4px, 0.8vmin, 8px);
+    left: clamp(4px, 0.8vmin, 8px);
+    width: clamp(8px, 1.3vmin, 12px);
+    height: clamp(8px, 1.3vmin, 12px);
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid var(--color-white);
   }
-}
+
+  .kaart-grid li.checked {
+    background-color: var(--color-green-accent);
+  }
+
+  .kaart-grid li.checked .dot {
+    background-color: var(--color-white);
+  }
+
+  /* Focus op panelen en items */
+  .kaart-grid li:focus-visible {
+    outline: 3px solid var(--primary-color-dark);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-contrast: more) {
+    .kaart-grid li {
+      border: 2px solid var(--color-neutral-darker);
+    }
+  }
+
+  /* =========================
+     TABLET
+  ========================= */
+  @media (min-width: 768px) {
+    .page-nav {
+      padding: 0 2rem 0.75rem;
+    }
+
+    .tablist {
+      justify-content: flex-start;
+      gap: 2rem;
+    }
+
+    .tablist::after {
+      left: 0;
+      transform: none;
+      width: 260px;
+    }
+
+    .tabbutton {
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+      font-size: var(--text-size-sm);
+    }
+
+    .tabbutton.active::after {
+      width: 56px;
+    }
+
+    .bingokaart {
+      max-width: 920px;
+      margin: 0;
+    }
+
+    .kaart-grid {
+      --cell: clamp(110px, 12vmin, 165px);
+      --gap: clamp(0.5rem, 1vmin, 1rem);
+      margin-inline: 0;
+    }
+  }
+
+  @media (min-width: 768px) and (max-height: 650px) {
+    .bingokaart {
+      padding-top: 1rem;
+    }
+  }
+
+  /* =========================
+     DESKTOP
+  ========================= */
+  @media (min-width: 1024px) {
+    .tabbutton {
+      font-size: var(--text-size-lg);
+    }
+
+    .bingokaart {
+      margin-top: 2rem;
+    }
+
+    .kaart-grid {
+      --cell: clamp(130px, 25vmin, 190px);
+    }
+
+    .kaart-grid li p {
+      font-size: var(--text-size-lg);
+      line-height: 1.2;
+    }
+
+    .bingokaart-title {
+      font-size: var(--text-size-lg);
+    }
+
+    .bingokaart-subtitle {
+      font-size: var(--text-size-md);
+    }
+  }
 </style>
