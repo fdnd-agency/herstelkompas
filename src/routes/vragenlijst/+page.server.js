@@ -127,6 +127,49 @@ export const actions = {
         const todayBehandeling =  await fetch(url)
         const todayBehandelingReponseData = await todayBehandeling.json()
         let todayBehandelingData = todayBehandelingReponseData.data;
+
+        // count positive answers
+        function countPositive(vragenlijst = []) {
+            return vragenlijst.filter(v => v.antwoord === "Eens").length;
+        }
+        // get feedback message for treater
+        function getFeedback(currentCount, previousCount) {
+            if (currentCount === 2 && previousCount <= 2) {
+                return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten. Vorige sessie was ook minder";
+            }
+            switch (currentCount) {
+                case 4:
+                    return "Perfecte sessie, op naar de volgende.";
+                case 3:
+                    return "Mooi resultaat, voor de begeleiding volgende sessie wel scherp blijven op verkrijgen van succeservaringen.";
+                case 2:
+                    return "Misschien een mindere sessie, kan gebeuren. Geen probleem als de volgende sessie weer beter is.";
+                case 1:
+                    return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
+                case 0:
+                    return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
+                default:
+                    return "Feedback niet beschikbaar.";
+            }
+        }
+
+        // latest question list
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0);
+
+        const latestQuestionlistURL = `https://fdnd-agency.directus.app/items/behandeling?filter[datum][_lt]=${todayStart.toISOString()}&filter[vragenlijst][_nnull]=true&sort=-datum&limit=1`;
+        const latestTreatmentWithQuestionListFetch =  await fetch(latestQuestionlistURL)
+        const latestTreatmentWithQuestionListReponseData = await latestTreatmentWithQuestionListFetch.json()
+        let latestTreatmentWithQuestionListData = latestTreatmentWithQuestionListReponseData.data;
+
+        let countPositivePrevious = countPositive(latestTreatmentWithQuestionListData[0].vragenlijst)
+        let countPositiveCurrent = countPositive(newQuestionsarray)
+
+        let feedbackMessage = getFeedback(countPositiveCurrent, countPositivePrevious);
+        if (!feedbackMessage) {
+            feedbackMessage = "Feedback is niet beschikbaar.";
+        }
+
         let lastbingokaart;
         if(!todayBehandelingData.bingokaart){
             const lastBingoCardurl = `https://fdnd-agency.directus.app/items/behandeling?filter[bingokaart][_nnull]=true&limit=1&sort=-datum`;
@@ -192,7 +235,7 @@ export const actions = {
         }
         return {
             success: true,
-            message: "Yay!!",
+            message: feedbackMessage,
         };
     }
 };

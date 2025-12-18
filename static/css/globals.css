@@ -119,3 +119,21 @@ button.btn-prev:hover svg>path {
     stroke: var(--color-neutral-lighter);
     fill: var(--color-neutral-lighter)
 }
+
+
+
+
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0; /* Move into view when focused */
+}
