@@ -30,6 +30,7 @@
     <main id="mainContent">
 	{#if feedbackMessage != ""}
 			<div 
+				id="feedback-message"
 				aria-hidden="true" 
 				tabindex=0
 			>

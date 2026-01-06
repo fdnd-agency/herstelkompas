@@ -128,29 +128,37 @@ export const actions = {
         const todayBehandelingReponseData = await todayBehandeling.json()
         let todayBehandelingData = todayBehandelingReponseData.data;
 
-        // count positive answers
         function countPositive(vragenlijst = []) {
-            return vragenlijst.filter(v => v.antwoord === "Eens").length;
+            const weights = {
+                "Eens": 1,
+                "Neutraal": 0.5
+            };
+            return vragenlijst.reduce(
+                (sum, v) => sum + (weights[v.antwoord] || 0),
+                0
+            );
         }
-        // get feedback message for treater
         function getFeedback(currentCount, previousCount) {
-            if (currentCount === 2 && previousCount <= 2) {
-                return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten. Vorige sessie was ook minder";
+            if (currentCount <= 2 && previousCount <= 2) {
+                return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
             }
-            switch (currentCount) {
-                case 4:
-                    return "Perfecte sessie, op naar de volgende.";
-                case 3:
-                    return "Mooi resultaat, voor de begeleiding volgende sessie wel scherp blijven op verkrijgen van succeservaringen.";
-                case 2:
-                    return "Misschien een mindere sessie, kan gebeuren. Geen probleem als de volgende sessie weer beter is.";
-                case 1:
-                    return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
-                case 0:
-                    return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
-                default:
-                    return "Feedback niet beschikbaar.";
+
+            if (currentCount == 4) {
+                return "Perfecte sessie, op naar de volgende.";
             }
+
+            if (currentCount >= 3) {
+                return "Mooi resultaat, voor de begeleiding volgende sessie wel scherp blijven op verkrijgen van succeservaringen.";
+            }
+
+            if (currentCount >= 2) {
+                return "Misschien een mindere sessie, kan gebeuren. Geen probleem als de volgende sessie weer beter is.";
+            }
+
+            if (currentCount >= 0) {
+                return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
+            }
+
         }
 
         // latest question list
@@ -164,7 +172,6 @@ export const actions = {
 
         let countPositivePrevious = countPositive(latestTreatmentWithQuestionListData[0].vragenlijst)
         let countPositiveCurrent = countPositive(newQuestionsarray)
-
         let feedbackMessage = getFeedback(countPositiveCurrent, countPositivePrevious);
         if (!feedbackMessage) {
             feedbackMessage = "Feedback is niet beschikbaar.";
