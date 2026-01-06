@@ -15,9 +15,7 @@
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <div id="container">
-	{#key $page.url.pathname}
-		<Waves color1="#137BC0" color2="#DCEBF5" />
-	{/key}
+	<Waves color1="#137BC0" color2="#DCEBF5" />
     <Sidebar/>
     <Header/>
     <main>

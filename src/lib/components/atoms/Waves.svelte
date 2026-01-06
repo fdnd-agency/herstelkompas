@@ -1,12 +1,21 @@
 <script>
 	let { color1 = '#3b46d3',color2='#DCEBF5', height = 100 } = $props();
-
+	import { browser } from '$app/environment';
 	// encode # to %23
 	let encodedColor = encodeURIComponent(color1);
 	let encodedColor2 = encodeURIComponent(color2);
+	let shouldAnimate = false;
+	if (browser) {
+		const hasPlayed = sessionStorage.getItem('wavesPlayed');
+
+		if (!hasPlayed) {
+			shouldAnimate = true;
+			sessionStorage.setItem('wavesPlayed', 'true');
+		}
+	}
 </script>
-<div class="waves-container">
-	<div class="waves">
+<div class="waves-container {shouldAnimate ? 'animate' : 'static'}">
+	<div class="waves {shouldAnimate ? 'animate' : 'static'}">
 		<div class="wave wave1" style="height: {height}px;background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -0.00012207 500 100'%3E%3Cpath d='M 0 37.8889 C 97.3839 37.8889 128.352 -0.0783 253.95 0 C 379.202 0 410.515 37.8889 500 37.8889 L 500 100 L 0 100 Z' fill='{encodedColor}'/%3E%3C/svg%3E&quot;);"></div>
 		<div class="wave wave2" style=" height: {height}px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -0.00012207 500 100'%3E%3Cpath d='M 0 37.8889 C 97.3839 37.8889 128.352 -0.0783 253.95 0 C 379.202 0 410.515 37.8889 500 37.8889 L 500 100 L 0 100 Z' fill='{encodedColor2}'/%3E%3C/svg%3E&quot;);"></div>
 	</div>
@@ -14,21 +23,29 @@
 
 
 <style>
-	.waves-container{
+	
+	.waves-container {
 		position: absolute;
 		width: 100vw;
 		height: 100%;
 		overflow: hidden;
-		animation: zindexchange 3.5s linear;
 		z-index: -1;
 	}
-
+	.waves-container.animate {
+		animation: zindexchange 3.5s linear;
+	}
 	.waves{
 		position: absolute;
-		translate: 0 110vh;
 		width: 100%;
 		z-index: 9;
+	}
+	.waves.animate {
+		translate: 0 110vh;
 		animation: waterUp 3.5s linear;
+	}
+	.waves.static {
+		translate: 0 110vh;
+		animation: none;
 	}
 	.waves::after{
 		height: 100vh;
@@ -127,6 +144,11 @@
 		}
 		100% {
 			z-index: -1; 
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.waves-container{
+			display: none !important;
 		}
 	}
 </style>
