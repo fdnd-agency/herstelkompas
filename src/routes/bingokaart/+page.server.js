@@ -15,7 +15,15 @@ export async function load({}){
     const behandelingenReponseData = await behandelingenReponse.json()
     let behandeling = behandelingenReponseData.data[0] 
     let bingokaart = behandeling.bingokaart ? behandeling.bingokaart : [];
-    return { bingokaart };
+    
+    const prizesResponse  = await fetch(
+        'https://fdnd-agency.directus.app/items/prijs'
+    );
+    const prizesData = await prizesResponse.json();
+    return {
+        bingokaart,
+        prizes: prizesData.data
+    };
 }
 export const actions = {
     default: async ({ request }) => {
@@ -70,6 +78,11 @@ export const actions = {
         const todayBehandelingReponseData = await todayBehandeling.json()
         let todayBehandelingData = todayBehandelingReponseData.data;
 
+        const oldCount = lastbingokaart.filter(b => b.checked).length;
+        const newCount = newCardState.filter(b => b.checked).length;
+
+        const showPopup = newCount > oldCount;
+
         // als er vandaag geen behandeling was, posten, anders pas de bingokaart aan van de meest recente behandeling
         if(!todayBehandelingReponseData.data || todayBehandelingData.length == 0){
             const todaydatetime = today.toISOString().slice(0, 19);
@@ -103,9 +116,9 @@ export const actions = {
             const patchResult = await patchRes.json();
         }
         return {
-            success: true,
-            message: "Yay!!",
-            newCardState
+        success: true,
+        showPopup,
+        count: newCount
         };
     }
 };
