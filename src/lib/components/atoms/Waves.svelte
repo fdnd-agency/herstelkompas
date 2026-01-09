@@ -41,7 +41,7 @@
 	}
 	.waves.animate {
 		translate: 0 110vh;
-		animation: waterUp 3.5s linear;
+		animation: waterUp 3.5s cubic-bezier(.43,.76,1,.6);
 	}
 	.waves.static {
 		translate: 0 110vh;
