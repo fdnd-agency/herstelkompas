@@ -15,3 +15,4 @@ export { default as AuthInformation } from './components/molecules/AuthInformati
 export { default as Vraag } from './components/molecules/Vraag.svelte'
 // Atoms
 export { default as SidebarLink } from './components/atoms/SidebarLink/SidebarLink.svelte'
+export { default as Waves } from './components/atoms/Waves.svelte';
