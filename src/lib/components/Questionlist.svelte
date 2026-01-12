@@ -81,7 +81,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0 1.25rem 2rem 1.25rem;
+    padding: 0 0 2rem 0;
   }
 
   /* === Mobiele kaart styling (vervangt je eerdere <li>) === */
@@ -167,23 +167,28 @@
   .survey {
 
     .survey-title {
-      padding-inline: 2rem;
+      padding-inline: 0
     }
 
     /* TABELHEADER ZICHTBAAR */
     .survey-header {
-      display: grid;
-      grid-template-columns: 1fr 150px;
-      padding: 0.75rem 2rem;
+      display: block;
       border-bottom: 1px solid #dbe6f5;
       color: #6d8bb8;
       font-family: var(--font-medium);
       font-size: 0.95rem;
       margin-top: 1rem;
     }
-
+    .survey-header tr{
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            padding: 0.75rem 20px;
+    }
+    .survey-header tr th{
+      text-align: left;
+    }
     .survey-list {
-      padding: 0 1.5rem;
+      padding: 0;
       gap: 0.75rem;
       padding-top: 3rem;
     }
@@ -213,22 +218,27 @@
   .survey {
 
     .survey-title {
-      padding-inline: 4rem;
+      padding-inline: 0rem;
     }
 
     .survey-header {
-      display: grid;
-      grid-template-columns: 1fr 200px;
-      padding: 0.75rem 4rem;
+      display: block;
       border-bottom: 1px solid #dbe6f5;
       color: #6d8bb8;
       font-family: var(--font-medium);
       font-size: 1rem;
       margin-top: 1rem;
     }
-
+    .survey-header tr{
+            display: grid;
+      grid-template-columns: 1fr 200px;
+      padding: 0.75rem 24px;
+    }
+        .survey-header tr th{
+      text-align: left;
+    }
     .survey-list {
-      padding: 0 2rem;
+      padding: 0 0rem;
       gap: 0.75rem;
       padding-top: 3rem;
     }
@@ -245,4 +255,5 @@
 
   }
 }
+
 </style>

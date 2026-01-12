@@ -199,7 +199,7 @@
 ========================= */
 .bingokaart {
   max-width: clamp(320px, 85vw, 720px);
-  padding: clamp(1rem, 3vw, 2rem);
+  /* padding: clamp(1rem, 3vw, 2rem); */
   margin: 0 auto;
   padding-top: clamp(2rem, 5vw, 3rem);
 }
@@ -342,7 +342,7 @@
 ========================= */
 @media (min-width: 768px) {
   .page-nav {
-    padding: 0 2rem 0.75rem;
+    padding: 0 0rem 0.75rem;
   }
 
   .tablist {
@@ -388,5 +388,11 @@
   .kaart-grid li p {
     font-size: var(--text-size-lg);
   }
+}
+
+
+/*  Quick Fix [Dylan] */
+#vragenlijst-panel{
+  padding-top: clamp(2rem, 5vw, 3rem);
 }
 </style>
