@@ -1,7 +1,7 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
 	import { Bingocard, Sidebar, Header } from '$lib'
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { Waves } from '$lib';
 	let { children } = $props();
 	let feedbackMessage = "";
