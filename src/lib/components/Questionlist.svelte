@@ -63,8 +63,8 @@
 .survey {
   max-width: none;
   margin: 0;
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
+  /* padding-left: 0.2rem;
+  padding-right: 0.2rem; */
 }
 
 
@@ -189,9 +189,10 @@
       margin-top: 1rem;
     }
     .survey-header tr{
-            display: grid;
-            grid-template-columns: 1fr 150px;
-            padding: 0.75rem 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
     }
     .survey-header tr th{
       text-align: left;
@@ -204,13 +205,14 @@
 
     /* TR wordt 2-koloms layout zoals jouw oude li-grid */
     .survey-list tr {
-  display: grid;
-  grid-template-columns: 1fr 150px;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
   padding: 1rem 1.25rem;
  background-color: #eef6ff; 
   border-radius: 12px;
-
+    }
 
 /* Tekst */
 .question-column,
@@ -267,8 +269,6 @@
       margin-top: 1rem;
     }
     .survey-header tr{
-            display: grid;
-      grid-template-columns: 1fr 200px;
       padding: 0.75rem 24px;
     }
         .survey-header tr th{
@@ -281,9 +281,7 @@
     }
 
    .survey-list tr {
-  display: grid;
-  grid-template-columns: 1fr 200px;
-  align-items: center;
+
   padding: 1.2rem 1.5rem;
   background-color: #eef6ff; /* ← DIT TOEVOEGEN */
   border-radius: 12px;
