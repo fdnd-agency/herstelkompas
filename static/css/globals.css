@@ -37,8 +37,10 @@ main{
   }
 }
 #container{
-	height: 100vh;
-	overflow: hidden;
+  /* min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden; */
+  -webkit-overflow-scrolling: touch;
 }
 @supports (display: grid){
 	@media (min-width: 850px){
@@ -120,3 +122,4 @@ button.btn-prev:hover svg>path {
     stroke: var(--color-neutral-lighter);
     fill: var(--color-neutral-lighter)
 }
+
