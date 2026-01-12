@@ -104,7 +104,7 @@ export const actions = {
         }
         return {
             success: true,
-            message: "Yay!!",
+            message: "Bingokaart opgeslagen",
             newCardState
         };
     }

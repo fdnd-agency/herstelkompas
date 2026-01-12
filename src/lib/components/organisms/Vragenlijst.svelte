@@ -1,17 +1,16 @@
-
 <script>
     let { vragenlijst, agreementsScales } = $props();
     import { onMount } from "svelte";
-    import { Vraag } from '$lib';
+    import { Vraag } from "$lib";
     let count = $state(1);
     let jsEnabled = $state(false);
     onMount(() => {
         //check for the html class that is acrtive when client side JS is enabled
         jsEnabled = document.documentElement.classList.contains("js-enabled");
         if (jsEnabled) {
-            document.querySelector('input[type="submit"]').tabIndex = -1
-            let formContainer = document.querySelector('#form-container')
-            let formEl = document.querySelector('#formEl');
+            document.querySelector('input[type="submit"]').tabIndex = -1;
+            let formContainer = document.querySelector("#form-container");
+            let formEl = document.querySelector("#formEl");
             // ADD CONTAINER FOR CONTROL BTNS
             let controlBtnContainer = document.createElement("div");
             controlBtnContainer.classList.add("controls-container");
@@ -49,45 +48,55 @@
             }
 
             if (formEl) {
-                document.querySelectorAll('legend').forEach((legend) => {
+                document.querySelectorAll("legend").forEach((legend) => {
                     legend.style.height = "135px";
                 });
                 const firstChild = formEl.firstElementChild;
                 if (!firstChild) return;
                 function updateHeight() {
-                    console.log('HEIGHT')
-                    const childHeight = firstChild.getBoundingClientRect().height;
+                    console.log("HEIGHT");
+                    const childHeight =
+                        firstChild.getBoundingClientRect().height;
                     formEl.style.height = childHeight + "px";
                     const questions = formEl.querySelectorAll("fieldset");
-                    formEl.scrollTop = 0 + (formEl.offsetHeight * ( count - 1));
-                    document.querySelector('#formControl').style.paddingTop = (formEl.offsetHeight / 2 ) + "px";
-                    document.querySelector('#formControl').style.paddingBottom = (formEl.offsetHeight / 2 ) + "px";
+                    formEl.scrollTop = 0 + formEl.offsetHeight * (count - 1);
+                    document.querySelector("#formControl").style.paddingTop =
+                        formEl.offsetHeight / 2 + "px";
+                    document.querySelector("#formControl").style.paddingBottom =
+                        formEl.offsetHeight / 2 + "px";
                 }
                 updateHeight();
                 window.addEventListener("resize", updateHeight);
             }
             //tab control
-            const radios = document.querySelectorAll('#form-container form input');
+            const radios = document.querySelectorAll(
+                "#form-container form input",
+            );
             const questions = formEl.querySelectorAll("fieldset");
             radios.forEach((radio) => {
-                radio.addEventListener('keydown', (e) => {
-                    if (e.key === 'Tab') {
-
+                radio.addEventListener("keydown", (e) => {
+                    if (e.key === "Tab") {
                         // shift tab - prev question
                         if (e.shiftKey) {
                             prevQuestion(e);
+                        } else {
+                            //only tab pressed, next question it is
 
-                        } else { //only tab pressed, next question it is
-                            
                             nextQuestion(e);
-                            if(count == questions.length + 1){
-                                document.querySelector('input[type="submit"]').focus();
+                            if (count == questions.length + 1) {
+                                document
+                                    .querySelector('input[type="submit"]')
+                                    .focus();
                             }
                         }
-                        const currentFieldset = formEl.querySelector(`fieldset:nth-child(${count})`);
-                        if(currentFieldset){
-                            let newFocus = currentFieldset.querySelector(`input#q-${count}`);
-                            console.log(newFocus)
+                        const currentFieldset = formEl.querySelector(
+                            `fieldset:nth-child(${count})`,
+                        );
+                        if (currentFieldset) {
+                            let newFocus = currentFieldset.querySelector(
+                                `input#q-${count}`,
+                            );
+                            console.log(newFocus);
                             newFocus.focus();
                         }
                     }
@@ -98,99 +107,114 @@
         // fix for when the body is active element and tab is being pressed
         const q1g = document.querySelectorAll("[name='q-1']");
         q1g.forEach((q1) => {
-            q1.addEventListener("focus", function(e) {
+            q1.addEventListener("focus", function (e) {
                 count = 1;
-                const form = document.querySelector('form');
+                const form = document.querySelector("form");
                 form.scrollTop = 0;
-                document.querySelector('.controls-container .btn-prev').style.display = "none"
-                document.querySelector('.controls-container .btn-next').style.display = "flex"
+                document.querySelector(
+                    ".controls-container .btn-prev",
+                ).style.display = "none";
+                document.querySelector(
+                    ".controls-container .btn-next",
+                ).style.display = "flex";
 
-                const fieldset = e.target.closest('fieldset');
+                const fieldset = e.target.closest("fieldset");
                 if (fieldset) {
                     fieldset.style.opacity = 1;
                     const questions = formEl.querySelectorAll("fieldset");
-                
-                        questions.forEach((fieldset) => {
-                            fieldset.style.opacity = "0";
-                            fieldset.classList.remove('animation--slide-in');
-                        });
-                        fieldset.style.opacity = 1;
-                        fieldset.classList.add('animation--slide-in');
-                    
+
+                    questions.forEach((fieldset) => {
+                        fieldset.style.opacity = "0";
+                        fieldset.classList.remove("animation--slide-in");
+                    });
+                    fieldset.style.opacity = 1;
+                    fieldset.classList.add("animation--slide-in");
                 }
             });
         });
-
     });
     //prev question button click
     function prevQuestion(e) {
         const questions = formEl.querySelectorAll("fieldset");
-        if(count == questions.length +1){
+        if (count == questions.length + 1) {
             e.preventDefault();
-            document.querySelector('.controls-container .btn-next').style.display = "flex"
+            document.querySelector(
+                ".controls-container .btn-next",
+            ).style.display = "flex";
         }
-        if(count == 2){ // FIRST Q
+        if (count == 2) {
+            // FIRST Q
             // here no prevent default to get out of the form when shift tabbing
-            document.querySelector('.controls-container .btn-prev').style.display = "none"
+            document.querySelector(
+                ".controls-container .btn-prev",
+            ).style.display = "none";
         }
-        if(count > 1 ){
+        if (count > 1) {
             e.preventDefault();
             formEl.scrollTop -= formEl.offsetHeight;
             count--;
             const questions = formEl.querySelectorAll("fieldset");
-            const prevElement = formEl.querySelector(`fieldset:nth-child(${count})`);
-            if(prevElement){
+            const prevElement = formEl.querySelector(
+                `fieldset:nth-child(${count})`,
+            );
+            if (prevElement) {
                 questions.forEach((fieldset) => {
                     fieldset.style.opacity = "0";
-                    fieldset.classList.remove('animation--slide-in');
+                    fieldset.classList.remove("animation--slide-in");
                 });
                 prevElement.style.opacity = 1;
-                prevElement.classList.add('animation--slide-in');
+                prevElement.classList.add("animation--slide-in");
             }
         }
-
     }
     //next question button click
     function nextQuestion(e) {
-        document.querySelector('.controls-container .btn-prev').style.display = "flex"
+        document.querySelector(".controls-container .btn-prev").style.display =
+            "flex";
         const questions = formEl.querySelectorAll("fieldset");
-        if(count == questions.length){
+        if (count == questions.length) {
             e.preventDefault();
-            document.querySelector('.controls-container .btn-next').style.display = "none"
+            document.querySelector(
+                ".controls-container .btn-next",
+            ).style.display = "none";
             questions.forEach((fieldset) => {
-                    fieldset.style.opacity = "0";
-                    fieldset.classList.remove('animation--slide-in');
-                });
+                fieldset.style.opacity = "0";
+                fieldset.classList.remove("animation--slide-in");
+            });
         }
-        if(count == questions.length + 1){
+        if (count == questions.length + 1) {
             // so you can tab out of the form
         }
-        if(count < questions.length + 1 ){
+        if (count < questions.length + 1) {
             e.preventDefault();
             formEl.scrollTop += formEl.offsetHeight;
             count++;
-            const nextElement = formEl.querySelector(`fieldset:nth-child(${count})`);
-            if(nextElement){
+            const nextElement = formEl.querySelector(
+                `fieldset:nth-child(${count})`,
+            );
+            if (nextElement) {
                 questions.forEach((fieldset) => {
                     fieldset.style.opacity = "0";
-                    fieldset.classList.remove('animation--slide-in');
+                    fieldset.classList.remove("animation--slide-in");
                 });
                 nextElement.style.opacity = 1;
-                nextElement.classList.add('animation--slide-in');
+                nextElement.classList.add("animation--slide-in");
             }
-            
         }
     }
 </script>
+
 <form method="POST" id="formEl">
     {#each vragenlijst as vraag, i}
-        <Vraag {i} length={vragenlijst.length} {vraag} {agreementsScales}/>
+        <Vraag {i} length={vragenlijst.length} {vraag} {agreementsScales} />
     {/each}
 
     <div id="formControl">
         <input type="submit" value="Verstuur vragenlijst" />
     </div>
 </form>
+
+
 <style>
     form {
         display: flex;
@@ -199,22 +223,20 @@
         max-height: calc(100vh - 150px);
         overflow-y: auto;
         padding-bottom: 3rem;
-
     }
     @media (min-width: 850px) {
         form {
             max-height: calc(100vh - 90px);
         }
     }
-    @keyframes slide-in{
-        0%{
+    @keyframes slide-in {
+        0% {
             translate: 0 100px;
         }
-        100%{
+        100% {
             translate: 0 0;
         }
     }
-   
 
     input[type="submit"] {
         cursor: pointer;
@@ -232,5 +254,4 @@
         background-color: #e8ebf2;
         color: var(--color-neutral);
     }
- 
 </style>
