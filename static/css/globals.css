@@ -49,6 +49,7 @@ main{
 }
 @media (min-width: 850px){
 	main{
+        padding: 20px 20px 20px 46px;
 		display: inline-block;
 		vertical-align: top;
 	}
