@@ -1,7 +1,14 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
 	import { Bingocard, Sidebar, Header } from '$lib'
+	import { page } from '$app/state';
+	import { Waves } from '$lib';
 	let { children } = $props();
+	let feedbackMessage = "";
+	if(page.form?.message){
+		feedbackMessage = page?.form?.message
+	}
+
 </script>
 
 <svelte:head>
@@ -13,9 +20,20 @@
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <div id="container">
+	<Waves color1="#137BC0" color2="#DCEBF5" />
+  <a href="#mainContent" class="skip-to-content">Skip to the content</a>
     <Sidebar/>
     <Header/>
-    <main>
-		{@render children?.()}
+    <main id="mainContent">
+	{#if feedbackMessage != ""}
+			<div 
+				id="feedback-message"
+				aria-hidden="true" 
+				tabindex=0
+			>
+				<strong>Feedback:</strong> {feedbackMessage}
+			</div>
+	{/if}
+        {@render children?.()}
     </main>
 </div>

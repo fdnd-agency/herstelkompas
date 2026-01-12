@@ -68,3 +68,10 @@ op basis van de retrospect van sprint 14: https://github.com/fdnd-agency/herstel
 	•	Sub-tickets AF
 	•	Documentatie Compleet
 	•	Review Kolom in Backlog
+
+## Postmortem
+
+We steken de koppen bij elkaar en gaan samen af:
+- Wat er goed ging
+- Waarom we een post-mortem houden (wat ging er mis)
+- Wat we kunnen verbeteren

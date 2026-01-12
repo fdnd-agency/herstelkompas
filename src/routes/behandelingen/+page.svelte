@@ -56,7 +56,7 @@
 
 <style>
 .treatment-section {
-  padding: 1rem;
+  /* padding: 1rem; */
   font-family: var(--font-regular);
 
   /* ===== Pagina header ===== */
@@ -90,7 +90,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
+    overflow-y: scroll;
+    height: calc(100vh - 215px);
     .treatment-card {
       display: block;
       background-color: var(--color-blue-tint);

@@ -2,8 +2,8 @@
     <link rel="stylesheet" href="/css/form-enhance.css">
 </svelte:head>
 <script>
-    let { data } = $props();
-    import { onMount } from "svelte";
+    let { data, form } = $props();
+    import { onMount } from 'svelte';
     import { Vragenlijst } from '$lib';
     let count = $state(1);
     let vragenlijst = data.vragen;
@@ -18,7 +18,7 @@
         <p class="visually-hidden">Kies bij elke vraag een waarde tussen de 0 en de 100. Des te hoger de waarde, des te meer u instemt met de vraag</p>
     </header>
     <div id="form-container">
-        <Vragenlijst {agreementsScales}, {vragenlijst}/>
+        <Vragenlijst {agreementsScales} {vragenlijst}/>
     </div>
 </section>
 

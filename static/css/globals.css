@@ -6,7 +6,7 @@
 
     /* padding-right: 1px; */
 }
-@media (min-width: 850px){
+/* @media (min-width: 850px){
     #container{
         display: grid;
         grid-template-columns: 320px 1fr;
@@ -14,6 +14,24 @@
     }
 
 }
+ */
+input[type="submit"] {
+        cursor: pointer;
+        padding: 8px 30px;
+        background-color: var(--primary-color-dark);
+        color: #DEF0FC;
+        border: 3px solid var(--primary-color-dark);
+        border-radius: 10px;
+        margin-left: 1rem;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    input[type="submit"]:hover,
+    input[type="submit"]:focus-visible {
+        background-color: #DEF0FC;
+        color: var(--primary-color-dark);
+    }
+
 .visually-hidden{
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
@@ -25,22 +43,27 @@
 }
 
 main{
-  padding: 0;               
-  container-name: main-container;
-  container-type: inline-size; 
+	padding: 20px;
+        container-name: main-container;
+        container-type: inline-size; 
 }
-
 @media (min-width: 850px){
-  main{
-    display: inline-block;
-    vertical-align: top;
-  }
+	main{
+        padding: 20px 20px 20px 46px;
+		display: inline-block;
+		vertical-align: top;
+	}
 }
 #container{
   /* min-height: 100dvh;
   overflow-y: auto;
   overflow-x: hidden; */
   -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 850px){
+    main{
+        height: calc(100% - 81px);
+    }
 }
 @supports (display: grid){
 	@media (min-width: 850px){
@@ -122,4 +145,62 @@ button.btn-prev:hover svg>path {
     stroke: var(--color-neutral-lighter);
     fill: var(--color-neutral-lighter)
 }
+
+
+
+
+
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0; /* Move into view when focused */
+}
+#feedback-message{
+    position: absolute;
+    bottom: 0;
+    left: -1px;
+    width: calc(100% + 1px);
+    translate: 0;
+    padding: 30px 1rem;
+    background-color: #137BC0;
+    color: white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    transition: transform 0.6s ease;
+    animation: test 1s ease;
+    /* &:after{
+        height: 100%;
+        content: '';
+        position: absolute;
+        right: 100%;
+        background-color: #137BC0;
+        width: 100vw;
+        top: 0;
+    } */
+    @container main-container (width > 500px) {
+        width: 80%;
+        translate: -50% 0;
+        left: 50%;
+    }
+}
+@keyframes test{
+    from{
+        opacity: 0;
+        padding: 1rem 1rem;
+    }
+    to{
+        opacity: 1;
+        padding: 30px 1rem;
+    }
+}
+
 

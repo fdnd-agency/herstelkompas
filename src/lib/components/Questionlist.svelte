@@ -67,11 +67,22 @@
   padding-right: 0.2rem;
 }
 
+
 .survey-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
+
+  .survey-title {
+    font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
+    color: var(--primary-color-dark);
+    font-family: var(--font-medium);
+    margin-bottom: 1rem;
+    /* padding-inline: 1.25rem; */
+    text-align: left;
+  }
+
 
 /* verberg de kop op mobiel  */
 .survey-header {
@@ -90,6 +101,7 @@
   display: block;
 }
 
+
 /* =========================
    CARD (tr)
 ========================= */
@@ -100,6 +112,15 @@
   border-radius: 0.9rem;
   padding: 1rem;
   margin: 0 0 0.75rem;
+
+  /* Gebruik tbody zoals je eerst ul gebruikte */
+  .survey-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 0 2rem 0;
+  }
+
 
 
   border: 2px solid transparent;
@@ -154,6 +175,43 @@
   margin-top: 0.75rem;
 }
 
+    .survey-title {
+      padding-inline: 0
+    }
+
+    /* TABELHEADER ZICHTBAAR */
+    .survey-header {
+      display: block;
+      border-bottom: 1px solid #dbe6f5;
+      color: #6d8bb8;
+      font-family: var(--font-medium);
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+    .survey-header tr{
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            padding: 0.75rem 20px;
+    }
+    .survey-header tr th{
+      text-align: left;
+    }
+    .survey-list {
+      padding: 0;
+      gap: 0.75rem;
+      padding-top: 3rem;
+    }
+
+    /* TR wordt 2-koloms layout zoals jouw oude li-grid */
+    .survey-list tr {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  align-items: center;
+  padding: 1rem 1.25rem;
+ background-color: #eef6ff; 
+  border-radius: 12px;
+
+
 /* Tekst */
 .question-column,
 .answer-column {
@@ -190,10 +248,48 @@
     padding-right: 0;
   }
 
+
   .survey-list {
     display: grid;
     gap: 5px;
   }
+
+    .survey-title {
+      padding-inline: 0rem;
+    }
+
+    .survey-header {
+      display: block;
+      border-bottom: 1px solid #dbe6f5;
+      color: #6d8bb8;
+      font-family: var(--font-medium);
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    .survey-header tr{
+            display: grid;
+      grid-template-columns: 1fr 200px;
+      padding: 0.75rem 24px;
+    }
+        .survey-header tr th{
+      text-align: left;
+    }
+    .survey-list {
+      padding: 0 0rem;
+      gap: 0.75rem;
+      padding-top: 3rem;
+    }
+
+   .survey-list tr {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background-color: #eef6ff; /* ← DIT TOEVOEGEN */
+  border-radius: 12px;
+  
+}
+
 
   .survey-item {
     margin: 0;
@@ -207,4 +303,5 @@
     margin-bottom: 0.25rem;
   }
 }
+
 </style>
