@@ -61,7 +61,7 @@
     color: var(--primary-color-dark);
     font-family: var(--font-medium);
     margin-bottom: 1rem;
-    padding-inline: 1.25rem;
+    /* padding-inline: 1.25rem; */
     text-align: left;
   }
 

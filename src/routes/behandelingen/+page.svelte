@@ -90,7 +90,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
+    overflow-y: scroll;
+    height: calc(100vh - 215px);
     .treatment-card {
       display: block;
       background-color: var(--color-blue-tint);

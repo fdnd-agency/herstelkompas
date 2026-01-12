@@ -9,7 +9,7 @@
     month: "long",
     year: "numeric"
   });
-
+  console.log(formattedDate)
   const tabs = [
     { id: "bingokaart", label: "Bingo kaart", icon: "/icons/brain.svg" },
     { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/frame-2.svg" }
@@ -113,7 +113,7 @@
     hidden={activeTab !== "vragenlijst"}
     tabindex="0"
   >
-    <Questionlist vragenlijst={activiteit.vragenlijst} />
+    <Questionlist vragenlijst={activiteit.vragenlijst} shortDate={formattedDate} />
   </section>
 </section>
 
