@@ -6,7 +6,7 @@
 
     /* padding-right: 1px; */
 }
-@media (min-width: 850px){
+/* @media (min-width: 850px){
     #container{
         display: grid;
         grid-template-columns: 320px 1fr;
@@ -14,11 +14,7 @@
     }
 
 }
-main{
-	padding: 20px;
-    container-name: main-container;
-    container-type: inline-size; 
-}
+ */
 input[type="submit"] {
         cursor: pointer;
         padding: 8px 30px;
@@ -35,3 +31,171 @@ input[type="submit"] {
         background-color: #DEF0FC;
         color: var(--primary-color-dark);
     }
+
+.visually-hidden{
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+main{
+	padding: 20px;
+        container-name: main-container;
+        container-type: inline-size; 
+}
+@media (min-width: 850px){
+	main{
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+#container{
+	height: 100vh;
+	overflow: hidden;
+}
+@media (max-width: 850px){
+    main{
+        height: calc(100% - 81px);
+    }
+}
+@supports (display: grid){
+	@media (min-width: 850px){
+		main{
+			grid-row: 2;
+			position: relative;
+		}
+		#container{
+			display: grid;
+			grid-template-columns: 350px 1fr;
+			grid-template-rows: max-content 1fr;
+			gap: 1rem;
+			column-gap: 0;
+		}
+	}
+}
+/* Control buttons */
+
+button.btn-nav {
+    transition: .3s ease;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 10px;
+    margin-left: 1rem;
+    font-size: 18px;
+    font-weight: 700;
+    border: 2px solid #54689c;
+    display: flex;
+    gap: 5px;
+    align-items: center
+}
+
+button.btn-prev {
+    background-color: #e8ebf2;
+    color: #54689c;
+    display: none
+}
+
+button.btn-prev span {
+    font-size: 0
+}
+
+@container question (width > 500px) {
+    button.btn-prev span {
+        font-size: inherit
+    }
+}
+
+button.btn-prev:hover,button.btn-next {
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-lighter)
+}
+
+button.btn-next:hover {
+    background-color: var(--color-neutral-lighter);
+    color: var(--color-neutral)
+}
+
+h1,.subtitle {
+    margin-left: 0!important
+}
+
+button.btn-next svg>path {
+    stroke: var(--color-neutral-lighter);
+    fill: var(--color-neutral-lighter)
+}
+
+button.btn-next:hover svg>path {
+    stroke: var(--color-neutral);
+    fill: var(--color-neutral)
+}
+
+button.btn-prev svg>path {
+    stroke: var(--color-neutral);
+    fill: var(--color-neutral)
+}
+
+button.btn-prev:hover svg>path {
+    stroke: var(--color-neutral-lighter);
+    fill: var(--color-neutral-lighter)
+}
+
+
+
+
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0; /* Move into view when focused */
+}
+#feedback-message{
+    position: absolute;
+    bottom: 0;
+    left: -1px;
+    width: calc(100% + 1px);
+    translate: 0;
+    padding: 30px 1rem;
+    background-color: #137BC0;
+    color: white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    transition: transform 0.6s ease;
+    animation: test 1s ease;
+    /* &:after{
+        height: 100%;
+        content: '';
+        position: absolute;
+        right: 100%;
+        background-color: #137BC0;
+        width: 100vw;
+        top: 0;
+    } */
+    @container main-container (width > 500px) {
+        width: 80%;
+        translate: -50% 0;
+        left: 50%;
+    }
+}
+@keyframes test{
+    from{
+        opacity: 0;
+        padding: 1rem 1rem;
+    }
+    to{
+        opacity: 1;
+        padding: 30px 1rem;
+    }
+}
+
