@@ -95,11 +95,19 @@
       </p>
     </header>
 
-    <ul class="kaart-grid">
-      {#each activiteit.bingokaart as item (item.activiteit)}
-        <li class:checked={item.checked}>
-          <span class="dot" aria-hidden="true"></span>
-          <p>{item.activiteit}</p>
+    <ul class="kaart-grid" role="list" aria-label={`Bingokaart items van ${formattedDate}`}>
+      {#each activiteit.bingokaart as item, i (item.activiteit)}
+        <li style={`--i:${i}`}>
+          <button
+            type="button"
+            class="kaart-btn"
+            class:checked={item.checked}
+            aria-pressed={item.checked}
+            aria-label={`${item.activiteit}. ${item.checked ? "Afgevinkt" : "Niet afgevinkt"}`}
+          >
+            <span class="dot" aria-hidden="true"></span>
+            <span class="kaart-text">{item.activiteit}</span>
+          </button>
         </li>
       {/each}
     </ul>
@@ -108,30 +116,30 @@
   <!-- VRAGENLIJST -->
   <section
     id="vragenlijst-panel"
+    class="bingokaart"
     role="tabpanel"
     aria-labelledby="vragenlijst-tab"
     hidden={activeTab !== "vragenlijst"}
     tabindex="0"
   >
-    <Questionlist vragenlijst={activiteit.vragenlijst} />
+    <header class="bingokaart-header">
+      <h2 class="bingokaart-title">{formattedDate}</h2>
+      <p class="bingokaart-subtitle">
+        Hieronder zie je jouw antwoorden op de vragenlijst van {formattedDate}.
+      </p>
+    </header>
+
+    <Questionlist vragenlijst={activiteit.vragenlijst ?? []} />
   </section>
 </section>
 
 <style>
- /* =========================
-   BASE
-========================= */
-.behandeling {
-  width: 100%;
-  min-width: 0;
-}
-
 /* =========================
    NAVIGATIE (TABS)
 ========================= */
 .page-nav {
   position: relative;
-  padding-bottom: 1.25rem;
+  padding-bottom: 10px;
 }
 
 .tablist {
@@ -147,7 +155,7 @@
 .tablist::after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: clamp(220px, 60%, 520px);
@@ -159,8 +167,10 @@
 .tabbutton {
   background: none;
   border: none;
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.6rem 10px;
   font-size: var(--text-size-xs);
+  font-weight: 600;
+  line-height: 1.2;
   color: var(--color-neutral);
   display: flex;
   flex-direction: column;
@@ -170,15 +180,19 @@
   cursor: pointer;
 }
 
+.tabbutton:not(.active) {
+  opacity: 0.75;
+}
+
 .tabbutton.active {
+  opacity: 1;
   color: var(--primary-color-dark);
-  font-family: var(--font-semibold);
 }
 
 .tabbutton.active::after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 36px;
@@ -233,13 +247,19 @@
   list-style: none;
 }
 
-/* =========================
-   BINGOKAART ITEMS + ANIMATIE
-========================= */
 .kaart-grid li {
-  position: relative;
   width: var(--cell);
   height: calc(var(--cell) * 0.84);
+  list-style: none;
+}
+
+/* =========================
+   KAART BUTTON 
+========================= */
+.kaart-btn {
+  width: 100%;
+  height: 100%;
+  position: relative;
 
   display: flex;
   align-items: center;
@@ -249,24 +269,27 @@
   text-align: center;
 
   background-color: var(--primary-color-light);
+  border: 2px solid transparent;
+  border-radius: 5px;
+
+  cursor: pointer;
 
   opacity: 0;
   transform: translateY(12px) scale(0.98);
 }
 
 /* Alleen animeren wanneer panel zichtbaar is */
-.bingokaart:not([hidden]) .kaart-grid li {
+.bingokaart:not([hidden]) .kaart-btn {
   animation: card-in 420ms cubic-bezier(.2,.8,.2,1) forwards;
   animation-delay: calc(var(--i) * 80ms);
 }
 
-.bingokaart[hidden] .kaart-grid li {
+.bingokaart[hidden] .kaart-btn {
   animation: none;
   opacity: 0;
   transform: translateY(12px) scale(0.98);
 }
 
-/* Animatie */
 @keyframes card-in {
   to {
     opacity: 1;
@@ -274,21 +297,8 @@
   }
 }
 
-/* Sibling index (stagger) */
-.kaart-grid li:nth-child(1) { --i: 0; }
-.kaart-grid li:nth-child(2) { --i: 1; }
-.kaart-grid li:nth-child(3) { --i: 2; }
-.kaart-grid li:nth-child(4) { --i: 3; }
-.kaart-grid li:nth-child(5) { --i: 4; }
-.kaart-grid li:nth-child(6) { --i: 5; }
-.kaart-grid li:nth-child(7) { --i: 6; }
-.kaart-grid li:nth-child(8) { --i: 7; }
-.kaart-grid li:nth-child(9) { --i: 8; }
-
-/* =========================
-   CONTENT
-========================= */
-.kaart-grid li p {
+/* Tekst */
+.kaart-text {
   margin: 0;
   font-size: clamp(0.6rem, 1.8vmin, 1rem);
   line-height: 1.25;
@@ -307,30 +317,39 @@
   border: 1px solid var(--color-white);
 }
 
-.kaart-grid li.checked {
+.kaart-btn.checked,
+.kaart-btn[aria-pressed="true"] {
   background-color: var(--color-green-accent);
 }
 
-.kaart-grid li.checked .dot {
+.kaart-btn.checked .dot,
+.kaart-btn[aria-pressed="true"] .dot {
   background-color: var(--color-white);
 }
 
-/* =========================
-   ACCESSIBILITY
-========================= */
-.kaart-grid li:focus-visible {
-  outline: 3px solid var(--primary-color-dark);
-  outline-offset: 2px;
+/* Focus voor toetsenbord */
+.kaart-btn:focus-visible {
+  outline: none;
+  border-color: var(--primary-color-dark);
+  box-shadow: 0 0 0 4px rgba(20, 58, 139, 0.25);
 }
 
+/* Hover (optioneel) */
+.kaart-btn:hover {
+  filter: brightness(0.98);
+}
+
+/* =========================
+   REDUCED 
+========================= */
 @media (prefers-contrast: more) {
-  .kaart-grid li {
-    border: 2px solid var(--color-neutral-darker);
+  .kaart-btn {
+    border-color: var(--color-neutral-darker);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kaart-grid li {
+  .kaart-btn {
     animation: none !important;
     opacity: 1;
     transform: none;
@@ -342,7 +361,7 @@
 ========================= */
 @media (min-width: 768px) {
   .page-nav {
-    padding: 0 2rem 0.75rem;
+    padding: 0 2rem 10px;
   }
 
   .tablist {
@@ -353,7 +372,7 @@
   .tablist::after {
     left: 0;
     transform: none;
-    width: 300px;
+    width: 320px;
   }
 
   .tabbutton {
@@ -385,7 +404,7 @@
     --cell: clamp(130px, 25vmin, 190px);
   }
 
-  .kaart-grid li p {
+  .kaart-text {
     font-size: var(--text-size-lg);
   }
 }
