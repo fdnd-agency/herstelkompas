@@ -55,8 +55,10 @@ main{
 	}
 }
 #container{
-	height: 100vh;
-	overflow: hidden;
+  /* min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden; */
+  -webkit-overflow-scrolling: touch;
 }
 @media (max-width: 850px){
     main{
@@ -147,6 +149,7 @@ button.btn-prev:hover svg>path {
 
 
 
+
 .skip-to-content {
     position: absolute;
     top: -40px;
@@ -199,4 +202,5 @@ button.btn-prev:hover svg>path {
         padding: 30px 1rem;
     }
 }
+
 
