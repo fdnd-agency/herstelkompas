@@ -8,7 +8,7 @@
       <h2 class="bingokaart-title">{formattedDate}</h2>
       <p class="bingokaart-subtitle">
             {#if !scansInfo || (!scansInfo.scan_before && !scansInfo.scan_after)}
-            ijdens de behandeling van {formattedDate} zijn er geen scans gemaakt
+            Tijdens de behandeling van {formattedDate} zijn er geen scans gemaakt
             {:else}
             Jouw scans voor en na de behandeling op {formattedDate}
             {/if}
