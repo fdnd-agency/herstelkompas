@@ -202,6 +202,7 @@
             }
         }
     }
+    
 </script>
 
 <form method="POST" id="formEl">

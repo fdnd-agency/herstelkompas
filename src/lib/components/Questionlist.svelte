@@ -200,7 +200,7 @@
     .survey-list {
       padding: 0;
       gap: 0.75rem;
-      padding-top: 3rem;
+      /* padding-top: 3rem; */
     }
 
     /* TR wordt 2-koloms layout zoals jouw oude li-grid */
@@ -277,7 +277,7 @@
     .survey-list {
       padding: 0 0rem;
       gap: 0.75rem;
-      padding-top: 3rem;
+      /* padding-top: 3rem; */
     }
 
    .survey-list tr {

@@ -1,6 +1,7 @@
 <script>
   export let activiteit;
   export let Questionlist;
+  export let ScansDetail;
 
   const datum = new Date(activiteit.datum);
 
@@ -9,15 +10,18 @@
     month: "long",
     year: "numeric"
   });
-  console.log(formattedDate)
+    const shortDate = datum.toLocaleDateString('nl-NL', {
+    day: 'numeric',
+    month: 'long'
+  });
   const tabs = [
-    { id: "bingokaart", label: "Bingo kaart", icon: "/icons/brain.svg" },
-    { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/frame-2.svg" }
+    { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/bingo.svg' },
+    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/frame-1.svg' },
+    { id: 'scans', label: 'Scans', icon: '/icons/brain.svg' }
   ];
-
   let activeTab = "bingokaart";
   let tabButtons = [];
-
+  let scans = activiteit.scans
   function selectTab(index) {
     activeTab = tabs[index].id;
     tabButtons[index]?.focus();
@@ -71,7 +75,7 @@
             on:click={() => selectTab(i)}
             on:keydown={(e) => onTabKeydown(e, i)}
           >
-            <img src={tab.icon} alt="" aria-hidden="true" />
+            <img height="19" src={tab.icon} alt="" aria-hidden="true" />
             <span>{tab.label}</span>
           </button>
         </li>
@@ -133,6 +137,20 @@
     <Questionlist vragenlijst={activiteit.vragenlijst ?? []} />
 
   </section>
+  <!--  SCANS PANEL -->
+    <section
+      id="scans-panel"
+      role="tabpanel"
+      aria-labelledby="scans-tab"
+      class="bingokaart scans {activeTab !== 'scans' ? 'hidden' : ''}"
+    >
+
+    <ScansDetail
+      scans = {scans}
+      shortDate={shortDate}
+      formattedDate={formattedDate}
+    />
+    </section>
 </section>
 
 <style>
@@ -153,7 +171,9 @@
   margin: 0;
   list-style: none;
 }
-
+.bingokaart-header{
+  margin-right: auto;
+}
 .tablist::after {
   content: "";
   position: absolute;
@@ -378,7 +398,7 @@
   .tablist::after {
     left: 0;
     transform: none;
-    width: 320px;
+    width: 460px;
   }
 
   .tabbutton {
@@ -388,7 +408,7 @@
   }
 
   .bingokaart {
-    max-width: 920px;
+    max-width: 950px;
     margin: 0;
   }
 
@@ -421,7 +441,20 @@
 /*  Quick Fix [Dylan] */
 #vragenlijst-panel{
   padding-top: clamp(2rem, 5vw, 3rem);
-      overflow-y: scroll;
+      overflow-y: auto;
     height: calc(100vh - 150px);
+}
+
+/* SCANS */
+section.scans{
+    display: flex;
+    gap: 2rem;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+}
+section.scans.hidden {
+  display: none;
 }
 </style>
