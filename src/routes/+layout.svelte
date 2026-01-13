@@ -1,13 +1,17 @@
 <script>
+	import { onNavigate } from '$app/navigation';
 	import favicon from '$lib/assets/favicon.svg';
 	import { Bingocard, Sidebar, Header } from '$lib'
 	import { page } from '$app/state';
 	import { Waves } from '$lib';
 	let { children } = $props();
-	let feedbackMessage = "";
+	let feedbackMessage = $state("");
 	if(page.form?.message){
 		feedbackMessage = page?.form?.message
 	}
+	onNavigate(() => {
+		feedbackMessage = "";
+	});
 
 </script>
 
@@ -31,7 +35,7 @@
 				aria-hidden="true" 
 				tabindex=0
 			>
-				<strong>Feedback:</strong> {feedbackMessage}
+			<strong>Feedback:</strong> {feedbackMessage}
 			</div>
 	{/if}
         {@render children?.()}

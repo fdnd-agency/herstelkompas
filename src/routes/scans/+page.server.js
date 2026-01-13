@@ -110,7 +110,7 @@ export const actions = {
 
     return {
       success: true,
-      message: "Scan successfully uploaded",
+      message: "Scans geupdatet!",
       scanId: scanResult.data.id,
       behandelingId
     };
