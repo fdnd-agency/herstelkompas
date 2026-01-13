@@ -13,7 +13,7 @@
 		justify-content: center;       
 		align-items: flex-start;        
 		text-align: center;
-		min-height: 100vh;                      
+		/* min-height: 100vh;                       */
 		background-color: var(--color-white);
 		font-family: var(--font-regular);
 	}
