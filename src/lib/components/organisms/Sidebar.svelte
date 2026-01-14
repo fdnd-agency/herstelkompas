@@ -32,7 +32,7 @@
         top: 0;
         left: -1px; /* subpixel bug */
         grid-row: 1 / -1;
-        z-index: 3;
+        z-index: 4;
     }
     aside .hamburger-open{
         transition: 0.3s ease;
