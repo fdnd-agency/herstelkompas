@@ -81,7 +81,7 @@
     @media (max-width: 850px){
         aside:target{
             translate: 0 0;
-            position: absolute;
+            position: fixed;
         }
     }
 

@@ -7,6 +7,15 @@
     <!-- Nog logo toevoegen -->
 </header>
 <style>
+@media (max-width: 850px){
+    header{
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 1;
+    }
+}
 
 header .hamburger-close{
     display: flex;
@@ -19,7 +28,6 @@ header .hamburger-close{
     box-sizing: content-box;
     text-decoration: none;
     padding: 10px;
-    padding-top: 30px;
     margin-left: 20px;
     font-weight: bold;
     line-height: 1rem;
