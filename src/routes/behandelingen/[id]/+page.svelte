@@ -1,11 +1,12 @@
 <script>
-    let { data } = $props();
-    import { Sidebar } from '$lib'
-    import { page } from '$app/state';
+  import TreatmentBingo from '$lib/components/Treatmentbingo.svelte';
+  import Questionlist from '$lib/components/Questionlist.svelte';
+  import ScansDetail from '$lib/components/ScansDetail.svelte';
+  export let data;
 </script>
-<div id="container">
-    <Sidebar/>
-    <main>
-        <h1>Behandelingen detail pagina</h1>
-    </main>
-</div>
+
+<TreatmentBingo 
+  activiteit={data.activiteit}
+  Questionlist={Questionlist}
+  ScansDetail={ScansDetail}
+/>
