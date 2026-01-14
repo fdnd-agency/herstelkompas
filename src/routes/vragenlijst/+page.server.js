@@ -16,11 +16,9 @@ export async function load({ cookies }){
     const vragenReponseData = await vragenReponse.json()
     let vragen = vragenReponseData.data
     let agreementsScales = [
-        { text: "Zeer mee oneens" },
-        { text: "Oneens" },
-        { text: "Neutraal" },
-        { text: "Eens" },
-        { text: "Zeer mee eens" },
+        { text: "Oneens", align: "left" },
+        { text: "Neutraal", align: "center" },
+        { text: "Eens", align: "right" },
     ];
     var s = vragen.sort(func);  
     function func(a, b) {  
@@ -84,7 +82,22 @@ export const actions = {
         let vragenAmount = vragen.length;
         vragen.forEach( (vraag, i) =>{
             let curQuestionValue = data.getAll('q-'+ (i + 1));
-            newQuestionsarray.push({vraag: vraag.vraag, antwoord: curQuestionValue})
+            let relativeValue;
+            switch(true){
+                case curQuestionValue <= 33:
+                    relativeValue = "Oneens"
+                    break;
+                case curQuestionValue > 33 && curQuestionValue < 66:
+                    relativeValue = "Neutraal"
+                    break;
+                case curQuestionValue >= 66:
+                    relativeValue = "Eens"
+                    break;
+                default:
+                    relativeValue = "Neutraal"
+                    break;
+            }
+            newQuestionsarray.push({vraag: vraag.vraag, antwoord: relativeValue})
         })
             const today = new Date();
 
@@ -109,23 +122,72 @@ export const actions = {
             const startString = toLocalISOString(start);
             const endString = toLocalISOString(end);
         //
-
         // zoek naar de meest recente behandeling van vandaag
         const url = `https://fdnd-agency.directus.app/items/behandeling?filter[datum][_between]=${startString},${endString}&limit=1&sort=-datum`;
         const todayBehandeling =  await fetch(url)
         const todayBehandelingReponseData = await todayBehandeling.json()
         let todayBehandelingData = todayBehandelingReponseData.data;
+
+        function countPositive(vragenlijst = []) {
+            const weights = {
+                "Eens": 1,
+                "Neutraal": 0.5
+            };
+            return vragenlijst.reduce(
+                (sum, v) => sum + (weights[v.antwoord] || 0),
+                0
+            );
+        }
+        function getFeedback(currentCount, previousCount) {
+            if (currentCount <= 2 && previousCount <= 2) {
+                return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
+            }
+
+            if (currentCount == 4) {
+                return "Perfecte sessie, op naar de volgende.";
+            }
+
+            if (currentCount >= 3) {
+                return "Mooi resultaat, voor de begeleiding volgende sessie wel scherp blijven op verkrijgen van succeservaringen.";
+            }
+
+            if (currentCount >= 2) {
+                return "Misschien een mindere sessie, kan gebeuren. Geen probleem als de volgende sessie weer beter is.";
+            }
+
+            if (currentCount >= 0) {
+                return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
+            }
+
+        }
+
+        // latest question list
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0);
+
+        const latestQuestionlistURL = `https://fdnd-agency.directus.app/items/behandeling?filter[datum][_lt]=${todayStart.toISOString()}&filter[vragenlijst][_nnull]=true&sort=-datum&limit=1`;
+        const latestTreatmentWithQuestionListFetch =  await fetch(latestQuestionlistURL)
+        const latestTreatmentWithQuestionListReponseData = await latestTreatmentWithQuestionListFetch.json()
+        let latestTreatmentWithQuestionListData = latestTreatmentWithQuestionListReponseData.data;
+
+        let countPositivePrevious = countPositive(latestTreatmentWithQuestionListData[0].vragenlijst)
+        let countPositiveCurrent = countPositive(newQuestionsarray)
+        let feedbackMessage = getFeedback(countPositiveCurrent, countPositivePrevious);
+        if (!feedbackMessage) {
+            feedbackMessage = "Feedback is niet beschikbaar.";
+        }
+
         let lastbingokaart;
-        // if(!todayBehandelingData.bingokaart){
-        //     const lastBingoCardurl = `https://fdnd-agency.directus.app/items/behandeling?filter[bingokaart][_nnull]=true&limit=1&sort=-datum`;
-        //     const lastBingoCardFetch =  await fetch(lastBingoCardurl)
-        //     const lastBingoCardFetchJson = await lastBingoCardFetch.json()
-        //     const lastBingoCardFetchData = lastBingoCardFetchJson.data;
-        //     lastbingokaart = lastBingoCardFetchData[0].bingokaart;
-        // }
-        // else{
-        //     lastbingokaart = todayBehandelingData[0].bingokaart;
-        // }
+        if(!todayBehandelingData.bingokaart){
+            const lastBingoCardurl = `https://fdnd-agency.directus.app/items/behandeling?filter[bingokaart][_nnull]=true&limit=1&sort=-datum`;
+            const lastBingoCardFetch =  await fetch(lastBingoCardurl)
+            const lastBingoCardFetchJson = await lastBingoCardFetch.json()
+            const lastBingoCardFetchData = lastBingoCardFetchJson.data;
+            lastbingokaart = lastBingoCardFetchData[0].bingokaart;
+        }
+        else{
+            lastbingokaart = todayBehandelingData[0].bingokaart;
+        }
 
         // als er vandaag geen behandeling was, posten, anders pas de vragenlijst aan van de meest recente behandeling
         if(!todayBehandelingReponseData.data || todayBehandelingData.length == 0){
@@ -180,7 +242,7 @@ export const actions = {
         }
         return {
             success: true,
-            message: "Yay!!",
+            message: feedbackMessage,
         };
     }
 };
