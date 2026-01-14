@@ -7,9 +7,11 @@
     <ul>
         <SidebarLink name="Home" src="/" Svg={HomeIcon}/>
         <SidebarLink name="Bingokaart" src="/bingokaart" Svg={BingoIcon}/>
-        <SidebarLink name="Behandelingen" src="/behandelingen" Svg={LinechartIcon}/>
-        <SidebarLink name="Scans" src="/scans" Svg={BrainsIcon}/>
         <SidebarLink name="Vragenlijst" src="/vragenlijst" Svg={OrderedListIcon}/>
+        <SidebarLink name="Scans" src="/scans" Svg={BrainsIcon}/>
+        <SidebarLink name="Behandelingen" src="/behandelingen" Svg={LinechartIcon}/>
+
+
     </ul>
 </nav>
 
