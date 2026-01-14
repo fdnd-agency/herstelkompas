@@ -45,5 +45,7 @@
         container-name: question;
         container-type: inline-size; 
         position: relative;
+        overflow: hidden;
+        padding-bottom: 100px;
     }
 </style>

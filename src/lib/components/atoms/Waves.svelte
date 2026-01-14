@@ -25,12 +25,10 @@
 <style>
 	
 	.waves-container {
-		position: absolute;
-		width: 100vw;
-		max-width: 100%;
-		height: 100%;
 		overflow: hidden;
 		z-index: -1;
+		position: absolute;
+		inset: 0;
 	}
 	.waves-container.animate {
 		animation: zindexchange 3.5s linear;

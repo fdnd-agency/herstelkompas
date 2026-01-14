@@ -58,8 +58,8 @@
     #form-container {
         display: flex;
         justify-content: center;
-        overflow-y: auto;
-        height: 80vh;
+        /* overflow-y: auto;
+        height: 80vh; */
     }
     @container main-container (width > 600px) {
         form {
@@ -80,6 +80,13 @@
         width: fit-content;
         height: fit-content;
         margin: 0 auto;
-        margin-top: 3rem;
+        margin-top: 1.5rem;
     }
+    /* @media (min-width: 850px){
+        #form-container{
+            overflow-y: scroll;
+            height: calc(100vh - 215px);
+        }
+
+    } */
 </style>

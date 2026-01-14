@@ -52,6 +52,8 @@ main{
         padding: 20px 20px 20px 46px;
 		display: inline-block;
 		vertical-align: top;
+        overflow-y: auto;
+        max-height: calc(100vh - 35px);
 	}
 }
 #container{

@@ -23,7 +23,7 @@
         max-width: 400px;
         background-color: lightgray;
         background-color: #137BC0;
-        height: 100vh;
+        height: 100dvh;
         display: flex;
         flex-direction: column;
         translate: -100% 0;
@@ -32,7 +32,7 @@
         top: 0;
         left: -1px; /* subpixel bug */
         grid-row: 1 / -1;
-        z-index: 2;
+        z-index: 3;
     }
     aside .hamburger-open{
         transition: 0.3s ease;
@@ -81,7 +81,7 @@
     @media (max-width: 850px){
         aside:target{
             translate: 0 0;
-            position: absolute;
+            position: fixed;
         }
     }
 
