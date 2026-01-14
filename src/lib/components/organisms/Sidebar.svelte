@@ -23,7 +23,7 @@
         max-width: 400px;
         background-color: lightgray;
         background-color: #137BC0;
-        height: 100vh;
+        height: 100dvh;
         display: flex;
         flex-direction: column;
         translate: -100% 0;

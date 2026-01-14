@@ -25,10 +25,10 @@
 <style>
 	
 	.waves-container {
+		overflow: hidden;
+		z-index: -1;
 		position: absolute;
-		width: 100vw;
-		max-width: 100%;
-		height: 100%;
+		inset: 0;
 		overflow: hidden;
 		z-index: -1;
 	}

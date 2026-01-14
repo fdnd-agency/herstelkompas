@@ -19,7 +19,7 @@ header .hamburger-close{
     box-sizing: content-box;
     text-decoration: none;
     padding: 10px;
-    margin-top: 20px;
+    padding-top: 30px;
     margin-left: 20px;
     font-weight: bold;
     line-height: 1rem;

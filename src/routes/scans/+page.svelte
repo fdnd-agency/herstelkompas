@@ -58,8 +58,8 @@
     #form-container {
         display: flex;
         justify-content: center;
-        overflow-y: auto;
-        height: 80vh;
+        /* overflow-y: auto;
+        height: 80vh; */
     }
     @container main-container (width > 600px) {
         form {
