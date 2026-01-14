@@ -206,3 +206,23 @@ button.btn-prev:hover svg>path {
 }
 
 
+
+.btn-primary {
+    text-decoration: none;
+    width: fit-content;
+    transition: .3s ease;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    border: 2px solid var(--primary-color-dark);
+    background-color: var(--primary-color-dark);
+    color: #e8ebf2;
+    display: block;
+    margin-top: 1rem;
+}
+.btn-primary:hover,.btn-primary:focus-visible {
+    background-color: #e8ebf2;
+    color: var(--primary-color-dark);
+}
