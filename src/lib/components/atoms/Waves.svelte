@@ -29,8 +29,6 @@
 		z-index: -1;
 		position: absolute;
 		inset: 0;
-		overflow: hidden;
-		z-index: -1;
 	}
 	.waves-container.animate {
 		animation: zindexchange 3.5s linear;
