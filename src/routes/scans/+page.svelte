@@ -80,7 +80,7 @@
         width: fit-content;
         height: fit-content;
         margin: 0 auto;
-        margin-top: 3rem;
+        margin-top: 1.5rem;
     }
     /* @media (min-width: 850px){
         #form-container{
