@@ -11,14 +11,22 @@
     let prizes = data.prizes;
 
     let showAlert = $state(false);
+    let success = $state(false)
 
     let count =
         form?.count ??
         bingokaart.filter(item => item.checked).length;
+  
+    if(form?.success) {
+        success = true
+        setTimeout(() => {
+            success = false
+        }, 1000)
+    }
 </script>
 
 <h1>Bingokaart pagina</h1>
 {#if form?.showPopup}
   <BingoAlert {count} {prizes} />
 {/if}
-<Bingocard {bingokaart}/>
+<Bingocard {bingokaart} {success} />
