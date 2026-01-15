@@ -67,6 +67,42 @@ Commits moeten altijd naar het issue verwijzen.
 
 We werken enkel in featurebranches en maken een pull request naar de dev branch. Als we genoeg user stories hebben kunnen verwerkenm gaan we samen de website intensief testen zodat we een goede pull request kunnen opstellen naar de main branch
 
+
+### Pull Requests
+
+Maak voor elke wijziging een Pull Request vanuit de issue-branch.
+
+**Vereisten:**
+- Gebruik het vaste PR-template
+- Koppel minimaal één issue (`Resolves #nummer`)
+- PR wordt pas gemerged na review
+
+**PR-template:**
+```
+## What does this change?
+
+Resolves issue #xxxxx
+
+[livesite](https://livesite.com)
+
+## How Has This Been Tested?
+
+* [ ] User test
+* [ ] Accessibility test
+* [ ] Performance test
+* [ ] Responsive Design test
+* [ ] Device test
+* [ ] Browser test
+
+## Images
+
+## How to review
+```
+**Reviewregels:**
+- Minimaal één reviewer
+- Geen directe merge door de auteur
+- Feedback moet verwerkt zijn vóór merge
+
 ## 📌 Team Canvas
 
 <img width="1765" height="1232" alt="Screenshot (568)" src="https://github.com/user-attachments/assets/e0053788-acee-462e-8010-f8413cce288a" />
