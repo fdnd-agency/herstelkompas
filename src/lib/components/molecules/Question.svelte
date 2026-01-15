@@ -1,17 +1,17 @@
 
 <script>
-    let { vraag, i, length, agreementsScales } = $props();
+    let { question, i, length, agreementsScales } = $props();
     import { onMount } from "svelte";
     let count = $state(1);
     let jsEnabled = $state(false);
-    console.log(vraag + " current")
+
     //When page is loaded or hard refreshed
     
 </script>
 
 
 <fieldset class={i == 0 ? "animation--slide-in" : ""}>
-    <legend>Vraag {i + 1} van {length}:<span>{vraag.vraag}</span></legend>
+    <legend>Vraag {i + 1} van {length}:<span>{question.vraag}</span></legend>
     <div class="input-wrapper">
         <label class="visually-hidden" for="q-{i + 1}">Kies de mate van instemming.</label>
         <input type="range" name="q-{i + 1}" id="q-{i + 1}" step=10/>
@@ -37,7 +37,7 @@
     legend {
         font-weight: 700;
         font-size: var(--text-size-xl);
-        color: var(--color-neutral);
+        color: var(--primary-color-dark);
         max-width: 48rem;
         display: flex;
         gap: .5rem;
@@ -62,20 +62,20 @@
         grid-row: 2;
     }
     .input-wrapper div::after{
-        color: var(--color-neutral);
+        color: var(--primary-color-dark);
         font-weight: bold;
         content: attr(data-content);
     }
     input[type="range"]{
         grid-row: 1;
         grid-column: 1 / 6;
-        accent-color: var(--color-neutral);
+        accent-color: var(--primary-color-dark);
     }
     input[type="range"]:focus{
         accent-color: var(--color-green-accent);
     }
     input[type="range"]:focus-visible{
-        outline: 3px dashed var(--color-neutral);
+        outline: 3px dashed var(--primary-color-dark);
         outline-offset: 2px;
         outline-width: medium;
     }

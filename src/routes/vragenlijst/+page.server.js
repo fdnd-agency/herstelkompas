@@ -14,41 +14,41 @@ const token = await client.login({
 export async function load({ cookies }){
     const vragenReponse = await fetch('https://fdnd-agency.directus.app/items/vraag') // meest recent
     const vragenReponseData = await vragenReponse.json()
-    let vragen = vragenReponseData.data
+    let questions = vragenReponseData.data
     let agreementsScales = [
         { text: "Oneens", align: "left" },
         { text: "Neutraal", align: "center" },
         { text: "Eens", align: "right" },
     ];
-    var s = vragen.sort(func);  
+    var s = questions.sort(func);  
     function func(a, b) {  
         return 0.5 - Math.random();
     }  
     const sortedQuestions = [];
     const added = {};
-    for (const vraag of vragen) {
-    switch (vraag.stofje) {
+    for (const question of questions) {
+    switch (question.stofje) {
         case '1':
         if (!added['1']) {
-            sortedQuestions.push(vraag);
+            sortedQuestions.push(question);
             added['1'] = true;
         }
         break;
         case '2':
         if (!added['2']) {
-            sortedQuestions.push(vraag);
+            sortedQuestions.push(question);
             added['2'] = true;
         }
         break;
         case '3':
         if (!added['3']) {
-            sortedQuestions.push(vraag);
+            sortedQuestions.push(question);
             added['3'] = true;
         }
         break;
         case '4':
         if (!added['4']) {
-            sortedQuestions.push(vraag);
+            sortedQuestions.push(question);
             added['4'] = true;
         }
         break;
@@ -64,11 +64,12 @@ export async function load({ cookies }){
     sortedQuestions.sort((q1, q2) => {
     return q1.stofje - q2.stofje;
     });
+    console.log(sortedQuestions)
     cookies.set('sortedQuestions', JSON.stringify(sortedQuestions), {
         path: '/',
         httpOnly: true
     });
-    return { vragen: sortedQuestions, agreementsScales };
+    return { questions: sortedQuestions, agreementsScales };
 }
 
 
@@ -76,11 +77,11 @@ export const actions = {
     default: async ({ request, cookies  }) => {
         // Maak een nieuw array aan voor een nieuwe antwoorden op de vragenlijst.
         let newQuestionsarray = [];
-        const vragen = JSON.parse(cookies.get('sortedQuestions') || '[]');
+        const questions = JSON.parse(cookies.get('sortedQuestions') || '[]');
         // haal alle gecheckte veldfen op van het formulier
         const data = await request.formData();
-        let vragenAmount = vragen.length;
-        vragen.forEach( (vraag, i) =>{
+        let questionsAmount = questions.length;
+        questions.forEach( (question, i) =>{
             let curQuestionValue = data.getAll('q-'+ (i + 1));
             let relativeValue;
             switch(true){
@@ -97,7 +98,7 @@ export const actions = {
                     relativeValue = "Neutraal"
                     break;
             }
-            newQuestionsarray.push({vraag: vraag.vraag, antwoord: relativeValue})
+            newQuestionsarray.push({vraag: question.vraag, antwoord: relativeValue})
         })
             const today = new Date();
 
@@ -128,12 +129,12 @@ export const actions = {
         const todayBehandelingReponseData = await todayBehandeling.json()
         let todayBehandelingData = todayBehandelingReponseData.data;
 
-        function countPositive(vragenlijst = []) {
+        function countPositive(questionlist = []) {
             const weights = {
                 "Eens": 1,
                 "Neutraal": 0.5
             };
-            return vragenlijst.reduce(
+            return questionlist.reduce(
                 (sum, v) => sum + (weights[v.antwoord] || 0),
                 0
             );

@@ -1,7 +1,7 @@
 <script>
-  import TreatmentBingo from '$lib/components/Treatmentbingo.svelte';
-  import Questionlist from '$lib/components/Questionlist.svelte';
-  import ScansDetail from '$lib/components/ScansDetail.svelte';
+  import { TreatmentBingo } from '$lib';
+  import { Questionlist } from '$lib';
+  import { ScansDetail } from '$lib';
   export let data;
 </script>
 
