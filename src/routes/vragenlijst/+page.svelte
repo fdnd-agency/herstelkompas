@@ -4,9 +4,9 @@
 <script>
     let { data, form } = $props();
     import { onMount } from 'svelte';
-    import { Vragenlijst } from '$lib';
+    import { QuestionListClient } from '$lib';
     let count = $state(1);
-    let vragenlijst = data.vragen;
+    let questionlist = data.questions;
     let agreementsScales = data.agreementsScales;
     let jsEnabled = $state(false);
 </script>
@@ -18,7 +18,7 @@
         <p class="visually-hidden">Kies bij elke vraag een waarde tussen de 0 en de 100. Des te hoger de waarde, des te meer u instemt met de vraag</p>
     </header>
     <div id="form-container">
-        <Vragenlijst {agreementsScales} {vragenlijst}/>
+        <QuestionListClient {agreementsScales} {questionlist}/>
     </div>
 </section>
 

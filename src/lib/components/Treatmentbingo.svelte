@@ -26,7 +26,6 @@
     activeTab = tabs[index].id;
     tabButtons[index]?.focus();
   }
-
   function onTabKeydown(e, index) {
     const last = tabs.length - 1;
 
@@ -54,6 +53,7 @@
         break;
     }
   }
+
 </script>
 
 <section class="behandeling">
@@ -129,13 +129,17 @@
 
     <header class="bingokaart-header">
       <h2 class="bingokaart-title">{formattedDate}</h2>
-      <p class="bingokaart-subtitle">
-        Hieronder zie je jouw antwoorden op de vragenlijst van {formattedDate}.
-      </p>
+      
+      {#if activiteit.vragenlijst}
+        <p class="bingokaart-subtitle">Hieronder zie je jouw antwoorden op de vragenlijst van {formattedDate}.</p>
+      {:else}
+        <p class="bingokaart-subtitle">Op {formattedDate} is er nog geen vragenlijst ingevuld.</p>
+        <a href="/vragenlijst" class="btn-primary">Vul de vragenlijst in</a>
+      {/if}
     </header>
-
-    <Questionlist vragenlijst={activiteit.vragenlijst ?? []} />
-
+    {#if activiteit.vragenlijst}
+      <Questionlist vragenlijst={activiteit.vragenlijst ?? []} />
+    {/if}
   </section>
   <!--  SCANS PANEL -->
     <section

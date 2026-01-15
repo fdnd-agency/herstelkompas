@@ -92,7 +92,7 @@ button.btn-nav {
     margin-left: 1rem;
     font-size: 18px;
     font-weight: 700;
-    border: 2px solid #54689c;
+    border: 2px solid var(--primary-color-dark);
     display: flex;
     gap: 5px;
     align-items: center
@@ -100,7 +100,7 @@ button.btn-nav {
 
 button.btn-prev {
     background-color: #e8ebf2;
-    color: #54689c;
+    color: var(--primary-color-dark);
     display: none
 }
 
@@ -115,13 +115,13 @@ button.btn-prev span {
 }
 
 button.btn-prev:hover,button.btn-next {
-    background-color: var(--color-neutral);
+    background-color: var(--primary-color-dark);
     color: var(--color-neutral-lighter)
 }
 
 button.btn-next:hover {
     background-color: var(--color-neutral-lighter);
-    color: var(--color-neutral)
+    color: var(--primary-color-dark);
 }
 
 h1,.subtitle {
@@ -134,13 +134,13 @@ button.btn-next svg>path {
 }
 
 button.btn-next:hover svg>path {
-    stroke: var(--color-neutral);
-    fill: var(--color-neutral)
+    stroke: var(--primary-color-dark);
+    fill: var(--primary-color-dark);
 }
 
 button.btn-prev svg>path {
-    stroke: var(--color-neutral);
-    fill: var(--color-neutral)
+    stroke:var(--primary-color-dark);
+    fill: var(--primary-color-dark);
 }
 
 button.btn-prev:hover svg>path {

@@ -1,7 +1,7 @@
 <script>
-    let { vragenlijst, agreementsScales } = $props();
+    let { questionlist, agreementsScales } = $props();
     import { onMount } from "svelte";
-    import { Vraag } from "$lib";
+    import { Question } from "$lib";
     let count = $state(1);
     let jsEnabled = $state(false);
     onMount(() => {
@@ -206,8 +206,8 @@
 </script>
 
 <form method="POST" id="formEl">
-    {#each vragenlijst as vraag, i}
-        <Vraag {i} length={vragenlijst.length} {vraag} {agreementsScales} />
+    {#each questionlist as question, i}
+        <Question {i} length={questionlist.length} {question} {agreementsScales} />
     {/each}
 
     <div id="formControl">
@@ -242,9 +242,9 @@
     input[type="submit"] {
         cursor: pointer;
         padding: 8px 30px;
-        background-color: #54689c;
+        background-color: var(--primary-color-dark);
         color: #def0fc;
-        border: 2px solid #54689c;
+        border: 2px solid var(--primary-color-dark);;
         border-radius: 10px;
         margin-left: 1rem;
         font-size: 18px;
@@ -253,6 +253,6 @@
     input[type="submit"]:hover,
     input[type="submit"]:focus-visible {
         background-color: #e8ebf2;
-        color: var(--color-neutral);
+        color: var(--primary-color-dark);
     }
 </style>

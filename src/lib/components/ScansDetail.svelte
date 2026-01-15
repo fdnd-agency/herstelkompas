@@ -6,13 +6,13 @@
 </script>
     <header class="bingokaart-header">
       <h2 class="bingokaart-title">{formattedDate}</h2>
-      <p class="bingokaart-subtitle">
-            {#if !scansInfo || (!scansInfo.scan_before && !scansInfo.scan_after)}
-            Tijdens de behandeling van {formattedDate} zijn er geen scans gemaakt
-            {:else}
-            Jouw scans voor en na de behandeling op {formattedDate}
-            {/if}
-      </p>
+      
+      {#if !scansInfo || (!scansInfo.scan_before && !scansInfo.scan_after)}
+        <p class="bingokaart-subtitle">Tijdens de behandeling van {formattedDate} zijn er nog geen scans gemaakt</p>
+        <a href="/scans" class="btn-primary">Update de scans voor deze behandeling</a>
+      {:else}
+        <p class="bingokaart-subtitle">Jouw scans voor en na de behandeling op {formattedDate}</p>
+      {/if}
     </header>
 
 
@@ -52,7 +52,7 @@
     p{
         font-size: 16px;
         color: var(--primary-color-dark);
-        font-weight: 600;
+        font-weight: 400;
         width: 100%;
     }
     @container main-container (width > 550px){
