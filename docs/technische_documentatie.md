@@ -86,7 +86,7 @@ Het project volgt de **FDND code conventies**:
 
 Het volledige datamodel is vastgelegd in een afbeelding:
 
-**Zie:** [datamodel.png](https://github.com/fdnd-agency/herstelkompas/blob/dev/docs/datamodel.png)
+**Zie:** <a href="https://github.com/fdnd-agency/herstelkompas/blob/dev/docs/datamodel.png" target="_blank">datamodel.png</a>
 
 Het datamodel wordt beheerd in **Directus** en bevat onder andere:
 - Relaties tussen behandelingen
