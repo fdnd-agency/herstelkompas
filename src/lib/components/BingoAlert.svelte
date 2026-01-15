@@ -10,7 +10,6 @@
 
     <p>Je wint een <strong>{prize.titel}</strong>!</p>
 
-    <!-- form method="dialog" werkt ook zonder JS -->
     <form method="dialog">
         <button type="submit">
             <p>Sluiten</p>

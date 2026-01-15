@@ -25,8 +25,31 @@
     }
 </script>
 
-<h1>Bingokaart pagina</h1>
+<header class="page-header">
+    <h1 id="behandelingstitel">Bingokaart</h1>
+    <p class="subtitle">Jouw voortgang</p>
+</header>
+
 {#if form?.showPopup}
   <BingoAlert {count} {prizes} />
 {/if}
 <Bingocard {bingokaart} {success} />
+
+<style>
+  .page-header {
+    margin-bottom: 3em;
+
+    h1 {
+      color: var(--primary-color-dark);
+      font-family: var(--font-semibold);
+      font-size: var(--text-size-xl);
+      margin: 0 0 0.25rem 0;
+    }
+
+    .subtitle {
+      color: var(--primary-color-dark);
+      font-size: var(--text-size-sm);
+      margin: 0;
+    }
+  }
+</style>

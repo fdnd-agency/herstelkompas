@@ -8,7 +8,8 @@
     }
 </script>
 
-<h2>Ik ben een bingokaart</h2>
+
+
 <form onsubmit={handleSubmit} class="bingocard" method="POST">
     {#each bingokaart as square}
         <label class="bingo-square">
@@ -34,35 +35,50 @@
     }
 
     .bingocard {
-        margin: 0 auto;
-        display: grid;
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: repeat(3, 1fr);
+        position: relative;
+        margin-inline: auto;
 
-        font-size: clamp(1.125rem, 2.25vw, 18px);
+        display: grid;
+        place-items: stretch;
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(3, 1fr);
 
         width: 100%;
-        max-width: 650px;
+        max-width: 600px;
 
         gap: 1rem;
+        aspect-ratio: 1.1 / 1;
 
-        @media (max-width: 600px) {
+
+        @media (max-width: 550px) {
             gap: 0.5rem;
             font-size: clamp(12px, 4vw, 16px);
+        }
+
+        @media (min-width: 550px) {
+            max-width: 500px;
+        }
+
+        @media (min-width: 850px) {
+            max-width: 600px;
         }
     }
 
     .bingo-square {
         position: relative;
-        aspect-ratio: 1.3 / 1;
+        /* aspect-ratio: 1.3 / 1; */
+        height: 100%;
+        padding: .5rem;
+
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        border-radius: 0.8125rem;
-        background-color: #137BC0;
-        color: white;
+        border-radius: 5px;
+        background-color: var(--primary-color-light);
+        color: var(--color-white);
 
         user-select: none;
         cursor: pointer;
@@ -70,7 +86,7 @@
         transition: transform .2s cubic-bezier(.2,.9,.2,1);
 
         &:has(:checked) {
-            background-color: #0C8825;
+            background-color: var(--color-green-accent);
         }
     }
 
@@ -81,10 +97,15 @@
 
     .bingo-square input {
         appearance: none;
-        border: solid rgb(255, 255, 255) 1.5px;
+        box-sizing: border-box;
+
+        width: 1rem;
+        height: 1rem;
         aspect-ratio: 1;
-        width: 1em;
-        border-radius: 2rem;
+
+        border: 1.5px solid white;
+        border-radius: 50%;
+
         position: absolute;
         top: 0;
         left: 0;
@@ -92,6 +113,8 @@
 
         @media (max-width: 600px) {
             margin: 0.3rem;
+            width: .7rem;
+            height: .7rem;
         }
     }
 
@@ -100,12 +123,13 @@
         max-height: 100%;
         text-align: center;
             
-        padding: 0.5rem;
+        /* margin-top: .8rem; */
+        /* padding: 0.5rem; */
         overflow: hidden;
 
-        @media (max-width: 600px) {
-            padding: 0.3rem;
-        }
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        hyphens: auto;
     }
 
     .bingo-square input:checked {
@@ -138,9 +162,9 @@
         align-items: center;
         justify-content: center;
         
-        color: #54689C;
+        color: var(--primary-color-dark);
         font-weight: 600;
-        background-color: #DEF0FC;
+        background-color: var(--color-blue-tint);
         border: none;
         border-radius: .6rem;
 
