@@ -1,5 +1,5 @@
 <script>
-  import DetailScanToggle from '$lib/components/DetailScanToggle.svelte';
+  import { DetailScanToggle } from '$lib';
   import { Chevron } from '$lib/icons';
   const { scans, shortDate, formattedDate } = $props();
   let scansInfo = scans?.length > 0 ? scans[scans.length - 1] : null;

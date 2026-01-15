@@ -1,6 +1,5 @@
 <script>
 	import { onNavigate } from '$app/navigation';
-	import favicon from '$lib/assets/favicon.svg';
 	import { Bingocard, Sidebar, Header } from '$lib'
 	import { page } from '$app/state';
 	import { Waves } from '$lib';
@@ -16,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/img/favicon.ico"/>
 	<link rel="stylesheet" href="/css/stylesheet.css" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
