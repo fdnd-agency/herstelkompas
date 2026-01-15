@@ -34,6 +34,35 @@ We werken deze sprints volgens de Git Flow workflow strategie:
 
 <img width="559" height="648" alt="492315217-0568b305-f1d8-4c78-962b-0f9d34342331" src="https://github.com/user-attachments/assets/ed577032-d00c-4be2-ac94-d2a7072f1a09" />
 
+## Branches & Commits
+
+### Branches
+Maak branches altijd automatischvanuit een GitHub Issue of handmatig op de juiste manier
+
+**Formaat:**
+```
+[nummer]-[korte-beschrijving]
+```
+**Voorbeeld:**
+```
+12-fix-image-upload
+```
+---
+
+### Commits
+Commits moeten altijd naar het issue verwijzen.
+
+**Formaat:**
+```
+#[nummer] beschrijving van de wijziging
+```
+
+**Voorbeelden:**
+```
+#12 Fixed image upload
+#12 Fixed image upload, also #22 added support for multiple formats
+```
+
 ## Samenwerking met GIT.
 
 We werken enkel in featurebranches en maken een pull request naar de dev branch. Als we genoeg user stories hebben kunnen verwerkenm gaan we samen de website intensief testen zodat we een goede pull request kunnen opstellen naar de main branch
