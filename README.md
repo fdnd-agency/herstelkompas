@@ -1,118 +1,97 @@
-# Herstelkompas
+# Herstelkompas (Zelfzorg aan zee)
 
-## Dev link
+[🇬🇧 Read this in English](README.md)
 
-https://herstelkompas.netlify.app/
+## Over het project
+**Herstelkompas (Zelfzorg aan zee)** is een online platform voor cliënten met **long COVID** en andere omstandigheden, zoals **burn-out** en **letselschade**. Het platform helpt cliënten om hun hersteltraject overzichtelijk te volgen, met ondersteuning rondom (begeleide) activiteiten zoals **surfen**.
 
-## About this project
+Surfen kan bijdragen aan herstel doordat het **fysieke activiteit** (endorfines, minder stress), **natuurbeleving** (water, zonlicht) en een **mentale reset** (focus op het nu, doorbreken van routines) combineert. In sommige trajecten wordt dit ingezet als **surfterapie**, waarbij professionele begeleiding belangrijk is.
 
-**Herstelkompas** is a digital web tool developed using the **Svelte** framework.  
-The tool supports Long COVID patients and their healthcare providers in monitoring recovery in a visual, accessible, and personalized way. It combines design, data, and usability to provide clear recovery insights and encourage progress.
+## Wat hebben we gebouwd?
+Een cliëntomgeving waarin gebruikers:
+- **Behandelingen** kunnen inzien
+- **Scans / documenten** kunnen toevoegen
+- Een **bingokaart** kunnen invullen als motivatietool (voortgang bijhouden en afronden stimuleren)
 
----
+## Screenshots
 
-## Client
+### Client → Behandelingen → Bingokaart
+<img width="716" height="322" alt="Bingokaart" src="https://github.com/user-attachments/assets/876379f4-0bdd-4f92-a453-77435a75776d" />
 
-**Zelfzorg aan Zee**
+### Client → Behandelingen → Vragenlijst (FAQ-stijl)
+<img width="754" height="274" alt="Vragenlijst" src="https://github.com/user-attachments/assets/7083f7b3-01c3-4ee5-847c-92a3575ad1f3" />
 
-Zelfzorg aan Zee combines physical therapy, insightful exercises, and the power of water (Blue Mind Theory) to promote recovery. The program supports people with brain injuries, Long COVID, and burnout in improving both cognitive and physical functions.  
+## Ontwerpkeuzes & inspiratie
+- **Thema:** surfen, zee, rust
+- **Kleuren:** blauw en wit (aansluitend bij water/vertrouwen)
+- **Layout:** onderdelen zijn rustig en scanbaar opgezet in een **FAQ-achtige stijl**
+- **Bingokaart-overzicht:** links gecentreerd om de FAQ-layout consistent te houden
 
-A medically specialized rehabilitation team collaborates with experienced patient advisors to guide participants until they can meaningfully contribute to society through work, volunteering, or achieving personal goals.  
-The treatment program is only complete when the participant is satisfied with the outcome.
+## Tech stack
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Directus](https://img.shields.io/badge/directus-%2364f.svg?style=for-the-badge&logo=directus&logoColor=white)
+![SvelteKit](https://img.shields.io/badge/sveltekit-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white)
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
----
+## Team & opdracht
+Dit platform is ontwikkeld als afstudeerproject door FDND-studenten:
+- **Kerem Tutucu**
+- **Dylan [Achternaam]** *(TODO)*
+- **Ties [Achternaam]** *(TODO)*
 
-## Design Challenge
+Begeleiding: **Joost [Achternaam]** *(TODO)*  
+Opdrachtgevers: **Rosalie Denneman** en **[Naam]** *(TODO)*
 
-Design an **intuitive and user-friendly web tool** to help Long COVID patients and their healthcare providers track recovery. The tool should:
+## Installatie & runnen
 
-* Be visually appealing and easy to navigate
-* Display reliable and insightful recovery data
-* Offer personalized recommendations based on individual recovery trajectories
+### Vereisten
+- Node.js (LTS aangeraden)
+- Toegang tot een Directus instance (URL + credentials/token)
 
----
-
-## Team & Roles
-
-The project team consists of **Ties**, **Kerem**, and **Dylan**.  
-Each member developed their own **design concept**, and the team decided to move forward with **Ties' design**, as it best aligned with the project goals and target audience.  
-
-All team members collaborate on the **technical implementation** of the web tool, contributing to front-end development and optimizing the user experience.
-
----
-
-## Technical Stack
-
-* **Framework:** Svelte
-* **Styling:** CSS (mobile-first, responsive design)
-* **Tools:** GitHub, Figma, VS Code
-* **Goal:** Accessible and scalable web tool for recovery monitoring
-
----
-
-## Design Choices
-
-We tried to match the colors from the “Zelfzorg aan Zee” website as closely as possible. However, the original yellow did not provide enough contrast with white text, so we replaced it with green in our design (adjustable as needed).  
-
-We used rounded corners throughout the website for a friendly and approachable look, reflecting the waves of the sea.  
-
-The left sidebar enables easy navigation between the Home, Bingokaart, Behandelingen, Scans, and Vragenlijst pages. On desktops, the sidebar is always visible; on tablets and mobile, it turns into a hamburger menu.  
-<img width="500" alt="Sidebar desktop" src="https://github.com/user-attachments/assets/c9699568-56c4-4d68-8be3-13389e8aaef9" />
-<img width="300" alt="Sidebar tablet" src="https://github.com/user-attachments/assets/e556a366-4c7b-464d-97c4-df358fbbb9cc" />
-<img width="200" height="878" alt="Sidebar mobile" src="https://github.com/user-attachments/assets/abcaa791-995e-4f1d-a479-5106207f51c1" />
-
-The **Bingokaart page** features an easy-to-use bingo card. Each square has a small circle in the top-left corner that fills when checked, and the square changes color (currently green) when completed.  
-
-The **Behandelingen page** displays all treatments as stacked bars, each showing a description and date. An arrow on each bar indicates that the user can click for more information.  
-<img width="500" alt="Behandelingen overview" src="https://github.com/user-attachments/assets/27e91ad5-8e74-4944-a814-462e64b2d1eb" />
-<img width="300" alt="Behandelingen overview smaller" src="https://github.com/user-attachments/assets/c611a458-b6b9-417e-8e5b-3aaabd343f4a" />
-<img width="200" alt="Behandelingen overview mobile" src="https://github.com/user-attachments/assets/f3735f72-8497-4572-b04e-263a7d34da06" />
-
-The **Treatment detail page** shows the status of the bingo card, scans, and vragenlijst for that date.  
-<img width="500" alt="Treatment detail desktop" src="https://github.com/user-attachments/assets/e97ec318-299f-4890-bfd8-ca517d69375d" />
-<img width="300" alt="Treatment detail tablet" src="https://github.com/user-attachments/assets/b6d5e66c-666b-4600-804c-ca753c0b3b42" />
-<img width="200" alt="Treatment detail mobile" src="https://github.com/user-attachments/assets/2170c6e5-965c-403f-b6be-2e74c783d626" />
-
-A save button below the bingo card shows loading and success states when saving.  
-<img width="2356" height="930" alt="Save button" src="https://github.com/user-attachments/assets/369729f7-e37c-4d07-ab6c-ba153cf73a7b" />
-
----
-
-## Functionality Overview
-
-### Libraries
-
-#### SvelteKit
-
-SvelteKit is a modern framework built on Svelte that simplifies web development. It handles routing, server-side rendering (SSR), data fetching, and build optimization. Its compile-time approach produces smaller, faster code compared to frameworks like React or Vue, making it suitable for both small and large applications.
-
-#### @directus/sdk
-
-`@directus/sdk` provides an easy interface to interact with the Directus API and can handle authentication for restricted actions.
-
-### Components
-
-#### Sidebar
-
-Contains links to all pages with simple icons and doubles as a mobile menu. On screens ≤850px, it can be toggled open and closed.
-
-#### Bingo Card
-
-A dynamic component allowing users to check off goals. Each treatment saves its bingo card status; new entries are created if no treatment exists for the current day.
-
-#### Treatments Page + Detail [TBD]
-
-Displays an overview of all treatments. Users can view the bingo card, questionnaire, and scans for each treatment on a dedicated detail page.
-
----
-
-## Installation & Contribution
-
-To contribute:
-
-1. Clone the repository via the green **`Code`** button: [Herstelkompas GitHub](https://github.com/fdnd-agency/herstelkompas)
-2. Open the project in your preferred editor
-3. Install dependencies:
-
+### Installeren
 ```bash
 npm install
+
+Development server
+
+npm run dev
+
+Build (production)
+
+npm run build
+npm run preview
+
+Environment variables
+
+Maak een .env bestand aan in de root van het project:
+
+PUBLIC_DIRECTUS_URL=
+DIRECTUS_TOKEN=
+
+Code & data-verwerking (Directus)
+
+Voorbeeld (pas aan naar jullie implementatie):
+	•	Data wordt opgehaald uit Directus via de REST API (collections zoals clients, treatments, bingo_cards, uploads/scans).
+	•	Rollen/rechten bepalen welke data een cliënt ziet.
+	•	Uploads worden gekoppeld aan een cliënt en zijn terug te vinden onder Scans.
+	•	Bingokaart-items slaan status op (bijv. done, date, notes) zodat voortgang zichtbaar blijft.
+
+Projectstructuur (voorbeeld)
+
+src/
+  routes/
+  lib/
+static/
+  icons/
+
+Contributing
+	1.	Maak een branch: feat/naam-van-feature
+	2.	Commit met duidelijke messages
+	3.	Open een merge request / pull request met uitleg + screenshots (indien UI)
+
+Licentie
+
+TODO – voeg hier jullie licentie toe (bijv. MIT) of laat dit weg als het intern blijft.
+
