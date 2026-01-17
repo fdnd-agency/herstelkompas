@@ -183,6 +183,10 @@
         inset: 0;
         pointer-events: none;
         z-index: 2000;
+
+        @media (prefers-reduced-motion: reduce) {
+                display: none;
+        }
     }
 
 </style>
