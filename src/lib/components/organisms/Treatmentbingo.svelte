@@ -337,10 +337,19 @@
   position: absolute;
   top: clamp(4px, 0.8vmin, 8px);
   left: clamp(4px, 0.8vmin, 8px);
-  width: clamp(8px, 1.3vmin, 12px);
-  height: clamp(8px, 1.3vmin, 12px);
-  border-radius: 50%;
+
+  width: clamp(6px, 1.1vmin, 8px);
+  height: clamp(6px, 1.1vmin, 8px);
+
+  border-radius: 20%;
   border: 1px solid var(--color-white);
+}
+
+@media (min-width: 600px) {
+  .dot {
+    width: clamp(9px, 1.3vmin, 11px);
+    height: clamp(9px, 1.3vmin, 11px);
+  }
 }
 
 .kaart-btn.checked,

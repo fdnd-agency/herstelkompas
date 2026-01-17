@@ -99,12 +99,12 @@
         appearance: none;
         box-sizing: border-box;
 
-        width: 1rem;
-        height: 1rem;
+        width: 11px;
+        height: 11px;
         aspect-ratio: 1;
 
         border: 1.5px solid white;
-        border-radius: 50%;
+        border-radius: 20%;
 
         position: absolute;
         top: 0;
@@ -113,8 +113,8 @@
 
         @media (max-width: 600px) {
             margin: 0.3rem;
-            width: .7rem;
-            height: .7rem;
+            width: .6rem;
+            height: .6rem;
         }
     }
 
