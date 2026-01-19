@@ -7,50 +7,50 @@
     <!-- Nog logo toevoegen -->
 </header>
 <style>
-@media (max-width: 850px){
-    header{
-        padding: 20px 0;
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 2;
+    @media (max-width: 850px){
+        header{
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 2;
+        }
     }
-}
 
-header .hamburger-close{
-    display: flex;
-    color: #0B4989;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 42px;
-    border-radius: 9px;
-    box-sizing: content-box;
-    text-decoration: none;
-    padding: 10px;
-    margin-left: 20px;
-    font-weight: bold;
-    line-height: 1rem;
-    gap: .35rem;
-    transition: 0.3s ease;
+    header .hamburger-close{
+        display: flex;
+        color: #0B4989;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        border-radius: 9px;
+        box-sizing: content-box;
+        text-decoration: none;
+        padding: 10px;
+        margin-left: 20px;
+        font-weight: bold;
+        line-height: 1rem;
+        gap: .35rem;
+        transition: 0.3s ease;
 
-}
+    }
     @media (min-width: 850px){
         header .hamburger-close{
             display: none !important;
         }
     }
 
-header .hamburger-close svg > *{
-    fill: #0B4989;
-    transition: 0.3s ease;
-}
-header .hamburger-close:hover, header .hamburger-close:focus{
-    background-color: #0B4989;
-    color: white;
-}
-header .hamburger-close:hover svg > *, header .hamburger-close:focus svg > *{
-    fill: white;
-}
+    header .hamburger-close svg > *{
+        fill: #0B4989;
+        transition: 0.3s ease;
+    }
+    header .hamburger-close:hover, header .hamburger-close:focus{
+        background-color: #0B4989;
+        color: white;
+    }
+    header .hamburger-close:hover svg > *, header .hamburger-close:focus svg > *{
+        fill: white;
+    }
 
 </style>

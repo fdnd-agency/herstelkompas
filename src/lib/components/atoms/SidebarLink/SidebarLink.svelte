@@ -36,7 +36,6 @@
     }
 
     li a:before {
-        /* background-color: #137BC0; */
         position: absolute;
         content: '';
         width: 15px;
@@ -49,7 +48,6 @@
     }
 
     li a:after {
-        /* background-color: #137BC0; */
         position: absolute;
         content: '';
         width: 15px;
@@ -79,14 +77,12 @@
     li.active a:before,
     li a:hover:before,
     li a:focus:before {
-        /* border-bottom-right-radius: 100%; */
         background-image: radial-gradient(farthest-side circle at 0% 0%, #0000 calc(100% - .5px), white 100%);
     }
 
     li.active a:after,
     li a:hover:after,
     li a:focus:after {
-        /* border-top-right-radius: 100%; */
         background-image: radial-gradient(farthest-side circle at 0% 100%, #0000 calc(100% - .5px), white 100%);
     }
 </style>

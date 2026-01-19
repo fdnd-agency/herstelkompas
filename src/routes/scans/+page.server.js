@@ -106,7 +106,6 @@ export const actions = {
     });
 
     const scanResult = await scanRes.json();
-    console.log('Scan created:', scanResult.data);
 
     return {
       success: true,

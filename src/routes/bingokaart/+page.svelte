@@ -1,9 +1,6 @@
 <script>
-    import { Bingocard } from '$lib';
-    import { Sidebar } from '$lib';
+    import { BingoCard, BingoAlert } from '$lib';
     import { page } from '$app/state';
-    import BingoAlert from '$lib/components/BingoAlert.svelte';
-
     let { data, form } = $props();
     let behandelingen = data.behandelingen;
     let bingokaart = data.bingokaart;
@@ -33,7 +30,7 @@
 {#if form?.showPopup}
   <BingoAlert {count} {prizes} />
 {/if}
-<Bingocard {bingokaart} {success} />
+<BingoCard {bingokaart} {success} />
 
 <style>
   .page-header {

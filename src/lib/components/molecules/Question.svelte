@@ -4,8 +4,6 @@
     import { onMount } from "svelte";
     let count = $state(1);
     let jsEnabled = $state(false);
-
-    //When page is loaded or hard refreshed
     
 </script>
 

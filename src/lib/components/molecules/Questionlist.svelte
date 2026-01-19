@@ -63,8 +63,6 @@
 .survey {
   max-width: none;
   margin: 0;
-  /* padding-left: 0.2rem;
-  padding-right: 0.2rem; */
 }
 
 
@@ -79,7 +77,6 @@
     color: var(--primary-color-dark);
     font-family: var(--font-medium);
     margin-bottom: 1rem;
-    /* padding-inline: 1.25rem; */
     text-align: left;
   }
 
@@ -113,7 +110,6 @@
   padding: 1rem;
   margin: 0 0 0.75rem;
 
-  /* Gebruik tbody zoals je eerst ul gebruikte */
   .survey-list {
     display: flex;
     flex-direction: column;
@@ -137,7 +133,6 @@
   animation: card-in 920ms var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-/* Focus voor toetsenbord */
 .survey-item:focus,
 .survey-item:focus-visible {
   outline: none;
@@ -200,7 +195,6 @@
     .survey-list {
       padding: 0;
       gap: 0.75rem;
-      /* padding-top: 3rem; */
     }
 
     /* TR wordt 2-koloms layout zoals jouw oude li-grid */
@@ -277,7 +271,6 @@
     .survey-list {
       padding: 0 0rem;
       gap: 0.75rem;
-      /* padding-top: 3rem; */
     }
 
    .survey-list tr {

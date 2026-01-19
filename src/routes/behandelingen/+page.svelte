@@ -56,7 +56,6 @@
 
 <style>
 .treatment-section {
-  /* padding: 1rem; */
   font-family: var(--font-regular);
 
   /* ===== Pagina header ===== */

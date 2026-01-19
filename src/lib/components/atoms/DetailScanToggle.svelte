@@ -23,7 +23,7 @@
 <style>
     details {
         width: fit-content;
-    min-width: 250px;
+        min-width: 250px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -34,16 +34,12 @@
         transition: 0.3s ease;
         width: 100%;
         max-width: 450px;
-
-
-  opacity: 0;
-  transform: translateY(12px) scale(0.98);
-
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
         --delay: 0s;
         @supports (animation-delay: calc(sibling-index() * 80ms)) {
             --delay: calc(sibling-index() * 160ms);
         }
-
         animation: card-in 920ms var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
     }
     @keyframes card-in {

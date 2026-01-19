@@ -1,6 +1,6 @@
 <script>
   export let activiteit;
-  export let Questionlist;
+  export let QuestionList;
   export let ScansDetail;
 
   const datum = new Date(activiteit.datum);
@@ -16,7 +16,7 @@
   });
   const tabs = [
     { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/bingo.svg' },
-    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/frame-1.svg' },
+    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/ordenedlist.svg' },
     { id: 'scans', label: 'Scans', icon: '/icons/brain.svg' }
   ];
   let activeTab = "bingokaart";
@@ -138,7 +138,7 @@
       {/if}
     </header>
     {#if activiteit.vragenlijst}
-      <Questionlist vragenlijst={activiteit.vragenlijst ?? []} />
+      <QuestionList vragenlijst={activiteit.vragenlijst ?? []} />
     {/if}
   </section>
   <!--  SCANS PANEL -->
@@ -387,8 +387,6 @@
 ========================= */
 @media (min-width: 768px) {
   .page-nav {
-
-    /* padding: 0 2rem 10px; */
 
     padding: 0 0rem 0.75rem;
 

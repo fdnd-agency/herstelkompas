@@ -1,6 +1,6 @@
 <script>
 	import { onNavigate } from '$app/navigation';
-	import { Bingocard, Sidebar, Header } from '$lib'
+	import { Sidebar, Header } from '$lib'
 	import { page } from '$app/state';
 	import { Waves } from '$lib';
 	let { children } = $props();
