@@ -233,3 +233,11 @@ button.btn-prev:hover svg>path {
     background-color: #e8ebf2;
     color: var(--primary-color-dark);
 }
+html.js aside.s-aLFk7wFB5ZhE {
+	translate: -100% 0;
+	position: fixed;
+}
+html.js aside.s-aLFk7wFB5ZhE.open {
+    translate: 0 0;
+    position: fixed;
+}

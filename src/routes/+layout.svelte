@@ -1,5 +1,5 @@
 <script>
-	import { onNavigate } from '$app/navigation';
+	import { onNavigate, afterNavigate } from '$app/navigation';
 	import { Bingocard, Sidebar, Header } from '$lib'
 	import { page } from '$app/state';
 	import { Waves } from '$lib';
@@ -10,6 +10,31 @@
 	}
 	onNavigate(() => {
 		feedbackMessage = "";
+		// document.querySelector('#nav-sidebar').classList.add('hide');
+	});
+	import { sidebarOpen } from '$lib/stores/sidebar';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		document.documentElement.classList.add('js');
+		const onHashChange = () => {
+			if (location.hash === '#nav-sidebar') {
+				sidebarOpen.set(true);
+				history.replaceState(null, '', location.pathname + location.search);
+			
+			} else {
+				sidebarOpen.set(false);
+			}
+		};
+
+		window.addEventListener('hashchange', onHashChange);
+		onHashChange();
+
+		return () => window.removeEventListener('hashchange', onHashChange);
+	});
+	afterNavigate(() => {
+		sidebarOpen.set(false);
+		console.log($sidebarOpen + "layout")
 	});
 
 </script>
