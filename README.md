@@ -56,6 +56,16 @@ Bijdragen (o.a.)
 
 ### Functionaliteitsoverzicht
 
+#### Welkompagina
+* Verwelkomingspagina
+
+#### Vragenlijst
+* Dylan
+
+#### Scans
+* Dylan
+
+
 #### Bingokaart
 * Interactieve bingokaart waarmee cliënten doelen kunnen afvinken.
 * Elk vakje heeft een kleine cirkel linksboven die vult bij selectie; het vakje verandert van kleur (nu groen) zodra het voltooid is.
