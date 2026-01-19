@@ -237,7 +237,9 @@ html.js aside.s-aLFk7wFB5ZhE {
 	translate: -100% 0;
 	position: fixed;
 }
-html.js aside.s-aLFk7wFB5ZhE.open {
-    translate: 0 0;
-    position: fixed;
+@media (max-width:850px){
+    html.js aside.s-aLFk7wFB5ZhE.open {
+        translate: 0 0;
+        position: fixed;
+    }
 }
