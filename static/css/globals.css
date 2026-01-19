@@ -167,7 +167,7 @@ button.btn-prev:hover svg>path {
     top: 0; /* Move into view when focused */
 }
 #feedback-message{
-    position: absolute;
+    position: fixed;
     border: 3px solid #fff;
     bottom: 0;
     z-index: 3;
@@ -191,12 +191,16 @@ button.btn-prev:hover svg>path {
         width: 100vw;
         top: 0;
     } */
-    @container main-container (width > 500px) {
-        width: 80%;
-        translate: -50% 0;
-        left: 50%;
-    }
+    
 }
+@media (min-width: 850px){
+        #feedback-message{
+            right: calc((100% - 350px) * 0.1);
+            left: initial;
+            width: calc((100% - 350px) * 0.8);
+        }
+        
+    }
 @keyframes test{
     from{
         opacity: 0;
