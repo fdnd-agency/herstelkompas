@@ -1,16 +1,47 @@
 <script>
 	import { onNavigate } from '$app/navigation';
 	import { Sidebar, Header } from '$lib'
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { Waves } from '$lib';
 	let { children } = $props();
 	let feedbackMessage = $state("");
+	let mQuery = $state(false);
+	onMount(() => {
+		const mediaQuery = window.matchMedia('(max-width:850px)');
+		if (mediaQuery.matches) {
+			mQuery = true;
+		}
+		else{
+			mQuery = false;
+		}
+		mediaQuery.addEventListener('change', () => {
+			if (mediaQuery.matches) {
+				mQuery = true;
+			}
+			else{
+				mQuery = false;
+			}
+		});
+	});
+	
 	if(page.form?.message){
 		feedbackMessage = page?.form?.message
 	}
 	onNavigate(() => {
 		feedbackMessage = "";
+
+		// Close popover if supported and media query matches
+		const sidebar = document.querySelector('#nav-sidebar');
+		if (mQuery && sidebar && supportsPopover) {
+			sidebar.hidePopover?.(); // safe optional chaining
+		}
 	});
+	let supportsPopover = false;
+
+	if (typeof window !== 'undefined') {
+		supportsPopover = 'popover' in HTMLElement.prototype;
+	}
 
 </script>
 
@@ -25,8 +56,8 @@
 <div id="container">
 	<Waves color1="#137BC0" color2="#DCEBF5" />
   <a href="#mainContent" class="skip-to-content">Skip to the content</a>
-    <Sidebar/>
-    <Header/>
+    <Sidebar supportsPopover={supportsPopover} mQuery={mQuery}/>
+    <Header supportsPopover={supportsPopover} mQuery={mQuery}/>
     <main id="mainContent">
 	{#if feedbackMessage != ""}
 			<div 
