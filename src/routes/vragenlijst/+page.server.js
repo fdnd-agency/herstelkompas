@@ -69,7 +69,13 @@ export async function load({ cookies }){
         path: '/',
         httpOnly: true
     });
-    return { questions: sortedQuestions, agreementsScales };
+    return { 
+        questions: sortedQuestions, 
+        agreementsScales,
+
+        title: 'Vragenlijst',
+		description: 'Vul de vragenlijst in om inzicht te krijgen in het verloop van de behandeling.'
+    };
 }
 
 

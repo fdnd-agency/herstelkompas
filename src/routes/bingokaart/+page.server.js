@@ -22,7 +22,11 @@ export async function load({}){
     const prizesData = await prizesResponse.json();
     return {
         bingokaart,
-        prizes: prizesData.data
+        prizes: prizesData.data,
+
+        // SEO data
+        title: 'Bingokaart',
+        description: 'Houd je voortgang bij met de bingokaart en vink behaalde activiteiten af.'
     };
 }
 export const actions = {

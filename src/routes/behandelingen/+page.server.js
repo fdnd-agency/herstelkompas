@@ -9,6 +9,10 @@ export async function load() {
 
 
   return {
-    behandelingen: json.data 
+    behandelingen: json.data,
+    
+    // SEO data
+    title: 'Behandelingen',
+    description: 'Bekijk een overzicht van alle behandelingen en hun bijbehorende datum.'
   };
 }

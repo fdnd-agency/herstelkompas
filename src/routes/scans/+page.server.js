@@ -7,6 +7,15 @@ const token = await client.login({
     email: DIRECTUS_EMAIL,
     password: DIRECTUS_PASSWORD
 });
+
+/* SEO data */
+export const load = async () => {
+	return {
+		title: 'Scans',
+		description: 'Upload en bekijk voor- en na-scans.'
+	};
+};
+
 export const actions = {
   default: async ({ request }) => {
     if (!token?.access_token) {
