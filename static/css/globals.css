@@ -217,3 +217,8 @@ button.btn-prev:hover svg>path {
     background-color: #e8ebf2;
     color: var(--primary-color-dark);
 }
+@media (max-width: 850px){
+    [popover]:where(:not(:popover-open)) {
+        display: none !important
+    }
+}
