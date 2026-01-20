@@ -42,19 +42,62 @@
 
 
 	// JSON-LD
-	const breadcrumbJsonLd = $derived.by(() =>
-		JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "BreadcrumbList",
-			"@id": `${page.url.href}#breadcrumb`,
-			"itemListElement": breadcrumbs.map((crumb, index) => ({
-				"@type": "ListItem",
-				"position": index + 1,
-				"name": crumb.label,
-				"item": `${page.url.origin}${crumb.href}`
-			}))
-		})
-	);
+// SEO – Structured Data (JSON-LD graph)
+	const jsonLd = $derived.by(() => ({
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "Organization",
+				"@id": `${page.url.origin}/#organization`,
+				"name": "Herstelkompas",
+				"url": page.url.origin,
+				"logo": `${page.url.origin}/img/logo.svg`,
+				"address": {
+					"@type": "PostalAddress",
+					"addressCountry": "NL"
+				}
+			},
+			{
+				"@type": "WebSite",
+				"@id": `${page.url.origin}/#website`,
+				"url": page.url.origin,
+				"name": "Herstelkompas",
+				"inLanguage": "nl-NL",
+				"publisher": {
+					"@id": `${page.url.origin}/#organization`
+				}
+			},
+			{
+				"@type": "WebPage",
+				"@id": `${page.url.href}#webpage`,
+				"url": page.url.href,
+				"name": title,
+				"description": description,
+				"inLanguage": "nl-NL",
+				"isPartOf": {
+					"@id": `${page.url.origin}/#website`
+				},
+				"breadcrumb": breadcrumbs.length
+					? { "@id": `${page.url.href}#breadcrumb` }
+					: undefined
+			},
+			...(breadcrumbs.length
+				? [
+						{
+							"@type": "BreadcrumbList",
+							"@id": `${page.url.href}#breadcrumb`,
+							"itemListElement": breadcrumbs.map((crumb, index) => ({
+								"@type": "ListItem",
+								"position": index + 1,
+								"name": crumb.label,
+								"item": `${page.url.origin}${crumb.href}`
+							}))
+						}
+				]
+				: [])
+		]
+	}));
+
 
 	let { children } = $props();
 	let feedbackMessage = $state("");
@@ -118,9 +161,9 @@
 	<meta name="twitter:title" content={title} />
 
 	<!-- SEO - Breadcrumbs JSON-LD -->
-	{#if breadcrumbs.length > 0}
-		{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
-	{/if}
+	<svelte:element this="script" type="application/ld+json">
+		{JSON.stringify(jsonLd)}
+	</svelte:element>
 </svelte:head>
 <div id="container">
 	<Waves color1="#137BC0" color2="#DCEBF5" />
