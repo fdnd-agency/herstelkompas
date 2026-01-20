@@ -42,21 +42,17 @@
 
 
 	// JSON-LD
-	const breadcrumbJsonLd = $derived.by(() => {
-		if (breadcrumbs.length === 0) return null;
-
-		return {
-			"@context": "https://schema.org",
-			"@type": "BreadcrumbList",
-			"@id": `${page.url.origin}#breadcrumb`,
-			"itemListElement": breadcrumbs.map((crumb, index) => ({
-				"@type": "ListItem",
-				"position": index + 1,
-				"name": crumb.label,
-				"item": `${page.url.origin}${crumb.href}`
-			}))
-		};
-	});
+	const breadcrumbJsonLd = $derived.by(() => ({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"@id": `${page.url.href}#breadcrumb`,
+		"itemListElement": breadcrumbs.map((crumb, index) => ({
+			"@type": "ListItem",
+			"position": index + 1,
+			"name": crumb.label,
+			"item": `${page.url.origin}${crumb.href}`
+		}))
+	}));
 
 	let { children } = $props();
 	let feedbackMessage = $state("");
@@ -120,9 +116,11 @@
 	<meta name="twitter:title" content={title} />
 
 	<!-- SEO - Breadcrumbs JSON-LD -->
-	<svelte:element this="script" type="application/ld+json">
-		{JSON.stringify(breadcrumbJsonLd)}
-	</svelte:element>
+	{#if breadcrumbs.length > 0}
+		<svelte:element this="script" type="application/ld+json">
+			{JSON.stringify(breadcrumbJsonLd)}
+		</svelte:element>
+	{/if}
 </svelte:head>
 <div id="container">
 	<Waves color1="#137BC0" color2="#DCEBF5" />
