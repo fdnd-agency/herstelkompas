@@ -2,7 +2,7 @@
 export { default as Sidebar } from './components/organisms/Sidebar.svelte'
 export { default as Header } from './components/organisms/Header.svelte'
 export { default as QuestionListClient } from './components/organisms/QuestionListClient.svelte'
-export { default as TreatmentBingo } from './components/organisms/TreatmentBingo.svelte'
+export { default as TreatmentBingo } from './components/organisms/Treatmentbingo.svelte'
 
 // Molecules
 export { default as SidebarNavigation } from './components/molecules/SidebarNavigation.svelte'
