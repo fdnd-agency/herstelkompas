@@ -8,7 +8,7 @@ export { default as TreatmentBingo } from './components/organisms/Treatmentbingo
 export { default as SidebarNavigation } from './components/molecules/SidebarNavigation.svelte'
 export { default as AuthInformation } from './components/molecules/AuthInformation.svelte'
 export { default as Question } from './components/molecules/Question.svelte'
-export { default as QuestionList } from './components/molecules/QuestionList.svelte'
+export { default as QuestionList } from './components/molecules/Questionlist.svelte'
 export { default as Treatment } from './components/molecules/Treatment.svelte'
 export { default as ScansDetail } from './components/molecules/ScansDetail.svelte'
 export { default as BingoCard } from './components/molecules/BingoCard.svelte'
