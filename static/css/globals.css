@@ -219,6 +219,6 @@ button.btn-prev:hover svg>path {
 }
 @media (max-width: 850px){
     [popover]:where(:not(:popover-open)) {
-        display: none !important
+        visibility: hidden !important;
     }
 }
