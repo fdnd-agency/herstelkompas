@@ -24,6 +24,11 @@
 			.split('/')
 			.filter(Boolean);
 
+		// Als je op de homepage bent → geen breadcrumbs nodig
+		if (segments.length === 0) {
+			return [];
+		}
+
 		return [
 			{ label: 'Home', href: '/' },
 			...segments.map((segment, index) => ({
@@ -35,20 +40,23 @@
 		];
 	});
 
+
 	// JSON-LD
-	const breadcrumbJsonLd = $derived.by(() => ({
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		"@id": `${page.url.href}#breadcrumb`,
-		"itemListElement": breadcrumbs.map((crumb, index) => ({
-			"@type": "ListItem",
-			"position": index + 1,
-			"name": crumb.label,
-			"item": {
-				"@id": `${page.url.origin}${crumb.href}`
-			}
-		}))
-	}));
+	const breadcrumbJsonLd = $derived.by(() => {
+		if (breadcrumbs.length === 0) return null;
+
+		return {
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"@id": `${page.url.origin}#breadcrumb`,
+			"itemListElement": breadcrumbs.map((crumb, index) => ({
+				"@type": "ListItem",
+				"position": index + 1,
+				"name": crumb.label,
+				"item": `${page.url.origin}${crumb.href}`
+			}))
+		};
+	});
 
 	let { children } = $props();
 	let feedbackMessage = $state("");
