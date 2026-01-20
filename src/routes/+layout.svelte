@@ -136,6 +136,8 @@
 </script>
 
 <svelte:head>
+	<meta name="google-site-verification" content="3uZH2qeyEP5fnAQDCNNEjyUW30uuBcc43nB5DiRhXRE" />
+	
 	<link rel="icon" href="/img/favicon.ico"/>
 	<link rel="stylesheet" href="/css/stylesheet.css" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
