@@ -42,17 +42,19 @@
 
 
 	// JSON-LD
-	const breadcrumbJsonLd = $derived.by(() => ({
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		"@id": `${page.url.href}#breadcrumb`,
-		"itemListElement": breadcrumbs.map((crumb, index) => ({
-			"@type": "ListItem",
-			"position": index + 1,
-			"name": crumb.label,
-			"item": `${page.url.origin}${crumb.href}`
-		}))
-	}));
+	const breadcrumbJsonLd = $derived.by(() =>
+		JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"@id": `${page.url.href}#breadcrumb`,
+			"itemListElement": breadcrumbs.map((crumb, index) => ({
+				"@type": "ListItem",
+				"position": index + 1,
+				"name": crumb.label,
+				"item": `${page.url.origin}${crumb.href}`
+			}))
+		})
+	);
 
 	let { children } = $props();
 	let feedbackMessage = $state("");
@@ -117,9 +119,7 @@
 
 	<!-- SEO - Breadcrumbs JSON-LD -->
 	{#if breadcrumbs.length > 0}
-		<svelte:element this="script" type="application/ld+json">
-			{JSON.stringify(breadcrumbJsonLd)}
-		</svelte:element>
+		{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
 	{/if}
 </svelte:head>
 <div id="container">
