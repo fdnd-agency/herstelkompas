@@ -39,11 +39,14 @@
 	const breadcrumbJsonLd = $derived.by(() => ({
 		"@context": "https://schema.org",
 		"@type": "BreadcrumbList",
+		"@id": `${page.url.href}#breadcrumb`,
 		"itemListElement": breadcrumbs.map((crumb, index) => ({
 			"@type": "ListItem",
 			"position": index + 1,
 			"name": crumb.label,
-			"item": `${page.url.origin}${crumb.href}`
+			"item": {
+				"@id": `${page.url.origin}${crumb.href}`
+			}
 		}))
 	}));
 
