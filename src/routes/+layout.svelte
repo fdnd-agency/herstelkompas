@@ -30,11 +30,9 @@
 	}
 	onNavigate(() => {
 		feedbackMessage = "";
-
-		// Close popover if supported and media query matches
 		const sidebar = document.querySelector('#nav-sidebar');
 		if (mQuery && sidebar && supportsPopover) {
-			sidebar.hidePopover?.(); // safe optional chaining
+			sidebar.hidePopover?.(); // hide popover when above 850px
 		}
 	});
 	let supportsPopover = false;
