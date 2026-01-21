@@ -1,8 +1,93 @@
 <script>
+    import { onMount } from 'svelte';
+
     const { count, prizes } = $props();
 
     const prize = prizes.find(p => p.Hoeveelheid === count) ?? null;
+
+    let launchConfetti;
+    let hasCelebrated = false;
+
+    // https://codepen.io/Franbeltramella/pen/emNdVBP
+    onMount(() => {
+        const canvas = document.getElementById('confetti-canvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let confettis = [];
+
+        launchConfetti = (
+            x = window.innerWidth / 2,
+            y = window.innerHeight / 2
+        ) => {
+            for (let i = 0; i < 80; i++) {
+                confettis.push({
+                    x,
+                    y,
+                    dx: (Math.random() - 0.5) * 8,
+                    dy: Math.random() * -6 - 4,
+                    width: 4,
+                    height: 10,
+                    angle: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10,
+                    color: `hsl(${Math.random() * 360}, 80%, 60%)`,
+                    alpha: 1
+                });
+            }
+        };
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            confettis.forEach((c, i) => {
+                c.x += c.dx;
+                c.y += c.dy;
+                c.dy += 0.15;
+                c.angle += c.rotationSpeed;
+                c.alpha -= 0.005;
+
+                if (c.alpha < 0.2) return;
+
+                ctx.save();
+                ctx.translate(c.x, c.y);
+                ctx.rotate((c.angle * Math.PI) / 180);
+                ctx.fillStyle = c.color;
+                ctx.globalAlpha = c.alpha;
+                ctx.fillRect(
+                    -c.width / 2,
+                    -c.height / 2,
+                    c.width,
+                    c.height
+                );
+                ctx.restore();
+
+                if (c.alpha <= 0) confettis.splice(i, 1);
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    });
+
+    $effect(() => {
+        if (hasCelebrated) return; // als confetti al een keer is afgespeeld, stop meteen
+        if (!prize) return; // als er geen prijs is, niks doen
+
+        hasCelebrated = true; // hasCelebrated is nu true waardoor als $effect weer draaid er niet weer confetti komt
+        launchConfetti();
+    });
 </script>
+
 
 {#if prize}
 <dialog open>
@@ -20,6 +105,8 @@
     </form>
 </dialog>
 {/if}
+
+<canvas id="confetti-canvas"></canvas>
 
 
 <style>
@@ -90,4 +177,16 @@
             display: block;
         }
     }
+
+    #confetti-canvas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2000;
+
+        @media (prefers-reduced-motion: reduce) {
+                display: none;
+        }
+    }
+
 </style>
