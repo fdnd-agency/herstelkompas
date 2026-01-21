@@ -32,11 +32,11 @@
         height: 100%;
         width: 1px;
         transition: 0.3s ease;
-        background: #137BC000;
+        background: var(--primary-color-dark)00;
     }
 
     li a:before {
-        /* background-color: #137BC0; */
+        /* background-color: var(--primary-color-dark); */
         position: absolute;
         content: '';
         width: 15px;
@@ -49,7 +49,7 @@
     }
 
     li a:after {
-        /* background-color: #137BC0; */
+        /* background-color: var(--primary-color-dark); */
         position: absolute;
         content: '';
         width: 15px;
@@ -64,7 +64,7 @@
     li.active a,
     li a:hover,
     li a:focus {
-        color: #137BC0;
+        color: var(--primary-color-dark);
         background-color: #fff;
         border-top-left-radius: 9px;
         border-bottom-left-radius: 9px;

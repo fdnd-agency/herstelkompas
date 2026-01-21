@@ -26,7 +26,7 @@
         width: 100%;
         max-width: 400px;
         background-color: lightgray;
-        background-color: #137BC0;
+        background-color: var(--primary-color-dark);
         height: 100dvh;
         display: flex;
         flex-direction: column;
@@ -69,10 +69,10 @@
     }
     aside .hamburger-open:hover, aside .hamburger-open:focus{
         background-color: white;
-        color: #137BC0;
+        color: var(--primary-color-dark);
     }
     aside .hamburger-open:hover svg > *, aside .hamburger-open:focus svg > *{
-        fill: #137BC0;
+        fill: var(--primary-color-dark);
     }
     
     

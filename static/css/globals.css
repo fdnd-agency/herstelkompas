@@ -176,7 +176,7 @@ button.btn-prev:hover svg>path {
     width: calc(100% + 1px);
     translate: 0;
     padding: 30px 1rem;
-    background-color: #137BC0;
+    background-color: var(--primary-color-dark);
     color: white;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -187,7 +187,7 @@ button.btn-prev:hover svg>path {
         content: '';
         position: absolute;
         right: 100%;
-        background-color: #137BC0;
+        background-color: var(--primary-color-dark);
         width: 100vw;
         top: 0;
     } */
