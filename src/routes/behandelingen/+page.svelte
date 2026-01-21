@@ -1,26 +1,32 @@
 <script>
+  // Import (currently unused in this file)
   import { Treatment } from '$lib';
 
+  // Data injected by the page/load function
   export let data;
+
+  // Extract treatments from the loaded data
   const behandelingen = data.behandelingen;
 </script>
 
 <section class="treatment-section" aria-labelledby="behandelingstitel">
+  <!-- Page header -->
   <header class="page-header">
     <h1 id="behandelingstitel">Behandelingen</h1>
     <p class="subtitle">Jouw overzicht</p>
   </header>
 
-  <!-- Kolomtitels – alleen zichtbaar op tablet en desktop -->
+  <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
     <span>Beschrijving</span>
     <span>Datum</span>
   </header>
 
-  <!-- Lijst van behandelingen -->
+  <!-- Treatments list -->
   <ul class="treatment-list" role="list">
     {#each behandelingen as behandeling (behandeling.id)}
       <li role="listitem">
+        <!-- Card links to treatment detail page -->
         <a
           href={`/behandelingen/${behandeling.id}`}
           class="treatment-card"
@@ -28,6 +34,7 @@
           aria-describedby={`datum-${behandeling.id}`}
         >
           <article>
+            <!-- Description block -->
             <header class="treatment-info">
               <p class="label">Beschrijving</p>
               <h2 id={`titel-${behandeling.id}`} class="title">
@@ -35,6 +42,7 @@
               </h2>
             </header>
 
+            <!-- Date block -->
             <section class="date-block">
               <p class="label">Datum</p>
               <time
@@ -46,6 +54,7 @@
               </time>
             </section>
 
+            <!-- Decorative arrow indicator -->
             <span class="arrow" aria-hidden="true">→</span>
           </article>
         </a>
@@ -55,11 +64,12 @@
 </section>
 
 <style>
+/* Page wrapper */
 .treatment-section {
   /* padding: 1rem; */
   font-family: var(--font-regular);
 
-  /* ===== Pagina header ===== */
+  /* ===== Page header ===== */
   .page-header {
     margin-bottom: 3em;
 
@@ -77,12 +87,12 @@
     }
   }
 
-  /* ===== Kolomtitels ===== */
+  /* ===== Column headers (hidden on mobile) ===== */
   .treatment-header {
     display: none;
   }
 
-  /* ===== Behandelingskaarten ===== */
+  /* ===== Treatment cards list ===== */
   .treatment-list {
     list-style: none;
     padding: 0;
@@ -90,6 +100,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
     .treatment-card {
       display: block;
       background-color: var(--color-blue-tint);
@@ -100,28 +111,33 @@
       position: relative;
       transition: background-color 0.3s ease, transform 0.2s ease;
 
+      /* Hover state */
       &:hover {
         background-color: color-mix(in srgb, var(--primary-color-light) 30%, white 70%);
         transform: translateY(-1px);
       }
 
+      /* Visible focus ring for keyboard users */
       &:focus-visible {
         outline: 2px solid var(--primary-color-dark);
         outline-offset: 3px;
       }
 
+      /* Mobile layout: stacked content */
       article {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
       }
 
+      /* Small field label (shown on mobile) */
       .label {
         font-size: var(--text-size-xs);
         color: color-mix(in srgb, var(--primary-color-dark) 60%, white 40%);
         margin: 0 0 0.25rem 0;
       }
 
+      /* Treatment title */
       .title {
         font-size: var(--text-size-md);
         font-family: var(--font-semibold);
@@ -129,6 +145,7 @@
         margin: 0;
       }
 
+      /* Date block */
       .date-block {
         display: flex;
         flex-direction: column;
@@ -141,6 +158,7 @@
         }
       }
 
+      /* Arrow icon positioning (mobile) */
       .arrow {
         position: absolute;
         right: 1rem;
@@ -152,8 +170,9 @@
     }
   }
 
-  /* ===== TABLET / DESKTOP ===== */
+  /* ===== TABLET / DESKTOP LAYOUT ===== */
   @media (min-width: 640px) {
+    /* Show column header row */
     .treatment-header {
       display: flex;
       justify-content: space-between;
@@ -167,6 +186,7 @@
       margin-bottom: 0.75rem;
     }
 
+    /* Card becomes a grid with 3 columns (description / date / arrow) */
     .treatment-list {
       .treatment-card {
         display: grid;
@@ -175,14 +195,17 @@
         gap: 1rem;
         padding: 1.25rem 1.5rem;
 
+        /* Use "contents" so the grid is applied to inner elements */
         article {
           display: contents;
         }
 
+        /* Hide field labels on larger screens (since columns are visible) */
         .label {
           display: none;
         }
 
+        /* Center the date column */
         .date-block {
           justify-self: center;
 
@@ -191,6 +214,7 @@
           }
         }
 
+        /* Arrow sits in the last column */
         .arrow {
           position: static;
           transform: none;
@@ -199,12 +223,13 @@
       }
     }
   }
-  @media (min-width: 850px){
-    .treatment-list{
+
+  /* Enable scrolling for the list on larger screens */
+  @media (min-width: 850px) {
+    .treatment-list {
       overflow-y: scroll;
       height: calc(100vh - 215px);
     }
-
   }
 }
 </style>
