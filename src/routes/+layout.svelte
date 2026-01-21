@@ -47,7 +47,6 @@
 <svelte:head>
 	<link rel="icon" href="/img/favicon.ico"/>
 	<link rel="stylesheet" href="/css/stylesheet.css" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="stylesheet" href="/css/globals.css">
 </svelte:head>
 <div id="container">
