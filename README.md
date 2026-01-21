@@ -3,7 +3,7 @@
 
 Herstelkompas is een digitaal webplatform, ontwikkeld met SvelteKit, dat cliënten met Long COVID (en aanverwante klachten zoals burn-out en letselschade) ondersteunt bij het monitoren van herstel. Het platform maakt herstel inzichtelijk met een visuele, toegankelijke en persoonlijke weergave van voortgang. Hierdoor kunnen zorgverleners beter volgen hoe het traject verloopt en worden cliënten extra gemotiveerd om consequent aan hun herstel te werken.
 
-Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Kerem Tutucu, Dylan [Achternaam] en Ties [Achternaam], in opdracht van Zelfzorg aan Zee.
+Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Kerem Tutucu, Dylan van Nierop en Ties Beeftink, in opdracht van Zelfzorg aan Zee.
 
 ---
 
@@ -60,10 +60,10 @@ Bijdragen (o.a.)
 * Verwelkomingspagina
 
 #### Vragenlijst
-* Dylan
+* Interactieve pagina waarop een vragenlijst kan worden beantwoord. Deze vragen komen uit de database. Deze vragen zijn gebaseert op vier hormonen waarvan ze gewenst zijn vrij te komen tijdens de sessies. Van elke stof wordt willekeurig een vraag uitgekozen. In totaal beantwoord de client 4 vragen. Als deze vragenlijst wordt opgeslagen komt dit onder de behandeling van vandaag te staan.
 
 #### Scans
-* Dylan
+* Interactieve pgina waaorp twee scans (voor en na behandeling) en een bijbehorende beschrijving kunne worden ingevuld en verzonden. Deze worden per behandeloing opgeslagen
 
 
 #### Bingokaart
