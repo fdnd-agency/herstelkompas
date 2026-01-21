@@ -68,8 +68,9 @@ Bijdragen (o.a.)
 
 #### Bingokaart
 * Interactieve bingokaart waarmee cliënten doelen kunnen afvinken.
-* Elk vakje heeft een kleine cirkel linksboven die vult bij selectie; het vakje verandert van kleur (nu groen) zodra het voltooid is.
+* Elk vakje heeft een kleine vierkant linksboven die vult bij selectie; het vakje verandert van kleur (nu groen) zodra het voltooid is.
 * De status wordt per behandeling/dag opgeslagen; als er nog geen behandeling bestaat voor de dag, wordt automatisch een nieuwe entry aangemaakt.
+* Bij 3, 5 of 7 vakjes afgekruist heeft de cliënt bingo en opent er met een confetti animatie een popup met daarin de gewonnen prijs.
 
 #### Behandelingen (overzicht)
 * Interactieve bingokaart waarmee cliënten doelen kunnen afvinken.
