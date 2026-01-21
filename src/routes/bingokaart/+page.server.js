@@ -118,7 +118,8 @@ export const actions = {
         return {
         success: true,
         showPopup,
-        count: newCount
+        count: newCount,
+        message: "Bingokaart geupdatet!"
         };
     }
 };

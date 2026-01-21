@@ -61,8 +61,6 @@
             max-width: 600px;
         }
     }
-
-    
     
     input[type="submit"]{
         position: absolute;

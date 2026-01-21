@@ -5,8 +5,8 @@ li a svg.stroke-fix.sidebar-icon, aside li a svg.stroke-fix.sidebar-icon > *, as
     stroke: #fff;
 }
 li.active a svg.fill-fix.sidebar-icon, aside li.active a svg.fill-fix.sidebar-icon > *, aside li a:hover svg.fill-fix.sidebar-icon, aside li a:focus svg.fill-fix.sidebar-icon, aside li a:hover svg.fill-fix.sidebar-icon > *, aside li a:focus svg.fill-fix.sidebar-icon > *{
-    fill: #137BC0;
+    fill: var(--primary-color-dark);
 }
 li.active a svg.stroke-fix.sidebar-icon, aside li.active a svg.stroke-fix.sidebar-icon > *, aside li a:hover svg.stroke-fix.sidebar-icon, aside li a:focus svg.stroke-fix.sidebar-icon, aside li a:hover svg.stroke-fix.sidebar-icon > *, aside li a:focus svg.stroke-fix.sidebar-icon > *{
-    stroke: #137BC0;
+    stroke: var(--primary-color-dark);
 }

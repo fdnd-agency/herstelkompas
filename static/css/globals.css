@@ -1,29 +1,38 @@
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box; /* Stupid Flanders */
     font-family: "Inter", sans-serif;
-}
 
+    /* padding-right: 1px; */
+}
+/* @media (min-width: 850px){
+    #container{
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 1rem;
+    }
+
+}
+ */
 input[type="submit"] {
-    cursor: pointer;
-    padding: 8px 30px;
-    background-color: var(--primary-color-dark);
-    color: #DEF0FC;
-    border: 3px solid var(--primary-color-dark);
-    border-radius: 10px;
-    margin-left: 1rem;
-    font-size: 18px;
-    font-weight: bold;
-}
+        cursor: pointer;
+        padding: 8px 30px;
+        background-color: var(--primary-color-dark);
+        color: #DEF0FC;
+        border: 3px solid var(--primary-color-dark);
+        border-radius: 10px;
+        margin-left: 1rem;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    input[type="submit"]:hover,
+    input[type="submit"]:focus-visible {
+        background-color: #DEF0FC;
+        color: var(--primary-color-dark);
+    }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus-visible {
-    background-color: #DEF0FC;
-    color: var(--primary-color-dark);
-}
-
-.visually-hidden {
+.visually-hidden{
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;
@@ -33,49 +42,46 @@ input[type="submit"]:focus-visible {
     width: 1px;
 }
 
-main {
-    padding: 20px;
-    container-name: main-container;
-    container-type: inline-size;
+main{
+	padding: 20px;
+        container-name: main-container;
+        container-type: inline-size; 
 }
-
-@media (min-width: 850px) {
-    main {
+@media (min-width: 850px){
+	main{
         padding: 20px 20px 20px 46px;
-        display: inline-block;
-        vertical-align: top;
+		display: inline-block;
+		vertical-align: top;
         overflow-y: auto;
         max-height: calc(100vh - 16px);
-    }
+	}
 }
-
-#container {
-    -webkit-overflow-scrolling: touch;
+#container{
+  /* min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden; */
+  -webkit-overflow-scrolling: touch;
 }
-
-@media (max-width: 850px) {
-    main {
+@media (max-width: 850px){
+    main{
         height: calc(100% - 81px);
     }
 }
-
-@supports (display: grid) {
-    @media (min-width: 850px) {
-        main {
-            grid-row: 2;
-            position: relative;
-        }
-
-        #container {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            grid-template-rows: max-content 1fr;
-            gap: 1rem;
-            column-gap: 0;
-        }
-    }
+@supports (display: grid){
+	@media (min-width: 850px){
+		main{
+			grid-row: 2;
+			position: relative;
+		}
+		#container{
+			display: grid;
+			grid-template-columns: 350px 1fr;
+			grid-template-rows: max-content 1fr;
+			gap: 1rem;
+			column-gap: 0;
+		}
+	}
 }
-
 /* Control buttons */
 
 button.btn-nav {
@@ -108,8 +114,7 @@ button.btn-prev span {
     }
 }
 
-button.btn-prev:hover,
-button.btn-next {
+button.btn-prev:hover,button.btn-next {
     background-color: var(--primary-color-dark);
     color: var(--color-neutral-lighter)
 }
@@ -119,9 +124,8 @@ button.btn-next:hover {
     color: var(--primary-color-dark);
 }
 
-h1,
-.subtitle {
-    margin-left: 0 !important
+h1,.subtitle {
+    margin-left: 0!important
 }
 
 button.btn-next svg>path {
@@ -135,7 +139,7 @@ button.btn-next:hover svg>path {
 }
 
 button.btn-prev svg>path {
-    stroke: var(--primary-color-dark);
+    stroke:var(--primary-color-dark);
     fill: var(--primary-color-dark);
 }
 
@@ -143,6 +147,10 @@ button.btn-prev:hover svg>path {
     stroke: var(--color-neutral-lighter);
     fill: var(--color-neutral-lighter)
 }
+
+
+
+
 
 .skip-to-content {
     position: absolute;
@@ -156,12 +164,10 @@ button.btn-prev:hover svg>path {
 }
 
 .skip-to-content:focus {
-    top: 0;
-    /* Move into view when focused */
+    top: 0; /* Move into view when focused */
 }
-
-#feedback-message {
-    position: absolute;
+#feedback-message{
+    position: fixed;
     border: 3px solid #fff;
     bottom: 0;
     z-index: 3;
@@ -170,31 +176,43 @@ button.btn-prev:hover svg>path {
     width: calc(100% + 1px);
     translate: 0;
     padding: 30px 1rem;
-    background-color: #137BC0;
+    background-color: var(--primary-color-dark);
     color: white;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     transition: transform 0.6s ease;
     animation: test 1s ease;
-
-    @container main-container (width > 500px) {
-        width: 80%;
-        translate: -50% 0;
-        left: 50%;
-    }
+    /* &:after{
+        height: 100%;
+        content: '';
+        position: absolute;
+        right: 100%;
+        background-color: var(--primary-color-dark);
+        width: 100vw;
+        top: 0;
+    } */
+    
 }
-
-@keyframes test {
-    from {
+@media (min-width: 850px){
+        #feedback-message{
+            right: calc((100% - 350px) * 0.1);
+            left: initial;
+            width: calc((100% - 350px) * 0.8);
+        }
+        
+    }
+@keyframes test{
+    from{
         opacity: 0;
         padding: 1rem 1rem;
     }
-
-    to {
+    to{
         opacity: 1;
         padding: 30px 1rem;
     }
 }
+
+
 
 .btn-primary {
     text-decoration: none;
@@ -211,14 +229,18 @@ button.btn-prev:hover svg>path {
     display: block;
     margin-top: 1rem;
 }
-
-.btn-primary:hover,
-.btn-primary:focus-visible {
+.btn-primary:hover,.btn-primary:focus-visible {
     background-color: #e8ebf2;
     color: var(--primary-color-dark);
 }
-@media (max-width: 850px){
-    [popover]:where(:not(:popover-open)) {
-        visibility: hidden !important;
+@media (max-width:850px){
+    html.js aside.s-aLFk7wFB5ZhE {
+        translate: -100% 0;
+        position: fixed;
+    }
+
+    html.js aside.s-aLFk7wFB5ZhE.open {
+        translate: 0 0;
+        position: fixed;
     }
 }

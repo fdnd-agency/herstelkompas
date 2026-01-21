@@ -34,6 +34,7 @@
 		if (mQuery && sidebar && supportsPopover) {
 			sidebar.hidePopover?.(); // hide popover when above 850px
 		}
+
 	});
 	let supportsPopover = false;
 

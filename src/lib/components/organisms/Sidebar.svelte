@@ -3,7 +3,6 @@
 	import { page } from '$app/state';
     import { AuthInformation, SidebarNavigation } from '$lib';
 
-
 </script>
 <aside id="nav-sidebar" {...(supportsPopover && mQuery ? { popover: true } : {})}>
     {#if supportsPopover && mQuery}
@@ -32,7 +31,7 @@
         width: 100%;
         max-width: 400px;
         background-color: lightgray;
-        background-color: #137BC0;
+        background-color: var(--primary-color-dark);
         height: 100dvh;
         display: flex;
         flex-direction: column;
@@ -46,6 +45,7 @@
         border: none;
         overflow-x: hidden;
     }
+
     aside .hamburger-open{
         transition: 0.3s ease;
 		display: flex;
@@ -79,10 +79,10 @@
     }
     aside .hamburger-open:hover, aside .hamburger-open:focus{
         background-color: white;
-        color: #137BC0;
+        color: var(--primary-color-dark);
     }
     aside .hamburger-open:hover svg > *, aside .hamburger-open:focus svg > *{
-        fill: #137BC0;
+        fill: var(--primary-color-dark);
     }
     
     
@@ -92,6 +92,7 @@
             position: relative;
         }
 
+
     }
     @media (max-width: 850px){
         aside:target, aside:popover-open{
@@ -100,5 +101,6 @@
         }
     }
 
-    
+
+
 </style>

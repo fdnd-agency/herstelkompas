@@ -1,17 +1,22 @@
 <script>
+  // Props: the survey data (array of { vraag, antwoord })
   export let vragenlijst = [];
 
+  // Formatter for answers:
+  // - Arrays become comma-separated strings
+  // - null/undefined becomes a fallback string
   export let format = (a) => {
     if (Array.isArray(a)) return a.join(", ");
     return a ?? "Geen antwoord ingevuld";
   };
 
+  // Safety: ensure we always loop over an array
   $: safeVragenlijst = Array.isArray(vragenlijst) ? vragenlijst : [];
 </script>
 
 <section class="survey" aria-label="Vragenlijst resultaten">
   <table class="survey-table" aria-describedby="survey-desc">
-    <!-- Beschrijving voor screenreaders -->
+    <!-- Screen reader description for the table -->
     <caption id="survey-desc" class="sr-only">
       Overzicht van vragen en bijbehorende antwoorden. Tab om per item te navigeren.
     </caption>
@@ -30,10 +35,12 @@
           tabindex="0"
           aria-label={`Item ${i + 1}: ${item.vraag}`}
         >
+          <!-- Question cell -->
           <td class="question-column" headers="col-vraag">
             {item.vraag}
           </td>
 
+          <!-- Answer cell -->
           <td class="answer-column" headers="col-antwoord">
             {format(item.antwoord)}
           </td>
@@ -44,7 +51,7 @@
 </section>
 
 <style>
-/* Screenreader-only */
+/* Screen-reader-only utility class */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -65,23 +72,25 @@
   margin: 0;
 }
 
-
+/* Base table layout */
 .survey-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-  .survey-title {
-    font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
-    color: var(--primary-color-dark);
-    font-family: var(--font-medium);
-    margin-bottom: 1rem;
-    text-align: left;
-  }
 
+/* Title styling (if used elsewhere in markup) */
+.survey-title {
+  font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
+  color: var(--primary-color-dark);
+  font-family: var(--font-medium);
+  margin-bottom: 1rem;
+  /* padding-inline: 1.25rem; */
+  text-align: left;
+}
 
-/* verberg de kop op mobiel  */
+/* Hide the table header on mobile (visually) */
 .survey-header {
   position: absolute;
   width: 1px;
@@ -94,13 +103,13 @@
   border: 0;
 }
 
+/* Make tbody behave like a block container on mobile */
 .survey-list {
   display: block;
 }
 
-
 /* =========================
-   CARD (tr)
+   CARD STYLE (tr)
 ========================= */
 .survey-item {
   display: block;
@@ -110,6 +119,9 @@
   padding: 1rem;
   margin: 0 0 0.75rem;
 
+  /* NOTE: This nested rule seems intended for .survey-list layout,
+     but it's currently placed inside .survey-item (CSS nesting).
+     Keep as-is if you rely on nesting support. */
   .survey-list {
     display: flex;
     flex-direction: column;
@@ -117,14 +129,14 @@
     padding: 0 0 2rem 0;
   }
 
-
-
+  /* Default border (focus will override) */
   border: 2px solid transparent;
 
- 
+  /* Entry animation defaults */
   opacity: 0;
   transform: translateY(12px) scale(0.98);
 
+  /* Staggered delay (with sibling-index support if available) */
   --delay: 0s;
   @supports (animation-delay: calc(sibling-index() * 80ms)) {
     --delay: calc(sibling-index() * 160ms);
@@ -133,6 +145,8 @@
   animation: card-in 920ms var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
 }
 
+
+/* Keyboard focus styling for the row "card" */
 .survey-item:focus,
 .survey-item:focus-visible {
   outline: none;
@@ -140,12 +154,13 @@
   box-shadow: 0 0 0 4px rgba(20, 58, 139, 0.25);
 }
 
-
+/* Remove focus styles when focus isn't keyboard (mouse click) */
 .survey-item:focus:not(:focus-visible) {
   box-shadow: none;
   border-color: transparent;
 }
 
+/* On mobile, make cells stack vertically */
 .question-column,
 .answer-column {
   display: block;
@@ -153,7 +168,7 @@
   border: 0;
 }
 
-/* Labels */
+/* "Label" text shown above the cell content (mobile) */
 .question-column::before,
 .answer-column::before {
   display: block;
@@ -165,50 +180,58 @@
 }
 
 .question-column::before { content: "Vraag"; }
+
 .answer-column::before {
   content: "Antwoord";
   margin-top: 0.75rem;
 }
 
-    .survey-title {
-      padding-inline: 0
-    }
+/* Remove inline padding for the title (if used) */
+.survey-title {
+  padding-inline: 0;
+}
 
-    /* TABELHEADER ZICHTBAAR */
-    .survey-header {
-      display: block;
-      border-bottom: 1px solid #dbe6f5;
-      color: #6d8bb8;
-      font-family: var(--font-medium);
-      font-size: 0.95rem;
-      margin-top: 1rem;
-    }
-    .survey-header tr{
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    }
-    .survey-header tr th{
-      text-align: left;
-    }
-    .survey-list {
-      padding: 0;
-      gap: 0.75rem;
-    }
+/* Make table header visible (override the "hidden" header) */
+.survey-header {
+  display: block;
+  border-bottom: 1px solid #dbe6f5;
+  color: #6d8bb8;
+  font-family: var(--font-medium);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
 
-    /* TR wordt 2-koloms layout zoals jouw oude li-grid */
-    .survey-list tr {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
+/* Header row layout */
+.survey-header tr {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.survey-header tr th {
+  text-align: left;
+}
+
+/* Spacing between items */
+.survey-list {
+  padding: 0;
+  gap: 0.75rem;
+  /* padding-top: 3rem; */
+}
+
+/* Turn each TR into a "card" (mobile layout) */
+.survey-list tr {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
   padding: 1rem 1.25rem;
- background-color: #eef6ff; 
+  background-color: #eef6ff;
   border-radius: 12px;
-    }
+}
 
-/* Tekst */
+/* Typography for question + answer text */
 .question-column,
 .answer-column {
   font-size: 0.95rem;
@@ -228,12 +251,13 @@
   }
 }
 
+/* Card entry animation */
 @keyframes card-in {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* ===========================================================
-   TABLET – 
+   TABLET
 =========================================================== */
 @media (min-width: 768px) {
   .survey {
@@ -244,43 +268,48 @@
     padding-right: 0;
   }
 
-
+  /* Use a grid layout on tablet */
   .survey-list {
     display: grid;
     gap: 5px;
   }
 
-    .survey-title {
-      padding-inline: 0rem;
-    }
+  .survey-title {
+    padding-inline: 0rem;
+  }
 
-    .survey-header {
-      display: block;
-      border-bottom: 1px solid #dbe6f5;
-      color: #6d8bb8;
-      font-family: var(--font-medium);
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-    .survey-header tr{
-      padding: 0.75rem 24px;
-    }
-        .survey-header tr th{
-      text-align: left;
-    }
-    .survey-list {
-      padding: 0 0rem;
-      gap: 0.75rem;
-    }
 
-   .survey-list tr {
+  /* Show header row on tablet */
+  .survey-header {
+    display: block;
+    border-bottom: 1px solid #dbe6f5;
+    color: #6d8bb8;
+    font-family: var(--font-medium);
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
 
-  padding: 1.2rem 1.5rem;
-  background-color: #eef6ff; /* ← DIT TOEVOEGEN */
-  border-radius: 12px;
-  
-}
 
+  .survey-header tr {
+    padding: 0.75rem 24px;
+  }
+
+  .survey-header tr th {
+    text-align: left;
+  }
+
+  .survey-list {
+    padding: 0 0rem;
+    gap: 0.75rem;
+    /* padding-top: 3rem; */
+  }
+
+  /* Card styling for each row */
+  .survey-list tr {
+    padding: 1.2rem 1.5rem;
+    background-color: #eef6ff; /* Added background color */
+    border-radius: 12px;
+  }
 
   .survey-item {
     margin: 0;
@@ -288,11 +317,11 @@
     border-radius: 1rem;
   }
 
+  /* Slightly adjust label sizes on tablet */
   .question-column::before,
   .answer-column::before {
     font-size: var(--text-size-xs);
     margin-bottom: 0.25rem;
   }
 }
-
 </style>
