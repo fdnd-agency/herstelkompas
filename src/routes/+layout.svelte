@@ -1,41 +1,46 @@
 <script>
-	import { onNavigate, afterNavigate } from '$app/navigation';
-	import { Bingocard, Sidebar, Header } from '$lib'
+	import { onNavigate } from '$app/navigation';
+	import { Sidebar, Header } from '$lib'
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { Waves } from '$lib';
 	let { children } = $props();
 	let feedbackMessage = $state("");
+	let mQuery = $state(false);
+	onMount(() => {
+		const mediaQuery = window.matchMedia('(max-width:850px)');
+		if (mediaQuery.matches) {
+			mQuery = true;
+		}
+		else{
+			mQuery = false;
+		}
+		mediaQuery.addEventListener('change', () => {
+			if (mediaQuery.matches) {
+				mQuery = true;
+			}
+			else{
+				mQuery = false;
+			}
+		});
+	});
+	
 	if(page.form?.message){
 		feedbackMessage = page?.form?.message
 	}
 	onNavigate(() => {
 		feedbackMessage = "";
-		// document.querySelector('#nav-sidebar').classList.add('hide');
-	});
-	import { sidebarOpen } from '$lib/stores/sidebar';
-	import { onMount } from 'svelte';
+		const sidebar = document.querySelector('#nav-sidebar');
+		if (mQuery && sidebar && supportsPopover) {
+			sidebar.hidePopover?.(); // hide popover when above 850px
+		}
 
-	onMount(() => {
-		document.documentElement.classList.add('js');
-		const onHashChange = () => {
-			if (location.hash === '#nav-sidebar') {
-				sidebarOpen.set(true);
-				history.replaceState(null, '', location.pathname + location.search);
-			
-			} else {
-				sidebarOpen.set(false);
-			}
-		};
-
-		window.addEventListener('hashchange', onHashChange);
-		onHashChange();
-
-		return () => window.removeEventListener('hashchange', onHashChange);
 	});
-	afterNavigate(() => {
-		sidebarOpen.set(false);
-		console.log($sidebarOpen + "layout")
-	});
+	let supportsPopover = false;
+
+	if (typeof window !== 'undefined') {
+		supportsPopover = 'popover' in HTMLElement.prototype;
+	}
 
 </script>
 
@@ -50,8 +55,8 @@
 <div id="container">
 	<Waves color1="#137BC0" color2="#DCEBF5" />
   <a href="#mainContent" class="skip-to-content">Skip to the content</a>
-    <Sidebar/>
-    <Header/>
+    <Sidebar supportsPopover={supportsPopover} mQuery={mQuery}/>
+    <Header supportsPopover={supportsPopover} mQuery={mQuery}/>
     <main id="mainContent">
 	{#if feedbackMessage != ""}
 			<div 

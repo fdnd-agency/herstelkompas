@@ -54,7 +54,6 @@
                 const firstChild = formEl.firstElementChild;
                 if (!firstChild) return;
                 function updateHeight() {
-                    console.log("HEIGHT");
                     const childHeight =
                         firstChild.getBoundingClientRect().height;
                     formEl.style.height = childHeight + "px";
@@ -96,7 +95,6 @@
                             let newFocus = currentFieldset.querySelector(
                                 `input#q-${count}`,
                             );
-                            console.log(newFocus);
                             newFocus.focus();
                         }
                     }

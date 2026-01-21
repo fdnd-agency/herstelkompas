@@ -79,6 +79,7 @@
   border-spacing: 0;
 }
 
+
 /* Title styling (if used elsewhere in markup) */
 .survey-title {
   font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
@@ -143,6 +144,7 @@
 
   animation: card-in 920ms var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
 }
+
 
 /* Keyboard focus styling for the row "card" */
 .survey-item:focus,
@@ -276,6 +278,7 @@
     padding-inline: 0rem;
   }
 
+
   /* Show header row on tablet */
   .survey-header {
     display: block;
@@ -285,6 +288,7 @@
     font-size: 1rem;
     margin-top: 1rem;
   }
+
 
   .survey-header tr {
     padding: 0.75rem 24px;

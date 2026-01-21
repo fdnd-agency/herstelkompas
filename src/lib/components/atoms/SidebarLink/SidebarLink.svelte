@@ -32,11 +32,10 @@
         height: 100%;
         width: 1px;
         transition: 0.3s ease;
-        background: var(--primary-color-dark)00;
+        background: var(--primary-color-dark);
     }
 
     li a:before {
-        /* background-color: var(--primary-color-dark); */
         position: absolute;
         content: '';
         width: 15px;
@@ -49,7 +48,7 @@
     }
 
     li a:after {
-        /* background-color: var(--primary-color-dark); */
+        /* background-color: #137BC0; */
         position: absolute;
         content: '';
         width: 15px;

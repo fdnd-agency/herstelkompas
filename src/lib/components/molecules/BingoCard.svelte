@@ -1,6 +1,6 @@
 <script>
     const { bingokaart, success } = $props() // haalt inhoud bingokaart en succes boolean op (true, false)
-
+    import { BingoSquare } from '$lib';
     let loading = $state(false) // $state maakt het reactive, op alle veranderd het
 
     function handleSubmit() {
@@ -12,10 +12,7 @@
 
 <form onsubmit={handleSubmit} class="bingocard" method="POST">
     {#each bingokaart as square}
-        <label class="bingo-square">
-            <input type="checkbox" name="bingocard-field" value={square.activiteit} checked={square.checked}>
-            <span>{square.activiteit}</span>
-        </label>
+        <BingoSquare square={square}/>
     {/each}
 
     <button class="save-button" type="submit">
@@ -64,82 +61,6 @@
             max-width: 600px;
         }
     }
-
-    .bingo-square {
-        position: relative;
-        /* aspect-ratio: 1.3 / 1; */
-        height: 100%;
-        padding: .5rem;
-
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        border-radius: 5px;
-        background-color: var(--primary-color-dark);
-        color: var(--color-white);
-
-        user-select: none;
-        cursor: pointer;
-
-        transition: transform .2s cubic-bezier(.2,.9,.2,1);
-
-        &:has(:checked) {
-            background-color: var(--color-green-accent);
-        }
-    }
-
-    .bingo-square:hover,
-    .bingo-square:has(input:focus-visible) {
-        transform: scale(1.03);
-    }
-
-    .bingo-square input {
-        appearance: none;
-        box-sizing: border-box;
-
-        width: 11px;
-        height: 11px;
-        aspect-ratio: 1;
-
-        border: 1.5px solid white;
-        border-radius: 20%;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        margin: .5rem;
-
-        @media (max-width: 600px) {
-            margin: 0.3rem;
-            width: .6rem;
-            height: .6rem;
-        }
-    }
-
-    .bingo-square span {
-        width: 100%;
-        max-height: 100%;
-        text-align: center;
-            
-        /* margin-top: .8rem; */
-        /* padding: 0.5rem; */
-        overflow: hidden;
-
-        word-break: break-word;
-        overflow-wrap: anywhere;
-        hyphens: auto;
-    }
-
-    .bingo-square input:checked {
-        background: white;
-    }
-    
-    .bingo-square:has(input:focus-visible) {
-        outline: 3px solid #000000;
-        outline-offset: 2px;
-    }
     
     input[type="submit"]{
         position: absolute;
@@ -148,29 +69,20 @@
         translate: -50% 0;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        .bingo-square:hover {
-            transform: none;
-        }
-    }
 
     .save-button {
         font-size: inherit;
         font-family: inherit;
-
         display: flex;
         align-items: center;
         justify-content: center;
-        
         color: var(--primary-color-dark);
         font-weight: 600;
         background-color: var(--color-blue-tint);
         border: none;
         border-radius: .6rem;
-
         height: 2.1rem;
         grid-column: 2;
-    
         cursor: pointer;
     }
 </style>

@@ -1,7 +1,7 @@
 <script>
   // Props passed into this component
   export let activiteit;
-  export let Questionlist;
+  export let QuestionList;
   export let ScansDetail;
 
   // Parse the activity date
@@ -22,9 +22,9 @@
 
   // Tab configuration (id + label + icon)
   const tabs = [
-    { id: "bingokaart", label: "Bingo kaart", icon: "/icons/bingo.svg" },
-    { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/frame-1.svg" },
-    { id: "scans", label: "Scans", icon: "/icons/brain.svg" }
+    { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/bingo.svg' },
+    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/ordenedlist.svg' },
+    { id: 'scans', label: 'Scans', icon: '/icons/brain.svg' }
   ];
 
   // Currently active tab
@@ -163,7 +163,7 @@
 
     <!-- Render the Questionlist component only if the survey exists -->
     {#if activiteit.vragenlijst}
-      <Questionlist vragenlijst={activiteit.vragenlijst ?? []} />
+      <QuestionList vragenlijst={activiteit.vragenlijst ?? []} />
     {/if}
   </section>
 

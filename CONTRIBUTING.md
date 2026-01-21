@@ -110,7 +110,7 @@ Resolves issue #xxxxx
 
 ## Nieuwe afspraken 10-10-2025
 
-op basis van de retrospect van sprint 14: https://github.com/fdnd-agency/herstelkompas/blob/dev/RETROSPECT-S14.md zijn er afspraken gemaakt voor komende sprints
+op basis van de retrospect van sprint 14: https://github.com/fdnd-agency/herstelkompas/blob/dev/docs/RETROSPECT-S14.md zijn er afspraken gemaakt voor komende sprints
 
 - Elke schooldag een standup aan het begin of einde van de lesdag (maandag, woensdag,vrijdag)
 - Actief communiceren waar nodig.

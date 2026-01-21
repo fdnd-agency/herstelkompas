@@ -11,8 +11,6 @@
 
 <style>
 	.welcome {
-
-		/* min-height: 100vh;                       */
 		background-color: var(--color-white);
 		font-family: var(--font-regular);
 		max-width: 35em;

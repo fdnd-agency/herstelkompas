@@ -66,7 +66,6 @@
 <style>
 /* Page wrapper */
 .treatment-section {
-  /* padding: 1rem; */
   font-family: var(--font-regular);
 
   /* ===== Page header ===== */

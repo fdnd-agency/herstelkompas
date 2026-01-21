@@ -1,5 +1,5 @@
 <svelte:head>
-    <link rel="stylesheet" href="/css/form-enhance.css">
+    <link rel="stylesheet" href="/css/formEnhance.css">
 </svelte:head>
 <script>
     let { data, form } = $props();

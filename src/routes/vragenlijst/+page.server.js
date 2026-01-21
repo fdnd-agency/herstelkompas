@@ -64,7 +64,6 @@ export async function load({ cookies }){
     sortedQuestions.sort((q1, q2) => {
     return q1.stofje - q2.stofje;
     });
-    console.log(sortedQuestions)
     cookies.set('sortedQuestions', JSON.stringify(sortedQuestions), {
         path: '/',
         httpOnly: true
