@@ -51,7 +51,7 @@
             confettis.forEach((c, i) => {
                 c.x += c.dx;
                 c.y += c.dy;
-                c.dy += 0.25;
+                c.dy += 0.15;
                 c.angle += c.rotationSpeed;
                 c.alpha -= 0.005;
 
