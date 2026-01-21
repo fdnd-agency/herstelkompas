@@ -60,10 +60,10 @@ Bijdragen (o.a.)
 * Verwelkomingspagina
 
 #### Vragenlijst
-* Dylan
+* Interactieve pagina waarop een vragenlijst kan worden beantwoord. Deze vragen komen uit de database. Deze vragen zijn gebaseert op vier hormonen waarvan ze gewenst zijn vrij te komen tijdens de sessies. Van elke stof wordt willekeurig een vraag uitgekozen. In totaal beantwoord de client 4 vragen. Als deze vragenlijst wordt opgeslagen komt dit onder de behandeling van vandaag te staan.
 
 #### Scans
-* Dylan
+* Interactieve pgina waaorp twee scans (voor en na behandeling) en een bijbehorende beschrijving kunne worden ingevuld en verzonden. Deze worden per behandeloing opgeslagen
 
 
 #### Bingokaart
