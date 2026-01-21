@@ -52,7 +52,7 @@
         line-height: 1rem;
         gap: .35rem;
 		color: white;
-        background-color: #137BC0;
+        background-color:  var(--primary-color-dark);;
         border: none;
         appearance: none;
 		flex-direction: column;

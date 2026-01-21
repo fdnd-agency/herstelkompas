@@ -17,7 +17,7 @@ const { square } = $props();
         align-items: center;
 
         border-radius: 5px;
-        background-color: var(--primary-color-light);
+        background-color: var(--primary-color-dark);
         color: var(--color-white);
 
         user-select: none;
@@ -44,7 +44,7 @@ const { square } = $props();
         aspect-ratio: 1;
 
         border: 1.5px solid white;
-        border-radius: 50%;
+        border-radius: 20%;
 
         position: absolute;
         top: 0;

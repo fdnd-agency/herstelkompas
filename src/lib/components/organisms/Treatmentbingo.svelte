@@ -324,7 +324,7 @@
   padding: clamp(0.5rem, 1.2vmin, 0.9rem);
   text-align: center;
 
-  background-color: var(--primary-color-light);
+  background-color: var(--primary-color-dark);
   border: 2px solid transparent;
   border-radius: 5px;
 
