@@ -5,11 +5,23 @@ Herstelkompas is een digitaal webplatform, ontwikkeld met SvelteKit, dat cliënt
 
 Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Kerem Tutucu, Dylan van Nierop en Ties Beeftink, in opdracht van Zelfzorg aan Zee.
 
+
+# Demovideo
+
+Hieronder een demovideo waarin de applicatie wordt laten zien
+
+[Demovideo](https://vimeo.com/1157505344?share=copy&fl=sv&fe=ci)
+
+
 ---
 
 🔗 Live / Repo
-	•	Repository: https://github.com/fdnd-agency/herstelkompas
-	•	Live link: [herstelkompas.netlify.app](herstelkompas.netlify.app)
+
+
+Repository: https://github.com/fdnd-agency/herstelkompas
+
+
+Live link: [herstelkompas.netlify.app](herstelkompas.netlify.app)
 
 ---
 
