@@ -9,7 +9,7 @@ Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Ke
 
 🔗 Live / Repo
 	•	Repository: https://github.com/fdnd-agency/herstelkompas
-	•	Live link: (voeg hier jullie live URL toe, indien beschikbaar)
+	•	Live link: [herstelkompas.netlify.app](herstelkompas.netlify.app)
 
 ---
 
@@ -36,7 +36,8 @@ Het team bestaat uit Ties, Kerem en Dylan. Ieder teamlid ontwikkelde een eigen o
 
 Bijdragen (o.a.)	
 * Kerem - herontwerp en ontwikkeling van Client → Behandelingen → Bingokaart
-* Herwerking van Vragenlijst naar een duidelijke FAQ-achtige layout
+* Kerem - Herwerking van Vragenlijst naar een duidelijke FAQ-achtige layout
+* Dylan - Ontwikkeling van vragenlijst, Sidebar/Mobile Menu en Scans
 * Ties & Kerem → (Door)ontwikkeling van het ontwerp en de visuele richting
 * Team → Gezamenlijke front-end implementatie, optimalisaties en toegankelijkheid
 
