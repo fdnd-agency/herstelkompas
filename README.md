@@ -115,28 +115,34 @@ SvelteKit is een modern framework bovenop Svelte, met ondersteuning voor routing
 ---
 
 Installatie
-	1.	Clone de repository:
 
-git clone https://github.com/fdnd-agency/herstelkompas.git
+1.	Clone de repository:
 
-
-	2.	Ga naar de projectmap:
-
-cd herstelkompas
+`git clone https://github.com/fdnd-agency/herstelkompas.git`
 
 
-	3.	Installeer dependencies:
+2.	Ga naar de projectmap:
 
-npm install
-
-
-	4.	Start de development server:
-
-npm run dev
+`cd herstelkompas`
 
 
-	5.	Open in je browser:
+3.	Installeer dependencies:
+
+`npm install`
+
+
+4.	Start de development server:
+
+`npm run dev`
+
+
+5.	Open in je browser:
+
+
 	•	http://localhost:5173 (kan afwijken, check je terminal output)
+
+
+P.S. Een .env bestand met de correcte credentials is vereist voor lokaal gebruik van de applicatie.
 
 ---
 
