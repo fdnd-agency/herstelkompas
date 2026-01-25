@@ -6,7 +6,12 @@ Herstelkompas is een digitaal webplatform, ontwikkeld met SvelteKit, dat cliënt
 Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Kerem Tutucu, Dylan van Nierop en Ties Beeftink, in opdracht van Zelfzorg aan Zee.
 
 
-# Demovideo
+# Visuals/Demovideo
+
+| Desktop (Behandeling Detail) | Mobile (bingokaart) |
+|-------------|-----------|
+| <img src="https://github.com/user-attachments/assets/16f93ccb-ce3b-4bdb-9c21-6d3e00139b09" width="700"/> | <img src="https://github.com/user-attachments/assets/43569b03-6595-4957-8c30-9b427bfcce34" width="200"/> |
+
 
 Hieronder een demovideo waarin de applicatie wordt laten zien
 
