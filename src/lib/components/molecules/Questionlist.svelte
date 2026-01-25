@@ -1,49 +1,30 @@
 <script>
-  // Props: the survey data (array of { vraag, antwoord })
   export let vragenlijst = [];
 
-  // Formatter for answers:
-  // - Arrays become comma-separated strings
-  // - null/undefined becomes a fallback string
   export let format = (a) => {
     if (Array.isArray(a)) return a.join(", ");
     return a ?? "Geen antwoord ingevuld";
   };
 
-  // Safety: ensure we always loop over an array
   $: safeVragenlijst = Array.isArray(vragenlijst) ? vragenlijst : [];
 </script>
 
-<section class="survey" aria-label="Vragenlijst resultaten">
-  <table class="survey-table" aria-describedby="survey-desc">
-    <!-- Screen reader description for the table -->
-    <caption id="survey-desc" class="sr-only">
-      Overzicht van vragen en bijbehorende antwoorden. Tab om per item te navigeren.
-    </caption>
+<section class="survey">
+  <table class="survey-table">
+    <caption class="sr-only">Overzicht van vragen en bijbehorende antwoorden.</caption>
 
     <thead class="survey-header">
       <tr>
-        <th id="col-vraag" class="question-column" scope="col">Vraag</th>
-        <th id="col-antwoord" class="answer-column" scope="col">Antwoord</th>
+        <th scope="col" class="question-column">Vraag</th>
+        <th scope="col" class="answer-column">Antwoord</th>
       </tr>
     </thead>
 
     <tbody class="survey-list">
-      {#each safeVragenlijst as item, i (item?.vraag)}
-        <tr
-          class="survey-item"
-          tabindex="0"
-          aria-label={`Item ${i + 1}: ${item.vraag}`}
-        >
-          <!-- Question cell -->
-          <td class="question-column" headers="col-vraag">
-            {item.vraag}
-          </td>
-
-          <!-- Answer cell -->
-          <td class="answer-column" headers="col-antwoord">
-            {format(item.antwoord)}
-          </td>
+      {#each safeVragenlijst as item (item?.vraag)}
+        <tr class="survey-item">
+          <td class="question-column">{item.vraag}</td>
+          <td class="answer-column">{format(item.antwoord)}</td>
         </tr>
       {/each}
     </tbody>
