@@ -139,6 +139,7 @@ export const actions = {
             );
         }
         function getFeedback(currentCount, previousCount) {
+            console.log(previousCount)
             if (currentCount <= 2 && previousCount <= 2) {
                 return "Nagaan of de impuls voldoende is, of surfen de juiste stimulus is, kijken naar andere uitdagende activiteiten.";
             }
@@ -169,8 +170,8 @@ export const actions = {
         const latestTreatmentWithQuestionListFetch =  await fetch(latestQuestionlistURL)
         const latestTreatmentWithQuestionListReponseData = await latestTreatmentWithQuestionListFetch.json()
         let latestTreatmentWithQuestionListData = latestTreatmentWithQuestionListReponseData.data;
-
-        let countPositivePrevious = countPositive(latestTreatmentWithQuestionListData[0].vragenlijst)
+        let previousQuestions = latestTreatmentWithQuestionListData?.[0]?.vragenlijst ?? [];
+        let countPositivePrevious = countPositive(previousQuestions)
         let countPositiveCurrent = countPositive(newQuestionsarray)
         let feedbackMessage = getFeedback(countPositiveCurrent, countPositivePrevious);
         if (!feedbackMessage) {
