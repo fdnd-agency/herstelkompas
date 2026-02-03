@@ -32,7 +32,7 @@ We follow the **Gitflow by GitKraken**.
 - You **never merge your own PR**
 - Even for very small fixes (e.g. one line of code):
   - Another team member must review and merge
-- All work is merged into `dev`
+- All work is merged into `dev-2526`
 
 ### Issue Status
 
