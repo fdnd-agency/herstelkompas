@@ -24,6 +24,26 @@ We follow the **Gitflow by GitKraken**.
   **Example:** `feature/home-button`
 - Always use *Create Branch from Issue* so the issue is linked to the branch
 
+### Conventional Commits
+
+At FDND Agency, because of **Semantic Versioning**, we use **Conventional Commits**.  
+Conventional Commits is a specification: a set of rules that must be followed when writing commit messages.
+
+#### Allowed commit types
+
+- **build:** Changes that affect the build system or external dependencies
+- **chore:** Changes to the build process or auxiliary tools and libraries (e.g. documentation generation)
+- **ci:** Changes to CI configuration files and scripts (GitHub Actions, `netlify.toml`)
+- **docs:** Changes to documentation (e.g. `README.md`, `Handover.md`, Figma files, design rationale in the Wiki)
+- **feat:** Implementing a new feature
+- **fix:** Fixing a bug, style, or layout issue
+- **perf:** Code changes that improve performance
+- **refactor:** Code changes that neither fix a bug nor add a feature, but improve structure or readability
+- **style:** Changes that affect readability only (formatting, tabs, newlines)
+- **test:** Adding missing tests or correcting existing tests
+
+---
+
 ### Pull Requests & Merging
 
 - **Never merge directly into `main`**
