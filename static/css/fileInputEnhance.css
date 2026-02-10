@@ -1,0 +1,59 @@
+html.js-enabled .fileInputForm  {
+  margin-top: 0rem;
+  label.file-label {
+    width: 250px;
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    border: 3px solid black;
+    border: 3px solid var(--primary-color-dark);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #DEF0FC var(--url, none) center/cover;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #DEF0FC;
+    position: relative;
+
+    /* enable stacking */
+    span {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  input[type="file"] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    width: 250px;
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+  }
+
+  fieldset:has(input[type="file"]:focus-visible) {
+    label.file-label {
+      border-color: var(--primary-color-dark);
+      border-style: dashed;
+    }
+  }
+
+
+  input.input-file:valid+label.file-label::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(222, 240, 252, 0.6);
+    border-radius: inherit;
+  }
+
+  /* Volor var support is needed for the background replace with url */
+  @supports (color: var(--caniuse-var)) {
+    label.file-label {
+      background: #DEF0FC var(--url, none) center/cover;
+    }
+  }
+}
