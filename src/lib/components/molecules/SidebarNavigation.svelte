@@ -5,11 +5,11 @@
 </script>
 <nav class="nav-sidebar">
     <ul>
-        <SidebarLink name="Home" src="/" Svg={HomeIcon}/>
-        <SidebarLink name="Bingokaart" src="/bingokaart" Svg={BingoIcon}/>
-        <SidebarLink name="Vragenlijst" src="/vragenlijst" Svg={OrderedListIcon}/>
-        <SidebarLink name="Scans" src="/scans" Svg={BrainsIcon}/>
-        <SidebarLink name="Behandelingen" src="/behandelingen" Svg={LinechartIcon}/>
+        <SidebarLink name="Home" src="/deashboard" Svg={HomeIcon}/>
+        <SidebarLink name="Bingokaart" src="/deashboard/bingokaart" Svg={BingoIcon}/>
+        <SidebarLink name="Vragenlijst" src="/deashboard/vragenlijst" Svg={OrderedListIcon}/>
+        <SidebarLink name="Scans" src="/deashboard/scans" Svg={BrainsIcon}/>
+        <SidebarLink name="Behandelingen" src="/deashboard/behandelingen" Svg={LinechartIcon}/>
 
 
     </ul>
