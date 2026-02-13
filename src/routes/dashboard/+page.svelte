@@ -6,7 +6,7 @@
 <section class="welcome">
 	<h1>Welkom bij jouw omgeving!</h1>
 	<p>Maak een nieuwe behandeling door de bingokaart, vragenlijst of scans te updaten, of bekijk eerdere behandelingen via onderstaande link.</p>
-	<a href="/behandelingen" class="btn-primary">Bekijk eerdere behandelingen</a>
+	<a href="/dashboard/behandelingen" class="btn-primary">Bekijk eerdere behandelingen</a>
 </section>
 
 <style>

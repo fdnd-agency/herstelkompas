@@ -10,9 +10,9 @@
     
      <nav>
         <ul>
-            <li><a href="/dashboard">Afspraken</a></li>
-            <li><a href="/dashboard/scans">Scans</a></li>
-            <li><a href="/dashboard/behandelingen">Behandelingen</a></li>
+            <li><a href="/dashboard" data-sveltekit-prefetch>Afspraken</a></li>
+            <li><a href="/dashboard/scans" data-sveltekit-prefetch>Scans</a></li>
+            <li><a href="/dashboard/behandelingen" data-sveltekit-prefetch>Behandelingen</a></li>
         </ul>
     </nav>
     
