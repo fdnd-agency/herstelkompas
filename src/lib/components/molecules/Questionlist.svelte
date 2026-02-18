@@ -38,8 +38,6 @@
     {/if}
   {:else}
     <table class="survey-table">
-      <caption class="sr-only">Overzicht van vragen en bijbehorende antwoorden.</caption>
-
       <tbody class="survey-list">
         {#each safeVragenlijst as item (item?.vraag)}
           <tr class="survey-item">
@@ -53,19 +51,6 @@
 </section>
 
 <style>
-/* Screen-reader-only utility class */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* overlay + animatie */
 .overlay {
   position: fixed;
@@ -133,27 +118,12 @@
   margin: 0;
 }
 
-/* Base table layout */
 .survey-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-/* Hide the table header on mobile (visually) */
-.survey-header {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Make tbody behave like a block container on mobile */
 .survey-list {
   display: block;
 }
@@ -182,7 +152,6 @@
   animation: card-in 920ms var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-/* On mobile, make cells stack vertically */
 .question-column,
 .answer-column {
   display: block;
@@ -190,7 +159,6 @@
   border: 0;
 }
 
-/* "Label" text shown above the cell content (mobile) */
 .question-column::before,
 .answer-column::before {
   display: block;
@@ -243,26 +211,6 @@
   .survey-list {
     display: grid;
     gap: 5px;
-  }
-
-  .survey-header {
-    display: block;
-    border-bottom: 1px solid #dbe6f5;
-    color: #6d8bb8;
-    font-family: var(--font-medium);
-    font-size: 1rem;
-    margin-top: 1rem;
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 1rem 0 0;
-    clip: auto;
-    overflow: visible;
-    white-space: normal;
-  }
-
-  .survey-header tr {
-    padding: 0.75rem 24px;
   }
 
   .survey-list tr {
