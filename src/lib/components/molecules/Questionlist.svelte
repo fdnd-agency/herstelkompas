@@ -1,4 +1,6 @@
 <script>
+  import { goto } from "$app/navigation";
+
   export let vragenlijst = [];
 
   export let format = (a) => {
@@ -7,28 +9,47 @@
   };
 
   $: safeVragenlijst = Array.isArray(vragenlijst) ? vragenlijst : [];
+
+  let showOverlay = false;
+
+  function startSurvey() {
+    if (showOverlay) return;
+    showOverlay = true;
+    setTimeout(() => goto("/vragenlijst"), 1600);
+  }
 </script>
 
 <section class="survey">
-  <table class="survey-table">
-    <caption class="sr-only">Overzicht van vragen en bijbehorende antwoorden.</caption>
+  {#if safeVragenlijst.length === 0}
+    <button type="button" class="btn-primary" on:click={startSurvey}>
+      Vul de vragenlijst in
+    </button>
 
-    <thead class="survey-header">
-      <tr>
-        <th scope="col" class="question-column">Vraag</th>
-        <th scope="col" class="answer-column">Antwoord</th>
-      </tr>
-    </thead>
+    {#if showOverlay}
+      <div class="overlay">
+        <p class="overlayText">Onderweg naar de vragenlijst!</p>
 
-    <tbody class="survey-list">
-      {#each safeVragenlijst as item (item?.vraag)}
-        <tr class="survey-item">
-          <td class="question-column">{item.vraag}</td>
-          <td class="answer-column">{format(item.antwoord)}</td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+        <div class="orb">
+          <div class="wave one"></div>
+          <div class="wave two"></div>
+          <div class="wave three"></div>
+        </div>
+      </div>
+    {/if}
+  {:else}
+    <table class="survey-table">
+      <caption class="sr-only">Overzicht van vragen en bijbehorende antwoorden.</caption>
+
+      <tbody class="survey-list">
+        {#each safeVragenlijst as item (item?.vraag)}
+          <tr class="survey-item">
+            <td class="question-column">{item.vraag}</td>
+            <td class="answer-column">{format(item.antwoord)}</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  {/if}
 </section>
 
 <style>
@@ -45,6 +66,65 @@
   border: 0;
 }
 
+/* overlay + animatie */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(4, 22, 55, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.overlayText {
+  margin: 0;
+  color: var(--color-white);
+  font-weight: 700;
+  text-align: center;
+  font-size: var(--text-size-xl);
+}
+
+.orb {
+  position: relative;
+  width: min(16rem, 72vw);
+  height: min(16rem, 72vw);
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: var(--color-neutral-lighter);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+}
+
+.wave {
+  position: absolute;
+  top: 72%;
+  left: -50%;
+  width: 48rem;
+  height: 48rem;
+  border-radius: 35%;
+  animation:
+    waves var(--spin, 9000ms) linear infinite,
+    rise 1600ms ease-in forwards;
+  transform-origin: center;
+}
+
+.wave.one { background: var(--primary-color-dark); opacity: 0.40; --spin: 7000ms; }
+.wave.two { background: var(--primary-color-light); opacity: 0.55; --spin: 9000ms; }
+.wave.three { background: var(--primary-color-dark); opacity: 0.28; --spin: 12000ms; }
+
+@keyframes waves { to { transform: rotate(360deg); } }
+@keyframes rise { to { top: 8%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay .orb,
+  .overlay .wave {
+    animation: none;
+    display: none;
+  }
+}
+
 /* ===========================================================
    SURVEY – MOBILE FIRST
 =========================================================== */
@@ -58,17 +138,6 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-}
-
-
-/* Title styling (if used elsewhere in markup) */
-.survey-title {
-  font-size: clamp(0.85rem, 2.8vw, var(--text-size-sm));
-  color: var(--primary-color-dark);
-  font-family: var(--font-medium);
-  margin-bottom: 1rem;
-  /* padding-inline: 1.25rem; */
-  text-align: left;
 }
 
 /* Hide the table header on mobile (visually) */
@@ -100,45 +169,17 @@
   padding: 1rem;
   margin: 0 0 0.75rem;
 
-  /* NOTE: This nested rule seems intended for .survey-list layout,
-     but it's currently placed inside .survey-item (CSS nesting).
-     Keep as-is if you rely on nesting support. */
-  .survey-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 0 2rem 0;
-  }
-
-  /* Default border (focus will override) */
   border: 2px solid transparent;
 
-  /* Entry animation defaults */
   opacity: 0;
   transform: translateY(12px) scale(0.98);
 
-  /* Staggered delay (with sibling-index support if available) */
   --delay: 0s;
   @supports (animation-delay: calc(sibling-index() * 80ms)) {
     --delay: calc(sibling-index() * 160ms);
   }
 
   animation: card-in 920ms var(--delay) cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-
-/* Keyboard focus styling for the row "card" */
-.survey-item:focus,
-.survey-item:focus-visible {
-  outline: none;
-  border-color: #143a8b;
-  box-shadow: 0 0 0 4px rgba(20, 58, 139, 0.25);
-}
-
-/* Remove focus styles when focus isn't keyboard (mouse click) */
-.survey-item:focus:not(:focus-visible) {
-  box-shadow: none;
-  border-color: transparent;
 }
 
 /* On mobile, make cells stack vertically */
@@ -167,52 +208,6 @@
   margin-top: 0.75rem;
 }
 
-/* Remove inline padding for the title (if used) */
-.survey-title {
-  padding-inline: 0;
-}
-
-/* Make table header visible (override the "hidden" header) */
-.survey-header {
-  display: block;
-  border-bottom: 1px solid #dbe6f5;
-  color: #6d8bb8;
-  font-family: var(--font-medium);
-  font-size: 0.95rem;
-  margin-top: 1rem;
-}
-
-/* Header row layout */
-.survey-header tr {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-}
-
-.survey-header tr th {
-  text-align: left;
-}
-
-/* Spacing between items */
-.survey-list {
-  padding: 0;
-  gap: 0.75rem;
-  /* padding-top: 3rem; */
-}
-
-/* Turn each TR into a "card" (mobile layout) */
-.survey-list tr {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  padding: 1rem 1.25rem;
-  background-color: #eef6ff;
-  border-radius: 12px;
-}
-
-/* Typography for question + answer text */
 .question-column,
 .answer-column {
   font-size: 0.95rem;
@@ -221,9 +216,6 @@
   line-height: 1.25;
 }
 
-/* =========================
-   REDUCED MOTION
-========================= */
 @media (prefers-reduced-motion: reduce) {
   .survey-item {
     animation: none;
@@ -232,7 +224,6 @@
   }
 }
 
-/* Card entry animation */
 @keyframes card-in {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
@@ -249,18 +240,11 @@
     padding-right: 0;
   }
 
-  /* Use a grid layout on tablet */
   .survey-list {
     display: grid;
     gap: 5px;
   }
 
-  .survey-title {
-    padding-inline: 0rem;
-  }
-
-
-  /* Show header row on tablet */
   .survey-header {
     display: block;
     border-bottom: 1px solid #dbe6f5;
@@ -268,27 +252,22 @@
     font-family: var(--font-medium);
     font-size: 1rem;
     margin-top: 1rem;
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 1rem 0 0;
+    clip: auto;
+    overflow: visible;
+    white-space: normal;
   }
-
 
   .survey-header tr {
     padding: 0.75rem 24px;
   }
 
-  .survey-header tr th {
-    text-align: left;
-  }
-
-  .survey-list {
-    padding: 0 0rem;
-    gap: 0.75rem;
-    /* padding-top: 3rem; */
-  }
-
-  /* Card styling for each row */
   .survey-list tr {
     padding: 1.2rem 1.5rem;
-    background-color: #eef6ff; /* Added background color */
+    background-color: #eef6ff;
     border-radius: 12px;
   }
 
@@ -298,7 +277,6 @@
     border-radius: 1rem;
   }
 
-  /* Slightly adjust label sizes on tablet */
   .question-column::before,
   .answer-column::before {
     font-size: var(--text-size-xs);

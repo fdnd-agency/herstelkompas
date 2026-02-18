@@ -7,7 +7,7 @@
   // Parse the activity date
   const datum = new Date(activiteit.datum);
 
-  // Full date (e.g. "20 januari 2026")
+  // Full date (e.g. "20 januar)
   const formattedDate = datum.toLocaleDateString("nl-NL", {
     day: "numeric",
     month: "long",
@@ -22,92 +22,61 @@
 
   // Tab configuration (id + label + icon)
   const tabs = [
-    { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/bingo.svg' },
-    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/ordenedlist.svg' },
-    { id: 'scans', label: 'Scans', icon: '/icons/brain.svg' }
+    { id: "bingokaart", label: "Bingo kaart", icon: "/icons/bingo.svg" },
+    { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/ordenedlist.svg" },
+    { id: "scans", label: "Scans", icon: "/icons/brain.svg" }
   ];
 
-  // Currently active tab
+
   let activeTab = "bingokaart";
 
-  // References to the tab buttons (used for keyboard navigation)
-  let tabButtons = [];
+  
+  const toBool = (v) => v === true || v === 1 || v === "1" || v === "true";
 
-  // Local scans data derived from the activity object
-  let scans = activiteit.scans;
 
-  // Select a tab by index and move focus to the selected tab button
-  function selectTab(index) {
-    activeTab = tabs[index].id;
-    tabButtons[index]?.focus();
-  }
+  $: scans = activiteit?.scans ?? [];
+  $: vragenlijst = activiteit?.vragenlijst ?? null;
 
-  // Handle keyboard navigation within the tablist (ARIA tabs pattern)
-  function onTabKeydown(e, index) {
-    const last = tabs.length - 1;
-
-    switch (e.key) {
-      case "ArrowRight":
-      case "ArrowDown":
-        e.preventDefault();
-        selectTab(index === last ? 0 : index + 1);
-        break;
-
-      case "ArrowLeft":
-      case "ArrowUp":
-        e.preventDefault();
-        selectTab(index === 0 ? last : index - 1);
-        break;
-
-      case "Home":
-        e.preventDefault();
-        selectTab(0);
-        break;
-
-      case "End":
-        e.preventDefault();
-        selectTab(last);
-        break;
-    }
-  }
+ 
+  $: bingokaart = (activiteit?.bingokaart ?? []).map((item) => ({
+    ...item,
+    checked: toBool(item.checked)
+  }));
 </script>
 
 <section class="behandeling">
-  <!-- TABS NAVIGATION -->
-  <nav class="page-nav" aria-label="Behandeling tabs">
-    <ul class="tablist" role="tablist" aria-orientation="horizontal">
-      {#each tabs as tab, i (tab.id)}
-        <li class="tabitem" role="presentation">
-          <button
-            bind:this={tabButtons[i]}
-            type="button"
-            class="tabbutton"
-            class:active={activeTab === tab.id}
-            role="tab"
-            id={`${tab.id}-tab`}
-            aria-selected={activeTab === tab.id}
-            aria-controls={`${tab.id}-panel`}
-            tabindex={activeTab === tab.id ? 0 : -1}
-            on:click={() => selectTab(i)}
-            on:keydown={(e) => onTabKeydown(e, i)}
-          >
-            <!-- Decorative icon (hidden from screen readers) -->
-            <img height="19" src={tab.icon} alt="" aria-hidden="true" />
-            <span>{tab.label}</span>
-          </button>
-        </li>
-      {/each}
-    </ul>
+
+  <nav class="page-nav">
+    <fieldset class="tabs-fieldset">
+      <legend class="sr-only">Behandeling tabs</legend>
+
+      <ul class="tablist">
+        {#each tabs as tab (tab.id)}
+          <li class="tabitem">
+            <input
+              class="tab-radio"
+              type="radio"
+              name="behandeling-tabs"
+              id={`tab-${tab.id}`}
+              value={tab.id}
+              bind:group={activeTab}
+            />
+
+            <label class="tabbutton" for={`tab-${tab.id}`}>
+              <img height="19" src={tab.icon} alt="" />
+              <span>{tab.label}</span>
+            </label>
+          </li>
+        {/each}
+      </ul>
+    </fieldset>
   </nav>
 
   <!-- BINGO CARD PANEL -->
   <section
     id="bingokaart-panel"
     class="bingokaart"
-    role="tabpanel"
-    aria-labelledby="bingokaart-tab"
     hidden={activeTab !== "bingokaart"}
-    tabindex="0"
   >
     <header class="bingokaart-header">
       <h2 class="bingokaart-title">{formattedDate}</h2>
@@ -116,21 +85,21 @@
       </p>
     </header>
 
-    <!-- Bingo grid list -->
-    <ul class="kaart-grid" role="list" aria-label={`Bingokaart items van ${formattedDate}`}>
-      {#each activiteit.bingokaart as item, i (item.activiteit)}
+
+    <ul class="kaart-grid">
+      {#each bingokaart as item, i (item.activiteit)}
         <li style={`--i:${i}`}>
-          <button
-            type="button"
-            class="kaart-btn"
-            class:checked={item.checked}
-            aria-pressed={item.checked}
-            aria-label={`${item.activiteit}. ${item.checked ? "Afgevinkt" : "Niet afgevinkt"}`}
-          >
-            <!-- Corner indicator dot -->
-            <span class="dot" aria-hidden="true"></span>
-            <span class="kaart-text">{item.activiteit}</span>
-          </button>
+          <article class="kaart-card" class:checked={item.checked}>
+            <span class="dot"></span>
+
+            <!-- Status in dezelfde tekstflow, zodat SR dit netjes meeleest -->
+            <p class="kaart-text">
+              {item.activiteit}
+              <span class="sr-only">
+                {item.checked ? ", afgevinkt" : ", niet afgevinkt"}
+              </span>
+            </p>
+          </article>
         </li>
       {/each}
     </ul>
@@ -140,16 +109,12 @@
   <section
     id="vragenlijst-panel"
     class="bingokaart"
-    role="tabpanel"
-    aria-labelledby="vragenlijst-tab"
     hidden={activeTab !== "vragenlijst"}
-    tabindex="0"
   >
     <header class="bingokaart-header">
       <h2 class="bingokaart-title">{formattedDate}</h2>
 
-      <!-- Show different UI depending on whether the survey exists -->
-      {#if activiteit.vragenlijst}
+      {#if vragenlijst}
         <p class="bingokaart-subtitle">
           Hieronder zie je jouw antwoorden op de vragenlijst van {formattedDate}.
         </p>
@@ -157,35 +122,48 @@
         <p class="bingokaart-subtitle">
           Op {formattedDate} is er nog geen vragenlijst ingevuld.
         </p>
-        <a href="/vragenlijst" class="btn-primary">Vul de vragenlijst in</a>
       {/if}
     </header>
 
-    <!-- Render the Questionlist component only if the survey exists -->
-    {#if activiteit.vragenlijst}
-      <QuestionList vragenlijst={activiteit.vragenlijst ?? []} />
-    {/if}
+<QuestionList vragenlijst={vragenlijst ?? []} />
   </section>
 
   <!-- SCANS PANEL -->
   <section
     id="scans-panel"
-    role="tabpanel"
-    aria-labelledby="scans-tab"
     class="bingokaart scans {activeTab !== 'scans' ? 'hidden' : ''}"
   >
-    <!-- Scans detail component -->
     <ScansDetail scans={scans} shortDate={shortDate} formattedDate={formattedDate} />
   </section>
 </section>
 
 <style>
+/* Screen-reader-only utility class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* =========================
    TABS NAVIGATION
 ========================= */
 .page-nav {
   position: relative;
   padding-bottom: 10px;
+}
+
+.tabs-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .tablist {
@@ -215,7 +193,19 @@
   border-radius: 3px;
 }
 
-/* Tab button styling */
+.tabitem {
+  position: relative;
+}
+
+/* Radio visually hidden but still focusable */
+.tab-radio {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+/* Tab button styling (label) */
 .tabbutton {
   background: none;
   border: none;
@@ -233,18 +223,18 @@
 }
 
 /* Inactive tab appearance */
-.tabbutton:not(.active) {
+.tab-radio:not(:checked) + .tabbutton {
   opacity: 0.75;
 }
 
 /* Active tab appearance */
-.tabbutton.active {
+.tab-radio:checked + .tabbutton {
   opacity: 1;
   color: var(--primary-color-dark);
 }
 
 /* Active tab underline indicator */
-.tabbutton.active::after {
+.tab-radio:checked + .tabbutton::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -258,7 +248,7 @@
 }
 
 /* Visible focus ring for keyboard users */
-.tabbutton:focus-visible {
+.tab-radio:focus-visible + .tabbutton {
   outline: 3px solid var(--primary-color-light);
   outline-offset: 4px;
   border-radius: 6px;
@@ -310,9 +300,9 @@
 }
 
 /* =========================
-   CARD BUTTON
+   CARD (READ-ONLY)
 ========================= */
-.kaart-btn {
+.kaart-card {
   width: 100%;
   height: 100%;
   position: relative;
@@ -328,20 +318,18 @@
   border: 2px solid transparent;
   border-radius: 5px;
 
-  cursor: pointer;
-
   opacity: 0;
   transform: translateY(12px) scale(0.98);
 }
 
 /* Only animate when the panel is visible */
-.bingokaart:not([hidden]) .kaart-btn {
+.bingokaart:not([hidden]) .kaart-card {
   animation: card-in 420ms cubic-bezier(.2,.8,.2,1) forwards;
   animation-delay: calc(var(--i) * 80ms);
 }
 
 /* Reset animation when panel is hidden */
-.bingokaart[hidden] .kaart-btn {
+.bingokaart[hidden] .kaart-card {
   animation: none;
   opacity: 0;
   transform: translateY(12px) scale(0.98);
@@ -387,25 +375,16 @@
 }
 
 /* Checked state */
-.kaart-btn.checked,
-.kaart-btn[aria-pressed="true"] {
+.kaart-card.checked {
   background-color: var(--color-green-accent);
 }
 
-.kaart-btn.checked .dot,
-.kaart-btn[aria-pressed="true"] .dot {
+.kaart-card.checked .dot {
   background-color: var(--color-white);
 }
 
-/* Focus styling for card buttons */
-.kaart-btn:focus-visible {
-  outline: none;
-  border-color: var(--primary-color-dark);
-  box-shadow: 0 0 0 4px rgba(20, 58, 139, 0.25);
-}
-
 /* Optional hover effect */
-.kaart-btn:hover {
+.kaart-card:hover {
   filter: brightness(0.98);
 }
 
@@ -413,14 +392,14 @@
    ACCESSIBILITY PREFERENCES
 ========================= */
 @media (prefers-contrast: more) {
-  .kaart-btn {
+  .kaart-card {
     border-color: var(--color-neutral-darker);
   }
 }
 
 /* Disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .kaart-btn {
+  .kaart-card {
     animation: none !important;
     opacity: 1;
     transform: none;
@@ -485,7 +464,7 @@
   }
 }
 
-/*  Quick Fix [Dylan]
+/* Quick Fix [Dylan]
    Make the survey panel scrollable within the viewport */
 #vragenlijst-panel {
   padding-top: clamp(2rem, 5vw, 3rem);
