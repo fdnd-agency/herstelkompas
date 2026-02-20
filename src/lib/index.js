@@ -20,3 +20,5 @@ export { default as FileDescInput } from './components/atoms/FileDescInput.svelt
 export { default as DetailScanToggle } from './components/atoms/DetailScanToggle.svelte'
 export { default as BingoAlert } from './components/atoms/BingoAlert.svelte'
 export { default as BingoSquare } from './components/atoms/BingoSquare.svelte'
+export { default as InfoCard } from './components/atoms/InfoCard.svelte'
+export { default as ButtonLink} from './components/atoms/ButtonLink.svelte'
