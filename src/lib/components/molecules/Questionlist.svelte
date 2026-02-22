@@ -12,7 +12,10 @@
 
   let showOverlay = false;
 
-  function startSurvey() {
+  function startSurvey(event) {
+
+    event?.preventDefault();
+
     if (showOverlay) return;
     showOverlay = true;
     setTimeout(() => goto("/vragenlijst"), 1600);
@@ -21,9 +24,14 @@
 
 <section class="survey">
   {#if safeVragenlijst.length === 0}
-    <button type="button" class="btn-primary" on:click={startSurvey}>
+    <!-- baseline werkt zonder JS -->
+    <a
+      href="/vragenlijst"
+      class="btn-primary"
+      on:click={startSurvey}
+    >
       Vul de vragenlijst in
-    </button>
+    </a>
 
     {#if showOverlay}
       <div class="overlay">
