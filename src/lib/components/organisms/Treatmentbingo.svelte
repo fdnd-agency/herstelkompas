@@ -1,113 +1,58 @@
 <script>
-  export let activiteit;
-  export let QuestionList;
-  export let ScansDetail;
+    export let activiteit;
+    export let QuestionList;
+    export let ScansDetail;
 
-  const datum = new Date(activiteit.datum);
+    const datum = new Date(activiteit.datum);
 
-  const formattedDate = datum.toLocaleDateString("nl-NL", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
+    const formattedDate = datum.toLocaleDateString("nl-NL", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
 
-  const shortDate = datum.toLocaleDateString("nl-NL", {
-    day: "numeric",
-    month: "long"
-  });
+    const shortDate = datum.toLocaleDateString("nl-NL", {
+        day: "numeric",
+        month: "long"
+    });
 
-  const tabs = [
-    { id: "bingokaart", label: "Bingo kaart", icon: "/icons/bingo.svg" },
-    { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/ordenedlist.svg" },
-    { id: "scans", label: "Scans", icon: "/icons/brain.svg" }
-  ];
+    const tabs = [
+        { id: "bingokaart", label: "Bingo kaart", icon: "/icons/bingo.svg" },
+        { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/ordenedlist.svg" },
+        { id: "scans", label: "Scans", icon: "/icons/brain.svg" }
+    ];
 
-  const toBool = (v) => v === true || v === 1 || v === "1" || v === "true";
+    /**
+     * Normalizes different truthy values from the data source
+     * into a strict boolean for rendering and styling.
+     */
+    const toBool = (value) =>
+        value === true || value === 1 || value === "1" || value === "true";
 
-  $: scans = activiteit?.scans ?? [];
-  $: vragenlijst = activiteit?.vragenlijst ?? null;
+    /**
+     * Derived reactive state for the scans panel.
+     * Guarantees that the component always receives an array.
+     */
+    $: scans = activiteit?.scans ?? [];
 
-  $: bingokaart = (activiteit?.bingokaart ?? []).map((item) => ({
-    ...item,
-    checked: toBool(item.checked)
-  }));
+    /**
+     * Derived reactive state for the question list.
+     * Keeps the original value when available and falls back to null
+     * so the template can clearly distinguish between filled and empty states.
+     */
+    $: vragenlijst = activiteit?.vragenlijst ?? null;
+
+    /**
+     * Derived and normalized bingo card data.
+     * Maps over the incoming items to preserve the original object shape,
+     * while converting the checked value into a strict boolean so the UI
+     * can reliably apply checked styling and state.
+     */
+    $: bingokaart = (activiteit?.bingokaart ?? []).map((item) => ({
+        ...item,
+        checked: toBool(item.checked)
+    }));
 </script>
-
-<section class="behandeling">
-  <nav class="page-nav">
-    <fieldset class="tabs-fieldset">
-      <input
-        class="tab-radio"
-        type="radio"
-        name="behandeling-tabs"
-        id="tab-bingokaart"
-        checked
-      />
-      <input
-        class="tab-radio"
-        type="radio"
-        name="behandeling-tabs"
-        id="tab-vragenlijst"
-      />
-      <input class="tab-radio" type="radio" name="behandeling-tabs" id="tab-scans" />
-
-      <ul class="tablist">
-        {#each tabs as tab (tab.id)}
-          <li class="tabitem">
-            <label class="tabbutton" for={`tab-${tab.id}`}>
-              <img height="19" src={tab.icon} alt="" />
-              <span>{tab.label}</span>
-            </label>
-          </li>
-        {/each}
-      </ul>
-
-      <div class="tabpanels">
-        <section id="bingokaart-panel" class="bingokaart tabpanel">
-          <header class="bingokaart-header">
-            <h2 class="bingokaart-title">{formattedDate}</h2>
-            <p class="bingokaart-subtitle">
-              Hieronder info over de bingokaart van {formattedDate}.
-            </p>
-          </header>
-
-          <ul class="kaart-grid">
-            {#each bingokaart as item, i (item.activiteit)}
-              <li style={`--i:${i}`}>
-                <article class="kaart-card" class:checked={item.checked}>
-                  <span class="dot"></span>
-                  <p class="kaart-text">{item.activiteit}</p>
-                </article>
-              </li>
-            {/each}
-          </ul>
-        </section>
-
-        <section id="vragenlijst-panel" class="bingokaart tabpanel">
-          <header class="bingokaart-header">
-            <h2 class="bingokaart-title">{formattedDate}</h2>
-
-            {#if vragenlijst}
-              <p class="bingokaart-subtitle">
-                Hieronder zie je jouw antwoorden op de vragenlijst van {formattedDate}.
-              </p>
-            {:else}
-              <p class="bingokaart-subtitle">
-                Op {formattedDate} is er nog geen vragenlijst ingevuld.
-              </p>
-            {/if}
-          </header>
-
-          <QuestionList vragenlijst={vragenlijst ?? []} />
-        </section>
-
-        <section id="scans-panel" class="bingokaart scans tabpanel">
-          <ScansDetail scans={scans} shortDate={shortDate} formattedDate={formattedDate} />
-        </section>
-      </div>
-    </fieldset>
-  </nav>
-</section>
 
 <style>
 /* =========================
