@@ -1,183 +1,58 @@
 <script>
-  // Props passed into this component
-  export let activiteit;
-  export let QuestionList;
-  export let ScansDetail;
+    export let activiteit;
+    export let QuestionList;
+    export let ScansDetail;
 
-  // Parse the activity date
-  const datum = new Date(activiteit.datum);
+    const datum = new Date(activiteit.datum);
 
-  // Full date (e.g. "20 januari 2026")
-  const formattedDate = datum.toLocaleDateString("nl-NL", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
+    const formattedDate = datum.toLocaleDateString("nl-NL", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
 
-  // Short date (e.g. "20 januari")
-  const shortDate = datum.toLocaleDateString("nl-NL", {
-    day: "numeric",
-    month: "long"
-  });
+    const shortDate = datum.toLocaleDateString("nl-NL", {
+        day: "numeric",
+        month: "long"
+    });
 
-  // Tab configuration (id + label + icon)
-  const tabs = [
-    { id: 'bingokaart', label: 'Bingo kaart', icon: '/icons/bingo.svg' },
-    { id: 'vragenlijst', label: 'Vragenlijst', icon: '/icons/ordenedlist.svg' },
-    { id: 'scans', label: 'Scans', icon: '/icons/brain.svg' }
-  ];
+    const tabs = [
+        { id: "bingokaart", label: "Bingo kaart", icon: "/icons/bingo.svg" },
+        { id: "vragenlijst", label: "Vragenlijst", icon: "/icons/ordenedlist.svg" },
+        { id: "scans", label: "Scans", icon: "/icons/brain.svg" }
+    ];
 
-  // Currently active tab
-  let activeTab = "bingokaart";
+    /**
+     * Normalizes different truthy values from the data source
+     * into a strict boolean for rendering and styling.
+     */
+    const toBool = (value) =>
+        value === true || value === 1 || value === "1" || value === "true";
 
-  // References to the tab buttons (used for keyboard navigation)
-  let tabButtons = [];
+    /**
+     * Derived reactive state for the scans panel.
+     * Guarantees that the component always receives an array.
+     */
+    $: scans = activiteit?.scans ?? [];
 
-  // Local scans data derived from the activity object
-  let scans = activiteit.scans;
+    /**
+     * Derived reactive state for the question list.
+     * Keeps the original value when available and falls back to null
+     * so the template can clearly distinguish between filled and empty states.
+     */
+    $: vragenlijst = activiteit?.vragenlijst ?? null;
 
-  // Select a tab by index and move focus to the selected tab button
-  function selectTab(index) {
-    activeTab = tabs[index].id;
-    tabButtons[index]?.focus();
-  }
-
-  // Handle keyboard navigation within the tablist (ARIA tabs pattern)
-  function onTabKeydown(e, index) {
-    const last = tabs.length - 1;
-
-    switch (e.key) {
-      case "ArrowRight":
-      case "ArrowDown":
-        e.preventDefault();
-        selectTab(index === last ? 0 : index + 1);
-        break;
-
-      case "ArrowLeft":
-      case "ArrowUp":
-        e.preventDefault();
-        selectTab(index === 0 ? last : index - 1);
-        break;
-
-      case "Home":
-        e.preventDefault();
-        selectTab(0);
-        break;
-
-      case "End":
-        e.preventDefault();
-        selectTab(last);
-        break;
-    }
-  }
+    /**
+     * Derived and normalized bingo card data.
+     * Maps over the incoming items to preserve the original object shape,
+     * while converting the checked value into a strict boolean so the UI
+     * can reliably apply checked styling and state.
+     */
+    $: bingokaart = (activiteit?.bingokaart ?? []).map((item) => ({
+        ...item,
+        checked: toBool(item.checked)
+    }));
 </script>
-
-<section class="behandeling">
-  <!-- TABS NAVIGATION -->
-  <nav class="page-nav" aria-label="Behandeling tabs">
-    <ul class="tablist" role="tablist" aria-orientation="horizontal">
-      {#each tabs as tab, i (tab.id)}
-        <li class="tabitem" role="presentation">
-          <button
-            bind:this={tabButtons[i]}
-            type="button"
-            class="tabbutton"
-            class:active={activeTab === tab.id}
-            role="tab"
-            id={`${tab.id}-tab`}
-            aria-selected={activeTab === tab.id}
-            aria-controls={`${tab.id}-panel`}
-            tabindex={activeTab === tab.id ? 0 : -1}
-            on:click={() => selectTab(i)}
-            on:keydown={(e) => onTabKeydown(e, i)}
-          >
-            <!-- Decorative icon (hidden from screen readers) -->
-            <img height="19" src={tab.icon} alt="" aria-hidden="true" />
-            <span>{tab.label}</span>
-          </button>
-        </li>
-      {/each}
-    </ul>
-  </nav>
-
-  <!-- BINGO CARD PANEL -->
-  <section
-    id="bingokaart-panel"
-    class="bingokaart"
-    role="tabpanel"
-    aria-labelledby="bingokaart-tab"
-    hidden={activeTab !== "bingokaart"}
-    tabindex="0"
-  >
-    <header class="bingokaart-header">
-      <h2 class="bingokaart-title">{formattedDate}</h2>
-      <p class="bingokaart-subtitle">
-        Hieronder info over de bingokaart van {formattedDate}.
-      </p>
-    </header>
-
-    <!-- Bingo grid list -->
-    <ul class="kaart-grid" role="list" aria-label={`Bingokaart items van ${formattedDate}`}>
-      {#each activiteit.bingokaart as item, i (item.activiteit)}
-        <li style={`--i:${i}`}>
-          <button
-            type="button"
-            class="kaart-btn"
-            class:checked={item.checked}
-            aria-pressed={item.checked}
-            aria-label={`${item.activiteit}. ${item.checked ? "Afgevinkt" : "Niet afgevinkt"}`}
-          >
-            <!-- Corner indicator dot -->
-            <span class="dot" aria-hidden="true"></span>
-            <span class="kaart-text">{item.activiteit}</span>
-          </button>
-        </li>
-      {/each}
-    </ul>
-  </section>
-
-  <!-- SURVEY (QUESTION LIST) PANEL -->
-  <section
-    id="vragenlijst-panel"
-    class="bingokaart"
-    role="tabpanel"
-    aria-labelledby="vragenlijst-tab"
-    hidden={activeTab !== "vragenlijst"}
-    tabindex="0"
-  >
-    <header class="bingokaart-header">
-      <h2 class="bingokaart-title">{formattedDate}</h2>
-
-      <!-- Show different UI depending on whether the survey exists -->
-      {#if activiteit.vragenlijst}
-        <p class="bingokaart-subtitle">
-          Hieronder zie je jouw antwoorden op de vragenlijst van {formattedDate}.
-        </p>
-      {:else}
-        <p class="bingokaart-subtitle">
-          Op {formattedDate} is er nog geen vragenlijst ingevuld.
-        </p>
-        <a href="/vragenlijst" class="btn-primary">Vul de vragenlijst in</a>
-      {/if}
-    </header>
-
-    <!-- Render the Questionlist component only if the survey exists -->
-    {#if activiteit.vragenlijst}
-      <QuestionList vragenlijst={activiteit.vragenlijst ?? []} />
-    {/if}
-  </section>
-
-  <!-- SCANS PANEL -->
-  <section
-    id="scans-panel"
-    role="tabpanel"
-    aria-labelledby="scans-tab"
-    class="bingokaart scans {activeTab !== 'scans' ? 'hidden' : ''}"
-  >
-    <!-- Scans detail component -->
-    <ScansDetail scans={scans} shortDate={shortDate} formattedDate={formattedDate} />
-  </section>
-</section>
 
 <style>
 /* =========================
@@ -186,6 +61,20 @@
 .page-nav {
   position: relative;
   padding-bottom: 10px;
+}
+
+.tabs-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Radio visually hidden but still focusable */
+.tab-radio {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
 }
 
 .tablist {
@@ -209,13 +98,17 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(220px, 60%, 520px);
+  width: clamp(270px, 60%, 520px);
   height: 5px;
   background-color: var(--color-neutral-lighter);
   border-radius: 3px;
 }
 
-/* Tab button styling */
+.tabitem {
+  position: relative;
+}
+
+/* Tab button styling (label) */
 .tabbutton {
   background: none;
   border: none;
@@ -230,21 +123,21 @@
   gap: 0.25rem;
   position: relative;
   cursor: pointer;
-}
-
-/* Inactive tab appearance */
-.tabbutton:not(.active) {
   opacity: 0.75;
 }
 
-/* Active tab appearance */
-.tabbutton.active {
+/* Active tab appearance (based on checked input) */
+#tab-bingokaart:checked ~ .tablist label[for="tab-bingokaart"],
+#tab-vragenlijst:checked ~ .tablist label[for="tab-vragenlijst"],
+#tab-scans:checked ~ .tablist label[for="tab-scans"] {
   opacity: 1;
   color: var(--primary-color-dark);
 }
 
 /* Active tab underline indicator */
-.tabbutton.active::after {
+#tab-bingokaart:checked ~ .tablist label[for="tab-bingokaart"]::after,
+#tab-vragenlijst:checked ~ .tablist label[for="tab-vragenlijst"]::after,
+#tab-scans:checked ~ .tablist label[for="tab-scans"]::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -257,11 +150,23 @@
   z-index: 1;
 }
 
-/* Visible focus ring for keyboard users */
-.tabbutton:focus-visible {
-  outline: 3px solid var(--primary-color-light);
-  outline-offset: 4px;
-  border-radius: 6px;
+/* =========================
+   PANELS 
+========================= */
+.tabpanels .tabpanel {
+  display: none;
+}
+
+#tab-bingokaart:checked ~ .tabpanels #bingokaart-panel {
+  display: block;
+}
+
+#tab-vragenlijst:checked ~ .tabpanels #vragenlijst-panel {
+  display: block;
+}
+
+#tab-scans:checked ~ .tabpanels #scans-panel {
+  display: block;
 }
 
 /* =========================
@@ -290,8 +195,8 @@
    BINGO GRID (3x3)
 ========================= */
 .kaart-grid {
-  --cell: clamp(93px, 16vmin, 150px);
-  --gap: clamp(0.25rem, 1vmin, 0.75rem);
+  --cell: clamp(95px, 14vmin, 150px);
+  --gap: clamp(0.2rem, 0.8vmin, 0.75rem);
 
   display: grid;
   grid-template-columns: repeat(3, var(--cell));
@@ -305,49 +210,42 @@
 
 .kaart-grid li {
   width: var(--cell);
-  height: calc(var(--cell) * 0.84);
+  height: auto;
+  min-height: calc(var(--cell) * 0.84);
   list-style: none;
 }
 
 /* =========================
-   CARD BUTTON
+   CARD (READ-ONLY)
 ========================= */
-.kaart-btn {
+.kaart-card {
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: clamp(0.5rem, 1.2vmin, 0.9rem);
+  padding: clamp(0.55rem, 1.8vmin, 1rem);
   text-align: center;
 
   background-color: var(--primary-color-dark);
   border: 2px solid transparent;
-  border-radius: 5px;
-
-  cursor: pointer;
+  border-radius: 6px;
 
   opacity: 0;
   transform: translateY(12px) scale(0.98);
+  animation: none;
 }
 
-/* Only animate when the panel is visible */
-.bingokaart:not([hidden]) .kaart-btn {
+/* Animate only when Bingo panel is active */
+#tab-bingokaart:checked ~ .tabpanels #bingokaart-panel .kaart-card {
   animation: card-in 420ms cubic-bezier(.2,.8,.2,1) forwards;
   animation-delay: calc(var(--i) * 80ms);
 }
 
-/* Reset animation when panel is hidden */
-.bingokaart[hidden] .kaart-btn {
-  animation: none;
-  opacity: 0;
-  transform: translateY(12px) scale(0.98);
-}
-
-/* Enter animation */
 @keyframes card-in {
   to {
     opacity: 1;
@@ -358,11 +256,12 @@
 /* Card text */
 .kaart-text {
   margin: 0;
-  font-size: clamp(0.6rem, 1.8vmin, 1rem);
-  line-height: 1.25;
+  font-size: clamp(0.5rem, 1.5vmin, 1rem);
+  line-height: 1.2;
   font-family: var(--font-medium);
   color: var(--color-white);
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Corner dot indicator */
@@ -378,7 +277,6 @@
   border: 1px solid var(--color-white);
 }
 
-/* Slightly larger dot on wider screens */
 @media (min-width: 600px) {
   .dot {
     width: clamp(9px, 1.3vmin, 11px);
@@ -387,40 +285,22 @@
 }
 
 /* Checked state */
-.kaart-btn.checked,
-.kaart-btn[aria-pressed="true"] {
+.kaart-card.checked {
   background-color: var(--color-green-accent);
 }
 
-.kaart-btn.checked .dot,
-.kaart-btn[aria-pressed="true"] .dot {
+.kaart-card.checked .dot {
   background-color: var(--color-white);
 }
 
-/* Focus styling for card buttons */
-.kaart-btn:focus-visible {
-  outline: none;
-  border-color: var(--primary-color-dark);
-  box-shadow: 0 0 0 4px rgba(20, 58, 139, 0.25);
-}
-
 /* Optional hover effect */
-.kaart-btn:hover {
+.kaart-card:hover {
   filter: brightness(0.98);
-}
-
-/* =========================
-   ACCESSIBILITY PREFERENCES
-========================= */
-@media (prefers-contrast: more) {
-  .kaart-btn {
-    border-color: var(--color-neutral-darker);
-  }
 }
 
 /* Disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .kaart-btn {
+  .kaart-card {
     animation: none !important;
     opacity: 1;
     transform: none;
@@ -435,33 +315,28 @@
     padding: 0 0rem 0.75rem;
   }
 
-  /* Align tabs to the left on larger screens */
   .tablist {
     justify-content: flex-start;
     gap: 2rem;
   }
 
-  /* Move baseline underline to the left */
   .tablist::after {
     left: 0;
     transform: none;
     width: 460px;
   }
 
-  /* Tabs become horizontal (icon + text) */
   .tabbutton {
     flex-direction: row;
     gap: 0.5rem;
     font-size: var(--text-size-sm);
   }
 
-  /* Wider panel on tablet */
   .bingokaart {
     max-width: 950px;
     margin: 0;
   }
 
-  /* Slightly larger grid cells */
   .kaart-grid {
     --cell: clamp(110px, 12vmin, 165px);
     margin-inline: 0;
@@ -485,8 +360,6 @@
   }
 }
 
-/*  Quick Fix [Dylan]
-   Make the survey panel scrollable within the viewport */
 #vragenlijst-panel {
   padding-top: clamp(2rem, 5vw, 3rem);
   overflow-y: auto;
@@ -505,8 +378,4 @@ section.scans {
   align-items: start;
 }
 
-/* Hide scans panel when not active */
-section.scans.hidden {
-  display: none;
-}
 </style>
