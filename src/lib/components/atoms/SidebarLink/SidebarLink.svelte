@@ -4,7 +4,11 @@
 	import { page } from '$app/state';
 </script>
 <li class={page.url.pathname === `${src}` ? "active" : ""}>
-    <a href={src} aria-current={page.url.pathname === `${src}`}>
+    <a 
+    href={src} 
+    data-sveltekit-preload-data    
+    aria-current={page.url.pathname === `${src}`}
+    >
         <div class="corners"></div>
         <Svg class="sidebar-icon"/>
         {name}
