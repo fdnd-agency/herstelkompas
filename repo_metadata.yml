@@ -2,6 +2,6 @@ title: "Herstelkompas"
 client: "Zelfzorg aan Zee"
 status: "active"
 years: [2]
-main_link: "https://herstelkompas.agency.fdnd.nl/"
+main_link: ""
 dev_link: "https://herstelkompas.dev.fdnd.nl/"
 tech_stack: ["SvelteKit", "Directus"]
