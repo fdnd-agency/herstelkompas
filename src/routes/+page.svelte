@@ -12,7 +12,7 @@
 <div>
 <h2>Ga verder met je vragenlijst</h2>
 <p>Vul de vragenlijst in en krijg meer inzicht in hoe het met je gaat.</p>
-<a>Verder met vragenlijst <img class="icon" src="/img/Pijltje.png" alt="Illustratie van een vragenlijst"></a>
+<a href="/vragenlijst">Verder met vragenlijst <img class="icon" src="/img/Pijltje.png" alt="Illustratie van een vragenlijst"></a>
 </div>
 
 <img class="illustratie" src="/img/vragenlijst.png" alt="Illustratie van een vragenlijst">
