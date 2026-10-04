@@ -22,10 +22,11 @@
 
 
 <style>
+
 h1 {
 	color: var(--primary-color-dark);
 	font-family: var(--font-semibold);
-	font-size: var(--text-size-xl);
+	font-size: 2.4rem;
 	margin: 0 0 1rem;
 }
 
@@ -36,15 +37,15 @@ h1 + p {
 	margin: 0 0 3rem;
 }
 
+
+
 section {
+	/* mobiel */
 	display: grid;
-	grid-template-columns: 2fr 1fr;
-	align-items: center;
+	grid-template-columns: 1fr;
 	gap: 2rem;
 
-	max-width: 60rem;
-	padding: 3rem 2rem;
-
+	padding: 2rem 1.5rem;
 	background-color: var(--color-blue-tint);
 	border-radius: 1rem;
 
@@ -65,7 +66,6 @@ section {
 		color: var(--color-neutral-dark);
 		font-family: var(--font-regular);
 		font-size: var(--text-size-md);
-
 		max-width: 24rem;
 		margin: 0 0 2rem;
 	}
@@ -82,23 +82,49 @@ section {
 
 		font-family: var(--font-semibold);
 		font-size: var(--text-size-md);
+		font-weight: 600;
 
 		text-decoration: none;
 		border-radius: 0.5rem;
-
-		
 	}
 
-	.icon{
-
+	.icon {
 		width: 15px;
 		height: 15px;
 	}
 
-	.illustration {
+	.illustratie {
 		width: 100%;
-		max-width: 14rem;
+		max-width: 250px;
+		height: auto;
 		justify-self: center;
+	}
+
+
+	/* TABLET */
+	@media (min-width: 600px) {
+		padding: 2.5rem;
+
+		.illustratie {
+			max-width: 300px;
+		}
+	}
+
+
+	/* DESKTOP */
+	@media (min-width: 900px) {
+		grid-template-columns: 2fr 1fr;
+		align-items: center;
+
+		max-width: 60rem;
+		min-height: 20rem;
+		padding: 3rem 2rem;
+
+		.illustratie {
+			width: 350px;
+			max-width: 100%;
+			justify-self: center;
+		}
 	}
 }
 </style>
