@@ -15,6 +15,57 @@
 }
 
 :root {
+
+  /* RGB TOKENS VOOR ALS EEN BROWSER HSL NIET ONDERSTEUNT! RGB IS WIDELY AVAILABLE*/
+  /* https://caniuse.com/?search=rgb */
+
+  /* Primary kleur blauw */
+  --color-primary-900: rgb(0, 29, 49);
+  --color-primary-800: rgb(0, 52, 86);
+  --color-primary-700: rgb(0, 82, 137);
+  --color-primary-600: rgb(17, 121, 190);
+  --color-primary-500: rgb(83, 163, 217);
+  --color-primary-400: rgb(140, 191, 225);
+
+  /* Neutrale kleuren */
+  --color-neutral-900: rgb(26, 26, 26);
+  --color-neutral-800: rgb(40, 40, 40);
+  --color-neutral-700: rgb(64, 64, 64);
+  --color-neutral-600: rgb(127, 127, 127);
+  --color-neutral-500: rgb(163, 163, 163);
+  --color-neutral-400: rgb(209, 209, 209);
+  --color-neutral-300: rgb(243, 243, 243);
+
+  /* Accent groen */
+  --color-green-900: rgb(37, 61, 0);
+  --color-green-800: rgb(73, 114, 10);
+  --color-green-700: rgb(97, 152, 14);
+  --color-green-600: rgb(121, 190, 17);
+  --color-green-500: rgb(148, 203, 65);
+  --color-green-400: rgb(175, 216, 112);
+
+  /* Accent rood */
+  --color-red-900: rgb(70, 1, 7);
+  --color-red-800: rgb(114, 10, 20);
+  --color-red-700: rgb(152, 14, 27);
+  --color-red-600: rgb(190, 17, 34);
+  --color-red-500: rgb(203, 65, 78);
+  --color-red-400: rgb(216, 112, 122);
+
+  /* Accent oranje */
+  --color-orange-900: rgb(76, 34, 7);
+  --color-orange-800: rgb(114, 52, 10);
+  --color-orange-700: rgb(152, 69, 14);
+  --color-orange-600: rgb(190, 86, 17);
+  --color-orange-500: rgb(203, 120, 65);
+  --color-orange-400: rgb(216, 154, 112);
+  --color-orange-300: rgb(229, 187, 160);
+
+  --color-white: rgb(255, 255, 255);
+
+  /* HSL TOKENS. HSL IS WIDELY AVAILABLE */
+  /* https://caniuse.com/?search=hsl */
+
   /* Primary kleur blauw */
   --color-primary-900: hsl(204, 100%, 10%);
   --color-primary-800: hsl(204, 100%, 17%);
@@ -23,7 +74,7 @@
   --color-primary-500: hsl(204, 64%, 59%);
   --color-primary-400: hsl(204, 59%, 72%);
 
-  /* Neutraal (grijs) */
+  /* Neutrale kleuren */
   --color-neutral-900: hsl(0, 0%, 10%);
   --color-neutral-800: hsl(0, 0%, 16%);
   --color-neutral-700: hsl(0, 0%, 25%);
@@ -57,6 +108,8 @@
   --color-orange-400: hsl(24, 57%, 64%);
   --color-orange-300: hsl(23, 57%, 76%);
 
+  --color-white: hsl(0, 0%, 100%);
+
   /* Primary */
   --primary-color-dark: var(--color-primary-700);
   --primary-color-light: var(--color-primary-600);
@@ -72,8 +125,6 @@
   /* Accent */
   --color-green-accent: var(--color-green-600);
 
-  --color-white: hsl(0, 0%, 100%);
-
   @media (prefers-contrast: more) {
     --color-neutral: var(--color-neutral-700);
   }
@@ -81,7 +132,7 @@
   /* Fonts */
   --font-regular: "Inter", sans-serif;
   --font-medium: "Inter Medium", "Inter", sans-serif;
-  --font-semibold: "Inter Semi Bold", "Inter", sans-serif; 
+  --font-semibold: "Inter Semi Bold", "Inter", sans-serif;
 
   /* Typografie */
   --text-size-xs: clamp(0.75rem, 1.5vw, 12px);
