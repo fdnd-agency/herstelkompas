@@ -2,6 +2,7 @@
     let { data } = $props();
     import { page } from "$app/state";
     import { FileDescInput } from "$lib";
+    import { BingoRadioButton } from "$lib";
 </script>
 
 <svelte:head>
