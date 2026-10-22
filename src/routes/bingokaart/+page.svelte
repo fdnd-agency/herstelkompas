@@ -15,8 +15,8 @@
         <p class="subtitle">Jouw tempo, onze steun.</p>
     </header>
 
-    <BingoRadioButton state='1'/>
-        <BingoRadioButton state='2'/>
+    <BingoRadioButton state="1" />
+    <BingoRadioButton state="2" />
 </section>
 
 <style>

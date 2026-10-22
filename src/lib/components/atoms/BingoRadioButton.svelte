@@ -1,8 +1,8 @@
 <script>
-    let { state, activiteit = "Mock activiteit"} = $props();
+    let { state, activiteit = "Mock activiteit" } = $props();
 </script>
 
-<label class="bingokaart-radiobuttons state-{state}">
+<fieldset class="bingokaart-radiobuttons state-{state}">
     {activiteit}
     {#if state == 1}
         <input type="radio" name="state-{activiteit}" value="1" />
@@ -11,7 +11,37 @@
         <input type="radio" name="state-{activiteit}" value="2" />
         <label>Gedaan</label>
     {/if}
-</label>
+</fieldset>
 
 <style>
+    fieldset {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: none;
+        width: max-content;
+        gap: 10px;
+    }
+    .state-1 {
+        input {
+            appearance: none;
+
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+
+            border: 2px solid var(--color-orange-accent);
+
+            position: relative;
+            top: 4px;
+        }
+
+        input:checked {
+            background-color: var(--color-orange-accent);
+        }
+
+        label {
+            color: var(--color-orange-accent);
+        }
+    }
 </style>
