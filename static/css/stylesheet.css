@@ -81,7 +81,7 @@
   /* Fonts */
   --font-regular: "Inter", sans-serif;
   --font-medium: "Inter Medium", "Inter", sans-serif;
-  --font-semibold: "Inter Semi Bold", "Inter", sans-serif;
+  --font-semibold: "Inter Semi Bold", "Inter", sans-serif; 
 
   /* Typografie */
   --text-size-xs: clamp(0.75rem, 1.5vw, 12px);
