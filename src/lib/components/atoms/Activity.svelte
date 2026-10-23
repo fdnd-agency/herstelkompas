@@ -21,5 +21,6 @@
     ];
 </script>
 
+<p>{activiteiten[0].activiteit}</p>
 <style>
 </style>

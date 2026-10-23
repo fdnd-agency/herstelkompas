@@ -3,6 +3,7 @@
     import { page } from "$app/state";
     import { FileDescInput } from "$lib";
     import { BingoRadioButton } from "$lib";
+    import Activity from "$lib/components/atoms/Activity.svelte";
 </script>
 
 <svelte:head>
@@ -17,6 +18,8 @@
 
     <BingoRadioButton state="1" />
     <BingoRadioButton state="2" />
+
+    <Activity />
 </section>
 
 <style>
