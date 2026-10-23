@@ -19,3 +19,5 @@ export { default as Waves } from './components/atoms/Waves.svelte'
 export { default as FileDescInput } from './components/atoms/FileDescInput.svelte'
 export { default as DetailScanToggle } from './components/atoms/DetailScanToggle.svelte'
 export { default as BingoRadioButton } from './components/atoms/BingoRadioButton.svelte'
+export { default as Activity } from './components/atoms/Activity.svelte'
+
