@@ -43,7 +43,19 @@
 
   .pijltje {
       margin-left: 0.25rem;
+      transition: transform 0.2 ease;
   }
+
+  :global(body:has(#filtermenu:popover-open)) .pijltje {
+  transform: rotate(180deg);
+}
+
+/* Houdt rekening met gebruikers die minder animatie willen */
+@media (prefers-reduced-motion: reduce) {
+  .pijltje {
+    transition: none;
+  }
+}
 
   button:focus-visible {
     outline: 2px solid #0d4c8f;
