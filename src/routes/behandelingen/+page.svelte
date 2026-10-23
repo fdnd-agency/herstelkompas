@@ -1,6 +1,8 @@
 <script>
   // Import (currently unused in this file)
   import { Treatment } from '$lib';
+   import FilterMenu from '$lib/components/molecules/FilterMenu.svelte';
+    
 
   // Data injected by the page/load function
   export let data;
@@ -9,12 +11,16 @@
   const behandelingen = data.behandelingen;
 </script>
 
+
+
 <section class="treatment-section" aria-labelledby="behandelingstitel">
   <!-- Page header -->
   <header class="page-header">
     <h1 id="behandelingstitel">Behandelingen</h1>
     <p class="subtitle">Jouw overzicht</p>
   </header>
+
+ <FilterMenu />
 
   <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
