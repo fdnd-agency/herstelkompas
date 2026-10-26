@@ -3,13 +3,15 @@
     import RadioButtonGroup from "$lib/components/molecules/RadioButtonGroup.svelte";
 </script>
 
-<article>
+<button class="state-{state}">
     <Activity />
-    <RadioButtonGroup />
-</article>
+    {#if isOpen}
+        <RadioButtonGroup />
+    {/if}
+</button>
 
 <style>
-    article {
+    button {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -22,15 +24,18 @@
         border-radius: 10px;
     }
 
-    .state-0 { /* default - blauw */
+    .state-0 {
+        /* default - blauw */
         background-color: var(--color-primary-300);
     }
 
-    .state-1{ /* mee bezig - oranje */
+    .state-1 {
+        /* mee bezig - oranje */
         background-color: var(--color-orange-300);
     }
 
-    .state-2{ /* gedaan - groen */
+    .state-2 {
+        /* gedaan - groen */
         background-color: var(--color-green-400);
     }
 </style>
