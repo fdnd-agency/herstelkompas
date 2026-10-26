@@ -14,5 +14,6 @@
         gap: 50px; /* later spacing token toevoegen */
         align-items: center;
         border: none;
+        background-color: none;
     }
 </style>
