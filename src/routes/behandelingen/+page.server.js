@@ -20,6 +20,17 @@ export async function load({ url }) {
   // url.searchparams.get() zoeken naar een speciefieke waarde in de url
   const sortering = url.searchParams.get('sort');
   const periode = url.searchParams.get('periode');
+
+
+
+
+  // de sorteervolgorde bepalen
+  // value="oudste"
+  // datum voor oudste -datum voor nieuwste
+
+
+  const volgorde = sortering === 'oudste' ? 'datum' : '-datum';
+
   }
 
   const json = await res.json();
