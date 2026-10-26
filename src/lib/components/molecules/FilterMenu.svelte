@@ -40,6 +40,7 @@
     position-anchor: --filterknop;
     top: anchor(bottom);
     left: anchor(left);
+    margin-top: 2rem;
   }
 
   form {

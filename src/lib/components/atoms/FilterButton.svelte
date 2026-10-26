@@ -44,6 +44,8 @@
   .pijltje {
       margin-left: 0.25rem;
       transition: transform 0.2 ease;
+      width: 14px;
+      height: 10px;
   }
 
   :global(body:has(#filtermenu:popover-open)) .pijltje {

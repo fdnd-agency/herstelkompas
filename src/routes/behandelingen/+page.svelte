@@ -1,14 +1,14 @@
 <script>
   // Import (currently unused in this file)
   import { Treatment } from '$lib';
-   import FilterMenu from '$lib/components/molecules/FilterMenu.svelte';
+   import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
     
 
   // Data injected by the page/load function
   export let data;
 
   // Extract treatments from the loaded data
-  const behandelingen = data.behandelingen;
+  $: behandelingen = data.behandelingen;
 </script>
 
 
@@ -20,7 +20,7 @@
     <p class="subtitle">Jouw overzicht</p>
   </header>
 
- <FilterMenu />
+ <FilterSorteerBalk />
 
   <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
