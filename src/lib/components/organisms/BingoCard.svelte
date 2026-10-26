@@ -19,7 +19,18 @@
         width: 400px;
         height: 150px;
 
-        background-color: var(--color-primary-300);
         border-radius: 10px;
+    }
+
+    .state-0 { /* default - blauw */
+        background-color: var(--color-primary-300);
+    }
+
+    .state-1{ /* mee bezig - oranje */
+        background-color: var(--color-orange-300);
+    }
+
+    .state-2{ /* gedaan - groen */
+        background-color: var(--color-green-400);
     }
 </style>
