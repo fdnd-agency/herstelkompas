@@ -13,6 +13,13 @@
 //   };
 // }
 
+
+export async function load({ url }) {
+
+  // sort in periode die ik in me html input en select gebruik 
+  // url.searchparams.get() zoeken naar een speciefieke waarde in de url
+  const sortering = url.searchParams.get('sort');
+  const periode = url.searchParams.get('periode');
   }
 
   const json = await res.json();
