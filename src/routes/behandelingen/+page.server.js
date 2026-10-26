@@ -36,12 +36,23 @@ export async function load({ url }) {
   // 3. Maak de Directus URL
   let apiUrl = `https://fdnd-agency.directus.app/items/behandeling?sort=${volgorde}`;
 
+  
+
+  // 4. Filter op periode (als er een gekozen is)
+  if (periode) {
+    const datum = new Date();
+
+    datum.setMonth(datum.getMonth() - Number(periode));
+
+    apiUrl += `&filter[datum][_gte]=${datum.toISOString()}`;
   }
 
+  // 5. Haal de behandelingen op
+  const res = await fetch(apiUrl);
   const json = await res.json();
-
+  console.log(json.data.map(behandeling => behandeling.datum));
 
   return {
-    behandelingen: json.data 
+    behandelingen: json.data
   };
 }
