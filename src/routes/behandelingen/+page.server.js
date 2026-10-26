@@ -31,6 +31,11 @@ export async function load({ url }) {
 
   const volgorde = sortering === 'oudste' ? 'datum' : '-datum';
 
+    
+   
+  // 3. Maak de Directus URL
+  let apiUrl = `https://fdnd-agency.directus.app/items/behandeling?sort=${volgorde}`;
+
   }
 
   const json = await res.json();
