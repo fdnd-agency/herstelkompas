@@ -2,8 +2,7 @@
     let { data } = $props();
     import { page } from "$app/state";
     import { FileDescInput } from "$lib";
-    import Activity from "$lib/components/atoms/Activity.svelte";
-    import RadioButtonGroup from "$lib/components/molecules/RadioButtonGroup.svelte";
+    import BingoCard from "$lib/components/organisms/BingoCard.svelte";
 </script>
 
 <svelte:head>
@@ -16,9 +15,7 @@
         <p class="subtitle">Jouw tempo, onze steun.</p>
     </header>
 
-    <Activity />
-
-    <RadioButtonGroup />
+    <BingoCard />
 </section>
 
 <style>
