@@ -2,7 +2,7 @@
     let { data } = $props();
     import { page } from "$app/state";
     import { FileDescInput } from "$lib";
-    import BingoCard from "$lib/components/organisms/BingoCard.svelte";
+    import BingoGrid from "$lib/components/templates/BingoGrid.svelte";
 </script>
 
 <svelte:head>
@@ -15,7 +15,8 @@
         <p class="subtitle">Jouw tempo, onze steun.</p>
     </header>
 
-    <BingoCard />
+<BingoGrid />
+
 </section>
 
 <style>
