@@ -1,3 +1,6 @@
+// templates
+export { default as BingoGrid } from './components/templates/BingoGrid.svelte'
+
 // Organisms
 export { default as Sidebar } from './components/organisms/Sidebar.svelte'
 export { default as Header } from './components/organisms/Header.svelte'
