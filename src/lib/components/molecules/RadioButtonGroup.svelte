@@ -3,6 +3,7 @@
 </script>
 
 <fieldset>
+<BingoRadioButton state="0" />
 <BingoRadioButton state="1" />
 <BingoRadioButton state="2" />
 </fieldset>
