@@ -1,9 +1,13 @@
 <script>
     import Activity from "$lib/components/atoms/Activity.svelte";
     import RadioButtonGroup from "$lib/components/molecules/RadioButtonGroup.svelte";
+
+    // Initiële declaratie
+    let isOpen = false;
+    let state = 0;
 </script>
 
-<button class="state-{state}">
+<button onclick={() => (isOpen = !isOpen)} class="state-{state}">
     <Activity />
     {#if isOpen}
         <RadioButtonGroup />
