@@ -23,7 +23,7 @@ div{
     margin-bottom: 2rem;
 
     
-    @media (min-width: 640px) {
+    @media (min-width: 700px) {
       flex-direction: row;
       align-items: center;
       
