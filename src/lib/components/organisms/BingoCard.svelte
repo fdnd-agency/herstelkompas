@@ -5,6 +5,7 @@
     // Initiële declaratie
     let isOpen = false;
     let state = 0;
+    let { activiteit } = $props();
 </script>
 
 <button onclick={() => (isOpen = !isOpen)} class="state-{state}">

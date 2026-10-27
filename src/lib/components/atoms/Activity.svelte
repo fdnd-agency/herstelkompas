@@ -19,6 +19,7 @@
                 "Langere auto ritten volbrengen & rijden in het donker.",
         },
     ];
+    let { activiteit } = $props();
 </script>
 
 <p>{activiteiten[0].activiteit}</p>
