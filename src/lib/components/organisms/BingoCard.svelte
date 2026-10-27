@@ -3,13 +3,12 @@
     import RadioButtonGroup from "$lib/components/molecules/RadioButtonGroup.svelte";
 
     // Initiële declaratie
-    let isOpen = false;
-    let state = 0;
+    let isOpen = $state(false);
+    let activityState = 0;
     let { activiteit } = $props();
 </script>
 
-<button onclick={() => (isOpen = !isOpen)} class="state-{state}">
-    <Activity />
+<button onclick={() => (isOpen = !isOpen)} class="state-{activityState}">
     {#if isOpen}
         <RadioButtonGroup />
     {/if}
