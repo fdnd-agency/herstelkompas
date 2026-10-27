@@ -1,20 +1,33 @@
 <script>
-    import { BingoRadioButton } from "$lib";
+	import BingoRadioButton from "../atoms/BingoRadioButton.svelte";
+	let { isOpen } = $props();
 </script>
 
-<fieldset>
-<BingoRadioButton state="0" />
-<BingoRadioButton state="1" />
-<BingoRadioButton state="2" />
+<!-- Bij class:is-closed={!isOpen} wordt de class toegepast als in BingoCard de boolean isOpen false is -->
+<fieldset class="RadioButtonGroup" class:is-closed={!isOpen}>
+	<BingoRadioButton state="0" />
+	<BingoRadioButton state="1" />
+	<BingoRadioButton state="2" />
 </fieldset>
 
 <style>
-    fieldset{
-        display: flex;
-        flex-direction: row;
-        gap: 50px; /* later spacing token toevoegen */
-        align-items: center;
-        border: none;
-        background-color: none;
-    }
+	fieldset {
+		display: flex;
+		flex-direction: row;
+		gap: 15px;
+		align-items: center;
+		border: none;
+	}
+
+	/* Fallback bij geen Javascript*/
+	.RadioButtonGroup {
+		display: flex;
+	}
+
+	/* Verbergt radiobuttons bij Javascript */
+	@media (scripting: enabled) {
+		.RadioButtonGroup.is-closed {
+			display: none;
+		}
+	}
 </style>
