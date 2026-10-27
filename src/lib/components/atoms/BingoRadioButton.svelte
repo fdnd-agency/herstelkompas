@@ -3,11 +3,14 @@
 </script>
 
 <fieldset class="bingokaart-radiobuttons state-{state}">
-    {#if state == 1}
-        <input type="radio" name="state-activiteit" value="1" />
+    {#if state == 0}
+        <input type="radio" name="state-activiteit" value="0" onclick={(event) => event.stopPropagation()} />
+        <label>Niet gedaan</label>
+    {:else if state == 1}
+        <input type="radio" name="state-activiteit" value="1" onclick={(event) => event.stopPropagation()} />
         <label>Mee bezig</label>
     {:else if state == 2}
-        <input type="radio" name="state-activiteit" value="2" />
+        <input type="radio" name="state-activiteit" value="2" onclick={(event) => event.stopPropagation()} />
         <label>Gedaan</label>
     {/if}
 </fieldset>
