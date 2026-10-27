@@ -21,6 +21,7 @@
         justify-content: center;
         align-items: center;
         gap: 20px; /* later spacing token toevoegen */
+        border: 1px solid var(--primary-color-dark);
 
         width: 400px;
         height: 150px;
