@@ -142,5 +142,4 @@
   --text-size-md: clamp(1rem, 2vw, 16px);
   --text-size-lg: clamp(1.125rem, 2.25vw, 18px);
   --text-size-xl: clamp(1.4rem, 2.5vw, 30px);
-  --text-size-bingo: clamp(1.05rem, 1.875vw, 22.5px); /* 25% kleiner dan xl */
 }

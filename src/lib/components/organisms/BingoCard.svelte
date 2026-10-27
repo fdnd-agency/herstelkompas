@@ -24,10 +24,10 @@
         gap: 20px; /* later spacing token toevoegen */
         border: 1px solid var(--primary-color-dark);
 
-        width: 400px;
-        height: 150px;
+        width: 250px;
+        height: 200px;
 
-        border-radius: 10px;
+        border-radius: 5px;
     }
 
     .state-0 {
