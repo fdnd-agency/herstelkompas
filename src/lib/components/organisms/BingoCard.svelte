@@ -9,6 +9,7 @@
 </script>
 
 <button onclick={() => (isOpen = !isOpen)} class="state-{activityState}">
+    <Activity {activiteit} />
     {#if isOpen}
         <RadioButtonGroup />
     {/if}
