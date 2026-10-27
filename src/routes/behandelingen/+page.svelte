@@ -95,6 +95,13 @@
   /* ===== Column headers (hidden on mobile) ===== */
   .treatment-header {
     display: none;
+
+    span{
+
+      font-weight: 700;
+      font-size: var(--text-size-xs);
+      color: var(--primary-color-dark);
+    }
   }
 
   /* ===== Treatment cards list ===== */
