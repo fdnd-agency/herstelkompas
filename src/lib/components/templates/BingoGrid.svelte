@@ -27,3 +27,16 @@
         <BingoCard activiteit={activiteit.activiteit} />
     {/each}
 </section>
+
+<style>
+    .bingo-grid {
+        width: max-content;
+        height: max-content;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        flex-flow: wrap;
+
+        gap: 20px;
+    }
+</style>
