@@ -25,6 +25,37 @@
         gap: 10px;
     }
 
+    /* `Niet gedaan` state */
+    .state-0 {
+        display: flex;
+        input {
+            appearance: none;
+
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+
+            border: 2px solid var(--primary-color-dark);
+
+            position: relative;
+            top: 4px;
+        }
+
+        input:checked {
+            background-color: var(--primary-color-dark);
+        }
+
+        label {
+            color: var(--primary-color-dark);
+        }
+    }
+
+    @media (scripting: enabled) {
+        .state-0 {
+            display: none;
+        }
+    }
+
     /* `Mee bezig` state */
     .state-1 {
         input {
