@@ -6,7 +6,7 @@
 <section>
     {#if isLoggedIn}
         <details>
-            <summary class="account-toggle">
+            <summary class="account-actions">
                 <span class="avatar">
                     {#if avatar}
                         <img src={avatar} alt="avatar" width="38" height="38">
@@ -46,7 +46,7 @@
     {:else}
         <a class="login-card" href="/login">
             <span class="avatar">
-                <UserIcon />
+                <img src="/img/testimg.png" alt="default avatar" width="38" height="38">
             </span>
             <span class="content">
                 <strong>Mijn account</strong>
@@ -72,8 +72,24 @@
         }
 
         details{
+            &::details-content{
+                max-height: 0;
+                overflow: clip;
+                content-visibility: hidden;
+                opacity: 0;
+                translate: 0 -8px;
+                transition: content-visibility 0.5s allow-discrete, max-height 0.5s ease, opacity 0.5s ease, translate 0.5s ease;
+            }
+
+            &[open]::details-content{
+                max-height: 300px;
+                content-visibility: visible;
+                opacity: 1;
+                translate: 0 0;
+            }
+
             &[open]{
-                .account-toggle{
+                .account-actions{
                     border-radius: 9px 9px 0 0;
                 }
 
@@ -91,7 +107,22 @@
             }
         }
 
-        .account-toggle,
+        @media (prefers-reduced-motion: reduce){
+            details::details-content,
+            details[open]::details-content{
+                max-height: none;
+                content-visibility: visible;
+                opacity: 1;
+                translate: none;
+                transition: none;
+            }
+
+            :global(.chevron){
+                transition: none;
+            }
+        }
+
+        .account-actions,
         .login-card{
             display: flex;
             align-items: center;
@@ -104,10 +135,22 @@
             background: var(--primary-color-dark);
             text-decoration: none;
             cursor: pointer;
+            transition: 0.3s ease;
 
-            &:hover,
-            &:focus-visible{
-                background: var(--primary-color-light);
+            
+            &:hover{
+                color: var(--primary-color-dark);
+                background: var(--color-white);
+                border-top-left-radius: 9px;
+                border-bottom-left-radius: 9px;
+
+                .content span{
+                    color: var(--primary-color-dark);
+                }
+
+                :global(.chevron){
+                    color: var(--primary-color-dark);
+                }
             }
         }
 
@@ -142,8 +185,8 @@
             }
 
             strong{
-                font-family: var(--font-semibold);
-                font-size: var(--text-size-sm);
+                font-size: var(--text-size-md);
+                font-weight: 600;
             }
 
             span{
@@ -157,6 +200,7 @@
             height: 18px;
             margin-left: auto;
             color: var(--color-white);
+            transition: transform 0.5s ease, color 0.3s ease;
         }
 
         .account-menu{
@@ -174,19 +218,24 @@
                 min-height: 40px;
                 padding: 6px 12px;
                 color: var(--color-white);
-                font-size: var(--text-size-sm);
+                font-size: var(--text-size-md);
+                font-weight: 600;
                 text-decoration: none;
                 cursor: pointer;
+                transition: 0.3s ease;
 
-                &:hover,
-                &:focus-visible{
-                    background: var(--primary-color-light);
-                }
 
                 &.logout{
                     margin-top: 7px;
                     padding-top: 12px;
                     border-top: 1px solid var(--color-neutral-light);
+                }
+
+                &:hover{
+                    color: var(--primary-color-dark);
+                    background: var(--color-white);
+                    border-top-left-radius: 9px;
+                    border-bottom-left-radius: 9px;
                 }
             }
 

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" {...$$restProps}>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" {...$$restProps}>
     <path d="M19.43 12.98c.04-.32.07-.65.07-.98s-.02-.66-.07-.98l2.11-1.65-2-3.46-2.49 1a7.2 7.2 0 0 0-1.69-.98L15 3.31C14.04 3.11 13.04 3 12 3s-2.04.11-3 .31l-.36 2.62c-.6.25-1.17.58-1.69.98l-2.49-1-2 3.46 2.11 1.65c-.04.32-.07.65-.07.98s.02.66.07.98l-2.11 1.65 2 3.46 2.49-1c.52.4 1.09.73 1.69.98L9 20.69c.96.2 1.96.31 3 .31s2.04-.11 3-.31l.36-2.62c.6-.25 1.17-.58 1.69-.98l2.49 1 2-3.46-2.11-1.65Z"/>
     <circle cx="12" cy="12" r="3"/>
 </svg>
