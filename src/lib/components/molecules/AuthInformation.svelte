@@ -1,81 +1,254 @@
 <script>
     let { avatar, name, email } = $props();
+    let isLoggedIn = $derived(Boolean(name || email));
+    import { Chevron, HelpIcon, LogoutIcon, SettingsIcon, UserIcon } from '$lib/icons';
 </script>
-<header class="information-auth">
-    <figure>
-        {#if avatar}
-            <img src="{avatar}" alt="" width="38">
-        {:else}
-            <img src="/img/testimg.png" alt="" width="38">
-        {/if}
-
-        <figcaption class="content">
-            {#if name}
-                <strong>{name}</strong>
-            {/if}
-            {#if email}
-                <p>{email}</p>
-            {/if}
-        </figcaption>
-    </figure>
-    
-    <button class="auth-btn" type="button">
-    <span class="sr-only">Open inloggen</span>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true" focusable="false">
-      <path d="M297.4 470.6C309.9 483.1 330.2 483.1 342.7 470.6L534.7 278.6C547.2 266.1 547.2 245.8 534.7 233.3C522.2 220.8 501.9 220.8 489.4 233.3L320 402.7L150.6 233.4C138.1 220.9 117.8 220.9 105.3 233.4C92.8 245.9 92.8 266.2 105.3 278.7L297.3 470.7z"/>
-    </svg>
-  </button>
-</header>
+<section>
+    {#if isLoggedIn}
+        <details>
+            <summary class="account-actions">
+                <span class="avatar">
+                    {#if avatar}
+                        <img src={avatar} alt="avatar" width="38" height="38">
+                     {:else}
+                        <UserIcon />
+                    {/if}
+                </span>
+                <span class="content">
+                    {#if name}
+                        <strong>{name}</strong>
+                    {/if}
+                    {#if email}
+                        <span>{email}</span>
+                    {/if}
+                </span>
+                <Chevron class="chevron" />
+            </summary>
+            <nav class="account-menu">
+                <a href="/account">
+                    <UserIcon />
+                    Mijn account
+                </a>
+                <a href="/instellingen">
+                    <SettingsIcon />
+                    Instellingen
+                </a>
+                <a href="/help">
+                    <HelpIcon />
+                    Hulp en support
+                </a>
+                <a class="logout" href="/logout">
+                    <LogoutIcon />
+                    Uitloggen
+                </a>
+            </nav>
+        </details>
+    {:else}
+        <a class="login-card" href="/login">
+            <span class="avatar">
+                <img src="/img/testimg.png" alt="default avatar" width="38" height="38">
+            </span>
+            <span class="content">
+                <strong>Mijn account</strong>
+                <span>login/ signup</span>
+            </span>
+        </a>
+    {/if}
+</section>
 
 <style>
-    header{
-        display: flex;
-        justify-content: flex-start;
+    section{
         padding: 20px;
         margin-top: auto;
         position: relative;
-    }
-    header:before{
-        background-color: #fff;
-        opacity: 0.25;
-        top: 0;
-        left: 0;
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 1px;
-    }
-    header figure{
-        display: flex;
-    }
-    header figure figcaption{
-        margin-left: 1rem;
-    }
-    header figure figcaption > *{
-        font-weight: 400;
-    }
-    header figure figcaption p{
-        opacity: 0.44;
-    }
-    header button{
-        appearance: none;
-        border: 0;
-        background-color: transparent;
-        margin-left: auto;
-        width: 20px;
-    }
-    header *{
-        color: #fff;
-        fill: #fff;
-    }
 
-    .sr-only{
-    position:absolute;
-    width:1px;height:1px;
-    padding:0;margin:-1px;
-    overflow:hidden;
-    clip:rect(0 0 0 0);
-    white-space:nowrap;
-    border:0;
-  }
+        &:before{
+            position: absolute;
+            inset: 0 0 auto;
+            height: 1px;
+            content: '';
+            background-color: var(--color-white);
+            opacity: 0.25;
+        }
+
+        details{
+            &::details-content{
+                max-height: 0;
+                overflow: clip;
+                content-visibility: hidden;
+                opacity: 0;
+                translate: 0 -8px;
+                transition: content-visibility 0.5s allow-discrete, max-height 0.5s ease, opacity 0.5s ease, translate 0.5s ease;
+            }
+
+            &[open]::details-content{
+                max-height: 300px;
+                content-visibility: visible;
+                opacity: 1;
+                translate: 0 0;
+            }
+
+            &[open]{
+                .account-actions{
+                    border-radius: 9px 9px 0 0;
+                }
+
+                :global(.chevron){
+                    transform: rotate(180deg);
+                }
+            }
+
+            summary{
+                list-style: none;
+
+                &::-webkit-details-marker{
+                    display: none;
+                }
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            details::details-content,
+            details[open]::details-content{
+                max-height: none;
+                content-visibility: visible;
+                opacity: 1;
+                translate: none;
+                transition: none;
+            }
+
+            :global(.chevron){
+                transition: none;
+            }
+        }
+
+        .account-actions,
+        .login-card{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            min-height: 58px;
+            padding: 8px 10px;
+            border: 0;
+            border-radius: 9px;
+            color: var(--color-white);
+            background: var(--primary-color-dark);
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+
+            &:hover,
+            &:focus{
+                color: var(--primary-color-dark);
+                background: var(--color-white);
+                border-top-left-radius: 9px;
+                border-bottom-left-radius: 9px;
+
+                .content span{
+                    color: var(--primary-color-dark);
+                }
+
+                :global(.chevron){
+                    color: var(--primary-color-dark);
+                }
+            }
+        }
+
+        .avatar{
+            display: grid;
+            flex: 0 0 38px;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            overflow: hidden;
+            border-radius: 50%;
+            background: var(--color-blue-tint);
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .content{
+            display: grid;
+            min-width: 0;
+            gap: 2px;
+            margin-left: 12px;
+
+            strong,
+            span{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            strong{
+                font-size: var(--text-size-md);
+                font-weight: 600;
+            }
+
+            span{
+                color: var(--color-neutral-lighter);
+                font-size: var(--text-size-xs);
+            }
+        }
+
+        :global(.chevron){
+            width: 18px;
+            height: 18px;
+            margin-left: auto;
+            color: var(--color-white);
+            transition: transform 0.5s ease, color 0.3s ease;
+        }
+
+        .account-menu{
+            display: grid;
+            gap: 2px;
+            margin-top: 2px;
+            padding: 7px 0;
+            border-radius: 0 0 9px 9px; 
+            background: var(--primary-color-dark);
+
+            a{
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-height: 40px;
+                padding: 6px 12px;
+                color: var(--color-white);
+                font-size: var(--text-size-md);
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+                transition: 0.3s ease;
+
+
+                &.logout{
+                    margin-top: 7px;
+                    padding-top: 12px;
+                    border-top: 1px solid var(--color-neutral-light);
+                }
+
+                &:hover,
+                &:focus{
+                    color: var(--primary-color-dark);
+                    background: var(--color-white);
+                    border-top-left-radius: 9px;
+                    border-bottom-left-radius: 9px;
+                }
+            }
+
+            :global(svg){
+                width: 20px;
+                height: 20px;
+                flex: 0 0 20px;
+                stroke: currentColor;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 1.5;
+            }
+        }
+    }
 </style>
