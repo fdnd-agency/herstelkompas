@@ -3,12 +3,10 @@
     Toepassen
 </button>
 
-
-
 <style>
   button {
     padding: 0.75rem 1.5rem;
-    background-color: #0d4c8f;
+    background-color: var(--primary-color-dark);
     color: white;
     border: none;
     border-radius: 0.75rem;

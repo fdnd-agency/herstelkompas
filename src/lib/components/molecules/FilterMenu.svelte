@@ -4,6 +4,7 @@
   import ToepassenButton from '$lib/components/atoms/ToepassenButton.svelte';
 </script>
 
+<div class="filter-container">
 <!-- Filterknop opent en sluit het filtermenu -->
 <FilterButton />
 
@@ -28,6 +29,8 @@
   </form>
 </div>
 
+</div>
+
 <style>
   #filtermenu {
     width: min(20rem, calc(100vw - 2rem));
@@ -42,6 +45,11 @@
     left: anchor(left);
     margin-top: 2rem;
   }
+
+  /* De browser controleert met has of het filtermenu geopend is */
+  .filter-container:has(#filtermenu:popover-open) {
+  --pijltje-rotatie: 180deg;
+}
 
   form {
     display: flex;
@@ -59,7 +67,7 @@
   }
 
   legend {
-    font-size: 1rem;
+    font-size: var(--text-size-sm);
     font-weight: 600;
     margin-bottom: 1rem;
   }

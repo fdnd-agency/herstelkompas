@@ -3,8 +3,7 @@ let { tekst, waarde } = $props();
 
 </script>
 
- 
-<label>
+ <label>
   <input
     type="radio"
     name="periode"
@@ -28,12 +27,12 @@ input[type="radio"] {
     width: 1.25rem;
     height: 1.25rem;
     margin: 0;
-    accent-color: #0d4c8f;
+    accent-color: var(--primary-color-dark);
     cursor: pointer;
   }
 
   input:focus-visible {
-    outline: 2px solid #0d4c8f;
+    outline: 2px solid var(--primary-color-dark);
     outline-offset: 3px;
   }
 

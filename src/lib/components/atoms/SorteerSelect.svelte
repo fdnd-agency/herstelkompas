@@ -21,42 +21,38 @@
 
 <style>
 div{
-
   display:flex;
   gap: 1rem;
   align-items: center;
 }
 
-
-  select {
+select {
     padding: 0.75rem 1rem;
     background-color: white;
-    color: #0d4c8f;
-
+    color: var(--primary-color-dark);
     border-radius: 0.75rem;
     font: inherit;
     cursor: pointer;
     appearance: none;
     border: none;
-      box-shadow:
+    box-shadow:
     0 0 0 1px rgb(13 76 143 / 0.15),
     2px 3px 3px rgb(13 76 143 / 0.2);
-      
-  }
+      }
+  
   label{
-    color: #0d4c8f; 
+    color: var(--primary-color-dark); 
   }
-
 
   button{
 
     padding: 0.75rem 1rem;
-     border-radius: 0.75rem;
-     color: white;
-     background-color: #0d4c8f;
-     border: none;
-     margin-left: 5px;
-     font-weight: 600;
+    border-radius: 0.75rem;
+    color: white;
+    background-color: var(--primary-color-dark);
+    border: none;
+    margin-left: 5px;
+    font-weight: 600;
   }
   
 </style>
