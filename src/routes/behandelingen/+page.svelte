@@ -1,13 +1,17 @@
 <script>
   // Import (currently unused in this file)
   import { Treatment } from '$lib';
+   import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
+    
 
   // Data injected by the page/load function
   export let data;
 
   // Extract treatments from the loaded data
-  const behandelingen = data.behandelingen;
+  $: behandelingen = data.behandelingen;
 </script>
+
+
 
 <section class="treatment-section" aria-labelledby="behandelingstitel">
   <!-- Page header -->
@@ -15,6 +19,8 @@
     <h1 id="behandelingstitel">Behandelingen</h1>
     <p class="subtitle">Jouw overzicht</p>
   </header>
+
+ <FilterSorteerBalk />
 
   <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
@@ -89,6 +95,13 @@
   /* ===== Column headers (hidden on mobile) ===== */
   .treatment-header {
     display: none;
+
+    span{
+
+      font-weight: 700;
+      font-size: var(--text-size-xs);
+      color: var(--primary-color-dark);
+    }
   }
 
   /* ===== Treatment cards list ===== */
