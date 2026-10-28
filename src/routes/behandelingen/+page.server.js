@@ -10,6 +10,7 @@ export async function load({ url }) {
   // de sorteervolgorde bepalen
   // value="oudste"
   // datum voor oudste -datum voor nieuwste
+  
   const volgorde = sortering === 'oudste' ? 'datum' : '-datum';
 
     // 3. Maak de Directus URL

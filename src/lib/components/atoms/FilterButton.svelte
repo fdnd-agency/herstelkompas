@@ -1,7 +1,7 @@
 <!-- Opent en sluit het filtermenu via de Popover API -->
 <button type="button" popovertarget="filtermenu">
   <img
-    src="/img/filteren_icon.svg"
+    src="/icons/filteren_icon.svg"
     alt=""
     width="24"
     height="24"

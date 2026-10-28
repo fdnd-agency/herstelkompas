@@ -32,6 +32,7 @@
 </div>
 
 <style>
+
   #filtermenu {
     width: min(20rem, calc(100vw - 2rem));
     padding: 1.5rem;
