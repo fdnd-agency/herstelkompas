@@ -137,8 +137,8 @@
             cursor: pointer;
             transition: 0.3s ease;
 
-            
-            &:hover{
+            &:hover,
+            &:focus{
                 color: var(--primary-color-dark);
                 background: var(--color-white);
                 border-top-left-radius: 9px;
@@ -208,7 +208,7 @@
             gap: 2px;
             margin-top: 2px;
             padding: 7px 0;
-            border-radius: 0 0 9px 9px;
+            border-radius: 0 0 9px 9px; 
             background: var(--primary-color-dark);
 
             a{
@@ -231,7 +231,8 @@
                     border-top: 1px solid var(--color-neutral-light);
                 }
 
-                &:hover{
+                &:hover,
+                &:focus{
                     color: var(--primary-color-dark);
                     background: var(--color-white);
                     border-top-left-radius: 9px;
