@@ -30,6 +30,8 @@
 
 <style>
     .bingo-grid {
+        margin-top: 40px;
+        /* TIJDELIJK VOOR SPRINT REVIEW */
         width: max-content;
         height: max-content;
         display: grid;
