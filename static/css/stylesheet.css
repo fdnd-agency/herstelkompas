@@ -55,6 +55,11 @@
   --font-medium: "Inter Medium", "Inter", sans-serif;
   --font-semibold: "Inter Semi Bold", "Inter", sans-serif;
 
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
   /* Typografie */
   --text-size-xs: clamp(0.75rem, 1.5vw, 12px);
   --text-size-sm: clamp(0.875rem, 1.75vw, 14px);
