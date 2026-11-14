@@ -20,7 +20,10 @@
     <p class="subtitle">Jouw overzicht</p>
   </header>
 
- <FilterSorteerBalk />
+ <FilterSorteerBalk
+  periode={data.periode}
+  sortering={data.sortering}
+/>
 
   <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
@@ -109,6 +112,12 @@
     list-style: none;
     padding: 0;
     margin: 0;
+
+
+
+
+
+    
     display: flex;
     flex-direction: column;
     gap: 1rem;

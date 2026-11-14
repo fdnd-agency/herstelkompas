@@ -1,12 +1,16 @@
 <script>
+  import FilterMenu from '$lib/components/molecules/FilterMenu.svelte';
+  import SorteerSelect from '$lib/components/atoms/SorteerSelect.svelte';
 
-import FilterMenu from "../molecules/FilterMenu.svelte";
-import SorteerSelect from "../atoms/SorteerSelect.svelte";
-
+  // Ontvang de actieve periode en sortering van de pagina
+  export let periode = null;
+  export let sortering = null;
 </script>
-<div>
- <FilterMenu />
-  <SorteerSelect />
+
+<div class="filter-sorteer-balk">
+  <FilterMenu {sortering} />
+
+  <SorteerSelect {periode} {sortering} />
 </div>
 
 <style>

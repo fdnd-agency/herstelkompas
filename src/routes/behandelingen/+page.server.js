@@ -10,10 +10,11 @@ export async function load({ url }) {
   // de sorteervolgorde bepalen
   // value="oudste"
   // datum voor oudste -datum voor nieuwste
+  // datum te vindne in de data base
   
   const volgorde = sortering === 'oudste' ? 'datum' : '-datum';
 
-    // 3. Maak de Directus URL
+  // 3. Maak de Directus URL
   let apiUrl = `https://fdnd-agency.directus.app/items/behandeling?sort=${volgorde}`;
 
    // 4. Filter op periode (als er een gekozen is)
@@ -30,8 +31,11 @@ export async function load({ url }) {
   const json = await res.json();
   
 
-
+// Geef de behandelingen en actieve URL-waarden door aan de pagina
+// zodat de componenten weten welk filter en welke sortering gekozen zijn
   return {
-    behandelingen: json.data
+    behandelingen: json.data,
+  periode,
+  sortering
   };
 }

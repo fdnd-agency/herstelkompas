@@ -2,6 +2,8 @@
   import FilterButton from '$lib/components/atoms/FilterButton.svelte';
   import RadioInput from '$lib/components/atoms/RadioInput.svelte';
   import ToepassenButton from '$lib/components/atoms/ToepassenButton.svelte';
+
+  export let sortering = null;
 </script>
 
 <div class="filter-container">
@@ -13,6 +15,11 @@
 
   <!-- Verstuurt de geselecteerde periode via de URL -->
   <form method="GET">
+
+       <!-- Behoud de gekozen sortering tijdens het filteren -->
+      {#if sortering}
+        <input type="hidden" name="sort" value={sortering} />
+      {/if}
 
     <!-- Groepeert de radio inputs -->
     <fieldset>
