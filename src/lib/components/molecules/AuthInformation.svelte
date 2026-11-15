@@ -1,7 +1,7 @@
 <script>
     let { avatar, name, email } = $props();
     let isLoggedIn = $derived(Boolean(name || email));
-    import { Chevron, HelpIcon, LogoutIcon, SettingsIcon, UserIcon } from '$lib/icons';
+    import { Arrow, HelpIcon, LogoutIcon, SettingsIcon, UserIcon } from '$lib/icons';
 </script>
 <section>
     {#if isLoggedIn}
@@ -14,34 +14,51 @@
                         <UserIcon />
                     {/if}
                 </span>
+
                 <span class="content">
                     {#if name}
                         <strong>{name}</strong>
                     {/if}
                     {#if email}
-                        <span>{email}</span>
+                        <p>{email}</p>
                     {/if}
                 </span>
-                <Chevron class="chevron" />
+
+                <span class="arrow">
+                    <Arrow />
+                </span>
+                
             </summary>
-            <nav class="account-menu">
-                <a href="/account">
-                    <UserIcon />
-                    Mijn account
-                </a>
-                <a href="/instellingen">
-                    <SettingsIcon />
-                    Instellingen
-                </a>
-                <a href="/help">
-                    <HelpIcon />
-                    Hulp en support
-                </a>
-                <a class="logout" href="/logout">
-                    <LogoutIcon />
-                    Uitloggen
-                </a>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/account">
+                            <UserIcon width="20" height="20" style="flex: 0 0 20px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;" />
+                            Mijn account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/instellingen">
+                            <SettingsIcon width="20" height="20" style="flex: 0 0 20px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;" />
+                            Instellingen
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/help">
+                            <HelpIcon width="20" height="20" style="flex: 0 0 20px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;" />
+                            Hulp en support
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            <LogoutIcon width="20" height="20" style="flex: 0 0 20px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;" />
+                            Uitloggen
+                        </a>
+                    </li>
+                </ul>
             </nav>
+            
         </details>
     {:else}
         <a class="login-card" href="/login">
@@ -50,7 +67,7 @@
             </span>
             <span class="content">
                 <strong>Mijn account</strong>
-                <span>login/ signup</span>
+                <span>click the link in you email to login</span>
             </span>
         </a>
     {/if}
@@ -93,7 +110,7 @@
                     border-radius: 9px 9px 0 0;
                 }
 
-                :global(.chevron){
+                .arrow{
                     transform: rotate(180deg);
                 }
             }
@@ -117,8 +134,10 @@
                 transition: none;
             }
 
-            :global(.chevron){
-                transition: none;
+            details{
+                .arrow{
+                    transition: none;
+                }
             }
         }
 
@@ -129,7 +148,6 @@
             width: 100%;
             min-height: 58px;
             padding: 8px 10px;
-            border: 0;
             border-radius: 9px;
             color: var(--color-white);
             background: var(--primary-color-dark);
@@ -148,19 +166,28 @@
                     color: var(--primary-color-dark);
                 }
 
-                :global(.chevron){
+                .arrow{
                     color: var(--primary-color-dark);
                 }
+
             }
+        }
+
+        .arrow{
+            display: grid;
+            place-items: center;
+            width: 18px;
+            height: 18px;
+            margin-left: auto;
+            color: var(--color-white);
+            transition: transform 0.5s ease, color 0.3s ease;
         }
 
         .avatar{
             display: grid;
-            flex: 0 0 38px;
             place-items: center;
             width: 38px;
             height: 38px;
-            overflow: hidden;
             border-radius: 50%;
             background: var(--color-blue-tint);
 
@@ -173,7 +200,6 @@
 
         .content{
             display: grid;
-            min-width: 0;
             gap: 2px;
             margin-left: 12px;
 
@@ -186,7 +212,7 @@
 
             strong{
                 font-size: var(--text-size-md);
-                font-weight: 600;
+                font-weight: var(--font-weight-semibold);
             }
 
             span{
@@ -195,21 +221,19 @@
             }
         }
 
-        :global(.chevron){
-            width: 18px;
-            height: 18px;
-            margin-left: auto;
-            color: var(--color-white);
-            transition: transform 0.5s ease, color 0.3s ease;
-        }
-
-        .account-menu{
-            display: grid;
-            gap: 2px;
+        details nav{
             margin-top: 2px;
             padding: 7px 0;
             border-radius: 0 0 9px 9px; 
             background: var(--primary-color-dark);
+
+            ul{
+                display: grid;
+                gap: 2px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
 
             a{
                 display: flex;
@@ -219,13 +243,13 @@
                 padding: 6px 12px;
                 color: var(--color-white);
                 font-size: var(--text-size-md);
-                font-weight: 600;
+                font-weight: var(--font-weight-semibold);
                 text-decoration: none;
                 cursor: pointer;
                 transition: 0.3s ease;
 
 
-                &.logout{
+                li:last-child &{
                     margin-top: 7px;
                     padding-top: 12px;
                     border-top: 1px solid var(--color-neutral-light);
@@ -240,15 +264,6 @@
                 }
             }
 
-            :global(svg){
-                width: 20px;
-                height: 20px;
-                flex: 0 0 20px;
-                stroke: currentColor;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 1.5;
-            }
         }
     }
 </style>
