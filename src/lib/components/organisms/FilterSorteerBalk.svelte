@@ -1,6 +1,7 @@
 <script>
   import FilterMenu from '$lib/components/molecules/FilterMenu.svelte';
   import SorteerSelect from '$lib/components/atoms/SorteerSelect.svelte';
+  import ActiveFilterChip from '$lib/components/molecules/ActiveFilterChip.svelte';
 
   // Ontvang de actieve periode en sortering van de pagina
   export let periode = null;
@@ -12,6 +13,8 @@
 
   <SorteerSelect {periode} {sortering} />
 </div>
+
+<ActiveFilterChip {periode} {sortering} />
 
 <style>
 
