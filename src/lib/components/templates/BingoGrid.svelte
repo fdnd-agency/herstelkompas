@@ -23,8 +23,8 @@
 </script>
 
 <section class="bingo-grid">
-    {#each activiteiten as activiteit}
-        <BingoCard activiteit={activiteit.activiteit} />
+    {#each activiteiten as activiteit, i}
+        <BingoCard activiteit={activiteit.activiteit} index={i} />
     {/each}
 </section>
 

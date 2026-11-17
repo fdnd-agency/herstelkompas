@@ -2,14 +2,14 @@
 	import Activity from "$lib/components/atoms/Activity.svelte";
 	import RadioButtonGroup from "$lib/components/molecules/RadioButtonGroup.svelte";
 
-	let { activiteit } = $props();
+	let { activiteit, index } = $props();
 	let isOpen = $state(false);
 	let activityState = 0;
 </script>
 
 <button onclick={() => (isOpen = !isOpen)} class="state-{activityState}">
 	<Activity {activiteit} />
-	<RadioButtonGroup {isOpen} />
+	<RadioButtonGroup {isOpen} {index} />
 </button>
 
 <style>

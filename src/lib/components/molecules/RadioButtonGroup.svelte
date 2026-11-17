@@ -1,13 +1,13 @@
 <script>
 	import BingoRadioButton from "../atoms/BingoRadioButton.svelte";
-	let { isOpen } = $props();
+	let { isOpen, index } = $props();
 </script>
 
 <!-- Bij class:is-closed={!isOpen} wordt de class toegepast als in BingoCard de boolean isOpen false is -->
 <fieldset class="RadioButtonGroup" class:is-closed={!isOpen}>
-	<BingoRadioButton state="0" />
-	<BingoRadioButton state="1" />
-	<BingoRadioButton state="2" />
+	<BingoRadioButton state="0" {index} />
+	<BingoRadioButton state="1" {index} />
+	<BingoRadioButton state="2" {index} />
 </fieldset>
 
 <style>
