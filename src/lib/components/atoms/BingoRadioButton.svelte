@@ -1,121 +1,80 @@
 <script>
-    let { state, index } = $props();
+    let { value, label, group, index } = $props();
 </script>
 
-<fieldset class="bingokaart-radiobuttons state-{state}">
-    {#if state == 0}
-        <input
-            type="radio"
-            name="state-{index}"
-            value="0"
-            onclick={(event) => event.stopPropagation()}
-        />
-        <label>Niet gedaan</label>
-    {:else if state == 1}
-        <input
-            type="radio"
-            name="state-{index}"
-            value="1"
-            onclick={(event) => event.stopPropagation()}
-        />
-        <label>Mee bezig</label>
-    {:else if state == 2}
-        <input
-            type="radio"
-            name="state-{index}"
-            value="2"
-            onclick={(event) => event.stopPropagation()}
-        />
-        <label>Gedaan</label>
-    {/if}
-</fieldset>
+<label class="bingokaart-radiobutton value-{value}">
+    <input
+        type="radio"
+        name="state-{index}"
+        bind:group
+        onclick={(event) => event.stopPropagation()}
+    />
+    {label}
+</label>
 
 <style>
-    fieldset {
+    .bingokaart-radiobutton {
         display: flex;
         flex-direction: column;
+        gap: 5px;
         align-items: center;
         border: none;
-        width: max-content;
-        gap: 10px;
     }
 
-    /* `Niet gedaan` state */
-    .state-0 {
-        display: flex;
+    input {
+        appearance: none;
+
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+
+        border: 2px solid var(--primary-color-dark);
+
+        position: relative;
+        top: 4px;
+    }
+
+    input:checked {
+        background-color: var(--primary-color-dark);
+    }
+
+    /* `Niet gedaan` (value 0) — blauw */
+    .value-0 {
         input {
-            appearance: none;
-
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-
-            border: 2px solid var(--primary-color-dark);
-
-            position: relative;
-            top: 4px;
+            border-color: var(--primary-color-dark);
         }
 
         input:checked {
             background-color: var(--primary-color-dark);
         }
-
-        label {
-            color: var(--primary-color-dark);
-        }
     }
 
+    /* Verberg de `Niet gedaan`-optie wanneer JS actief is */
     @media (scripting: enabled) {
-        .state-0 {
+        .value-0 {
             display: none;
         }
     }
 
-    /* `Mee bezig` state */
-    .state-1 {
+    /* `Mee bezig` (value 1) — oranje */
+    .value-1 {
         input {
-            appearance: none;
-
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-
-            border: 2px solid var(--color-orange-accent);
-
-            position: relative;
-            top: 4px;
+            border-color: var(--color-orange-accent);
         }
 
         input:checked {
             background-color: var(--color-orange-accent);
         }
-
-        label {
-            color: var(--color-orange-accent);
-        }
     }
 
-    /* `Gedaan` state */
-    .state-2 {
+    /* `Gedaan` (value 2) — groen */
+    .value-2 {
         input {
-            appearance: none;
-
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-
-            border: 2px solid var(--color-green-accent);
-
-            position: relative;
-            top: 4px;
+            border-color: var(--color-green-accent);
         }
 
         input:checked {
             background-color: var(--color-green-accent);
-        }
-
-        label {
-            color: var(--color-green-accent);
         }
     }
 </style>

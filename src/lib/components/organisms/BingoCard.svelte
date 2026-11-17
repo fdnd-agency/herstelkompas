@@ -9,7 +9,7 @@
 
 <button onclick={() => (isOpen = !isOpen)} class="state-{activityState}">
 	<Activity {activiteit} />
-	<RadioButtonGroup {isOpen} {index} />
+	<RadioButtonGroup bind:activityState {isOpen} {index} />
 </button>
 
 <style>
