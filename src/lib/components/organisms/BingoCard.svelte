@@ -4,7 +4,7 @@
 
 	let { activiteit, index } = $props();
 	let isOpen = $state(false);
-	let activityState = 0;
+	let activityState = $state(0);
 </script>
 
 <button onclick={() => (isOpen = !isOpen)} class="state-{activityState}">
