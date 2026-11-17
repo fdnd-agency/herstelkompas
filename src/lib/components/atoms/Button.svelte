@@ -17,7 +17,7 @@
     }
 
     button:hover {
-        background-color: var(--primary-color-dark);
+        background-color: var(--primary-color-light);
     }
 
     button:focus-visible {
