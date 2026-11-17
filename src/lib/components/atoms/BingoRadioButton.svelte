@@ -40,14 +40,14 @@
         background-color: var(--primary-color-dark);
     }
 
-    /* `Niet gedaan` (value 0) — blauw */
+    /* `Niet gedaan` (value 0) — donkergrijs */
     .value-0 {
         input {
-            border-color: var(--primary-color-dark);
+            border-color: var(--color-neutral-dark);
         }
 
         input:checked {
-            background-color: var(--primary-color-dark);
+            background-color: var(--color-neutral-dark);
         }
     }
 
@@ -58,18 +58,18 @@
         }
     }
 
-    /* `Mee bezig` (value 1) — oranje */
+    /* `Mee bezig` (value 1) — donkerblauw */
     .value-1 {
         input {
-            border-color: var(--color-orange-accent);
+            border-color: var(--primary-color-dark);
         }
 
         input:checked {
-            background-color: var(--color-orange-accent);
+            background-color: var(--primary-color-dark);
         }
     }
 
-    /* `Gedaan` (value 2) — groen */
+    /* `Gedaan` (value 2) — donkergroen */
     .value-2 {
         input {
             border-color: var(--color-green-accent);

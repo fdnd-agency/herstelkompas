@@ -28,13 +28,13 @@
 	}
 
 	.state-0 {
-		/* default - blauw */
-		background-color: var(--color-primary-300);
+		/* niet gedaan - lichtgrijs */
+		background-color: var(--color-neutral-lighter);
 	}
 
 	.state-1 {
-		/* mee bezig - oranje */
-		background-color: var(--color-orange-300);
+		/* mee bezig - blauw */
+		background-color: var(--color-primary-300);
 	}
 
 	.state-2 {
