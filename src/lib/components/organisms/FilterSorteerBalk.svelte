@@ -14,7 +14,7 @@
   <SorteerSelect {periode} {sortering} />
 </div>
 
-<ActiveFilterChip {periode} {sortering} />
+<ActiveFilterChip period={periode} sortOrder={sortering} />
 
 <style>
 

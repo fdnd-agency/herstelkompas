@@ -4,6 +4,8 @@
   // Ontvangt de actieve filterperiode en sortering
   export let periode = null;
   export let sortering = null;
+  export let period = null;
+  export let sortOrder = null;
 
   // Koppelt de filterwaarden aan leesbare teksten
   const periodes = {
@@ -14,17 +16,20 @@
 
   // Zoekt de tekst die bij de gekozen periode hoort
   $: filterTekst = periodes[periode];
+  $: filterText = periodLabels[period];
 
   // Verwijdert het periodefilter, maar behoudt de sortering
   $: verwijderUrl = sortering
     ? `/behandelingen?sort=${encodeURIComponent(sortering)}`
+  $: removeUrl = sortOrder
+    ? `/behandelingen?sort=${encodeURIComponent(sortOrder)}`
     : '/behandelingen';
 </script>
 
-{#if filterTekst}
+{#if filterText}
   <div class="active-filter-chip">
-    <span>Datum: {filterTekst}</span>
-    <RemoveFilterButton href={verwijderUrl} />
+    <span>Datum: {filterText}</span>
+    <RemoveFilterButton href={removeUrl} />
   </div>
 {/if}
 
