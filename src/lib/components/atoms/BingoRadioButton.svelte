@@ -32,6 +32,7 @@
 
         position: relative;
         top: 4px;
+        cursor: pointer;
     }
 
     input:checked {
