@@ -1,15 +1,16 @@
 <script>
-    let { value, label, group, index } = $props();
+	let { value, label, index, group = $bindable() } = $props();
 </script>
 
 <label class="bingokaart-radiobutton value-{value}">
-    <input
-        type="radio"
-        name="state-{index}"
-        bind:group
-        onclick={(event) => event.stopPropagation()}
-    />
-    {label}
+	<input
+		type="radio"
+		name="state-{index}"
+		{value}
+		bind:group
+		onclick={(event) => event.stopPropagation()}
+	/>
+	{label}
 </label>
 
 <style>
