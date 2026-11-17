@@ -3,6 +3,7 @@
     import { page } from "$app/state";
     import { FileDescInput } from "$lib";
     import BingoGrid from "$lib/components/templates/BingoGrid.svelte";
+    import Button from "$lib/components/atoms/Button.svelte";
 </script>
 
 <svelte:head>
@@ -14,6 +15,7 @@
 </header>
 <section>
     <BingoGrid />
+    <Button label="Opslaan" />
 </section>
 
 <style>
@@ -23,6 +25,9 @@
 
     section {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        gap: 30px;
     }
 </style>
