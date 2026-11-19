@@ -1,52 +1,33 @@
 <script>
-    import { BingoCard, BingoAlert } from '$lib';
-    import { page } from '$app/state';
-    let { data, form } = $props();
-    let behandelingen = data.behandelingen;
-    let bingokaart = data.bingokaart;
-    let awards = data.awards; //
-    let prizes = data.prizes;
-
-    let showAlert = $state(false);
-    let success = $state(false)
-
-    let count =
-        form?.count ??
-        bingokaart.filter(item => item.checked).length;
-  
-    if(form?.success) {
-        success = true
-        setTimeout(() => {
-            success = false
-        }, 1000)
-    }
+    let { data } = $props();
+    import { page } from "$app/state";
+    import { FileDescInput } from "$lib";
+    import BingoGrid from "$lib/components/templates/BingoGrid.svelte";
+    import Button from "$lib/components/atoms/Button.svelte";
 </script>
 
+<svelte:head>
+    <link rel="stylesheet" href="/css/fileInputEnhance.css" />
+</svelte:head>
 <header class="page-header">
-    <h1 id="behandelingstitel">Bingokaart</h1>
-    <p class="subtitle">Jouw voortgang</p>
+    <h1>Bingokaart</h1>
+    <p class="subtitle">Jouw tempo, onze steun.</p>
 </header>
-
-{#if form?.showPopup}
-  <BingoAlert {count} {prizes} />
-{/if}
-<BingoCard {bingokaart} {success} />
+<form method="POST" action="?/save" class="bingo-form">
+    <BingoGrid {data} />
+    <Button label="Opslaan" />
+</form>
 
 <style>
-  .page-header {
-    margin-bottom: 3em;
-
-    h1 {
-      color: var(--primary-color-dark);
-      font-family: var(--font-semibold);
-      font-size: var(--text-size-xl);
-      margin: 0 0 0.25rem 0;
+    .page-header {
+        color: var(--primary-color-dark);
     }
 
-    .subtitle {
-      color: var(--primary-color-dark);
-      font-size: var(--text-size-sm);
-      margin: 0;
+    .bingo-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
     }
-  }
 </style>
