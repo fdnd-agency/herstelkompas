@@ -1,62 +1,68 @@
 
 
-import { createDirectus, authentication } from '@directus/sdk';
 import { DIRECTUS_EMAIL, DIRECTUS_PASSWORD, DIRECTUS_URL } from '$env/static/private';
 
-const client = createDirectus(DIRECTUS_URL).with(authentication());
-const token = await client.login({
-    email: DIRECTUS_EMAIL,
-    password: DIRECTUS_PASSWORD
-});
-
-const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token.access_token}`
-};
+async function directusAuth() {
+	const loginRes = await fetch(`${DIRECTUS_URL}/auth/login`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ email: DIRECTUS_EMAIL, password: DIRECTUS_PASSWORD })
+	});
+	const { data } = await loginRes.json();
+	return `Bearer ${data.access_token}`;
+}
 
 export async function load() {
-    const res = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=id,label,state`, { headers });
-    return { activiteiten: (await res.json()).data };
+	const token = await directusAuth();
+
+	const res = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=id,label,state`, {
+		headers: { Authorization: token }
+	});
+
+	return { activiteiten: (await res.json()).data };
 }
 
 export const actions = {
-    save: async ({ request }) => {
-        const formData = await request.formData();
+	save: async ({ request }) => {
+		const formData = await request.formData();
+		const token = await directusAuth();
 
-        const actRes = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=label`, { headers });
-        const activiteiten = (await actRes.json()).data;
+		const actRes = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=label`, {
+			headers: { Authorization: token }
+		});
+		const activiteiten = (await actRes.json()).data;
 
-        const bingokaart = activiteiten.map((a, i) => {
-            const state = Number(formData.get(`state-${i}`) ?? 0);
-            return { activiteit: a.label, checked: state > 0 };
-        });
+		const bingokaart = activiteiten.map((a, i) => {
+			const state = Number(formData.get(`state-${i}`) ?? 0);
+			return { activiteit: a.label, checked: state > 0 };
+		});
 
-        const today = new Date().toISOString().slice(0, 19);
+		const today = new Date().toISOString().slice(0, 19);
 
-        const res = await fetch(
-            `${DIRECTUS_URL}/items/behandeling?filter[datum][_gte]=${today}&limit=1&sort=-datum`,
-            { headers }
-        );
-        const bestaande = (await res.json()).data?.[0];
+		const res = await fetch(
+			`${DIRECTUS_URL}/items/behandeling?filter[datum][_gte]=${today}&limit=1&sort=-datum`,
+			{ headers: { Authorization: token } }
+		);
+		const bestaande = (await res.json()).data?.[0];
 
-        if (bestaande) {
-            await fetch(`${DIRECTUS_URL}/items/behandeling/${bestaande.id}`, {
-                method: 'PATCH',
-                headers,
-                body: JSON.stringify({ bingokaart })
-            });
-        } else {
-            await fetch(`${DIRECTUS_URL}/items/behandeling`, {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({
-                    beschrijving: 'N.v.t.',
-                    datum: today,
-                    bingokaart
-                })
-            });
-        }
+		if (bestaande) {
+			await fetch(`${DIRECTUS_URL}/items/behandeling/${bestaande.id}`, {
+				method: 'PATCH',
+				headers: { Authorization: token, 'Content-Type': 'application/json' },
+				body: JSON.stringify({ bingokaart })
+			});
+		} else {
+			await fetch(`${DIRECTUS_URL}/items/behandeling`, {
+				method: 'POST',
+				headers: { Authorization: token, 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					beschrijving: 'N.v.t.',
+					datum: today,
+					bingokaart
+				})
+			});
+		}
 
-        return { success: true, message: 'Bingokaart opgeslagen!' };
-    }
+		return { success: true, message: 'Bingokaart opgeslagen!' };
+	}
 };

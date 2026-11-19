@@ -13,10 +13,9 @@
     <h1>Bingokaart</h1>
     <p class="subtitle">Jouw tempo, onze steun.</p>
 </header>
-
-<form method="POST" class="bingo-form">
+<form method="POST" action="?/save" class="bingo-form">
     <BingoGrid {data} />
-    <Button label="Opslaan" name="action" value="save" />
+    <Button label="Opslaan" />
 </form>
 
 <style>
@@ -27,6 +26,7 @@
     .bingo-form {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         gap: 30px;
     }
