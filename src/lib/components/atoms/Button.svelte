@@ -1,8 +1,8 @@
 <script>
-    let { label } = $props();
+    let { label, name = null, value = null } = $props();
 </script>
 
-<button type="submit">{label}</button>
+<button type="submit" {name} {value}>{label}</button>
 
 <style>
     button {
