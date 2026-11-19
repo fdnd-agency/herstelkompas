@@ -14,7 +14,7 @@
     <p class="subtitle">Jouw tempo, onze steun.</p>
 </header>
 <section>
-    <BingoGrid />
+    <BingoGrid {data} />
     <Button label="Opslaan" />
 </section>
 

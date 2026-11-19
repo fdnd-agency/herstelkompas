@@ -72,11 +72,11 @@
     /* `Gedaan` (value 2) — donkergroen */
     .value-2 {
         input {
-            border-color: var(--color-green-accent);
+            border-color: var(--color-green-800);
         }
 
         input:checked {
-            background-color: var(--color-green-accent);
+            background-color: var(--color-green-800);
         }
     }
 </style>
