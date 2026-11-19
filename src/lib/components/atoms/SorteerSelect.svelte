@@ -1,10 +1,19 @@
+<script>
+  export let periode = null;
+  export let sortering = null;
+</script>
 
 <div>
 <form method="get" action="/behandelingen">
 
+   <!-- Behoud de gekozen periode tijdens het sorteren -->
+    {#if periode}
+      <input type="hidden" name="periode" value={periode} />
+    {/if}
+
 <label for="sorteren">Sorteren op:</label>
 
-<select id="sorteren" name="sort">
+<select id="sorteren" name="sort" value={sortering || 'nieuwste'}>
   <option value="nieuwste">Nieuwste</option>
   <option value="oudste">Oudste</option>
 </select>
