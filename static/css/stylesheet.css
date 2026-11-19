@@ -113,7 +113,7 @@
   /* Primary */
   --primary-color-dark: var(--color-primary-700);
   --primary-color-light: var(--color-primary-600);
-  --color-blue-tint: var(--color-primary-400);
+  --color-blue-tint: hsl(212, 100%, 96.3%);
 
   /* Neutraal */
   --color-neutral-darker: var(--color-neutral-900);
