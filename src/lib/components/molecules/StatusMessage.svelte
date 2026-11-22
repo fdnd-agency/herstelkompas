@@ -8,7 +8,7 @@
   } = $props();
 </script>
 
-<div class="status-message" role="status">
+<div class="status-message" class:success={type === 'success'} role="status">
  {#if type === 'success'}
   <CheckIcon />
   {:else}
