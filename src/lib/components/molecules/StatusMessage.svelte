@@ -11,6 +11,8 @@
 <div class="status-message" role="status">
  {#if type === 'success'}
   <CheckIcon />
+  {:else}
+  <Spinner />
 {/if}
 </div>
 
