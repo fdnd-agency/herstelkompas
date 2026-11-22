@@ -17,6 +17,11 @@
 </div>
 
 <style>
+
+.success {
+  background-color: var(--color-neutral-lighter);
+  color: var(--color-green-800);
+}
   .status-message {
   display: inline-flex;
   align-items: center;
