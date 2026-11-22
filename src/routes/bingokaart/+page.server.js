@@ -12,14 +12,17 @@ async function directusAuth() {
 	return `Bearer ${data.access_token}`;
 }
 
-export async function load() {
+async function getActiviteiten(fields) {
 	const token = await directusAuth();
-
-	const res = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=id,label,state`, {
+	const res = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=${fields}`, {
 		headers: { Authorization: token }
 	});
+	return (await res.json()).data;
+}
 
-	return { activiteiten: (await res.json()).data };
+export async function load() {
+	const activiteiten = await getActiviteiten('id,label,state');
+	return { activiteiten };
 }
 
 export const actions = {
@@ -27,10 +30,7 @@ export const actions = {
 		const formData = await request.formData();
 		const token = await directusAuth();
 
-		const actRes = await fetch(`${DIRECTUS_URL}/items/activiteit?limit=100&fields=label`, {
-			headers: { Authorization: token }
-		});
-		const activiteiten = (await actRes.json()).data;
+		const activiteiten = await getActiviteiten('label');
 
 		const bingokaart = activiteiten.map((a, i) => {
 			const state = Number(formData.get(`state-${i}`) ?? 0);
@@ -45,22 +45,28 @@ export const actions = {
 		);
 		const bestaande = (await res.json()).data?.[0];
 
+		const saveBody = { ...bingokaart };
+
+		if (!bestaande) {
+			saveBody.beschrijving = 'N.v.t.';
+			saveBody.datum = today;
+		}
+
+		const url = `${DIRECTUS_URL}/items/behandeling`;
+		let urlWithId = url;
+		let method = 'POST';
 		if (bestaande) {
-			await fetch(`${DIRECTUS_URL}/items/behandeling/${bestaande.id}`, {
-				method: 'PATCH',
-				headers: { Authorization: token, 'Content-Type': 'application/json' },
-				body: JSON.stringify({ bingokaart })
-			});
-		} else {
-			await fetch(`${DIRECTUS_URL}/items/behandeling`, {
-				method: 'POST',
-				headers: { Authorization: token, 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					beschrijving: 'N.v.t.',
-					datum: today,
-					bingokaart
-				})
-			});
+			urlWithId = `${url}/${bestaande.id}`;
+			method = 'PATCH';
+		}
+
+		const saveRes = await fetch(urlWithId, {
+			method,
+			headers: { Authorization: token, 'Content-Type': 'application/json' },
+			body: JSON.stringify(saveBody)
+		});
+		if (!saveRes.ok) {
+			return { success: false, message: 'Opslaan bingokaart is mislukt. Probeer het opnieuw!' };
 		}
 
 		return { success: true, message: 'Bingokaart opgeslagen!' };
