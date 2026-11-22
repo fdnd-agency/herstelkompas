@@ -7,7 +7,13 @@
 	let activityState = $state(0);
 </script>
 
-<button type="button" onclick={() => (isOpen = !isOpen)} class="state-{activityState}">
+<button
+	type="button"
+	onclick={() => (isOpen = !isOpen)}
+	aria-expanded={isOpen}
+	aria-controls="radiobuttons-{index}"
+	class="state-{activityState}"
+>
 	<Activity {activiteit} />
 	<RadioButtonGroup bind:activityState {isOpen} {index} />
 </button>
