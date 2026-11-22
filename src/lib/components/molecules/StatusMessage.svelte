@@ -3,6 +3,7 @@
   import CheckIcon from '$lib/components/atoms/CheckIcon.svelte';
 
   let {
+    type = 'loading',
     label = 'Bezig met laden...'
   } = $props();
 </script>
