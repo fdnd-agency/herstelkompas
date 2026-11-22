@@ -23,17 +23,18 @@
 
 <style>
 
-.success {
-  background-color: var(--color-neutral-lighter);
-  color: var(--color-green-800);
-}
-  .status-message {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background-color: var(--color-blue-tint);
-  color: var(--primary-color-dark);
-  border-radius: 0.75rem;
-}
+.status-message {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-blue-tint);
+    color: var(--primary-color-dark);
+    border-radius: 0.75rem;
+  }
+
+  .success {
+    background-color: var(--color-neutral-lighter);
+    color: var(--color-green-800);
+  }
 </style>
