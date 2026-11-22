@@ -1,5 +1,6 @@
 <script>
   import Spinner from '$lib/components/atoms/Spinner.svelte';
+  import CheckIcon from '$lib/components/atoms/CheckIcon.svelte';
 
   let {
     label = 'Bezig met laden...'
