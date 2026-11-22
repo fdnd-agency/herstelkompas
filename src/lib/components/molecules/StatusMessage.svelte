@@ -9,8 +9,9 @@
 </script>
 
 <div class="status-message" role="status">
-  <Spinner />
-  <span>{label}</span>
+ {#if type === 'success'}
+  <CheckIcon />
+{/if}
 </div>
 
 <style>
