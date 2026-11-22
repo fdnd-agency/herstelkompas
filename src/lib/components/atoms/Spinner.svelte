@@ -6,11 +6,9 @@
   .spinner {
     width: 1.5rem;
     height: 1.5rem;
-
-    border: 3px solid #bcd9f5;
-    border-top-color: #1769aa;
+   border: 3px solid var(--color-primary-400);
+border-top-color: var(--primary-color-dark);
     border-radius: 50%;
-
     animation: spin 1s linear infinite;
   }
 

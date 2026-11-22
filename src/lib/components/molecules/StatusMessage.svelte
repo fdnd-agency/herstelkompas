@@ -13,13 +13,12 @@
 
 <style>
   .status-message {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    padding: 0.75rem 1rem;
-    background-color: #ecf5ff;
-    color: #174a79;
-    border-radius: 0.75rem;
-  }
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-blue-tint);
+  color: var(--primary-color-dark);
+  border-radius: 0.75rem;
+}
 </style>
