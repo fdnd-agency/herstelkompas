@@ -34,6 +34,7 @@
   }
 
   .success {
+    
     background-color: var(--color-neutral-lighter);
     color: var(--color-green-800);
   }
