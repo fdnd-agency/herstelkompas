@@ -14,7 +14,12 @@
   {:else}
   <Spinner />
 {/if}
+
+  <span>{label}</span>
 </div>
+
+
+
 
 <style>
 
