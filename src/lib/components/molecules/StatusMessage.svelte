@@ -37,5 +37,7 @@
     
     background-color: var(--color-neutral-lighter);
     color: var(--color-green-800);
-  }
+    border: 0.1px solid var(--color-neutral-400);
+}
+  
 </style>
