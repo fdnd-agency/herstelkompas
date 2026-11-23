@@ -40,11 +40,11 @@
 
 	.state-1 {
 		/* mee bezig - blauw */
-		background-color: var(--color-primary-300);
+		background-color: hsl(204, 59%, 72%);
 	}
 
 	.state-2 {
 		/* gedaan - groen */
-		background-color: var(--color-green-400);
+		background-color: hsl(85, 57%, 64%);
 	}
 </style>

@@ -1,29 +1,22 @@
 <script>
-let { tekst, waarde } = $props();
-
+  let { tekst, waarde } = $props();
 </script>
 
- <label>
-  <input
-    type="radio"
-    name="periode"
-    value={waarde}
-  />
+<label>
+  <input type="radio" name="periode" value={waarde} />
 
   <span>{tekst}</span>
 </label>
 
 <style>
-
-label{
-
-    display:flex;
+  label {
+    display: flex;
     align-items: center;
     cursor: pointer;
     gap: 0.75rem;
-}
+  }
 
-input[type="radio"] {
+  input[type="radio"] {
     width: 1.25rem;
     height: 1.25rem;
     margin: 0;
@@ -40,6 +33,4 @@ input[type="radio"] {
     font-size: 1rem;
     color: #202020;
   }
-
-
 </style>
