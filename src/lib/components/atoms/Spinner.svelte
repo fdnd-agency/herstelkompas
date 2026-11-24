@@ -19,9 +19,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .spinner {
-      animation: none;
-    }
+     .spinner {
+    animation-duration: 3s;
+  }
   }
 
 </style>
