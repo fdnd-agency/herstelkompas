@@ -62,6 +62,7 @@
   --color-orange-300: rgb(229, 187, 160);
 
   --color-white: rgb(255, 255, 255);
+  --color-black: hsl(0, 0%, 0%);
 
   /* HSL TOKENS. HSL IS WIDELY AVAILABLE */
   /* https://caniuse.com/?search=hsl */
@@ -73,6 +74,7 @@
   --color-primary-600: hsl(204, 84%, 41%);
   --color-primary-500: hsl(204, 64%, 59%);
   --color-primary-400: hsl(204, 59%, 72%);
+  --color-primary-300: hsl(212, 90%, 96%); /* Bingocard achtergrond kleur */
 
   /* Neutrale kleuren */
   --color-neutral-900: hsl(0, 0%, 10%);
@@ -124,6 +126,7 @@
 
   /* Accent */
   --color-green-accent: var(--color-green-600);
+  --color-orange-accent: var(--color-orange-500);
 
   @media (prefers-contrast: more) {
     --color-neutral: var(--color-neutral-700);
