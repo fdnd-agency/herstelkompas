@@ -1,6 +1,7 @@
 <script>
   import Spinner from '$lib/components/atoms/Spinner.svelte';
   import CheckIcon from '$lib/assets/CheckIcon.svelte';
+  import ErrorIcon from '$lib/assets/ErrorIcon.svelte';
 
   let {
     type = 'loading',
