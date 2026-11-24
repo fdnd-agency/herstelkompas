@@ -12,6 +12,8 @@
 <div class="status-message" class:success={type === 'success'} role="status">
  {#if type === 'success'}
   <CheckIcon />
+  {:else if type === 'error'}
+  <ErrorIcon />
   {:else}
   <Spinner />
 {/if}
