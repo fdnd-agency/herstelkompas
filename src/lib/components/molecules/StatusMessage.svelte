@@ -9,7 +9,7 @@
   } = $props();
 </script>
 
-<div class="status-message" class:success={type === 'success'} role="status">
+<div class="status-message" class:success={type === 'success'} class:error={type === 'error'} role="status">
  {#if type === 'success'}
   <CheckIcon />
   {:else if type === 'error'}
