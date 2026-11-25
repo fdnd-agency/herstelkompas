@@ -27,7 +27,13 @@
   sortering={data.sortering}
 />
 
-{#if data.status === 'error'}
+{#if $navigating?.to?.url.pathname === '/behandelingen'}
+  <StatusMessage
+    type="loading"
+    label="Behandelingen bijwerken..."
+  />
+
+{:else if data.status === 'error'}
   <StatusMessage
     type="error"
     label="Behandelingen laden mislukt. Probeer opnieuw."
