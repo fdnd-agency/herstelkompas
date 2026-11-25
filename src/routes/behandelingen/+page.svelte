@@ -11,6 +11,8 @@
 
   // Extract treatments from the loaded data
   $: behandelingen = data.behandelingen;
+
+    let showSuccess = false;
 </script>
 
 
