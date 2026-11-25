@@ -2,6 +2,7 @@
   // Import (currently unused in this file)
   import { Treatment } from '$lib';
    import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
+   import StatusMessage from '$lib/components/molecules/StatusMessage.svelte';
     
 
   // Data injected by the page/load function
