@@ -5,6 +5,7 @@
    import StatusMessage from '$lib/components/molecules/StatusMessage.svelte';
    import { navigating } from '$app/stores';
    import { afterNavigate } from '$app/navigation';
+   import { onDestroy } from 'svelte';
     
 
   // Data injected by the page/load function
@@ -13,9 +14,10 @@
   // Extract treatments from the loaded data
   $: behandelingen = data.behandelingen;
 
-    let showSuccess = false;
+let showSuccess = false;
+let successTimer;
 
-    afterNavigate(({ from, to }) => {
+afterNavigate(({ from, to }) => {
   if (
     from?.url.pathname === '/behandelingen' &&
     to?.url.pathname === '/behandelingen' &&
@@ -23,10 +25,17 @@
     data.status === 'success'
   ) {
     showSuccess = true;
-    setTimeout(() => {
-  showSuccess = false;
-}, 3000);
+
+    clearTimeout(successTimer);
+
+    successTimer = setTimeout(() => {
+      showSuccess = false;
+    }, 3000);
   }
+});
+
+onDestroy(() => {
+  clearTimeout(successTimer);
 });
 </script>
 
