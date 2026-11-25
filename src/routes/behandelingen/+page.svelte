@@ -3,6 +3,7 @@
   import { Treatment } from '$lib';
    import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
    import StatusMessage from '$lib/components/molecules/StatusMessage.svelte';
+   import { navigating } from '$app/stores';
     
 
   // Data injected by the page/load function
