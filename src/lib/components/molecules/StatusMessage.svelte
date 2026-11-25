@@ -1,6 +1,7 @@
 <script>
   import Spinner from '$lib/components/atoms/Spinner.svelte';
   import CheckIcon from '$lib/assets/CheckIcon.svelte';
+  import ErrorIcon from '$lib/assets/ErrorIcon.svelte';
 
   let {
     type = 'loading',
@@ -8,9 +9,11 @@
   } = $props();
 </script>
 
-<div class="status-message" class:success={type === 'success'} role="status">
+<div class="status-message" class:success={type === 'success'} class:error={type === 'error'} role="status">
  {#if type === 'success'}
   <CheckIcon />
+  {:else if type === 'error'}
+  <ErrorIcon />
   {:else}
   <Spinner />
 {/if}
@@ -38,6 +41,17 @@
     background-color: var(--color-neutral-lighter);
     color: var(--color-green-800);
     border: 0.1px solid var(--color-neutral-400);
+}
+
+.error {
+  background-color: var(--color-red-400);
+  
+  background-color: color-mix(
+    in srgb,
+    var(--color-red-400) 20%,
+    var(--color-white)
+  );
+  color: var(--color-red-800);
 }
   
 </style>
