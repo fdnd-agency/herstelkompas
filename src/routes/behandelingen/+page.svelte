@@ -4,6 +4,7 @@
    import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
    import StatusMessage from '$lib/components/molecules/StatusMessage.svelte';
    import { navigating } from '$app/stores';
+   import { afterNavigate } from '$app/navigation';
     
 
   // Data injected by the page/load function
