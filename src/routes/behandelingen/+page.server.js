@@ -38,7 +38,8 @@ try {
   return {
     behandelingen: json.data,
     periode,
-    sortering
+    sortering,
+    status: 'success'
   };
 
 } catch (error) {
