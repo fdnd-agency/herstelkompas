@@ -26,20 +26,28 @@ export async function load({ url }) {
     apiUrl += `&filter[datum][_gte]=${datum.toISOString()}`;
   }
 
-  if (!res.ok) {
-  throw new Error('Behandelingen laden mislukt');
-}
-
-  // 5. Haal de behandelingen op
+try {
   const res = await fetch(apiUrl);
-  const json = await res.json();
-  
 
-// Geef de behandelingen en actieve URL-waarden door aan de pagina
-// zodat de componenten weten welk filter en welke sortering gekozen zijn
+  if (!res.ok) {
+    throw new Error('Behandelingen laden mislukt');
+  }
+
+  const json = await res.json();
+
   return {
     behandelingen: json.data,
-  periode,
-  sortering
+    periode,
+    sortering
   };
+
+} catch (error) {
+  console.error(error);
+
+  return {
+    behandelingen: [],
+    periode,
+    sortering
+  };
+}
 }
