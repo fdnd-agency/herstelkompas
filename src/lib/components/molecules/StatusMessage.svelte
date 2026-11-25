@@ -44,6 +44,8 @@
 }
 
 .error {
+  background-color: var(--color-red-400);
+  
   background-color: color-mix(
     in srgb,
     var(--color-red-400) 20%,
