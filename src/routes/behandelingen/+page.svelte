@@ -23,6 +23,9 @@
     data.status === 'success'
   ) {
     showSuccess = true;
+    setTimeout(() => {
+  showSuccess = false;
+}, 3000);
   }
 });
 </script>
