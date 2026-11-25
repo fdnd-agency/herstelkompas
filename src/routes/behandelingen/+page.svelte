@@ -55,18 +55,25 @@ afterNavigate(({ from, to }) => {
   sortering={data.sortering}
 />
 
-{#if $navigating?.to?.url.pathname === '/behandelingen'}
+{#if
+  $navigating?.from?.url.pathname === '/behandelingen' &&
+  $navigating?.to?.url.pathname === '/behandelingen' &&
+  (
+    $navigating.from.url.searchParams.get('periode') !==
+    $navigating.to.url.searchParams.get('periode') ||
+    $navigating.from.url.searchParams.get('sort') !==
+    $navigating.to.url.searchParams.get('sort')
+  )
+}
   <StatusMessage
     type="loading"
     label="Behandelingen bijwerken..."
   />
-
 {:else if data.status === 'error'}
   <StatusMessage
     type="error"
     label="Behandelingen laden mislukt. Probeer opnieuw."
   />
-
 {:else if data.status === 'success' && showSuccess}
   <StatusMessage
     type="success"
