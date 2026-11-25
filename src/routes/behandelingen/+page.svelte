@@ -26,6 +26,13 @@
   sortering={data.sortering}
 />
 
+{#if data.status === 'error'}
+  <StatusMessage
+    type="error"
+    label="Behandelingen laden mislukt. Probeer opnieuw."
+  />
+{/if}
+
   <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
     <span>Beschrijving</span>
