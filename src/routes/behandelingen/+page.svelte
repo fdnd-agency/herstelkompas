@@ -41,7 +41,7 @@
     label="Behandelingen laden mislukt. Probeer opnieuw."
   />
 
-{:else if data.status === 'success'}
+{:else if data.status === 'success' && showSuccess}
   <StatusMessage
     type="success"
     label="Overzicht bijgewerkt"
