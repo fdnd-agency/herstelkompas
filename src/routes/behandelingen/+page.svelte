@@ -14,6 +14,17 @@
   $: behandelingen = data.behandelingen;
 
     let showSuccess = false;
+
+    afterNavigate(({ from, to }) => {
+  if (
+    from?.url.pathname === '/behandelingen' &&
+    to?.url.pathname === '/behandelingen' &&
+    from.url.search !== to.url.search &&
+    data.status === 'success'
+  ) {
+    showSuccess = true;
+  }
+});
 </script>
 
 
