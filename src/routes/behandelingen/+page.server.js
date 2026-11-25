@@ -26,6 +26,10 @@ export async function load({ url }) {
     apiUrl += `&filter[datum][_gte]=${datum.toISOString()}`;
   }
 
+  if (!res.ok) {
+  throw new Error('Behandelingen laden mislukt');
+}
+
   // 5. Haal de behandelingen op
   const res = await fetch(apiUrl);
   const json = await res.json();
