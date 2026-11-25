@@ -31,7 +31,15 @@
     type="error"
     label="Behandelingen laden mislukt. Probeer opnieuw."
   />
+
+{:else if data.status === 'success'}
+  <StatusMessage
+    type="success"
+    label="Overzicht bijgewerkt"
+  />
 {/if}
+
+
 
   <!-- Column labels – only visible on tablet and desktop -->
   <header class="treatment-header" role="group" aria-label="Kolomnamen">
