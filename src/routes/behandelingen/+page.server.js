@@ -48,7 +48,8 @@ try {
   return {
     behandelingen: [],
     periode,
-    sortering
+    sortering,
+    status: 'error'
   };
 }
 }
