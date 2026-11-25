@@ -14,19 +14,19 @@
   // Extract treatments from the loaded data
   $: behandelingen = data.behandelingen;
 
-let showSuccess = false;
-let successTimer;
-
 afterNavigate(({ from, to }) => {
   if (
     from?.url.pathname === '/behandelingen' &&
     to?.url.pathname === '/behandelingen' &&
-    from.url.search !== to.url.search &&
+    (
+      from.url.searchParams.get('periode') !== to.url.searchParams.get('periode') ||
+      from.url.searchParams.get('sort') !== to.url.searchParams.get('sort')
+    ) &&
     data.status === 'success'
   ) {
     showSuccess = true;
 
-     const filterMenu = document.getElementById('filtermenu');
+    const filterMenu = document.getElementById('filtermenu');
 
     if (filterMenu?.matches(':popover-open')) {
       filterMenu.hidePopover();
@@ -38,10 +38,6 @@ afterNavigate(({ from, to }) => {
       showSuccess = false;
     }, 3000);
   }
-});
-
-onDestroy(() => {
-  clearTimeout(successTimer);
 });
 </script>
 
