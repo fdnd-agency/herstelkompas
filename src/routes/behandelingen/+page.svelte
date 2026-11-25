@@ -26,6 +26,12 @@ afterNavigate(({ from, to }) => {
   ) {
     showSuccess = true;
 
+     const filterMenu = document.getElementById('filtermenu');
+
+    if (filterMenu?.matches(':popover-open')) {
+      filterMenu.hidePopover();
+    }
+
     clearTimeout(successTimer);
 
     successTimer = setTimeout(() => {
