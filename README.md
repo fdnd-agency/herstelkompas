@@ -176,6 +176,10 @@ We hebben gedurende ontwikkeling rekening gehouden met toegankelijkheid, o.a. do
 
 ---
 
+### Contributing
+
+https://github.com/fdnd-agency/herstelkompas/blob/dev/CONTRIBUTING.md
+
 ### Bijdragen
 
 Wil je bijdragen?
