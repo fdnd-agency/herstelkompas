@@ -4,6 +4,27 @@ Herstelkompas is een digitaal webplatform, ontwikkeld met SvelteKit, dat cliënt
 
 Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Kerem Tutucu, Dylan van Nierop en Ties Beeftink, in opdracht van Zelfzorg aan Zee.
 
+- [Visuals](#visuals)
+- [Opdrachtgever: Zelfzorg aan Zee](#opdrachtgever-zelfzorg-aan-zee)
+- [Design challenge](#design-challenge)
+- [Team & rollen](#team--rollen)
+- [Ontwerpkeuzes & inspiratie](#ontwerpkeuzes--inspiratie)
+- [Functionaliteitsoverzicht](#functionaliteitsoverzicht)
+  - [Welkompagina](#welkompagina)
+  - [Vragenlijst](#vragenlijst)
+  - [Scans](#scans)
+  - [Bingokaart](#bingokaart)
+  - [Behandelingen (overzicht)](#behandelingen-overzicht)
+- [Tech stack & libraries](#tech-stack--libraries)
+- [Datamodel](#datamodel)
+- [Installatie](#installatie)
+- [Scripts](#scripts)
+- [Toegankelijkheid](#toegankelijkheid)
+- [Contributing](#contributing)
+- [Code conventies](#code-conventies)
+- [Bijdragen](#bijdragen)
+
+---
 
 # Visuals
 
@@ -126,7 +147,7 @@ SvelteKit is een modern framework bovenop Svelte, met ondersteuning voor routing
 
 ---
 
-Installatie
+## Installatie
 
 1.	Clone de repository:
 
