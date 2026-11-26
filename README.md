@@ -1,4 +1,3 @@
-
 # Herstelkompas
 
 Herstelkompas is een digitaal webplatform, ontwikkeld met SvelteKit, dat cliënten met Long COVID (en aanverwante klachten zoals burn-out en letselschade) ondersteunt bij het monitoren van herstel. Het platform maakt herstel inzichtelijk met een visuele, toegankelijke en persoonlijke weergave van voortgang. Hierdoor kunnen zorgverleners beter volgen hoe het traject verloopt en worden cliënten extra gemotiveerd om consequent aan hun herstel te werken.
@@ -6,17 +5,15 @@ Herstelkompas is een digitaal webplatform, ontwikkeld met SvelteKit, dat cliënt
 Het project is gerealiseerd binnen FDND (Front-End Design & Development) door Kerem Tutucu, Dylan van Nierop en Ties Beeftink, in opdracht van Zelfzorg aan Zee.
 
 
-# Visuals/Demovideo
+# Visuals
 
-| Desktop (Behandeling Detail) | Mobile (bingokaart) |
-|-------------|-----------|
-| <img src="https://github.com/user-attachments/assets/16f93ccb-ce3b-4bdb-9c21-6d3e00139b09" width="700"/> | <img src="https://github.com/user-attachments/assets/43569b03-6595-4957-8c30-9b427bfcce34" width="200"/> |
+<img width="1920" height="1440" alt="97shots_so_home" src="https://github.com/user-attachments/assets/eda89c44-9f0d-442a-9eab-379daeff7231" />
 
+<img width="1920" height="1440" alt="41shots_so_bingo" src="https://github.com/user-attachments/assets/b9274ac0-979e-4f2a-a926-91f32b3fbabe" />
 
-Hieronder een demovideo waarin de applicatie wordt laten zien
+<img width="1920" height="1440" alt="911shots_so_behandelingen" src="https://github.com/user-attachments/assets/53abbb94-308a-4cd1-a341-d6cd568104b8" />
 
-[Demovideo](https://vimeo.com/1157505344?share=copy&fl=sv&fe=ci)
-
+<img width="1920" height="1440" alt="297shots_so_iphone" src="https://github.com/user-attachments/assets/21c455c7-eb4d-4060-87fd-6cf85fd1c22a" />
 
 ---
 
@@ -52,10 +49,9 @@ Ontwerp en ontwikkel een intuïtieve en gebruiksvriendelijke webtool waarmee cli
 Het team bestaat uit Ties, Kerem en Dylan. Ieder teamlid ontwikkelde een eigen ontwerpconcept; uiteindelijk is gekozen voor het ontwerp van Ties, omdat dit het beste aansloot bij de doelstellingen en doelgroep. Vervolgens werkte het team gezamenlijk aan de technische implementatie en verbetering van de gebruikerservaring.
 
 Bijdragen (o.a.)	
-* Kerem - herontwerp en ontwikkeling van Client → Behandelingen → Bingokaart
-* Kerem - Herwerking van Vragenlijst naar een duidelijke FAQ-achtige layout
-* Dylan - Ontwikkeling van vragenlijst, Sidebar/Mobile Menu en Scans
-* Ties & Kerem → (Door)ontwikkeling van het ontwerp en de visuele richting
+* Sven - Behandelingen
+* Thomas - Navigatie en inlogsysteem
+* Chama - Bingokaart
 * Team → Gezamenlijke front-end implementatie, optimalisaties en toegankelijkheid
 
 ---
@@ -63,7 +59,6 @@ Bijdragen (o.a.)
 ### Ontwerpkeuzes & inspiratie
 * Kleuren
 * De huisstijl van Zelfzorg aan Zee is zo goed mogelijk benaderd.
-* De originele gele kleur gaf onvoldoende contrast met witte tekst; daarom is deze vervangen door groen (aanpasbaar indien gewenst).
 * Vormtaal
 * Afgeronde hoeken zorgen voor een vriendelijke, benaderbare uitstraling en verwijzen subtiel naar de golven van de zee.
 * Navigatie
@@ -86,19 +81,12 @@ Bijdragen (o.a.)
 
 #### Bingokaart
 * Interactieve bingokaart waarmee cliënten doelen kunnen afvinken.
-* Elk vakje heeft een kleine vierkant linksboven die vult bij selectie; het vakje verandert van kleur (nu groen) zodra het voltooid is.
+* Elk bingokaart bevat drie opties waaruit de gebruiker kan kiezen voor voortgang. De bingokaart verandert van kleur op basis van de aangeklikte staat.
 * De status wordt per behandeling/dag opgeslagen; als er nog geen behandeling bestaat voor de dag, wordt automatisch een nieuwe entry aangemaakt.
-* Bij 3, 5 of 7 vakjes afgekruist heeft de cliënt bingo en opent er met een confetti animatie een popup met daarin de gewonnen prijs.
 
 #### Behandelingen (overzicht)
-* Interactieve bingokaart waarmee cliënten doelen kunnen afvinken.
-* Overzicht van alle behandelingen als gestapelde balken met datum en korte omschrijving.
+* Overzicht van alle behandelingen als gestapelde balken met datum en korte omschrijving. Te sorteren en filteren op de behandelaars criteria
 * Een pijl per item geeft aan dat je kunt doorklikken naar details.
-
-
-#### Behandeling detail
-* Toont de status van de bingokaart, scans en vragenlijst voor die specifieke datum.
-* Onder de bingokaart staat een opslaanknop met loading- en success-states voor duidelijke feedback.
 
 ---
 
