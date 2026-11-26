@@ -180,6 +180,9 @@ We hebben gedurende ontwikkeling rekening gehouden met toegankelijkheid, o.a. do
 
 https://github.com/fdnd-agency/herstelkompas/blob/dev/CONTRIBUTING.md
 
+### Code conventies
+https://github.com/fdnd-agency/herstelkompas/blob/dev/CONTRIBUTING.md#code-conventies
+
 ### Bijdragen
 
 Wil je bijdragen?
