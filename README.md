@@ -100,6 +100,30 @@ SvelteKit is een modern framework bovenop Svelte, met ondersteuning voor routing
 
 @directus/sdk biedt een toegankelijke interface om de Directus API te gebruiken en ondersteunt authenticatie voor acties die afgeschermd zijn.
 
+## Datamodel
+
+| Collectie       | Veld                | Type      |
+|-----------------|---------------------|-----------|
+|     Gebruiker   | Email               | string    |
+|                 | Naam                | string    |
+|                 | Eerste Inlog        | datetime  |
+|                 | Behandelingen       | relation  |
+|                 | Rol                 | string    |
+|   Activiteit    | Activiteit ID       | int       |
+|                 | Label               | string    |
+|                 | State               | int       |
+|     Behandeling | Bingokaart          | relation  |
+|                 | Datum               | datetime  |
+|                 | Vragenlijst         | relation  |
+|     Scans       | Scan Before         | relation  |
+|                 | Scan Before Desc    | string    |
+|                 | Scan After          | relation  |
+|                 | Scan After Desc     | string    |
+|     Prijs       | Hoeveelheid         | int       |
+|                 | Titel               | string    |
+|     Vraag       | Stofje              | int       |
+|                 | Vraag               | string    |
+
 ---
 
 Installatie
