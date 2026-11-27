@@ -1,6 +1,5 @@
 <script>
  
-  import { TreatmentBingo } from '$lib';
   import { QuestionList } from '$lib';
   import { ScansDetail } from '$lib';
   export let data;
