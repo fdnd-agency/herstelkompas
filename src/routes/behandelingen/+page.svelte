@@ -1,46 +1,85 @@
 <script>
-  // Import (currently unused in this file)
-  import { Treatment } from '$lib';
-   import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
-   import StatusMessage from '$lib/components/molecules/StatusMessage.svelte';
-   import { navigating } from '$app/stores';
-   import { afterNavigate } from '$app/navigation';
-   import { onDestroy } from 'svelte';
-    
+  import FilterSorteerBalk from '$lib/components/organisms/FilterSorteerBalk.svelte';
+  import StatusMessage from '$lib/components/molecules/StatusMessage.svelte';
+  import { beforeNavigate, afterNavigate } from '$app/navigation';
+  import { onDestroy } from 'svelte';
 
-  // Data injected by the page/load function
   export let data;
 
-  // Extract treatments from the loaded data
   $: behandelingen = data.behandelingen;
 
-afterNavigate(({ from, to }) => {
-  if (
-    from?.url.pathname === '/behandelingen' &&
-    to?.url.pathname === '/behandelingen' &&
-    (
-      from.url.searchParams.get('periode') !== to.url.searchParams.get('periode') ||
-      from.url.searchParams.get('sort') !== to.url.searchParams.get('sort')
-    ) &&
-    data.status === 'success'
-  ) {
-    showSuccess = true;
+  let status = 'idle';
+  let timer;
+  let startTime;
 
+  // Controleer of de gebruiker filtert of sorteert
+  function isFilterSortNavigation(from, to) {
+    return (
+      from?.url.pathname === '/behandelingen' &&
+      to?.url.pathname === '/behandelingen' &&
+      (
+        (
+          to.url.searchParams.has('periode') &&
+          from.url.searchParams.get('periode') !==
+          to.url.searchParams.get('periode')
+        ) ||
+        from.url.searchParams.get('sort') !==
+        to.url.searchParams.get('sort')
+      )
+    );
+  }
+
+  // Start de Loading State
+  beforeNavigate(({ from, to }) => {
+    clearTimeout(timer);
+
+    if (isFilterSortNavigation(from, to)) {
+      status = 'loading';
+      startTime = Date.now();
+    } else {
+      status = 'idle';
+    }
+  });
+
+  // Wanneer de navigatie is afgerond
+  afterNavigate(({ from, to }) => {
+    if (!isFilterSortNavigation(from, to)) return;
+
+    // Toon de Error State bij een mislukte request
+    if (data.status === 'error') {
+      status = 'error';
+      return;
+    }
+
+    // Sluit het filtermenu
     const filterMenu = document.getElementById('filtermenu');
 
-    if (filterMenu?.matches(':popover-open')) {
+    if (filterMenu?.hidePopover && filterMenu.matches(':popover-open')) {
       filterMenu.hidePopover();
     }
 
-    clearTimeout(successTimer);
+    // Loading State minimaal 3 seconden tonen
+    const remainingTime = Math.max(
+      0,
+      3000 - (Date.now() - startTime)
+    );
 
-    successTimer = setTimeout(() => {
-      showSuccess = false;
-    }, 3000);
-  }
-});
+    timer = setTimeout(() => {
+      status = 'success';
+
+      // Success State 2 seconden tonen
+      timer = setTimeout(() => {
+        status = 'idle';
+      }, 2000);
+
+    }, remainingTime);
+  });
+
+  // Timer opruimen bij het verlaten van de pagina
+  onDestroy(() => {
+    clearTimeout(timer);
+  });
 </script>
-
 
 
 <section class="treatment-section" aria-labelledby="behandelingstitel">
@@ -50,21 +89,15 @@ afterNavigate(({ from, to }) => {
     <p class="subtitle">Jouw overzicht</p>
   </header>
 
- <FilterSorteerBalk
+
+
+<FilterSorteerBalk
   periode={data.periode}
   sortering={data.sortering}
+  showActiveFilter={status === 'idle' && data.status !== 'error'}
 />
 
-{#if
-  $navigating?.from?.url.pathname === '/behandelingen' &&
-  $navigating?.to?.url.pathname === '/behandelingen' &&
-  (
-    $navigating.from.url.searchParams.get('periode') !==
-    $navigating.to.url.searchParams.get('periode') ||
-    $navigating.from.url.searchParams.get('sort') !==
-    $navigating.to.url.searchParams.get('sort')
-  )
-}
+{#if status === 'loading'}
   <StatusMessage
     type="loading"
     label="Behandelingen bijwerken..."
@@ -74,7 +107,7 @@ afterNavigate(({ from, to }) => {
     type="error"
     label="Behandelingen laden mislukt. Probeer opnieuw."
   />
-{:else if data.status === 'success' && showSuccess}
+{:else if status === 'success'}
   <StatusMessage
     type="success"
     label="Overzicht bijgewerkt"

@@ -3,9 +3,9 @@
   import SorteerSelect from '$lib/components/atoms/SorteerSelect.svelte';
   import ActiveFilterChip from '$lib/components/molecules/ActiveFilterChip.svelte';
 
-  // Ontvang de actieve periode en sortering van de pagina
   export let periode = null;
   export let sortering = null;
+  export let showActiveFilter = true;
 </script>
 
 <div class="filter-sorteer-balk">
@@ -14,11 +14,15 @@
   <SorteerSelect {periode} {sortering} />
 </div>
 
-<ActiveFilterChip period={periode} sortOrder={sortering} />
+{#if showActiveFilter}
+  <ActiveFilterChip
+    period={periode}
+    sortOrder={sortering}
+  />
+{/if}
 
 <style>
-
-div{
+  div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -28,7 +32,6 @@ div{
     @media (min-width: 700px) {
       flex-direction: row;
       align-items: center;
-      
     }
   }
 </style>
